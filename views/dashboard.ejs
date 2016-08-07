@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <% include ./partials/header %>
+</head>
+
+
+<body>
+	<div class="wrapper">
+	    <div class="sidebar" data-background-color="brown" data-active-color="danger">
+	    <!--
+			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+		-->
+			<div class="logo">
+				<a href="#" class="simple-text">
+					FabLab@CEU
+				</a>
+			</div>
+			<div class="logo logo-mini">
+				<a href="#" class="simple-text">
+					Ceu
+				</a>
+			</div>
+	    	<div class="sidebar-wrapper">
+				<div class="user">
+	                <div class="photo">
+	                    <img src="" />
+	                </div>
+	                <div class="info">
+	                    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+	                        Gianluca Cornetta
+	                        <b class="caret"></b>
+	                    </a>
+	                    <div class="collapse" id="collapseExample">
+	                        <ul class="nav">
+	                            <li><a href="#profile">My Profile</a></li>
+	                            <li><a href="#editprofile">Edit Profile</a></li>
+	                            <li><a href="#settings">Settings</a></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <ul class="nav">					
+                         <li>
+	                    <a href="">
+	                        <i class="ti-wand"></i>
+	                        <p>Wizard</p>
+	                    </a>
+	                </li>
+                        
+	                <li class="active">
+	                    <a data-toggle="collapse" href="#dashboardOverview" aria-expanded="true">
+	                        <i class="ti-panel"></i>
+	                        <p>Dashboard
+                                <b class="caret"></b>
+                            </p>
+	                    </a>
+                        <div class="collapse in" id="dashboardOverview">
+							<ul class="nav">
+								<li class="active"><a href="#">Overview</a></li>
+								<li><a href="">Stats</a></li>
+							</ul>
+						</div>
+	                </li>
+	                <li>
+						<a data-toggle="collapse" href="#tablesExamples">
+	                        <i class="ti-view-list-alt"></i>
+	                        <p>
+								Tools
+	                           <b class="caret"></b>
+	                        </p>
+	                    </a>
+	                    <div class="collapse" id="tablesExamples">
+	                        <ul class="nav">
+								<li><a href="#">User Management</a></li>
+								<li><a href="#">Task Management</a></li>
+								<li><a href="#">System Logs</a></li>
+	                        </ul>
+	                    </div>
+	                </li>
+					<li>
+	                    <a href="">
+	                        <i class="ti-bar-chart-alt"></i>
+	                        <p>Workload</p>
+	                    </a>
+	                </li>
+	            </ul>
+	    	</div>
+	    </div>
+
+	    <div class="main-panel">
+			<nav class="navbar navbar-default">
+	            <div class="container-fluid">
+					<div class="navbar-minimize">
+						<button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
+					</div>
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar bar1"></span>
+	                        <span class="icon-bar bar2"></span>
+	                        <span class="icon-bar bar3"></span>
+	                    </button>
+	                    <a class="navbar-brand" href="#Dashboard">
+							Overview
+						</a>
+	                </div>
+	                <div class="collapse navbar-collapse">
+
+						<form class="navbar-form navbar-left navbar-search-form" role="search">
+	    					<div class="input-group">
+	    						<span class="input-group-addon"><i class="fa fa-search"></i></span>
+	    						<input type="text" value="" class="form-control" placeholder="Search...">
+	    					</div>
+	    				</form>
+
+	                    <ul class="nav navbar-nav navbar-right">
+	                        <li>
+	                            <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
+	                                <i class="ti-panel"></i>
+									<p>Stats</p>
+	                            </a>
+	                        </li>
+	                        <li class="dropdown">
+	                            <a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
+	                                <i class="ti-bell"></i>
+	                                <span class="notification">5</span>
+									<p>
+										Notifications <b class="caret"></b>
+									</p>
+	                            </a>
+	                            <ul class="dropdown-menu">
+	                                <li><a href="#not1">Notification 1</a></li>
+	                                <li><a href="#not2">Notification 2</a></li>
+	                                <li><a href="#not3">Notification 3</a></li>
+	                                <li><a href="#not4">Notification 4</a></li>
+	                            </ul>
+	                        </li>
+							<li>
+	                            <a href="/logout" class="btn-rotate">
+									<i class="ti-home"></i>
+									<p>Logout</p>
+	                            </a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </nav>
+
+	        <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                </div>
+					<div class="row">
+					</div>
+					<div class="row">
+					</div>
+                </div>
+	        </div>
+            <% include ./partials/footer %>
+	    </div>
+
+		<div class="clearfix">
+
+		</div>
+	</div>
+</body>
+
+	<% include ./partials/scripts %>
+
+</html>

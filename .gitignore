@@ -1,0 +1,7 @@
+#    shell scripts     #
+########################
+*.sh
+
+#node_modules directory#
+########################
+/node_modules
