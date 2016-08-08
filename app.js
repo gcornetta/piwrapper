@@ -14,6 +14,9 @@ var mongoose = require('mongoose');
 //start mongoDB
 var db = require('./config/db');
 
+//require Passport configuration
+require('./config/passport');
+
 //require routes
 var users = require('./routes/users');
 
