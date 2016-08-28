@@ -1,0 +1,17 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2016-08-26T11:11:32.660Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2016-08-26T11:12:21.193Z"}
+{"level":"error","message":"Error accessing 0x48. Check your I2C address.","timestamp":"2016-08-26T11:13:35.867Z"}
+{"level":"info","message":"@dashboard.cofigure: a new machine has been successfully configured","timestamp":"2016-08-26T11:13:35.949Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2016-08-26T11:13:37.433Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2016-08-26T11:13:37.765Z"}
+{"level":"info","message":"@dashboard.profileUpdate: user profile successfully updated","timestamp":"2016-08-26T11:14:49.376Z"}
+{"level":"info","message":"@dashboard.profileUpdate: user profile successfully updated","timestamp":"2016-08-26T11:15:43.959Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2016-08-26T11:15:49.711Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2016-08-26T11:15:49.734Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2016-08-26T11:35:28.068Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2016-08-26T11:35:31.349Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2016-08-26T11:35:31.367Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2016-08-26T11:36:30.617Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2016-08-26T11:36:34.542Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2016-08-26T11:36:34.550Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2016-08-26T11:37:03.840Z"}

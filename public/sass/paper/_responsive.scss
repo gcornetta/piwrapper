@@ -189,7 +189,7 @@
     }
 
     .sidebar,
-    .off-canvas-sidebar {
+    .off-canvas-sidebar{
         position: fixed;
         display: block;
         top: 0;
@@ -210,42 +210,37 @@
         @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
         .sidebar-wrapper {
-            position: relative;
-            z-index: 3;
-            overflow-y: scroll;
-            height: 100%;
             width: 230px;
             box-shadow: inset 1px 0px 0px 0px $medium-gray;
 
-            .collapse.in{
-                .nav > li.active{
 
-                    > a{
-                        &:before{
-                            border-left:  12px solid $medium-gray;
-                            border-top: 12px solid transparent;
-                            border-bottom: 12px solid transparent;
-                            content: "";
-                            display: inline-block;
-                            position: absolute;
-                            left: 0;
-                            top: 8px;
+            li.active{
+                > a:not([data-toggle="collapse"]){
+                    &:before{
+                        border-left:  12px solid $medium-gray;
+                        border-top: 12px solid transparent;
+                        border-bottom: 12px solid transparent;
+                        content: "";
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 12px;
 
-                        }
+                    }
 
-                        &:after{
-                            border-left: 12px solid $bg-nude;
-                            border-top: 12px solid transparent;
-                            border-bottom: 12px solid transparent;
-                            content: "";
-                            display: inline-block;
-                            position: absolute;
-                            left: -1px;
-                            top: 8px;
-                        }
+                    &:after{
+                        border-left: 12px solid $bg-nude;
+                        border-top: 12px solid transparent;
+                        border-bottom: 12px solid transparent;
+                        content: "";
+                        display: inline-block;
+                        position: absolute;
+                        left: -1px;
+                        top: 12px;
                     }
                 }
             }
+
 
             .dropdown-menu{
                 &:before,
@@ -275,33 +270,22 @@
                         line-height: 26px;
                     }
                 }
+            }
 
-                &.active > a{
+            .nav{
+                li.active{
+                    a{
+                        &:before{
+                            right: 0;
+                            top: 8px;
+                        }
 
-                    &:before{
-                        border-left:  12px solid $medium-gray;
-                        border-top: 12px solid transparent;
-                        border-bottom: 12px solid transparent;
-                        content: "";
-                        display: inline-block;
-                        position: absolute;
-                        left: 0;
-                        top: 11px;
-
-                    }
-
-                    &:after{
-                        border-left: 12px solid $bg-nude;
-                        border-top: 12px solid transparent;
-                        border-bottom: 12px solid transparent;
-                        content: "";
-                        display: inline-block;
-                        position: absolute;
-                        left: -1px;
-                        top: 11px;
+                        &:after{
+                            right: -1px;
+                            top: 8px;
+                        }
                     }
                 }
-
             }
 
         }
@@ -372,6 +356,7 @@
     .off-canvas-sidebar{
         .nav{
             margin-top: 15px;
+
             > li > a{
                 line-height: 30px;
                 font-size: 12px;

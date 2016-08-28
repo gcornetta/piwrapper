@@ -16,6 +16,13 @@ var UserSchema = new mongoose.Schema({
 	email: {
 		type: String
 	},
+	pathtophoto: {
+		type: String,
+                "default": null
+	},
+        lastlogged:{
+                type: Date,
+        },
         issuperuser  : Boolean,
         hash         : String,
         salt         : String
@@ -29,10 +36,21 @@ module.exports.createUser = function(newUser, password, callback){
         newUser.save(callback);
 }
 
+module.exports.updateUserById = function(id, newProfile, callback) {
+        var query = {_id : id};
+        User.findOneAndUpdate (query, newProfile, {new : true}, function(err, user){
+           if (err) throw err;
+           if(!user) {
+             callback(false, null);
+           } else{
+             callback(true, user);
+           }
+        });
+}
+
 module.exports.updatePassword = function(username, newPassword, callback){
         var query = {username: username};
         User.findOne (query, function(err, user){
-          console.log(user);
           if (err) throw(err);
           user.salt = crypto.randomBytes(16).toString('hex');
 	  user.hash = crypto.pbkdf2Sync(newPassword, user.salt, 1000, 64).toString('hex');
@@ -42,6 +60,48 @@ module.exports.updatePassword = function(username, newPassword, callback){
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
 	User.findOne(query, callback);
+}
+
+module.exports.getPhotoPathByUsername = function(username, callback){
+	var query = {username: username};
+        User.findOne(query, function(err, user){
+		if (err) throw (err);
+		if (user.pathtophoto) {
+                  callback(null, user.pathtophoto);
+                } else {
+		  callback(true, null);
+		}	
+	});
+}
+
+module.exports.getLastLogByUsername = function(username, callback){
+	var query = {username: username};
+        User.findOne(query, function(err, user){
+		if (err) throw (err);
+		if (user.lastlogged) {
+                  callback(null, user.lastlogged);
+                } else {
+		  callback(true, null);
+		}	
+	});
+}
+
+module.exports.updatePhotoPathByUsername = function(username, path, callback){
+	var query = {username: username};
+        User.findOne(query, function(err, user){
+		if (err) throw (err);
+		user.pathtophoto = path;
+                user.save(callback(null, true));	
+	});
+}
+
+module.exports.updateLastLogByUsername = function(username, callback){
+	var query = {username: username};
+        User.findOne(query, function(err, user){
+		if (err) throw (err);
+		user.lastlogged = new Date();
+                user.save(callback(null, true));	
+	});
 }
 
 module.exports.getUserById = function(id, callback){

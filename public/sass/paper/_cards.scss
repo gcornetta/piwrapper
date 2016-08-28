@@ -70,8 +70,7 @@
     .alert{
         border-radius: $border-radius-base;
     }
-    .category,
-    label{
+    .category{
         font-size: $font-size-base;
         font-weight: $font-weight-normal;
         color: $dark-gray;
@@ -85,11 +84,6 @@
             color: $danger-color;
             font-size: $font-size-small;
         }
-    }
-
-    label{
-        font-size: 15px;
-        margin-bottom: 5px;
     }
 
     .title{
@@ -210,6 +204,11 @@
         }
     }
 
+    .pull-right{
+        .label{
+            margin-top: 7px;
+        }
+    }
     ul.team-members{
         li{
             padding: 10px 0px;

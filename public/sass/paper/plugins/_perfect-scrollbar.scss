@@ -68,6 +68,7 @@
     -o-transition: background-color .2s linear, opacity .2s linear;
     transition: background-color .2s linear, opacity .2s linear;
     right: 3px;
+    z-index: 1042;
     /* there must be 'right' for ps-scrollbar-y-rail */
     width: 8px; }
     .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {

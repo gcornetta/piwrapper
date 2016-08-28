@@ -10,6 +10,7 @@ body{
         &:after{
             display: table;
             content: " ";
+            clear: both;
         }
     }
 }
@@ -60,7 +61,8 @@ button:focus {
     @include transition($fast-transition-time, $transition-ease-in);
 }
 
-.btn{
+.btn,
+.pagination a{
     @include transition($ultra-fast-transition-time, $transition-ease-in);
 }
 .fa{

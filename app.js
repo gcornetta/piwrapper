@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
@@ -10,6 +9,14 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
+var expressWinston = require('express-winston');
+var winston = require('winston');
+
+//configure winston logger
+var logger = require('./config/winston');
+
+//configure internationalization support
+var i18n = require('./i18n');
 
 //start mongoDB
 var db = require('./config/db');
@@ -17,18 +24,40 @@ var db = require('./config/db');
 //require Passport configuration
 require('./config/passport');
 
-//require routes
-var users = require('./routes/users');
-
 // Init App
 var app = express();
+
+// initialize logger
+/*app.use(expressWinston.logger({
+	transports : [
+		new winston.transports.Console({
+			json: true,
+                        colorize: true
+		})
+	]
+	})
+);*/
+
+//require routes
+var routes = require('./routes/index');
+var apiRoutes = require('./api/routes/index');
+
+var server = require('http').Server(app);
+
+//start web sockets
+var io = require('./lib/websockets/websocket').ws(server);
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(function(req, res, next){
+   res.io = io;
+   next();
+});
+
+
 // BodyParser Middleware
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -76,8 +105,20 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
+app.use(i18n);
 
-app.use('/', users);
+app.use('/', routes);
+app.use('/api', apiRoutes);
+
+// initialize  error logger after the routes
+/*app.use(expressWinston.errorLogger({
+	transports : [
+		new winston.transports.Console({
+			json: true,
+                        colorize: true
+		})
+	]
+}));*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -111,4 +152,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports ={app: app, server: server};

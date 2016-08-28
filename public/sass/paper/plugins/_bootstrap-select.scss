@@ -123,6 +123,7 @@
   border-radius: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
+  -ms-overflow-style: scrollbar; // Creative Tim: fix for Scrollbar Issue on Windows
 }
 .bootstrap-select.btn-group .dropdown-menu li {
   position: relative;
@@ -302,6 +303,8 @@
 
 .btn-group.bootstrap-select .dropdown-menu{
     min-width: 100%;
+    overflow: auto;
+    max-height: 350px;
 }
 
 .bootstrap-select .dropdown-menu > li:first-child > a{

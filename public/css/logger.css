@@ -1,0 +1,26 @@
+.logger-wrapper{
+    overflow: scroll;
+    position: relative;
+    background-color: #111;
+    margin: auto;
+    width: 98%; 
+    height: 86%;
+    border: 3px solid #444;
+    padding: 10px;
+}
+#logger-message {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    font-family: 'Inconsolata', Courier, sans-serif;
+    color: #fff;
+}
+#logger-message span.color-info{
+    color: #40ff00;
+}
+#logger-message span.color-warn{
+    color: #bfff00;
+}
+#logger-message span.color-err{
+    color: #ff0000;
+}

@@ -1,6 +1,6 @@
 /*! =========================================================
  *
- * Paper Dashboard PRO - V1.0.0
+ * Paper Dashboard PRO - V1.1.0
  *
  * =========================================================
  *
@@ -38,14 +38,14 @@
 //plugins css
 @import "paper/plugins/animate";
 @import "paper/plugins/sweetalert2";
-@import "paper/plugins/datatable";
+@import "paper/plugins/bootstrap-table";
+@import "paper/plugins/datatables.net";
 @import "paper/plugins/fullcalendar";
 @import "paper/plugins/chartist";
 @import "paper/plugins/perfect-scrollbar";
 @import "paper/plugins/jquery.jvectormap";
 @import "paper/plugins/bootstrap-select";
 @import "paper/plugins/datetime-picker";
-
 
 // Core CSS
 @import "paper/typography";

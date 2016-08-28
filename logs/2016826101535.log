@@ -1,0 +1,8 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2016-08-26T10:15:37.917Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2016-08-26T10:15:51.135Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2016-08-26T10:15:52.239Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2016-08-26T10:15:52.395Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2016-08-26T10:16:01.668Z"}
+{"level":"info","message":"@websockets.ws.logger: Connection established with the client","timestamp":"2016-08-26T10:16:01.703Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2016-08-26T10:17:05.816Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2016-08-26T10:17:46.594Z"}

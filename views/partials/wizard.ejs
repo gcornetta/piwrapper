@@ -1,0 +1,117 @@
+ <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-8 col-md-offset-2">
+					<% if (errors) {%>
+                                   	 	<%errors.forEach(function(error) {%>
+	                                		<div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+			                    			<button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+					    			<span data-notify="icon" class="ti-bell"></span>
+                                            			<span data-notify="message"><%=error.msg%></span>
+                                        		</div>
+                                    		<%});%>  
+                                	<%}%>
+	                        <div class="card card-wizard" id="wizardCard">
+	                            <form id="wizardForm" method="post" action="/dashboard/configure/">
+		                            <div class="header text-center">
+		                                <h4 class="title">Configuration Wizard</h4>
+		                                <p class="category">Sensor and machine setup utility</p>
+		                            </div>
+	            					<div class="content">
+		            				    <ul class="nav">
+		            						<li><a href="#tab1" data-toggle="tab">ADC Driver</a></li>
+		            						<li><a href="#tab2" data-toggle="tab">Machine Driver</a></li>
+		            						<li><a href="#tab3" data-toggle="tab">Submit</a></li>
+		            					</ul>
+		            					<div class="tab-content">
+		            					    <div class="tab-pane" id="tab1">
+		                                        <h5 class="text-center">Select sampling device.</h5>
+		                                        <div class="row">
+		                                        	<div class="col-md-5 col-md-offset-1">
+		                                                <div class="form-group">
+		                                                    <label class="control-label">Vendor</label>
+		                                                    <select name="adcVendor" class="form-control">
+		                                                        <option selected="" disabled="">- vendor -</option>
+                                                                        <% for (var i= 0; i< wizardPage.samplingDevices.length; i++) {%>
+		                                                        <option value="<%=wizardPage.samplingDevices[i].vendor%>"><%=wizardPage.samplingDevices[i].vendor%></option>
+                                                                        <%}%>
+		                                                    </select>
+		                                                </div>
+		                                            </div>
+		                                            <div class="col-md-5">
+		                                                <div class="form-group">
+		                                                    <label class="control-label">Device</label>
+		                                                    <select name="adcDevice" class="form-control">
+									<% for (var i= 0; i< wizardPage.samplingDevices.length; i++) {%>
+                                                                                <option selected="" disabled="">- <%=wizardPage.samplingDevices[i].vendor%> -</option> 
+										<% for (var j= 0; j< (wizardPage.samplingDevices[i].deviceList).length; j++) {%>
+		                                                        		<option value="<%=wizardPage.samplingDevices[i].deviceList[j]%>"><%=wizardPage.samplingDevices[i].deviceList[j]%></option>
+										<%}%>
+									<%}%>
+		                                                    </select>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		            					    </div>
+		            					    <div class="tab-pane" id="tab2">
+		                                        <h5 class="text-center">Select machine type and vendor</h5>
+		                                        <div class="row">
+		                                            <div class="col-md-10 col-md-offset-1">
+		                                                <div class="form-group">
+		                                                    <label class="control-label">Machine logical name</label>
+		                                                    <input class="form-control"
+		                                                           type="text"
+		                                                           name="machineName"
+		                                                           placeholder="ex: lasercutter.001"/>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="row">
+		                                            <div class="col-md-5 col-md-offset-1">
+		                                                <div class="form-group">
+		                                                    <label class="control-label">Machine Type</label>
+		                                                    <select name="machineType" class="form-control">
+		                                                        <option selected="" disabled="">- machine -</option>
+                                                                        <% for (var i= 0; i< wizardPage.machines.length; i++) {%>
+		                                                            <option value="<%=wizardPage.machines[i].type%>"><%=wizardPage.machines[i].type%></option>
+                                                                        <%}%> 
+		                                                    </select>
+		                                                </div>
+		                                            </div>
+		                                            <div class="col-md-5">
+		                                                <div class="form-group">
+		                                                    <label class="control-label">Vendor</label>
+		                                                    <select name="machineVendor" class="form-control">
+									<% for (var i= 0; i< wizardPage.machines.length; i++) {%>
+                                                                                <% if (i == 0) {%> 
+                                                                                    <option selected="" disabled="">
+                                                                                <%} else {%> 
+                                                                                    <option disabled=""> 
+                                                                                 <%}%>
+                                                                                   - <%=wizardPage.machines[i].label%> -</option> 
+										<% for (var j= 0; j< (wizardPage.machines[i].vendors).length; j++) {%>
+		                                                        		<option value="<%=wizardPage.machines[i].vendors[j]%>"><%=wizardPage.machines[i].vendors[j]%></option>
+										<%}%>
+									<%}%>
+		                                                    </select>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		            					    </div>
+		            						<div class="tab-pane" id="tab3">
+		            							<h2 class="text-center text-space">You're almost done <br><small>Click on "<b>Finish</b>" to submit configuration</small></h2>
+		            					    </div>
+		            					</div>
+	            					</div>
+		            				<div class="card-footer">
+		                                <button type="button" class="btn btn-default btn-fill btn-wd btn-back pull-left">Back</button>
+		                                <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
+		                                <button type="submit" class="btn btn-info btn-fill btn-wd btn-finish pull-right">Finish</button>
+		                                <div class="clearfix"></div>
+		            				</div>
+	                        	</form>
+	                    	</div>
+	                	</div>
+	            	</div>
+	        	</div>
+	    	</div>

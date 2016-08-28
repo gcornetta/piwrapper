@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var winston = require('winston');
 var gracefulShutdown;
 var dbURI = 'mongodb://localhost/usersDB';
 
@@ -7,24 +8,24 @@ mongoose.connect(dbURI);
 //Connection events
 //Monitoring for successful connection through mongoose
 mongoose.connection.on('connected', function(){
-  console.log('Mongoose connected to ' + dbURI);
+  winston.log('info', 'Mongoose connected to %s', dbURI);
 });
 
 //Checking for connection error
 mongoose.connection.on('error', function(err){
-  console.log('Mongoose connection error' + err);
+  winston.log('error', 'Mongoose connection error %s', err);
 });
 
 //Checking for disconnection event
 mongoose.connection.on('disconnected', function() {
-  console.log('Mongoose disconnected');
+  winston.info('Mongoose disconnected');
 });
 
 //Capture App termination/restart events
 //To be called when process is restarted or terminated
 gracefulShutdown = function(msg, callback){
   mongoose.connection.close(function(){
-    console.log('Mongoose disconnected through' + msg);
+    winston.log('info', 'Mongoose disconnected through %s', msg);
     callback();
   });
 };
@@ -45,3 +46,4 @@ process.on('SIGINT', function(){
 
 //Bring in your schemas and models
 require('../models/user');
+require('../models/machine');

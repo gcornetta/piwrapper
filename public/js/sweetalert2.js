@@ -598,11 +598,11 @@
     cssNode.type = 'text/css';
     cssNode.id = mediaqueryId;
     cssNode.innerHTML =
-      '@media screen and (max-width: ' + params.width + 'px) {' +
+      '@media screen and (max-width: ' + '550' + 'px) {' +
         '.' + window.swalClasses.modal + ' {' +
-          'max-width: 100%;' +
+          'max-width: 92%;' +
           'left: 0 !important;' +
-          'margin-left: 0 !important;' +
+          'margin-left: 4% !important;' +
         '}' +
       '}';
     head.appendChild(cssNode);

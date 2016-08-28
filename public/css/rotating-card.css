@@ -152,7 +152,7 @@
 .rc-card .rc-footer .btn-simple{
     margin-top: -6px;
 }
-.rc-card .header {
+.rc-card .rc-header {
     padding: 15px 20px;
     height: 90px;
 }
@@ -191,7 +191,7 @@
 }
 /*      Just for presentation        */
 
-.title{
+.rc-title{
     color: #506A85;
     text-align: center;
     font-weight: 300;
@@ -199,7 +199,7 @@
     margin-bottom: 90px;
     line-height: 90%;
 }
-.title small{
+.rc-title small{
     font-size: 17px;
     color: #999;
     text-transform: uppercase;

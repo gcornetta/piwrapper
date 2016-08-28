@@ -1,0 +1,100 @@
+<div class="content">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-8 col-md-6">
+            <div class="card" style="height:440px;">
+               <div class="header" style="padding-bottom:5px;">
+                  <h4 class="title"><%=terminalPanelTitle%></h4>
+	       </div>
+               <div class="term-container"></div>
+	    </div>    
+         </div>   
+ 	 <div class="col-lg-4 col-md-3">
+            <div class="card">
+               <div class="header">
+	          <h4 class="title"><%=cpuPanelTitle%></h4>
+               </div>
+ 		     <%for (var i = 0; i<= sysInfoTable.rows.length; i++) {%>
+                          <% if (sysInfoTable.rows[i].label == 'Number of cores') {%>
+	       		      <% if (sysInfoTable.rows[i].value != null) {%>
+			          <%for (var j = 0; j< sysInfoTable.rows[i].value/2; j++) {%>
+                                     <% var id0 = 'gaugeChart' + (2*j); %>
+                                     <% var id1 = 'gaugeChart' + (2*j+1); %>
+				     <div class="content">
+                                         <div id="<%=id0%>" class="epoch gauge-tiny" style="display: inline-block"></div>
+                                         <div id="<%=id1%>" class="epoch gauge-tiny" style="float : right"></div>     
+				     </div>   
+				     <div style="display: inline-block; margin-left:50px"> <h6>core <%=2*j%> </h6></div><div style="float : right; margin-right:50px "> <h6>core <%=2*j +1%></h6> </div>
+                                  <%}%>
+                              <%}%>
+                              <% break; %>
+		          <%}%>
+                      <%}%>
+		<div class="header">
+	          <h5 class="title"><%=cpuUptime%></h5>
+               </div>
+		<div class="content">
+                  <div id="upt"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+
+
+   <div class="row"> 
+      <div class="col-lg-12 col-md-11">
+         <div class="card">
+	    <div class="header">
+	       <h4 class="title">System Info</h4>
+	    </div>
+	    <div class="content table-responsive table-full-width">
+	       <table class="table table-striped">
+                  <%for (var i = 0; i<= sysInfoTable.rows.length; i++) {%>
+	             <% if (i == 0) {%>
+	                <thead>
+	                   <th><%=sysInfoTable.header.col1%></th>
+	                   <th><%=sysInfoTable.header.col2%></th>
+	                </thead>
+	                <tbody>
+                     <%} else {%>    
+	               <tr>
+	                  <td><%= sysInfoTable.rows[i-1].label%></td>
+                          <% if (sysInfoTable.rows[i-1].label == 'Clock frequency') {%>
+                             <% for (var j= 0; j < (sysInfoTable.rows[i-1].value).length; j++) {%>
+                                <% if ( j == 0) {%>
+                                   <td><%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> MHz, 
+                                <%} else if (j > 0 && j < (sysInfoTable.rows[i-1].value).length -1) {%> 
+                                    <%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> MHz,
+                                <%} else {%>
+				    <%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> MHz</td>
+                                <%}%>
+                             <%}%> 
+                          <%} else if (sysInfoTable.rows[i-1].label == 'Average load'){%> 
+                             <% for (var j= 0; j < (sysInfoTable.rows[i-1].value).length; j++) {%>
+                                <% if ( j == 0) {%>
+                                   <td><%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> %, 
+                                <%} else if (j > 0 && j < (sysInfoTable.rows[i-1].value).length -1) {%> 
+                                    <%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> %,
+                                <%} else {%>
+				    <%=(sysInfoTable.rows[i-1].value)[j].label%> : <%=(sysInfoTable.rows[i-1].value)[j].value%> %</td>
+                                <%}%>
+                             <%}%> 
+                          <%} else if (sysInfoTable.rows[i-1].label == 'Average clock frequency'){%>
+                              <td><%=sysInfoTable.rows[i-1].value%> MHz</td>
+                          <%} else if (sysInfoTable.rows[i-1].label == 'Total memory' || sysInfoTable.rows[i-1].label == 'Free memory'){%>
+                              <td><%=sysInfoTable.rows[i-1].value%> MBytes</td>
+                          <%} else {%>
+                            <td><%=sysInfoTable.rows[i-1].value%></td>
+                          <%}%>
+                       </tr>
+                <%}%>
+            <%}%>       
+         </tbody>        
+      </table>
+   </div>
+</div>    
+</div>
+    </div>
+   </div>
+   </div>
+

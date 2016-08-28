@@ -9,6 +9,7 @@
     .dropdown &,
     &.bootstrap-datetimepicker-widget,
     .bootstrap-table .btn-group &,
+    .btn-group &,
     .dropup &{
         @include transform-translate-y(-30px);
         @include transition($fast-transition-time, $transition-linear);
@@ -19,7 +20,8 @@
 
     .dropdown.open &,
     &.bootstrap-datetimepicker-widget.open,
-    .bootstrap-table .btn-group.open &{
+    .bootstrap-table .btn-group.open &,
+    .btn-group.open &{
         @include transform-translate-y(0);
         @include opacity(1);
         visibility: visible;
