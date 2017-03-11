@@ -62,7 +62,6 @@
     "standard": "*",
     "supertest": "*",
     "tape": "*",
-    "phantomjs": "*",
     "selenium-webdriver": "*"
   },
   "scripts": {
