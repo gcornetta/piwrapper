@@ -1,0 +1,22 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-10T23:13:47.968Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:13:49.825Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:13:49.857Z"}
+{"level":"info","message":"@authorization.isLoggedIn: access attempt without authorization","timestamp":"2017-03-10T23:13:57.068Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-10T23:14:04.165Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:14:04.815Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-10T23:14:04.858Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:14:09.659Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:14:09.718Z"}
+{"level":"info","message":"@dashboard.process: the process selected is halftone","timestamp":"2017-03-10T23:14:18.378Z"}
+{"level":"info","message":"@fifo.push: new job pushed into the FIFO","timestamp":"2017-03-10T23:14:22.916Z"}
+{"level":"info","message":"@fifo.push: job details {\"form\":[],\"jobPath\":\"/home/pi/piwrapper/public/uploads/designs/local/57a491c2c46763f60bf25acd/1.png\",\"userId\":\"57a491c2c46763f60bf25acd\",\"status\":\"pending\"}","timestamp":"2017-03-10T23:14:22.917Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:14:24.352Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:14:24.419Z"}
+{"level":"info","message":"@dashboard.process: the process selected is cut","timestamp":"2017-03-10T23:14:35.139Z"}
+{"level":"info","message":"@fifo.push: new job pushed into the FIFO","timestamp":"2017-03-10T23:14:40.149Z"}
+{"level":"info","message":"@fifo.push: job details {\"form\":[],\"jobPath\":\"/home/pi/piwrapper/public/uploads/designs/local/57a491c2c46763f60bf25acd/2.png\",\"userId\":\"57a491c2c46763f60bf25acd\",\"status\":\"pending\"}","timestamp":"2017-03-10T23:14:40.155Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:14:41.649Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:14:41.712Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:15:14.912Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:15:14.966Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2017-03-10T23:17:57.009Z"}

@@ -11,6 +11,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var expressWinston = require('express-winston');
 var winston = require('winston');
+var events = require('events');
+
+//create a global event emitter
+var eventEmitter = new events.EventEmitter();
 
 //configure winston logger
 var logger = require('./config/winston');
@@ -45,12 +49,19 @@ var apiRoutes = require('./api/routes/index');
 var server = require('http').Server(app);
 
 //start web sockets
-var io = require('./lib/websockets/websocket').ws(server);
+var io = require('./lib/websockets/websocket').ws(server, eventEmitter);
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//pass eventEmitter object to routes into the res object
+app.use(function(req, res, next){
+   res.eventEmitter = eventEmitter;
+   next();
+});
+
+//pass io object to routes into the res object
 app.use(function(req, res, next){
    res.io = io;
    next();
@@ -59,7 +70,7 @@ app.use(function(req, res, next){
 
 // BodyParser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Set Static Folder
@@ -152,4 +163,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports ={app: app, server: server};
+module.exports ={app: app, server: server, eventEmitter: eventEmitter};

@@ -58,7 +58,7 @@
 	                <tbody>
                      <%} else {%>    
 	               <tr>
-	                  <td><%= sysInfoTable.rows[i-1].label%></td>
+	                  <td><%= sysInfoTable.rows[i-1].translation%></td>
                           <% if (sysInfoTable.rows[i-1].label == 'Clock frequency') {%>
                              <% for (var j= 0; j < (sysInfoTable.rows[i-1].value).length; j++) {%>
                                 <% if ( j == 0) {%>

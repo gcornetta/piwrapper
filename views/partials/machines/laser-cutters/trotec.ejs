@@ -1,0 +1,17 @@
+<div class="content">
+   <div class="container-fluid">
+      <div class="card">
+         <form method="post" action="/dashboard/control/laser/trotec" enctype="multipart/form-data">
+	    <div class="content">
+               <% include ../../process/upload %>
+	       <% include ../../process/laser-cutters/trotec/switches %> 
+	       <% include ../../process/laser-cutters/trotec/engine %>
+               <div id="feedback"></div>
+                <br />
+	       <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= laserPanel.submitButtonText %></button>
+	    </div>
+	  </form>
+       </div>                         
+    <!-- end card -->
+    </div>
+</div>

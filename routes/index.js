@@ -5,6 +5,11 @@ var router = express.Router();
 var authCtrl = require('../controllers/authorization');
 var usrCtrl = require('../controllers/user');
 var dashCtrl = require('../controllers/dashboard');
+var epilogCtrl = require('../controllers/epilog_laser');
+var gccCtrl = require('../controllers/gcc_laser');
+var trotecCtrl = require('../controllers/trotec_laser');
+var rolandVinylCtrl = require('../controllers/roland_vinyl');
+var rolandMillingCtrl = require('../controllers/roland_milling');
 var apiCtrl = require('../controllers/api');
 
 
@@ -25,6 +30,18 @@ router.get('/dashboard/profile', authCtrl.isLoggedIn, dashCtrl.profile);
 router.get('/dashboard/wizard', authCtrl.isLoggedIn, dashCtrl.wizard);
 router.get('/dashboard/settings', authCtrl.isLoggedIn, dashCtrl.settings);
 router.get('/dashboard/logs', authCtrl.isLoggedIn, dashCtrl.logs);
+
+router.get('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.controller);
+router.get('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.controller);
+router.get('/dashboard/control/laser/gcc', authCtrl.isLoggedIn, gccCtrl.controller);
+router.get('/dashboard/control/vinyl/roland', authCtrl.isLoggedIn, rolandVinylCtrl.controller);
+router.get('/dashboard/control/milling/roland', authCtrl.isLoggedIn, rolandMillingCtrl.controller);
+
+router.get('/dashboard/control/laser/epilog/process', authCtrl.isLoggedIn, epilogCtrl.process);
+router.get('/dashboard/control/laser/trotec/process', authCtrl.isLoggedIn, trotecCtrl.process);
+router.get('/dashboard/control/laser/gcc/process', authCtrl.isLoggedIn, gccCtrl.process);
+router.get('/dashboard/control/vinyl/roland/material', authCtrl.isLoggedIn, rolandVinylCtrl.process);
+router.get('/dashboard/control/milling/roland/process', authCtrl.isLoggedIn, rolandMillingCtrl.process);
 
 // Post User Registation Form
 router.post('/', usrCtrl.registrationForm);
@@ -50,9 +67,15 @@ router.post('/dashboard/machine/update/', authCtrl.isLoggedIn, dashCtrl.machineU
 // Post Profile update
 router.post('/dashboard/profile/change', authCtrl.isLoggedIn, dashCtrl.profileUpdate);
 
+// Post fabrication job settings
+router.post('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.upload);
+router.post('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.upload);
+router.post('/dashboard/control/laser/gcc', authCtrl.isLoggedIn, gccCtrl.upload);
+router.post('/dashboard/control/vinyl/roland', authCtrl.isLoggedIn, rolandVinylCtrl.upload);
+router.post('/dashboard/control/milling/roland', authCtrl.isLoggedIn, rolandMillingCtrl.upload);
+
 // Post Password change
 router.post('/dashboard/password/change', authCtrl.isLoggedIn, dashCtrl.changePassword);
-
 
 // Get User Logout
 router.get('/logout', usrCtrl.logout);

@@ -1,0 +1,2 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-10T21:15:14.879Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2017-03-10T21:15:17.928Z"}

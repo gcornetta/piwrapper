@@ -1,0 +1,18 @@
+<div class="content">
+   <div class="container-fluid">
+      <div class="card">
+         <form method="post" action="/dashboard/control/laser/epilog" enctype="multipart/form-data">
+	    <div class="content">
+               <% include ../../process/upload %>
+	       <% include ../../process/laser-cutters/epilog/switches %>
+	       <% include ../../process/laser-cutters/epilog/engine %>
+               <div id="feedback"></div>
+                <br />
+	       <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= laserPanel.submitButtonText %></button>
+	    </div>
+	  </form>
+       </div>                         
+    <!-- end card -->
+    </div>
+</div>
+

@@ -65,7 +65,7 @@ if (typeof require === "function") {
         term.updateSize = function () {
             var tSize = $(".terminal").textSize();
             //term.w.cols = tSize.x || Terminal.geometry[0];
-             term.w.cols = 80;
+             term.w.cols = 99;
             //term.w.rows = tSize.y || Terminal.geometry[1]; 
 	     term.w.rows =24; //GC 13082016
             term.socket.emit("resize", term.w.cols, term.w.rows);

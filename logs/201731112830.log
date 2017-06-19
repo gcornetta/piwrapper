@@ -1,0 +1,50 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-11T01:28:33.461Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-11T01:30:33.022Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:30:33.704Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T01:30:33.753Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:35:59.811Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T01:35:59.882Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2017-03-11T01:36:04.772Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2017-03-11T01:36:04.791Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-11T01:36:15.207Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:36:15.683Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T01:36:15.724Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:36:22.352Z"}
+{"level":"info","message":"@websockets.ws.logger: Connection established with the client","timestamp":"2017-03-11T01:36:22.362Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2017-03-11T01:38:20.664Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2017-03-11T01:38:20.679Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-11T01:42:55.465Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:42:55.860Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T01:42:55.906Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T01:43:27.020Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T01:43:27.071Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T01:51:04.693Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T01:51:11.474Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T01:53:04.793Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T01:53:11.547Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T01:55:11.664Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:00:31.224Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T02:00:31.281Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:00:41.382Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:00:41.433Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T02:01:24.415Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T02:03:24.533Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:08:00.388Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:08:00.426Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T02:12:38.764Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:15:29.585Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:15:29.630Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:16:57.027Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:16:57.074Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T02:16:58.697Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T02:17:36.715Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T02:18:58.819Z"}
+{"level":"info","message":"@dashboard.process: the process selected is wax","timestamp":"2017-03-11T02:19:36.812Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:20:54.699Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:20:54.746Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:22:16.978Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:22:17.031Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T02:29:22.494Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T02:29:22.561Z"}
+{"level":"info","message":"@dashboard.process: the process selected is pcb","timestamp":"2017-03-11T02:33:14.678Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2017-03-11T02:42:14.456Z"}

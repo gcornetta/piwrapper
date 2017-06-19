@@ -4,6 +4,7 @@ $('.upload-btn').on('click', function (){
     $('.progress-bar').width('0%');
 });
 
+
 $('#upload-input').on('change', function(){
 
   var files = $(this).get(0).files;
@@ -20,7 +21,7 @@ $('#upload-input').on('change', function(){
       // add the files to formData object for the data payload
       formData.append('uploads', file, file.name);
     }
-
+    
     $.ajax({
       url: '/dashboard/upload',
       type: 'POST',
@@ -65,3 +66,4 @@ $('#upload-input').on('change', function(){
 
   }
 });
+

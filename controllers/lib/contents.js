@@ -99,7 +99,8 @@ dashboard                : i18n.__('w_00087'),
 profile                  : i18n.__('w_00088'),
 wizard                   : i18n.__('w_00094'),
 settings                 : i18n.__('w_00105'),
-logs                     : i18n.__('w_00115')
+logs                     : i18n.__('w_00115'),
+control			 : i18n.__('w_00145')
 };
 
 exports.panelNames = panelNames;
@@ -123,3 +124,62 @@ updateSettings		: i18n.__('w_00112')
 };
 
 exports.settingsText = settingsText; 
+
+var laserPanelText = {
+epilog: {  switches : {title: i18n.__('w_00116'), autofocus: i18n.__('w_00117'), sort: i18n.__('w_00118'), fill: i18n.__('w_00168')},
+           select   : {process: {title: i18n.__('w_00124'), cut: i18n.__('w_00125'), halftone: i18n.__('w_00126')}, material: {title: i18n.__('w_00127'), cardboard: i18n.__('w_00128'), acrylic: i18n.__('w_00129'), wood: i18n.__('w_00130'), mylar: i18n.__('w_00131')}}, 
+           position : {title: i18n.__('w_00119'), topleft: i18n.__('w_00120'), topright: i18n.__('w_00121'), bottomleft: i18n.__('w_00122'), bottomright: i18n.__('w_00123')},
+           engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00133'), speed: i18n.__('w_00134'), rate: i18n.__('w_00135')},
+           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
+           halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+          },
+trotec: {  switches : {title: i18n.__('w_00177'), sort: i18n.__('w_00178'), fill: i18n.__('w_00179')},
+           select   : {process: {title: i18n.__('w_00124'), cut: i18n.__('w_00125'), halftone: i18n.__('w_00126')}, material: {title: i18n.__('w_00127'), cardboard: i18n.__('w_00128'), acrylic: i18n.__('w_00129'), wood: i18n.__('w_00130'), mylar: i18n.__('w_00131')}, machine: {title: i18n.__('w_00172'), speedy100: i18n.__('w_00173'), speedy100FlexxCO2: i18n.__('w_00174'), speedy100FlexxFiber: i18n.__('w_00175'), speedy400: i18n.__('w_00176')}}, 
+           position : {title: i18n.__('w_00119'), topleft: i18n.__('w_00120'), topright: i18n.__('w_00121'), bottomleft: i18n.__('w_00122'), bottomright: i18n.__('w_00123')},
+           engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00169'), velocity: i18n.__('w_00170'), frequency: i18n.__('w_00171')},
+           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
+           halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+          },
+gcc:    {  switches : {title: i18n.__('w_00116'), autofocus: i18n.__('w_00117'), sort: i18n.__('w_00118'), fill: i18n.__('w_00168')},
+           select   : {process: {title: i18n.__('w_00124'), cut: i18n.__('w_00125'), halftone: i18n.__('w_00126')}, material: {title: i18n.__('w_00127'), cardboard: i18n.__('w_00128'), acrylic: i18n.__('w_00129'), wood: i18n.__('w_00130'), mylar: i18n.__('w_00131')}}, 
+           position : {title: i18n.__('w_00119'), topleft: i18n.__('w_00120'), topright: i18n.__('w_00121'), bottomleft: i18n.__('w_00122'), bottomright: i18n.__('w_00123')},
+           engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00133'), speed: i18n.__('w_00134'), rate: i18n.__('w_00186')},
+           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
+           halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+          },
+submitButtonText: i18n.__('w_00146')			
+};
+
+exports.laserPanelText = laserPanelText;
+
+var vinylPanelText = {
+roland: {  switches : {title: i18n.__('w_00116'), autofocus: i18n.__('w_00117'), sort: i18n.__('w_00118'), fill: i18n.__('w_00168')},
+           select   : {material: {title: i18n.__('w_00127'), vinyl: i18n.__('w_00187'), epoxy: i18n.__('w_00188'), copper: i18n.__('w_00189')}}, 
+           position : {title: i18n.__('w_00119'), topleft: i18n.__('w_00120'), topright: i18n.__('w_00121'), bottomleft: i18n.__('w_00122'), bottomright: i18n.__('w_00123')},
+           engine   : {title: i18n.__('w_00132'), force: i18n.__('w_00190'), velocity: i18n.__('w_00191')},
+           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')}
+          },
+submitButtonText: i18n.__('w_00146')			
+};
+
+exports.vinylPanelText = vinylPanelText;
+
+var millingPanelText = {
+roland: {  switches : {title: i18n.__('w_00116'), invert: i18n.__('w_00192')},
+           select   : {process: {title: i18n.__('w_00124'), pcb: i18n.__('w_00193'), wax: i18n.__('w_00194')}, finishing: {title: i18n.__('w_00195'), pcb: {traces_1_64: i18n.__('w_00196'), outline_1_32: i18n.__('w_00197'), traces_0_010: i18n.__('w_00198')}, wax: {rough_cut: i18n.__('w_00199'), finish_cut:i18n.__('w_00200')}}, machine: {title: i18n.__('w_00205'), mdx15: i18n.__('w_00206'), mdx20: i18n.__('w_00207'), mdx40: i18n.__('w_00208'), srm20: i18n.__('w_00209')}}, 
+           position : {title: i18n.__('w_00201'), toxyz: i18n.__('w_00202'), toxyzjog: i18n.__('w_00203'), toxyzhome: i18n.__('w_00204')},
+           engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00133'), speed: i18n.__('w_00134'), rate: i18n.__('w_00135')},
+           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
+           halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+          },
+othermill: {  switches : {title: i18n.__('w_00177'), sort: i18n.__('w_00178'), fill: i18n.__('w_00179')},
+              select   : {process: {title: i18n.__('w_00124'), cut: i18n.__('w_00125'), halftone: i18n.__('w_00126')}, material: {title: i18n.__('w_00127'), cardboard: i18n.__('w_00128'), acrylic: i18n.__('w_00129'), wood: i18n.__('w_00130'), mylar: i18n.__('w_00131')}, machine: {title: i18n.__('w_00172'), speedy100: i18n.__('w_00173'), speedy100FlexxCO2: i18n.__('w_00174'), speedy100FlexxFiber: i18n.__('w_00175'), speedy400: i18n.__('w_00176')}}, 
+              position : {title: i18n.__('w_00119'), topleft: i18n.__('w_00120'), topright: i18n.__('w_00121'), bottomleft: i18n.__('w_00122'), bottomright: i18n.__('w_00123')},
+              engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00169'), velocity: i18n.__('w_00170'), frequency: i18n.__('w_00171')},
+              cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
+              halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+          },
+submitButtonText: i18n.__('w_00146')			
+};
+
+exports.millingPanelText = millingPanelText;

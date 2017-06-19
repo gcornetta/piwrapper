@@ -1,0 +1,108 @@
+               <div class="row">								
+		  <div class="col-md-3">
+	             <legend><%= millingPanel.roland.switches.title %></legend>
+		     <div class="col-md-6">
+			<p class="category"><%= millingPanel.roland.switches.invert %></p>
+	                <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+			   <input type="checkbox" name="switchAutofocus" checked />
+			</div>
+	             </div>
+		  </div>
+ 		  <div class="col-md-5">
+		     <legend><%= millingPanel.roland.position.title %></legend>
+		     <div class="row">
+		        <fieldset>
+			   <div class="form-group">
+			      <div class="col-sm-6">
+			         <label class="col-sm-4 control-label">x (mm): </label>
+		                 <div class="col-sm-8">
+			            <div class="input-group">
+			               <input type="text" name="x" placeholder="" value="" class="form-control">
+			            </div>
+			         </div>
+			         <label class="col-sm-4 control-label">y (mm): </label>
+			         <div class="col-sm-8">
+			            <div class="input-group">
+			               <input type="text" name="y" placeholder="" value="" class="form-control">
+			            </div>
+			         </div>
+		                 <label class="col-sm-4 control-label">z (mm): </label>
+		                 <div class="col-sm-8">
+			            <div class="input-group">
+			               <input type="text" id="z" name="z" placeholder="" value="" class="form-control" onChange=setZjog()>
+			            </div>
+			         </div>
+		                 <label class="col-sm-4 control-label">zjog (mm): </label>
+		                 <div class="col-sm-8">
+			            <div class="input-group">
+			               <input type="text" id="zjog" name="zjog" placeholder="" value="" class="form-control">
+			            </div>
+			         </div>
+                              </div>
+			      <div class="col-sm-6">
+			         <label class="radio">
+			            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyz %>" checked> <%= millingPanel.roland.position.toxyz %>
+			         </label>
+			         <label class="radio">
+			            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzjog %>"> <%= millingPanel.roland.position.toxyzjog %>
+			         </label>
+			         <label class="radio">
+			            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzhome %>"> <%= millingPanel.roland.position.toxyzhome %>
+			         </label>
+			      </div>
+			   </div>
+	                </fieldset>
+		     </div>
+		  </div>
+		<div class="col-md-3 col-md-offset-1">
+		   <legend><%= millingPanel.roland.select.process.title %></legend>
+	           <div class="row">
+	              <fieldset>
+		         <div class="form-group">
+			    <div class="col-sm-12">
+		               <select id="processes-roland" name="process" class="selectpicker" data-title="Process" data-style="btn-danger btn-block" data-menu-style="dropdown-blue" onchange="selectFinishing(this)">
+			          <option value="pcb"><%= millingPanel.roland.select.process.pcb %></option>
+			          <option value="wax"><%= millingPanel.roland.select.process.wax %></option>
+			       </select>
+			    </div>
+			 </div>
+	              </fieldset>			
+		   </div>
+                   <br />
+                   <div id="finishings-title" style="display: none;">
+		   <legend><%= millingPanel.roland.select.finishing.title %></legend> 
+                   </div>
+                   <div class="row">
+		      <fieldset>
+		         <div class="form-group">
+			    <div class="col-sm-12">
+                                  <div id="pcb" style="display: none;">
+		                  <select id="pcb-finishings" name="pcb-finishing" class="selectpicker" data-title="Finishing" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
+			             <option value="traces_1_64"><%= millingPanel.roland.select.finishing.pcb.traces_1_64 %></option>
+			             <option value="outline_1_32"><%= millingPanel.roland.select.finishing.pcb.outline_1_32 %></option>
+				     <option value="traces_0_010"><%= millingPanel.roland.select.finishing.pcb.traces_0_010 %></option>
+			          </select>
+                                  </div>
+                                  <div id="wax" style="display: none;">
+				  <select id="wax-finishings" name="wax-finishing" class="selectpicker" data-title="Finishing" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
+                                     <option value="rough_cut"><%= millingPanel.roland.select.finishing.wax.rough_cut %></option>
+                                     <option value="finish_cut"><%= millingPanel.roland.select.finishing.wax.finish_cut %></option>
+			          </select>
+                                 </div>
+			    </div>
+			 </div>
+		      </fieldset> 					
+	           </div>
+                   <br />
+		</div>
+             </div>
+
+<script type="text/javascript">
+function setZjog() {
+  var z    = document.getElementById("z");
+  var zjog = document.getElementById("zjog");
+
+  zjog.value = parseInt(z.value) + 2;
+}
+</script>
+  

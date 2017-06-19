@@ -1,0 +1,12 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-10T23:21:29.330Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-10T23:21:59.071Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:21:59.709Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-10T23:21:59.757Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:22:04.641Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:22:04.689Z"}
+{"level":"info","message":"@dashboard.process: the process selected is halftone","timestamp":"2017-03-10T23:22:07.616Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:22:21.534Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:22:21.600Z"}
+{"level":"info","message":"@user.logout: User gcornetta logged out","timestamp":"2017-03-10T23:22:56.385Z"}
+{"level":"info","message":"@user.logout: DB successfully updated with log date","timestamp":"2017-03-10T23:22:56.442Z"}
+{"level":"info","message":"Mongoose disconnected","timestamp":"2017-03-10T23:23:26.632Z"}

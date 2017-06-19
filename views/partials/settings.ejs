@@ -40,17 +40,12 @@
 	                                <div class="form-group">
 	                                    <label><%=machineSettings.machineVendor%></label>
 						<select name="machineVendor" class="form-control">
-                                                     <% for (var i= 0; i< wizardPage.machines.length; i++) {%>
-                                                        <% if (wizardPage.machines[i].type == machine.type) {%>
-                                                            <% for (var j=0; j<wizardPage.machines[i].vendors.length; j++) {%>
-                                                               <% if (wizardPage.machines[i].vendors[j] == machine.vendor) {%>
+                                                     <% for (var i= 0; i< wizardPage.vendors.length; i++) {%>
+                                                               <% if (wizardPage.vendors[i] == machine.vendor) {%>
 		                                                  <option value="<%=machine.vendor%>" selected><%=machine.vendor%></option>
                                                                <%} else {%> 
-						                  <option value="<%=wizardPage.machines[i].vendors[j]%>"><%=wizardPage.machines[i].vendors[j]%></option>
+						                  <option value="<%=wizardPage.vendors[i]%>"><%=wizardPage.vendors[i]%></option>
                                                                <%}%>
-                                                            <%}%>  
-                                                            <% break%>
-                                                         <%}%>
                                                      <%}%>
 		                                 </select>
 	                                </div>

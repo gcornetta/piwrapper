@@ -1,0 +1,18 @@
+<div class="content">
+   <div class="container-fluid">
+      <div class="card">
+         <form method="post" action="/dashboard/control/milling/roland" enctype="multipart/form-data">
+	    <div class="content">
+               <% include ../../process/upload %>
+	       <% include ../../process/milling-machines/roland/switches %>
+               <% include ../../process/milling-machines/roland/output %>
+               <div id="feedback"></div>
+                <br />
+	       <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= millingPanel.submitButtonText %></button>
+	    </div>
+	  </form>
+       </div>                         
+    <!-- end card -->
+    </div>
+</div>
+

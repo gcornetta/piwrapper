@@ -1,234 +1,135 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <% include ./partials/header %>
-<% if (displayTerminal) {%>
-	<% include ./partials/header-term %>
-<%}%>
-<% if (displayLogs) {%>
-	<% include ./partials/header-log %>
-<%}%>
+   <% include ./partials/header %>
+   <% if (displayTerminal) {%>
+      <% include ./partials/header-term %>
+   <%}%>
+   <% if (displayLogs) {%>
+      <% include ./partials/header-log %>
+   <%}%>
 </head>
 
-
 <body>
-	<div class="wrapper">
-	    <div class="sidebar" data-background-color="brown" data-active-color="danger">
-	    <!--
-			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
-			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-		-->
-			<div class="logo">
-				<a href="/dashboard" class="simple-text">
-					<%=fabLabName%>
-				</a>
-			</div>
-			<div class="logo logo-mini">
-				<a href="/dashboard" class="simple-text">
-					<%=fabLabText%>
-				</a>
-			</div>
-	    	<div class="sidebar-wrapper">
-				<div class="user">
-	                <div class="photo">
-	                    <img src="<%=pathToPhoto%>" />
-	                </div>
-	                <div class="info">
-	                    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-	                        <%=userName%>
-	                        <b class="caret"></b>
-	                    </a>
-	                    <div class="collapse" id="collapseExample">
-	                        <ul class="nav">
-	                            <li><a href="/dashboard/profile"><%=sideBar.user.editProfile%></a></li>
-                                    <% if (machineConfigured) {%>
-	                               <li><a href="/dashboard/settings"><%=sideBar.user.settings%></a></li>
-                                    <%}%>
-	                        </ul>
-	                    </div>
-	                </div>
-	            </div>
-	            <ul class="nav">	
-                 <% if(!displaySidebarMenu) {%>
-				
-                         <li>
-	                    <a href="/dashboard/wizard">
-	                        <i class="ti-wand"></i>
-	                        <p><%=sideBar.wizard%></p>
-	                    </a>
-	                </li>
-                    <%}%>
-    
-                      <% if(displaySidebarMenu) {%>
-			<li>
-	                    <a href="">
-	                        <i class="ti-view-grid"></i>
-	                        <p><%=sideBar.machine%></p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a data-toggle="collapse" href="#dashboardOverview">
-	                        <i class="ti-panel"></i>
-	                        <p><%=sideBar.system.title%>
-                                <b class="caret"></b>
-                            </p>
-	                    </a>
-                        <div class="collapse" id="dashboardOverview">
-							<ul class="nav">
-								<li><a href="#"><%=sideBar.system.overview%></a></li>
-								<li><a href=""><%=sideBar.system.stats%></a></li>
-							</ul>
-						</div>
-	                </li>
-	                <li>
-				<a data-toggle="collapse" href="#tablesExamples">
-	                        	<i class="ti-view-list-alt"></i>
-	                        	<p><%=sideBar.tools.title%>
-	                       			<b class="caret"></b>
-	                        	</p>
-	                    	</a>
-	                    	<div class="collapse" id="tablesExamples">
-	                        <ul class="nav">
-								<li><a href="#"><%=sideBar.tools.userManag%></a></li>
-								<li><a href="#"><%=sideBar.tools.sysManag%></a></li>
-								<li><a href="/dashboard/logs"><%=sideBar.tools.sysLog%></a></li>
-	                        </ul>
-	                    </div>
-	                </li>
-			<li>
-	                    <a href="">
-	                        <i class="ti-bar-chart-alt"></i>
-	                        <p><%=sideBar.workload%></p>
-	                    </a>
-	                </li>
-                    <%}%>
+   <div class="wrapper">
+      <% include ./partials/sidebar %>
+      <div class="main-panel">
+         <% include ./partials/navigation %>	
+         <% if (displayWelcome) {%>
+            <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+	       <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+	       <span data-notify="icon" class="ti-bell"></span>
+               <span data-notify="message"><%=flashWelcome%></span>
+            </div>
+         <%}%>
 
-	            </ul>
-	    	</div>
-	    </div>
-
-	    <div class="main-panel">
-		<nav class="navbar navbar-default">
-	            <div class="container-fluid">
-					<div class="navbar-minimize">
-						<button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
-					</div>
-	                <div class="navbar-header">
-	                    <button type="button" class="navbar-toggle">
-	                        <span class="sr-only">Toggle navigation</span>
-	                        <span class="icon-bar bar1"></span>
-	                        <span class="icon-bar bar2"></span>
-	                        <span class="icon-bar bar3"></span>
-	                    </button>
-	                    <a class="navbar-brand" href=<%=currentPanelRoute%>>
-							<%=currentPanelName%>
-						</a>
-	                </div>
-	                <div class="collapse navbar-collapse">
-
-						<form class="navbar-form navbar-left navbar-search-form" role="search">
-	    					<div class="input-group">
-	    						<span class="input-group-addon"><i class="fa fa-search"></i></span>
-	    						<input type="text" value="" class="form-control" placeholder="Search...">
-	    					</div>
-	    				</form>
-
-	                    <ul class="nav navbar-nav navbar-right">
-	                        <li>
-	                            <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
-	                                <i class="ti-panel"></i>
-									<p>Stats</p>
-	                            </a>
-	                        </li>
-	                        <li class="dropdown">
-	                            <a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
-	                                <i class="ti-bell"></i>
-	                                <span class="notification">5</span>
-									<p>
-										Notifications <b class="caret"></b>
-									</p>
-	                            </a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="#not1">Notification 1</a></li>
-	                                <li><a href="#not2">Notification 2</a></li>
-	                                <li><a href="#not3">Notification 3</a></li>
-	                                <li><a href="#not4">Notification 4</a></li>
-	                            </ul>
-	                        </li>
-							<li>
-	                            <a href="/logout" class="btn-rotate">
-									<i class="ti-home"></i>
-									<p>Logout</p>
-	                            </a>
-	                        </li>
-	                    </ul>
-	                </div>
-	            </div>
-	        </nav>
-            <% if (displayWelcome) {%>
-		<div class="alert alert-success alert-with-icon fade in" data-notify="container">
-			<button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-			<span data-notify="icon" class="ti-bell"></span>
-                        <span data-notify="message"><%=flashWelcome%></span>
-                </div>
-            <%}%>
-
-	    <% if (displayWizard) {%>
-               <% include ./partials/wizard %>
-            <%}%>
+	 <% if (displayWizard) {%>
+            <% include ./partials/wizard %>
+         <%}%>
   
-            <% if (displayTerminal) {%>
-               <% if (errors) {%>
-                  <%errors.forEach(function(error) {%>
-	               <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-			   <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-                           <span data-notify="icon" class="ti-bell"></span>
-                           <span data-notify="message"><%=error.msg%></span>
-                        </div>
-                   <%});%>  
-               <%}%>
-               <% include ./partials/nterm %>
-            <%}%> 
+         <% if (displayTerminal) {%>
+            <% if (errors) {%>
+               <%errors.forEach(function(error) {%>
+	          <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+	             <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                     <span data-notify="icon" class="ti-bell"></span>
+                     <span data-notify="message"><%=error.msg%></span>
+                  </div>
+               <%});%>  
+            <%}%>
+            <% include ./partials/nterm %>
+         <%}%> 
 	    
-            <% if (displayProfile){%>
-                <% if (errors) {%>
-                  <%errors.forEach(function(error) {%>
-	               <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-			   <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-                           <span data-notify="icon" class="ti-bell"></span>
-                           <span data-notify="message"><%=error.msg%></span>
-                        </div>
-                   <%});%>  
-               <%}%> 	
-	       <% include ./partials/profile %>
-	    <%}%>
+         <% if (displayProfile){%>
+            <% if (errors) {%>
+               <%errors.forEach(function(error) {%>
+	          <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+	             <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                     <span data-notify="icon" class="ti-bell"></span>
+                     <span data-notify="message"><%=error.msg%></span>
+                  </div>
+               <%});%>  
+            <%}%> 	
+	    <% include ./partials/profile %>
+	 <%}%>
 	
-            <% if (displaySettings){%> 
-                <% if (errors) {%>
-                  <%errors.forEach(function(error) {%>
-	               <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-			   <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-                           <span data-notify="icon" class="ti-bell"></span>
-                           <span data-notify="message"><%=error.msg%></span>
-                        </div>
-                   <%});%>  
-               <%}%>	
-	       <% include ./partials/settings %>
-	    <%}%>
-            <% if (displayLogs) {%>
-              <% include ./partials/logger %>
-            <%}%> 
-    <!--/div-->
-            <% include ./partials/footer %>
-	    </div>
-	</div>
+         <% if (displaySettings){%> 
+            <% if (errors) {%>
+               <%errors.forEach(function(error) {%>
+	          <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+	             <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                     <span data-notify="icon" class="ti-bell"></span>
+                     <span data-notify="message"><%=error.msg%></span>
+                  </div>
+               <%});%>  
+            <%}%>	
+	    <% include ./partials/settings %>
+	 <%}%>
+            
+         <% if (displayLogs) {%>
+            <% include ./partials/logger %>
+         <%}%> 
+
+	 <% if (displayControl) {%>
+            <% if (errors) {%>
+               <%errors.forEach(function(error) {%>
+	          <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+	             <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                     <span data-notify="icon" class="ti-bell"></span>
+                     <span data-notify="message"><%=error.msg%></span>
+                  </div>
+               <%});%>  
+            <%}%>
+            <% if (uploadSuccess) {%>
+               <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+	          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+	          <span data-notify="icon" class="ti-bell"></span>
+                  <span data-notify="message"><%=flashUpload%></span>
+               </div>
+            <%}%>
+              <% if (machine.type == 'Laser cutter') {%>     
+                 <% if (machine.vendor == 'Epilog') {%>    
+                    <% include ./partials/machines/laser-cutters/epilog %>
+                 <% } %>
+                 <% if (machine.vendor == 'Trotec') {%>    
+                    <% include ./partials/machines/laser-cutters/trotec %>
+                 <% } %>
+                 <% if (machine.vendor == 'GCC') {%>    
+                    <% include ./partials/machines/laser-cutters/gcc %>
+                 <% } %>
+              <% } %>
+              <% if (machine.type == 'Vinyl cutter') {%>     
+                 <% if (machine.vendor == 'Roland') {%>    
+                    <% include ./partials/machines/vinyl-cutters/roland %>
+                 <% } %>
+              <% } %>
+              <% if (machine.type == 'Milling machine') {%>     
+                 <% if (machine.vendor == 'Roland') {%>    
+                    <% include ./partials/machines/milling-machines/roland %>
+                 <% } %>
+                 <% if (machine.vendor == 'Othermill') {%>    
+                    <% include ./partials/machines/milling-machines/othermill %>
+                 <% } %>
+              <% } %>
+         <%}%>
+            
+         <% include ./partials/footer %>
+      </div> <!-- end main panel-->
+   </div> <!-- end wrapper-->
 </body>
 
 <% include ./partials/scripts %>
+
 <% if (displayTerminal) {%>
-	<% include ./partials/scripts-term %>
+   <% include ./partials/scripts-term %>
 <%}%>
+
 <% if (displayLogs) {%>
-	<% include ./partials/scripts-log %>
+   <% include ./partials/scripts-log %>
 <%}%>
+
+<% if (displayControl) {%>
+   <% include ./partials/scripts-machines %>
+<%}%>
+
 </html>

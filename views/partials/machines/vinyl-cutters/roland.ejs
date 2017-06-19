@@ -1,0 +1,18 @@
+<div class="content">
+   <div class="container-fluid">
+      <div class="card">
+         <form method="post" action="/dashboard/control/vinyl/roland" enctype="multipart/form-data">
+	    <div class="content">
+               <% include ../../process/upload %>
+	       <% include ../../process/vinyl-cutters/roland/switches %>
+               <div id="feedback"></div>
+	       <% include ../../process/vinyl-cutters/roland/cut %>
+                <br />
+	       <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= laserPanel.submitButtonText %></button>
+	    </div>
+	  </form>
+       </div>                         
+    <!-- end card -->
+    </div>
+</div>
+

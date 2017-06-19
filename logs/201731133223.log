@@ -1,0 +1,18 @@
+{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-11T03:32:25.974Z"}
+{"level":"info","message":"@authorization.isLoggedIn: access attempt without authorization","timestamp":"2017-03-11T03:32:29.652Z"}
+{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-11T03:32:38.681Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:32:39.380Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T03:32:39.432Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:34:01.948Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T03:34:01.979Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:34:06.258Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T03:34:06.307Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:34:13.528Z"}
+{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-11T03:34:13.579Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:35:28.301Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T03:35:28.358Z"}
+{"level":"info","message":"@dashboard.process: the process selected is cut","timestamp":"2017-03-11T03:35:39.670Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:36:01.021Z"}
+{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-11T03:36:01.086Z"}
+{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-11T03:36:52.318Z"}
+{"level":"info","message":"@websockets.ws.logger: Connection established with the client","timestamp":"2017-03-11T03:36:52.338Z"}

@@ -60,6 +60,9 @@
 <!-- File Upload Management  -->
 <script src="/js/upload.js"></script>
 
+<!-- Process Management  -->
+<script src="/js/process.js"></script>
+
 <script type="text/javascript">
     $().ready(function(){
         $('[rel="tooltip"]').tooltip();
@@ -123,3 +126,50 @@
             });
         });
 	</script>
+
+<script type="text/javascript">
+function showSwitchEpilog(process){
+   if(process.value == 'halftone')
+      document.getElementById('switch-div').style.display = "block";
+   else
+      document.getElementById('switch-div').style.display = "none";
+}
+</script>
+
+<script type="text/javascript">
+function showSwitchTrotec(process){
+   if(process.value == 'halftone') {
+      document.getElementById('switch-div-halftone').style.display = "block";
+      document.getElementById('switch-div-cut').style.display = "none";
+   } else {
+      document.getElementById('switch-div-cut').style.display = "block"; 
+      document.getElementById('switch-div-halftone').style.display = "none";
+   }
+}
+</script>
+
+<script type="text/javascript">
+function showSwitchGcc(process){
+   if(process.value == 'halftone') {
+      document.getElementById('switch-div-halftone').style.display = "block";
+      document.getElementById('switch-div-cut').style.display = "none";
+   } else {
+      document.getElementById('switch-div-cut').style.display = "block"; 
+      document.getElementById('switch-div-halftone').style.display = "none";
+   }
+}
+</script>
+
+<script type="text/javascript">
+
+function selectFinishing(process){
+   document.getElementById('finishings-title').style.display = "block";
+   if(process.value == 'pcb') {
+      document.getElementById('pcb').style.display = "block";
+      document.getElementById('wax').style.display = "none";
+   } else {
+      document.getElementById('pcb').style.display = "none"; 
+      document.getElementById('wax').style.display = "block";
+   }
+}
+</script>

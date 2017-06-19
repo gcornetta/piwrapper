@@ -3,95 +3,25 @@ var fs = require('fs');
 var path = require('path');
 var lwip = require('lwip');
 var os = require('../lib/os/os');
+var fifo = require('../lib/fifo/jobFIFO');
 var mongoose = require('mongoose');
 var User = require('../models/user');
 var Machine = require('../models/machine');
 var ADS1x15 = require('../lib/ads1x15/ADS1x15');
-var pageContent = require('./lib/contents');
-var infoMsg = require('./lib/messages');
 var winston = require('winston');
+var eventEmitter = require('../app').eventEmitter;
+var sync = require('synchronize');
+var dashboard = require('./lib/dashboard');
 
-var dashboardText = pageContent.dashboardText;
-var profileText = pageContent.profileText;
-var settingsText = pageContent.settingsText;
-var infoText = pageContent.sysInfoText;
-var welcomeMsg = infoMsg.welcomeMsg;
-var validationMsg= infoMsg.validationMsg
-var panelNames = pageContent.panelNames;
-var userRoles = pageContent.userRoles;
+var dashboardPage = dashboard.dashboardPage;
+var welcomeMsg    = dashboard.welcomeMsg;
+var validationMsg = dashboard.validationMsg
+var panelNames    = dashboard.panelNames;
+var userRoles     = dashboard.userRoles;
+var infoText      = dashboard.infoText;
 
-var dashboardPage = {title: dashboardText.title,
-                       pageHeader: {
-                         title: dashboardText.headerTitle,
-			 subtitle: dashboardText.headerSubtitle    				
-                       },
-                       fabLabName: dashboardText.fabLabName,
-                       fabLabText: dashboardText.fabLabText,
-                       sideBar   : dashboardText.sideBar,
-                       userProfile : {
-                          editProfile : profileText.editProfile,
-                          userName : profileText.userName,
-                          role : profileText.role,
-                          email : profileText.email,
-                          firstName : profileText.firstName,
-                          lastName : profileText.lastName,
-                          updateProfile : profileText.updateProfile,
-                          uploadPhoto : profileText.uploadPhoto     
-		       },
-                       machineSettings : {
-                          editSettings : settingsText.editSettings,
-                          machineName : settingsText.machineName,
-                          machineType : settingsText.machineType, 
-                          machineVendor : settingsText.machineVendor,
-                          adcVendor : settingsText.adcVendor,
-                          adcDevice : settingsText.adcDevice,
-                          updateSettings : settingsText.updateSettings 
-		       },
-                       currentPanelRoute : {},
-                       currentPanelName : {},
-		       flashSuccess : false, 
-                       flashWelcome : null,
-                       displayWelcome : true,
-                       displayTerminal : true, 
-                       displayProfile : false,
-                       displayWizard : false,
-                       displaySettings : false,
-                       displayLogs : false,
-                       machineConfigured : false,
-                       displaySidebarMenu : null,
-                       profile : {},
-                       machine : {},
-                       pathToPhoto : {},
-                       lastLoggedOn : {},
-                       terminalPanelTitle : dashboardText.terminalPanelTitle,
-                       cpuPanelTitle : dashboardText.cpuPanelTitle,
-                       cpuUptime : dashboardText.cpuUptime,
-		       sysInfoTable : { header : {col1 : infoText.parameter, col2 : infoText.value},
-					rows : [{label : infoText.arch, value : null},	
-						{label : infoText.numCores, value : null},
-						{label : infoText.clk, value : []},
-						{label : infoText.avgClk, value : null},
-						{label : infoText.osType, value : null},
-						{label : infoText.release, value : null},
-						{label : infoText.totMem, value : null},
-						{label : infoText.freeMem, value : null},
-						{label : infoText.avgLoad, value : [{label : infoText.timeWin1, value : null},
-                                             					    {label : infoText.timeWin2, value : null},
-                                             					    {label : infoText.timeWin3, value : null}
-                                            					 ]
-                                    	        }
-     					       ]
-					},   
-		      wizardPage : {
-					samplingDevices : [{vendor : 'Texas Instruments', deviceList : ['ADS 1015', 'ADS 1115']}],
-        				machines        : [{label: 'Laser cutters', type : 'Laser cutter' , vendors : ['Epilog', 'GCC', 'Trotec']},
-                           			   	   {label: 'Vinyl cutters', type : 'Vinyl cutter' , vendors : ['GCC', 'Roland']},
-			   			   	   {label: 'Milling machines', type : 'Milling machine' , vendors : ['Roland', 'Othermachine']},
-                           			   	   {label: 'Micromachining', type : 'Laser micromachining' , vendors : ['Oxford']}
-						  	  ]
-				   },
-                     errors: null
-                    };
+var jobCounter = [];
+
 
 var _validateFields = function (req, res) {
 
@@ -140,6 +70,7 @@ var _validateFields = function (req, res) {
 }
 
 
+// ToDO: fix this routine we now perform single-end reading
 var _checkCurrentSensor = function(){
      var ADS1115 = 0x01	// 16-bit ADC;
      var adc = new ADS1x15(address=0x48, ic=ADS1115); 
@@ -202,9 +133,12 @@ module.exports.dashboard = function(req, res){
         			}
 				dashboardPage.displaySettings = false;
                                 dashboardPage.displayLogs = false;
+                                dashboardPage.displayControl = false;
                                 dashboardPage.displayProfile = false;
                                 dashboardPage.displayTerminal = false;
                                 dashboardPage.displaySidebarMenu = false;
+                                dashboardPage.displayProcessCut = false;
+				dashboardPage.displayProcessHalftone = false;
 				dashboardPage.currentPanelName = panelNames.dashboard;
 				dashboardPage.currentPanelRoute = '/dashboard';
                                 res.render('dashboard', dashboardPage);
@@ -234,8 +168,43 @@ module.exports.dashboard = function(req, res){
 				dashboardPage.displaySettings = false;
                                 dashboardPage.displayProfile = false;
                                 dashboardPage.displayLogs = false;
+                                dashboardPage.displayControl = false;
+                                dashboardPage.displayProcessCut = false;
+				dashboardPage.displayProcessHalftone = false;
         			dashboardPage.currentPanelName = panelNames.dashboard;
         			dashboardPage.currentPanelRoute = '/dashboard';
+                                
+                                switch (machine.type) {
+     				case 'Laser cutter'         :   switch (machine.vendor) {
+                                     				case 'Epilog' : dashboardPage.machinePanelRoute = '/dashboard/control/laser/epilog';
+                                                     				break;
+                                    				case 'GCC'    : dashboardPage.machinePanelRoute = '/dashboard/control/laser/gcc';
+                                                     				break;
+                                     				case 'Trotec' : dashboardPage.machinePanelRoute = '/dashboard/control/laser/trotec';
+                                                     				break;
+                                     				default       : break; 
+                                   				}
+                                   				break;
+     				case 'Vinyl cutter'         : switch (machine.vendor) {
+                                                          	case 'GCC'    : dashboardPage.machinePanelRoute = '/dashboard/control/vinyl/gcc';
+                                                     				break;
+                                     				case 'Roland' : dashboardPage.machinePanelRoute = '/dashboard/control/vinyl/roland';
+                                                     				break;
+                                     				default       : break; 
+                                   				}
+
+                                                              break;
+     				case 'Milling machine'      : switch (machine.vendor) {
+                                                          	case 'Roland'    : dashboardPage.machinePanelRoute = '/dashboard/control/milling/roland';
+                                                     				   break;
+                                     				case 'Othermill' : dashboardPage.machinePanelRoute = '/dashboard/control/milling/othermill';
+                                                     				   break;
+                                     				default       : break; 
+                                   				}
+								break;
+     				case 'Laser micromachining' : break; 
+   				}
+                                  	
 				res.render('dashboard', dashboardPage);
         			dashboardPage.displayWelcome = false;
 				dashboardPage.errors = null; //used to clear the current sensor error
@@ -250,6 +219,9 @@ module.exports.profile = function(req, res){
         dashboardPage.displayTerminal = false,
 	dashboardPage.displayWelcome = false;
         dashboardPage.displayLogs = false;
+        dashboardPage.displayControl = false;
+        dashboardPage.displayProcessCut = false;
+	dashboardPage.displayProcessHalftone = false;
 	dashboardPage.displayProfile = true;
         dashboardPage.currentPanelName = panelNames.profile;
         dashboardPage.currentPanelRoute = '/dashboard/profile';
@@ -317,6 +289,9 @@ module.exports.upload = function(req, res){
 module.exports.wizard = function (req, res){
 dashboardPage.displayWelcome = false;
 dashboardPage.displayLogs = false;
+dashboardPage.displayControl = false;
+dashboardPage.displayProcessCut = false;
+dashboardPage.displayProcessHalftone = false;
 dashboardPage.displayWizard = true;
 dashboardPage.currentPanelName = panelNames.wizard;
 dashboardPage.currentPanelRoute = '/dashboard/wizard';
@@ -368,10 +343,13 @@ if(errors){
 
 module.exports.settings = function(req, res){
 
+dashboardPage.displayControl = false;
 dashboardPage.displayLogs = false;
 dashboardPage.displayProfile = false;
 dashboardPage.displayWizard = false;
 dashboardPage.displayTerminal = false;
+dashboardPage.displayProcessCut = false;
+dashboardPage.displayProcessHalftone = false;
 dashboardPage.displaySettings = true;
 dashboardPage.currentPanelName = panelNames.settings;
 dashboardPage.currentPanelRoute = '/dashboard/settings';
@@ -384,10 +362,10 @@ Machine.checkIfMachineConfigured(function(err, machine){
                 	          vendor    : machine.vendor,
                         	  adcVendor : machine.adcDevice[0].vendor,
                           	  adcDevice : machine.adcDevice[0].device
-        	        	} 
+        	        	} ;
+         res.render('dashboard', dashboardPage);
+         dashboardPage.flashSuccess = false;
 	});               
-res.render('dashboard', dashboardPage);
-dashboardPage.flashSuccess = false;
 }
 
 module.exports.machineUpdate = function (req, res) {
@@ -520,6 +498,9 @@ dashboardPage.displayProfile = false;
 dashboardPage.displayWizard = false;
 dashboardPage.displayTerminal = false;
 dashboardPage.displaySettings = false;
+dashboardPage.displayControl = false;
+dashboardPage.displayProcessCut = false;
+dashboardPage.displayProcessHalftone = false;
 dashboardPage.displayLogs = true;
 dashboardPage.currentPanelName = panelNames.logs;
 dashboardPage.currentPanelRoute = '/dashboard/logs';

@@ -1,4 +1,0 @@
-{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2016-08-26T10:49:33.700Z"}
-{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2016-08-26T11:08:26.109Z"}
-{"level":"info","message":"@dashboard.cofigure: a new machine has been successfully configured","timestamp":"2016-08-26T11:09:44.584Z"}
-{"level":"info","message":"Mongoose disconnected","timestamp":"2016-08-26T11:11:11.084Z"}
