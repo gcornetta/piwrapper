@@ -68,7 +68,11 @@
             
          <% if (displayLogs) {%>
             <% include ./partials/logger %>
-         <%}%> 
+         <%}%>
+
+         <% if (displayJobsTable) {%>
+            <% include ./partials/jobsTable %>
+         <%}%>
 
 	 <% if (displayControl) {%>
             <% if (errors) {%>

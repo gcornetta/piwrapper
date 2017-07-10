@@ -1,0 +1,27 @@
+<link href="../css/fresh-bootstrap-table.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="fresh-table full-color-azure full-screen-table">
+    <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange                  
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+    -->
+        
+        <table id="fresh-table" class="table">
+            <thead>
+				<th data-field="priority"><%= jobsTableText.priority %></th>
+                <th data-field="userId"><%= jobsTableText.userId %></th>
+            	<th data-field="process" data-sortable="true"><%= jobsTableText.process %></th>
+            	<th data-field="jobPath" data-sortable="true"><%= jobsTableText.jobPath %></th>
+            	<th data-field="status" data-sortable="true"><%= jobsTableText.status %></th>
+				<th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents"><%= jobsTableText.actions %></th>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-table.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../js/html/full-screen-table.js"></script>

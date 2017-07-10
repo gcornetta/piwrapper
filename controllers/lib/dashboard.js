@@ -11,6 +11,7 @@ exports.infoText  = infoText;
 var laserPanelText   = pageContent.laserPanelText;
 var vinylPanelText   = pageContent.vinylPanelText;
 var millingPanelText = pageContent.millingPanelText;
+var jobsTableText    = pageContent.jobsTableText;
 
 
 var dashboardPage = {title: dashboardText.title,
@@ -38,7 +39,9 @@ var dashboardPage = {title: dashboardText.title,
                           machineVendor : settingsText.machineVendor,
                           adcVendor : settingsText.adcVendor,
                           adcDevice : settingsText.adcDevice,
-                          updateSettings : settingsText.updateSettings 
+                          updateSettings : settingsText.updateSettings,
+                          deviceUri : settingsText.deviceUri,
+                          refresh : settingsText.refresh
 		       },
                        currentPanelRoute : {},
                        currentPanelName : {},
@@ -54,6 +57,7 @@ var dashboardPage = {title: dashboardText.title,
                        displaySettings : false,
                        displayLogs : false,
                        displayControl : false,
+                       displayJobsTable : false,
                        machineConfigured : false,
 		       displaySidebarMenu : null,
                        profile : {},
@@ -91,6 +95,7 @@ var dashboardPage = {title: dashboardText.title,
 		     laserPanel   : laserPanelText,
                      vinylPanel   : vinylPanelText,
                      millingPanel : millingPanelText,
+                     jobsTableText: jobsTableText,
                      errors: null
                     };
 

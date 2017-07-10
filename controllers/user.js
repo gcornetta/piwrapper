@@ -180,7 +180,7 @@ module.exports.passwordRequest = function(req, res) {
                    //use the following code to convert the msg in a JSON object on the server side 
                    //var json = JSON.parse(msg);
                    
-                   wsClient.wsSendMsg (process.env.GATEWAY, 'new_password_request', msg, function(err, msg, sendOK){
+                   wsClient.wsSendMsg (process.env.GATEWAY || "ws://localhost:8080/", 'new_password_request', msg, function(err, msg, sendOK){
                       User.updatePassword(username, newPassword, function (err, updateOK){
                          if (err) throw err;
                          if(!updateOK){

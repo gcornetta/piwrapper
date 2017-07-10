@@ -1,0 +1,150 @@
+<div class="row">
+  <div class="col-md-12">
+    <legend><%= millingPanel.roland.wax.title %></legend>
+    <fieldset id="fieldset">
+      <div id="rough_cut" class="form-group" style="display: none;">
+        <div class="col-sm-5">
+          <label class="control-label"><%= millingPanel.roland.wax.direction %></label>
+          <label class="radio">
+            <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+            <input type="radio" data-toggle="radio" name="direction" value="conventional"><%= millingPanel.roland.wax.conventional %>
+          </label>
+          <label class="radio checked">
+            <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+            <input type="radio" data-toggle="radio" name="direction" value="climb" checked><%= millingPanel.roland.wax.climb %>
+          </label>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.bottomZ %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="bottomZ" placeholder="-10" value="-10" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.bottomIntensity %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="bottomIntensity" placeholder="0" value="0" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.topZ %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="topZ" placeholder="0" value="0" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.topIntensity %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="topIntensity" placeholder="1" value="1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.cutDepth %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="cutDepth" placeholder="1" value="1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.diameter %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="diameter" placeholder="3.175" value="3.175" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.offsets %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="offsets" placeholder="-1" value="-1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.overlap %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="overlap" placeholder="50" value="50" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.error %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="error" placeholder="1.1" value="1.1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.merge %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="merge" placeholder="1.5" value="1.5" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.order %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="order" placeholder="-1" value="-1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.sequence %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="sequence" placeholder="-1" value="-1" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div id="finish_cut" class="form-group" style="display: none;">
+        <div class="col-sm-5">
+          <label class="control-label"><%= millingPanel.roland.wax.type %></label>
+          <label class="radio">
+            <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+            <input type="radio" data-toggle="radio" name="type" value="ball"><%= millingPanel.roland.wax.ball %>
+          </label>
+          <label class="radio checked">
+            <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+            <input type="radio" data-toggle="radio" name="type" value="flat" checked><%= millingPanel.roland.wax.flat %>
+          </label>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.bottomZ %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="bottomZ" placeholder="-10" value="-10" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.bottomIntensity %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="bottomIntensity" placeholder="0" value="0" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.topZ %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="topZ" placeholder="0" value="0" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.topIntensity %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="topIntensity" placeholder="1" value="1" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.diameter %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="diameter" placeholder="3.175" value="3.175" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.overlap %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="overlap" placeholder="90" value="90" class="form-control">
+          </div>
+        </div>
+        <label class="col-sm-3 control-label"><%= millingPanel.roland.wax.error %></label>
+        <div class="col-sm-2">
+          <div class="input-group">
+            <input type="text" name="error" placeholder="1.1" value="1.1" class="form-control">
+          </div>
+        </div>
+      </div>
+
+
+    </fieldset>
+  </div>
+</div>

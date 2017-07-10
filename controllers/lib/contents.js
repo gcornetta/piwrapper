@@ -50,7 +50,7 @@ sideBar		          : {user : {editProfile : i18n.__('w_00031'), settings: i18n._
                              machine : i18n.__('w_00104'),
                              system : {title: i18n.__('w_00034'), overview: i18n.__('w_00035'), stats: i18n.__('w_00036')},
                              tools     : {title: i18n.__('w_00037'), userManag : i18n.__('w_00038'), sysManag : i18n.__('w_00039'), sysLog : i18n.__('w_00040')},
-                             workload : i18n.__('w_00041')
+                             workload : i18n.__('w_00041'), jobs : i18n.__('w_00256')
 			    },
 terminalPanelTitle        : i18n.__('w_00042'),
 cpuPanelTitle             : i18n.__('w_00043'),
@@ -100,7 +100,8 @@ profile                  : i18n.__('w_00088'),
 wizard                   : i18n.__('w_00094'),
 settings                 : i18n.__('w_00105'),
 logs                     : i18n.__('w_00115'),
-control			 : i18n.__('w_00145')
+control			         : i18n.__('w_00145'),
+jobsTable			     : i18n.__('w_00249')
 };
 
 exports.panelNames = panelNames;
@@ -120,10 +121,25 @@ machineType		: i18n.__('w_00108'),
 machineVendor		: i18n.__('w_00109'),
 adcVendor		: i18n.__('w_00110'),
 adcDevice		: i18n.__('w_00111'),
-updateSettings		: i18n.__('w_00112')
+updateSettings		: i18n.__('w_00112'),
+deviceUri		: i18n.__('w_00254'),
+refresh		: i18n.__('w_00255')
 };
 
-exports.settingsText = settingsText; 
+exports.settingsText = settingsText;
+
+var jobsTableText = {
+search		    : i18n.__('w_00242'),
+priority		: i18n.__('w_00243'),
+userId		    : i18n.__('w_00244'),
+process		    : i18n.__('w_00245'),
+jobPath		    : i18n.__('w_00246'),
+status		    : i18n.__('w_00247'),
+actions		    : i18n.__('w_00248'),
+jobsTable	    : i18n.__('w_00249')
+};
+
+exports.jobsTableText = jobsTableText;
 
 var laserPanelText = {
 epilog: {  switches : {title: i18n.__('w_00116'), autofocus: i18n.__('w_00117'), sort: i18n.__('w_00118'), fill: i18n.__('w_00168')},
@@ -165,12 +181,52 @@ submitButtonText: i18n.__('w_00146')
 exports.vinylPanelText = vinylPanelText;
 
 var millingPanelText = {
-roland: {  switches : {title: i18n.__('w_00116'), invert: i18n.__('w_00192')},
+roland: {  switches : {title: i18n.__('w_00116'), invert: i18n.__('w_00192'), sort: i18n.__('w_00118'), xz: i18n.__('w_00219'), yz: i18n.__('w_00220')},
            select   : {process: {title: i18n.__('w_00124'), pcb: i18n.__('w_00193'), wax: i18n.__('w_00194')}, finishing: {title: i18n.__('w_00195'), pcb: {traces_1_64: i18n.__('w_00196'), outline_1_32: i18n.__('w_00197'), traces_0_010: i18n.__('w_00198')}, wax: {rough_cut: i18n.__('w_00199'), finish_cut:i18n.__('w_00200')}}, machine: {title: i18n.__('w_00205'), mdx15: i18n.__('w_00206'), mdx20: i18n.__('w_00207'), mdx40: i18n.__('w_00208'), srm20: i18n.__('w_00209')}}, 
            position : {title: i18n.__('w_00201'), toxyz: i18n.__('w_00202'), toxyzjog: i18n.__('w_00203'), toxyzhome: i18n.__('w_00204')},
            engine   : {title: i18n.__('w_00132'), power: i18n.__('w_00133'), speed: i18n.__('w_00134'), rate: i18n.__('w_00135')},
-           cut      : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), offsets: i18n.__('w_00138'), overlap: i18n.__('w_00139'), error: i18n.__('w_00140'), threshold: i18n.__('w_00141'), merge: i18n.__('w_00142'), order: i18n.__('w_00143'), sequence: i18n.__('w_00144')},
-           halftone : {title: i18n.__('w_00136'), diameter: i18n.__('w_00137'), spotSize: i18n.__('w_00163'), minSpotsize: i18n.__('w_00164'), horSpotspace: i18n.__('w_00165'), verSpotspace: i18n.__('w_00166'), pointSpot: i18n.__('w_00167')}
+           cut      : {
+               title:           i18n.__('w_00136'),
+               direction:       i18n.__('w_00210'),
+               conventional:    i18n.__('w_00211'),
+               climb:           i18n.__('w_00212'),
+               cutDepth:        i18n.__('w_00213'),
+               diameter:        i18n.__('w_00137'),
+               offsets:         i18n.__('w_00138'),
+               overlap:         i18n.__('w_00139'),
+               error:           i18n.__('w_00140'),
+               threshold:       i18n.__('w_00141'),
+               merge:           i18n.__('w_00142'),
+               order:           i18n.__('w_00143'),
+               sequence:        i18n.__('w_00144'),
+               thickness:       i18n.__('w_00214')
+           },
+
+
+           wax      : {
+               title:           i18n.__('w_00136'),
+               bottomZ:         i18n.__('w_00215'),
+               bottomIntensity: i18n.__('w_00216'),
+               topZ:            i18n.__('w_00217'),
+               topIntensity:    i18n.__('w_00218'),
+               xz:              i18n.__('w_00219'),
+               xy:              i18n.__('w_00220'),
+               type:            i18n.__('w_00221'),
+               flat:            i18n.__('w_00222'),
+               ball:            i18n.__('w_00223'),
+               direction:       i18n.__('w_00210'),
+               conventional:    i18n.__('w_00211'),
+               climb:           i18n.__('w_00212'),
+               cutDepth:        i18n.__('w_00213'),
+               diameter:        i18n.__('w_00137'),
+               offsets:         i18n.__('w_00138'),
+               overlap:         i18n.__('w_00139'),
+               error:           i18n.__('w_00140'),
+               merge:           i18n.__('w_00142'),
+               order:           i18n.__('w_00143'),
+               sequence:        i18n.__('w_00144'),
+               tool:            i18n.__('w_00224'),
+           }
           },
 othermill: {  switches : {title: i18n.__('w_00177'), sort: i18n.__('w_00178'), fill: i18n.__('w_00179')},
               select   : {process: {title: i18n.__('w_00124'), cut: i18n.__('w_00125'), halftone: i18n.__('w_00126')}, material: {title: i18n.__('w_00127'), cardboard: i18n.__('w_00128'), acrylic: i18n.__('w_00129'), wood: i18n.__('w_00130'), mylar: i18n.__('w_00131')}, machine: {title: i18n.__('w_00172'), speedy100: i18n.__('w_00173'), speedy100FlexxCO2: i18n.__('w_00174'), speedy100FlexxFiber: i18n.__('w_00175'), speedy400: i18n.__('w_00176')}}, 

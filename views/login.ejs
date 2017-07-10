@@ -70,7 +70,7 @@
                                                     <%for (var i=0; i<placeHolders.length; i++) {%>
                                                         <div class="form-group">
                                                             <label><%=placeHolders[i].label%></label>
-                                                            <input type="<%=placeHolders[i].type%>" name="<%=placeHolders[i].name%>" placeholder="<%=placeHolders[i].text%>" class="form-control input-no-border">
+                                                            <input id="<%=placeHolders[i].name%>" type="<%=placeHolders[i].type%>" name="<%=placeHolders[i].name%>" placeholder="<%=placeHolders[i].text%>" class="form-control input-no-border">
                                                         </div>
                                                     <%}%>
                                                 </div>

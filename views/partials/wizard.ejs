@@ -97,6 +97,21 @@
 		                                                </div>
 		                                            </div>
 		                                        </div>
+		                                        <div class="row">
+                                                                  <div class="col-sm-7 col-md-offset-1">
+                                                                                        <div class="form-group">
+                                                                                          <label><%=machineSettings.deviceUri%></label>
+                                                                                          <select id="deviceUri" name="deviceUri" class="form-control">
+                                                                                          <option value="<%=machine.deviceUri%>">
+                                                                                              <%=machine.deviceUri%>
+                                                                                          </option>
+                                                                                          </select>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-2" style="padding-bottom: 3px;padding-top: 2em;">
+                                                                                                          <button type="button" class="btn btn-info btn-fill btn-wd" onclick="loadMachines()">Refresh</button>
+                                                                                                        </div>
+                                                                                      </div>
 		            					    </div>
 		            						<div class="tab-pane" id="tab3">
 		            							<h2 class="text-center text-space">You're almost done <br><small>Click on "<b>Finish</b>" to submit configuration</small></h2>

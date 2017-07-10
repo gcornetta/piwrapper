@@ -3,10 +3,12 @@ var fs = require('fs');
 var path = require('path');
 var Machine = require('../models/machine');
 var winston = require('winston');
-var fifo = require('../lib/fifo/jobFIFO');
+var fifo = require('../app').fifo;
 var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
+const uuid = require('uuid/v4');
+var formCheck = require('../lib/formCheck/formCheck');
 
 var dashboardPage = dashboard.dashboardPage;
 var panelNames    = dashboard.panelNames;
@@ -15,64 +17,9 @@ var validationMsg = dashboard.validationMsg;
 var jobCounter = [];
 
 var _validate = function (req, res) {
-        errors = [];
-  
- 	var process = req.body.process;
-        var diameter = req.body.diameter;
-        var overlap = req.body.overlap;
-        var error = req.body.error;
-        var threshold = req.body.threshold;
-        var merge = req.body.merge;
-        var order = req.body.order;
-        var sequence = req.body.sequence;
-        var process = req.body.process;
-        
-        var spotSize = req.body.spotSize;
-        var minSpotsize = req.body.minSpotsize;
-        var horSpotspace = req.body.horSpotspace;
-        var verSpotspace = req.body.verSpotspace;
-        var pointSpot = req.body.pointSpot;
-
-        var power = req.body.power;
-        var speed = req.body.speed;
-        var rate = req.body.rate;
-        var xCoord = req.body.xCoord;
-        var yCoord = req.body.yCoord;
-   
         var path = req.body.path;
-    
-	// Validation
         req.checkBody('path', validationMsg.path).notEmpty();
-	req.checkBody('process', validationMsg.process).notEmpty();
-        req.checkBody('material', validationMsg.material).notEmpty();
-
-        if ((process != "") && (process ==  'cut')) {
-          req.checkBody('diameter', validationMsg.diameter).notEmpty().isDecimal();
-          req.checkBody('offsets', validationMsg.offsets).notEmpty().isInt();
-          req.checkBody('overlap', validationMsg.overlap).notEmpty().isInt({ min: 1, max: 100 });
-          req.checkBody('error', validationMsg.error).notEmpty().isDecimal();
-          req.checkBody('threshold', validationMsg.threshold).notEmpty().isFloat({ min: 0, max: 1 });
-          req.checkBody('merge', validationMsg.merge).notEmpty().isDecimal();
-          req.checkBody('order', validationMsg.order).notEmpty().isInt();
-          req.checkBody('sequence', validationMsg.sequence).notEmpty().isInt();
-        } 
-          
-        if ((process != "") && (process ==  'halftone')) {
-          req.checkBody('diameter', validationMsg.diameter).notEmpty().isDecimal();
-          req.checkBody('spotSize', validationMsg.spotSize).notEmpty().isDecimal();
-          req.checkBody('minSpotsize', validationMsg.minSpotsize).notEmpty().isInt({ min: 1, max: 100 });
-          req.checkBody('horSpotspace', validationMsg.horSpotspace).notEmpty().isInt({ min: 1, max: 100 });
-          req.checkBody('verSpotspace', validationMsg.verSpotspace).notEmpty().isInt({ min: 1, max: 100 });          
-          req.checkBody('pointSpot', validationMsg.pointSpot).notEmpty().isInt();
-        } 
-
-         req.checkBody('power', validationMsg.power).notEmpty().isInt({ min: 1, max: 100 });
-         req.checkBody('speed', validationMsg.speed).notEmpty().isInt({ min: 1, max: 100 });
-         req.checkBody('rate', validationMsg.rate).notEmpty().isInt();
-         req.checkBody('xCoord', validationMsg.xCoord).notEmpty().isInt({ min: 0, max: 50 });
-         req.checkBody('yCoord', validationMsg.yCoord).notEmpty().isInt({ min: 0, max: 50 });
-
-	var errors = req.validationErrors();  
+	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
 
         if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
            if(!errors) {
@@ -97,6 +44,7 @@ dashboardPage.displayTerminal = false;
 dashboardPage.displaySettings = false;
 dashboardPage.displayLogs = false;
 dashboardPage.uploadSuccess = false;
+dashboardPage.displayJobsTable = false;
 dashboardPage.displayControl = true;
 dashboardPage.currentPanelName = panelNames.control;
 dashboardPage.currentPanelRoute = '/dashboard/control/laser/epilog';
@@ -225,14 +173,20 @@ module.exports.upload = function (req, res) {
           } else {
             dashboardPage.errors = null;
             fifoData.userId = req.user._id;
+            fifoData.jobId = uuid();
             fifoData.status = 'pending'; //status: pending, approved, rejected
-            fifo.push(fifoData, fifoData.jobPath);
-            dashboardPage.uploadSuccess = true; 
-            var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
-            req.flash('success_msg', uploadMessage);
-            var flashUpload = req.flash('success_msg')[0];                       
-            dashboardPage.flashUpload = flashUpload;
-            req.session.flash = [];
+            fifo.push(fifoData, "local", function(err, job){
+                if (err){
+                    winston.error('@controllers.epilog_laser: '+err.err);
+                }else{
+                    dashboardPage.uploadSuccess = true;
+                    var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
+                    req.flash('success_msg', uploadMessage);
+                    var flashUpload = req.flash('success_msg')[0];
+                    dashboardPage.flashUpload = flashUpload;
+                    req.session.flash = [];
+                }
+            });
          }
            
            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);

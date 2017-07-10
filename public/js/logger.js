@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var socket = io.connect( 'http://192.168.0.102:8888/syslogger' );
+    var socket = io.connect( 'http://192.168.0.100:8888/syslogger' );
     var container = $('#logger-message');
     
      socket.on ('connect', function(){

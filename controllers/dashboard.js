@@ -3,7 +3,6 @@ var fs = require('fs');
 var path = require('path');
 var lwip = require('lwip');
 var os = require('../lib/os/os');
-var fifo = require('../lib/fifo/jobFIFO');
 var mongoose = require('mongoose');
 var User = require('../models/user');
 var Machine = require('../models/machine');
@@ -12,6 +11,7 @@ var winston = require('winston');
 var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
+var printerConfig = require('../lib/fablab/printerConfig');
 
 var dashboardPage = dashboard.dashboardPage;
 var welcomeMsg    = dashboard.welcomeMsg;
@@ -30,6 +30,7 @@ var _validateFields = function (req, res) {
 	var name = req.body.machineName;
 	var adcVendor = req.body.adcVendor;
 	var adcDevice = req.body.adcDevice;
+	var deviceUri = req.body.deviceUri;
 
 	// Validation
 	req.checkBody('machineVendor', validationMsg.vendor).notEmpty();
@@ -37,6 +38,7 @@ var _validateFields = function (req, res) {
 	req.checkBody('machineName', validationMsg.name).notEmpty();
 	req.checkBody('adcVendor', validationMsg.adcVendor).notEmpty();
 	req.checkBody('adcDevice', validationMsg.adcDevice).notEmpty();
+	req.checkBody('deviceUri', validationMsg.deviceURI).notEmpty();
 
 	var errors = req.validationErrors();
 
@@ -138,6 +140,7 @@ module.exports.dashboard = function(req, res){
                                 dashboardPage.displayTerminal = false;
                                 dashboardPage.displaySidebarMenu = false;
                                 dashboardPage.displayProcessCut = false;
+                                dashboardPage.displayJobsTable = false;
 				dashboardPage.displayProcessHalftone = false;
 				dashboardPage.currentPanelName = panelNames.dashboard;
 				dashboardPage.currentPanelRoute = '/dashboard';
@@ -170,6 +173,7 @@ module.exports.dashboard = function(req, res){
                                 dashboardPage.displayLogs = false;
                                 dashboardPage.displayControl = false;
                                 dashboardPage.displayProcessCut = false;
+                                dashboardPage.displayJobsTable = false;
 				dashboardPage.displayProcessHalftone = false;
         			dashboardPage.currentPanelName = panelNames.dashboard;
         			dashboardPage.currentPanelRoute = '/dashboard';
@@ -222,6 +226,7 @@ module.exports.profile = function(req, res){
         dashboardPage.displayControl = false;
         dashboardPage.displayProcessCut = false;
 	dashboardPage.displayProcessHalftone = false;
+    dashboardPage.displayJobsTable = false;
 	dashboardPage.displayProfile = true;
         dashboardPage.currentPanelName = panelNames.profile;
         dashboardPage.currentPanelRoute = '/dashboard/profile';
@@ -292,6 +297,7 @@ dashboardPage.displayLogs = false;
 dashboardPage.displayControl = false;
 dashboardPage.displayProcessCut = false;
 dashboardPage.displayProcessHalftone = false;
+dashboardPage.displayJobsTable = false;
 dashboardPage.displayWizard = true;
 dashboardPage.currentPanelName = panelNames.wizard;
 dashboardPage.currentPanelRoute = '/dashboard/wizard';
@@ -309,6 +315,7 @@ var type = validationResponse.type;
 var name = validationResponse.name;
 var adcVendor = validationResponse.adcVendor;
 var adcDevice = validationResponse.adcDevice;
+var deviceUri = req.body.deviceUri;
 
 if(errors){
            dashboardPage.errors = errors;
@@ -318,7 +325,8 @@ if(errors){
                               		      type         : type,
                                               name         : name,
                                               isConfigured : true,
-                                              adcDevice    : [{vendor : adcVendor, device : adcDevice}]    
+                                              adcDevice    : [{vendor : adcVendor, device : adcDevice}],
+                                              deviceUri : deviceUri
                                           });
              	
 		//create a new machine
@@ -350,6 +358,7 @@ dashboardPage.displayWizard = false;
 dashboardPage.displayTerminal = false;
 dashboardPage.displayProcessCut = false;
 dashboardPage.displayProcessHalftone = false;
+dashboardPage.displayJobsTable = false;
 dashboardPage.displaySettings = true;
 dashboardPage.currentPanelName = panelNames.settings;
 dashboardPage.currentPanelRoute = '/dashboard/settings';
@@ -361,7 +370,8 @@ Machine.checkIfMachineConfigured(function(err, machine){
         	                  type      : machine.type,
                 	          vendor    : machine.vendor,
                         	  adcVendor : machine.adcDevice[0].vendor,
-                          	  adcDevice : machine.adcDevice[0].device
+                          	  adcDevice : machine.adcDevice[0].device,
+                              deviceUri : machine.deviceUri
         	        	} ;
          res.render('dashboard', dashboardPage);
          dashboardPage.flashSuccess = false;
@@ -378,6 +388,7 @@ module.exports.machineUpdate = function (req, res) {
 	var name = validationResponse.name;
 	var adcVendor = validationResponse.adcVendor;
 	var adcDevice = validationResponse.adcDevice;
+	var deviceUri = validationResponse.deviceUri;
 
         if (errors) {
 		dashboardPage.errors = errors;
@@ -388,7 +399,8 @@ module.exports.machineUpdate = function (req, res) {
                               	  type         : type,
                                   name         : name,
                                   isConfigured : true,
-                                  adcDevice    : [{vendor : adcVendor, device : adcDevice}]    
+                                  adcDevice    : [{vendor : adcVendor, device : adcDevice}],
+                                  deviceUri : deviceUri
                                  };
           Machine.updateMachine(newConfiguration, function (err, machine){
             if (err) throw err;
@@ -396,7 +408,8 @@ module.exports.machineUpdate = function (req, res) {
         	                  	 type      : machine.type,
                 	          	 vendor    : machine.vendor,
                         	 	 adcVendor : machine.adcDevice[0].vendor,
-                          	 adcDevice : machine.adcDevice[0].device
+                          	    adcDevice : machine.adcDevice[0].device,
+                          	    deviceUri : machine.deviceUri
         	        		}
           });
           var successDbUpdate = 'DB succsessfully updated';
@@ -407,6 +420,27 @@ module.exports.machineUpdate = function (req, res) {
    
           res.redirect('/dashboard/settings');
         }
+}
+
+module.exports.discoveredPrinters = function(req, res){
+
+dashboardPage.displayControl = false;
+dashboardPage.displayLogs = false;
+dashboardPage.displayProfile = false;
+dashboardPage.displayWizard = false;
+dashboardPage.displayTerminal = false;
+dashboardPage.displayProcessCut = false;
+dashboardPage.displayProcessHalftone = false;
+dashboardPage.displayJobsTable = false;
+dashboardPage.displaySettings = true;
+dashboardPage.currentPanelName = panelNames.settings;
+dashboardPage.currentPanelRoute = '/dashboard/settings';
+
+printerConfig.discoverPrinters(function (err, printers, unhandledPrinters){
+                dashboardPage.printers = printers;
+                dashboardPage.currentPanelRoute = '/dashboard/control';
+                res.render('partials/printersSelect', dashboardPage);
+})
 }
 
 module.exports.profileUpdate = function (req, res) {
@@ -501,6 +535,7 @@ dashboardPage.displaySettings = false;
 dashboardPage.displayControl = false;
 dashboardPage.displayProcessCut = false;
 dashboardPage.displayProcessHalftone = false;
+dashboardPage.displayJobsTable = false;
 dashboardPage.displayLogs = true;
 dashboardPage.currentPanelName = panelNames.logs;
 dashboardPage.currentPanelRoute = '/dashboard/logs';

@@ -7,11 +7,12 @@ var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var expressWinston = require('express-winston');
 var winston = require('winston');
 var events = require('events');
+var fifo = require('./lib/fifo/jobFIFO');
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
@@ -41,28 +42,28 @@ var app = express();
 	]
 	})
 );*/
+var server = require('http').Server(app);
+
+
+module.exports = {};
+module.exports.fifo = fifo;
+
+//start web sockets
+var io = require('./lib/websockets/websocket').ws(server, eventEmitter);
+
+module.exports.io = io;
+fifo.init();
 
 //require routes
 var routes = require('./routes/index');
 var apiRoutes = require('./api/routes/index');
 
-var server = require('http').Server(app);
-
-//start web sockets
-var io = require('./lib/websockets/websocket').ws(server, eventEmitter);
-
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//pass eventEmitter object to routes into the res object
 app.use(function(req, res, next){
    res.eventEmitter = eventEmitter;
-   next();
-});
-
-//pass io object to routes into the res object
-app.use(function(req, res, next){
    res.io = io;
    next();
 });
@@ -78,7 +79,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
 app.use(session({
-    secret: process.env.SESSIONKEY,
+    secret: process.env.SESSIONKEY || "wololo",
     saveUninitialized: true,
     resave: true
 }));
@@ -102,6 +103,11 @@ app.use(expressValidator({
       msg   : msg,
       value : value
     };
+  },
+  customValidators: {
+    isInArray: function(param, array){
+        return (array.indexOf(param) !== -1);
+      }
   }
 }));
 
@@ -163,4 +169,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports ={app: app, server: server, eventEmitter: eventEmitter};
+module.exports.app = app;
+module.exports.server = server;
+module.exports.eventEmitter = eventEmitter;

@@ -1,22 +1,20 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 var JobSchema = new mongoose.Schema({
-    fifoIndex: {
-        type: Number, 
+    jobId    : {
+        type: String,
         required: true},
-    owner    : {
-        type: String, 
-        required: true},
+    userId    : {
+        type: String},
     ownerIP  : {
-        type: String, 
-        required: true},
-    jobNumber: {
-        type: String, 
-        required: true},
+        type: String},
+    jobPath: {
+        type: String},
     status   : {    //queued, running, paused, cancelled
-        type: String, 
-        required: true}, 
-    createdOn: { //consider the idea to use Timestamp type 
+        type: String,
+        required: true},
+    createdOn: { //consider the idea to use Timestamp type
         type: Date,
         "default": Date.now
     }
@@ -48,7 +46,9 @@ var MachineSchema = new mongoose.Schema({
     }, 
     isConfigured : Boolean,
     adcDevice : [AdcSchema],  
-    queuedJobs: [JobSchema]
+    queuedJobs: [JobSchema],
+    deviceUri: {
+        type: String}
 });
 
 var Machine = module.exports = mongoose.model('Machine', MachineSchema);
@@ -67,12 +67,11 @@ module.exports.updateMachine = function(newConfiguration, callback){
 	Machine.findOneAndUpdate(query, newConfiguration, {new : true}, callback);
 }  
 
-module.exports.addMachineJob = function(machineName, newJob, callback){
-        var query = {name: machineName};
-        Machine.findOne (query, function(err, machine){
+module.exports.addMachineJob = function(newJob, callback){
+        Machine.findOne ({}, function(err, machine){
           if (err) throw(err);
           machine.queuedJobs.push(newJob);
-          machine.save(callback(null, true));
+          machine.save(callback);
         });
 }
 
@@ -86,16 +85,29 @@ module.exports.getMachineById = function(id, callback){
 }
 
 module.exports.getJobById = function(id, callback){
-    Machine.queuedJobs.findById(id, callback);
+    Machine.queuedJobs.find({jobId : id}, callback);
 }
 
 module.exports.removeJobById = function(id, callback){
-    Machine.queuedJobs.findByIdAndRemove(id, callback);
+    Machine.update({}, { $pull: { queuedJobs : { jobId : id } } }, callback);
 }
 
 module.exports.removeJobByOwner = function(owner, callback){
     var query = {owner : owner};
     Machine.queuedJobs.findByOneAndRemove(query, callback);
+}
+
+module.exports.updateJob = function(job, callback){
+    Machine.findOne ({}, function(err, machine){
+              if (err) throw(err);
+              for (var i in machine.queuedJobs){
+                if (machine.queuedJobs[i].jobId === job.jobId){
+                    machine.queuedJobs[i] = job;
+                    machine.save(callback);
+                    break;
+                }
+              }
+    });
 }
 
 module.exports.changeJobStatusById = function(id, newStatus, callback){
@@ -107,7 +119,7 @@ module.exports.changeJobStatusById = function(id, newStatus, callback){
           job.status = newStatus;
           job.save(callback(null, true));
        }
-    });	
+    });
 }
 
 module.exports.changeJobStatusByOwner = function(owner, newStatus, callback){
