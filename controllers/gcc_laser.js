@@ -96,31 +96,23 @@ module.exports.upload = function (req, res) {
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    var fileExt = (file.name).split('.').pop();
-    if (fileExt != "") {
-      // store all uploads in the upload directory
-      if (jobCounter[req.user._id] != undefined) {
-         (jobCounter[req.user._id].counter)++;  //increment counter
+      var fileExt = (file.name).split('.').pop();
+      if (fileExt != "") {
+        var jobPath = path.join(__dirname, '/../public/uploads/designs/local') + '/' + req.user._id;
+        if (fs.existsSync(jobPath) == false) {
+           fs.mkdirSync(jobPath);
+        }
+        fifoData.jobId = uuid();
+        form.uploadDir = jobPath;
+        newFileName = fifoData.jobId + '.' + fileExt;
+        fs.rename(file.path, path.join(jobPath, newFileName));
+        fifoData.jobPath = path.join(jobPath, newFileName);
+        req.body.path = fifoData.jobPath;
+        req.body.filename = newFileName;
       } else {
-         var job = {};
-         job.counter = 1;
-         job.path = path.join(__dirname, '/../public/uploads/designs/local') + '/' + req.user._id;
-         if (fs.existsSync(job.path) == false) {
-            fs.mkdirSync(job.path);
-         }
-         jobCounter[req.user._id] = job;   
+        req.body.path ="";
       }
-      form.uploadDir = jobCounter[req.user._id].path;
-
-      newFileName = (jobCounter[req.user._id].counter).toString() + '.' + fileExt;
-      fs.rename(file.path, path.join(jobCounter[req.user._id].path, newFileName)); 
-      fifoData.jobPath = path.join(jobCounter[req.user._id].path, newFileName);
-      req.body.path = fifoData.jobPath;
-      req.body.filename = newFileName;
-    } else {
-      req.body.path ="";
-    } 
-  });
+    });
 
     form.on('field', function (field, value) {
         fields[field] = value;
@@ -190,6 +182,7 @@ module.exports.upload = function (req, res) {
           errors = _validate(req, res);
           if(errors.length >0){
            dashboardPage.errors = errors;
+           setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
           } else {
             dashboardPage.errors = null; 
             fifoData.userId = req.user._id;
@@ -198,6 +191,7 @@ module.exports.upload = function (req, res) {
             fifo.push(fifoData, "local", function(err, job){
                             if (err){
                                 winston.error('@controllers.gcc_laser: '+err.err);
+                                dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
                             }else{
                                 dashboardPage.uploadSuccess = true;
                                 var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
@@ -206,10 +200,9 @@ module.exports.upload = function (req, res) {
                                 dashboardPage.flashUpload = flashUpload;
                                 req.session.flash = [];
                             }
+                            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
                         });
          }
-           
-           setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
        });
      });
 

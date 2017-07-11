@@ -4,6 +4,8 @@ var formCheck = require('../../lib/formCheck/formCheck');
 const uuid = require('uuid/v4');
 var multiparty = require('multiparty');
 var util = require('util');
+var fs = require('fs');
+var path = require('path');
 
 var pendingJobs = {};
 
@@ -35,22 +37,28 @@ module.exports.addJobFile = function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, fields, files) {
     if (files) {
-      if (addFilePath(req.params.jobid, files.file[0].path)) {
-        fifo.push(pendingJobs[req.params.jobid], "api", function(err, job) {
-          if (err) {
-            sendJSONresponse(res, 200, err);
-          } else {
-            delete pendingJobs[req.params.jobid];
-            sendJSONresponse(res, 200, {
-              "message": "File added"
-            });
-          }
-        });
-      } else {
-        sendJSONresponse(res, 200, {
-          "message": "Job don't exist or isn't pending"
-        });
+      var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + req.params.jobid ;
+      if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
+        fs.mkdirSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id);
       }
+      move(files.file[0].path, newPath, function(){
+        if (addFilePath(req.params.jobid, newPath)) {
+            fifo.push(pendingJobs[req.params.jobid], "api", function(err, job) {
+                if (err) {
+                    sendJSONresponse(res, 200, err);
+                } else {
+                    delete pendingJobs[req.params.jobid];
+                    sendJSONresponse(res, 200, {
+                        "message": "File added"
+                    });
+                }
+            });
+            } else {
+                sendJSONresponse(res, 200, {
+                    "message": "Job don't exist or isn't pending"
+                });
+            }
+      });
     } else {
       sendJSONresponse(res, 200, {
         "message": "Missing attachment"
@@ -171,4 +179,33 @@ function addFilePath(jobId, filePath) {
     return true;
   }
   return false;
+}
+
+function move(oldPath, newPath, callback) {
+
+    fs.rename(oldPath, newPath, function (err) {
+        if (err) {
+            if (err.code === 'EXDEV') {
+                copy();
+            } else {
+                callback(err);
+            }
+            return;
+        }
+        callback();
+    });
+
+    function copy() {
+        var readStream = fs.createReadStream(oldPath);
+        var writeStream = fs.createWriteStream(newPath);
+
+        readStream.on('error', callback);
+        writeStream.on('error', callback);
+
+        readStream.on('close', function () {
+            fs.unlink(oldPath, callback);
+        });
+
+        readStream.pipe(writeStream);
+    }
 }

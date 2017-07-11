@@ -77,19 +77,15 @@ module.exports.upload = function (req, res) {
   form.on('file', function(field, file) {
     var fileExt = (file.name).split('.').pop();
     if (fileExt != "") {
-      var job = {};
-      job.counter = 1;
-      job.path = path.join(__dirname, '/../public/uploads/designs/local') + '/' + req.user._id;
-      if (fs.existsSync(job.path) == false) {
-         fs.mkdirSync(job.path);
+      var jobPath = path.join(__dirname, '/../public/uploads/designs/local') + '/' + req.user._id;
+      if (fs.existsSync(jobPath) == false) {
+         fs.mkdirSync(jobPath);
       }
-      form.uploadDir = jobCounter[req.user._id].path;
-
-
       fifoData.jobId = uuid();
+      form.uploadDir = jobPath;
       newFileName = fifoData.jobId + '.' + fileExt;
-      fs.rename(file.path, path.join(jobCounter[req.user._id].path, newFileName)); 
-      fifoData.jobPath = path.join(jobCounter[req.user._id].path, newFileName);
+      fs.rename(file.path, path.join(jobPath, newFileName));
+      fifoData.jobPath = path.join(jobPath, newFileName);
       req.body.path = fifoData.jobPath;
       req.body.filename = newFileName;
     } else {
@@ -185,6 +181,7 @@ module.exports.upload = function (req, res) {
           errors = _validate(req, res);
           if(errors.length >0){
            dashboardPage.errors = errors;
+           setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
           } else {
             dashboardPage.errors = null;
             fifoData.userId = req.user._id;
@@ -192,6 +189,7 @@ module.exports.upload = function (req, res) {
             fifo.push(fifoData, "local", function(err, job){
                             if (err){
                                 winston.error('@controllers.roland_milling: '+err.err);
+                                dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
                             }else{
                                 dashboardPage.uploadSuccess = true;
                                 var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
@@ -200,10 +198,9 @@ module.exports.upload = function (req, res) {
                                 dashboardPage.flashUpload = flashUpload;
                                 req.session.flash = [];
                             }
+                            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
                         });
          }
-
-           setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
        });
      });
 
