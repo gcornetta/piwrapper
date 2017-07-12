@@ -1,6 +1,6 @@
 {
   "name": "piwrapper",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "private": true,
   "dependencies": {
     "@raymond-lam/priority-queue": "^2.0.0",
