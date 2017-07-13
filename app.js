@@ -13,6 +13,9 @@ var expressWinston = require('express-winston');
 var winston = require('winston');
 var events = require('events');
 var fifo = require('./lib/fifo/jobFIFO');
+var passportSocketIo = require("passport.socketio");
+const MongoStore = require('connect-mongo')(session);
+var store = new MongoStore({mongooseConnection: mongoose.connection});
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
@@ -51,6 +54,15 @@ module.exports.fifo = fifo;
 //start web sockets
 var io = require('./lib/websockets/websocket').ws(server, eventEmitter);
 
+io.use(passportSocketIo.authorize({
+  cookieParser: cookieParser,                           // the same middleware you registrer in express
+  key:          'connect.sid',                          // the name of the cookie where express/connect stores its session_id
+  secret:       process.env.SESSIONKEY || "wololo",     // the session_secret to parse the cookie
+  store:        store,                                // we NEED to use a sessionstore. no memorystore please
+  //success:      onAuthorizeSuccess,  // *optional* callback on success - read more below
+  //fail:         onAuthorizeFail,     // *optional* callback on fail/error - read more below
+}));
+
 module.exports.io = io;
 fifo.init();
 
@@ -81,7 +93,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: process.env.SESSIONKEY || "wololo",
     saveUninitialized: true,
-    resave: true
+    resave: true,
+    store: store
 }));
 
 // Passport init
