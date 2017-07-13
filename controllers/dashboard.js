@@ -68,7 +68,7 @@ var _validateFields = function (req, res) {
 		}
 	}
 
-	return {errors :errors, vendor : vendor, type : type, name : name, adcVendor : adcVendor, adcDevice : adcDevice};
+	return {errors :errors, vendor : vendor, type : type, name : name, adcVendor : adcVendor, adcDevice : adcDevice, deviceUri : deviceUri};
 }
 
 
