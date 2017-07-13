@@ -2,7 +2,7 @@ var webdriver = require('selenium-webdriver');
 var test = require('tape');
 var request = require('supertest');
 
-const imageAbsolutePath = "/home/meji/Imágenes/isosceles.png";
+const imageAbsolutePath = "C:/Users/mejis/IdeaProjects/piwrapper/tests/app/test.png";
 const url = 'http://192.168.0.100:8888';
 var token = "";
 
@@ -10,8 +10,8 @@ var driver = new webdriver
 .Builder()
 .usingServer()
 .withCapabilities({
-  //'browserName': 'phantomjs'
-  'browserName': 'chrome'
+  'browserName': 'phantomjs'
+  //'browserName': 'chrome'
 })
 .build();
 

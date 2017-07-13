@@ -1,22 +1,20 @@
 'use strict';
 
 function acceptJob(job, index){
-    jobs.splice(index, 1);
-    $table.bootstrapTable('load', jobs);
-    console.log("Accepted "+ job);
-    socket.emit('acceptJob', job.jobId);
+    if (job.status === "pending"){
+        socket.emit('acceptJob', job.jobId);
+    }else{
+        alert("Job already accepted");
+    }
 }
 
 function editJob(job, index){
+    //TODO: Implement this function
     job.status = "edited";
-    console.log("Edited "+ job);
     $table.bootstrapTable('load', jobs);
 }
 
 function removeJob(job, index){
-    jobs.splice(index, 1);
-    $table.bootstrapTable('load', jobs);
-    console.log("Removed "+ job);
     socket.emit('removeJob', job.jobId);
 }
 
@@ -42,17 +40,16 @@ socket.on('clearTable', function() {
    $table.bootstrapTable('load', jobs);
 });
 
-socket.on('addJob', function(jobStr) {
-   var job = JSON.parse(jobStr);
+socket.on('addJob', function(job) {
    jobs.push(job);
    $table.bootstrapTable('load', jobs);
 });
 
-socket.on('updateJob', function(jobStr){
-    var job = JSON.parse(jobStr);
+socket.on('updateJob', function(job){
     for (var j in jobs){
-        if (jobs[j].jobId = job.jobId){
-            jobs[j] = job;
+        if (jobs[j].jobId == job.jobId){
+            jobs.splice(j, 1);
+            jobs.push(job);
             break;
         }
     }
@@ -61,8 +58,8 @@ socket.on('updateJob', function(jobStr){
 
 socket.on('deleteJob', function(jobId){
     for (var j in jobs){
-        if (jobs[j].jobId = jobId){
-            delete jobs[j];
+        if (jobs[j].jobId == jobId){
+            jobs.splice(j, 1);
             break;
         }
     }
@@ -71,7 +68,7 @@ socket.on('deleteJob', function(jobId){
 
 socket.on('updateUserPriority', function(userId, priority){
     for (var j in jobs){
-        if (jobs[j].userId = userId){
+        if (jobs[j].userId == userId){
             jobs[j].priority = priority;
         }
     }
@@ -146,13 +143,13 @@ var $table = $('#fresh-table'),
 
         function operateFormatter(value, row, index) {
             return [
-                '<a rel="tooltip" title="Accept" class="table-action accept" href="javascript:void(0)" title="Accept">',
+                '<a rel="tooltip" title="Accept" class="table-action accept" href="javascript:void(0)">',
                     '<i class="fa fa-rocket"></i>',
                 '</a>',
-                '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+                '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
                     '<i class="fa fa-edit"></i>',
                 '</a>',
-                '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+                '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
                     '<i class="fa fa-remove"></i>',
                 '</a>'
             ].join('');

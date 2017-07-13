@@ -148,7 +148,9 @@ module.exports.upload = function (req, res) {
                                     break;
            case 'machine'         : req.body.machine = value;
         }
-        fifoData.form = fields;
+        for (var f in fields){
+            fifoData[f] = fields[f];
+        }
     });
 
     //Callback for file upload progress.

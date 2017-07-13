@@ -136,7 +136,8 @@ process		    : i18n.__('w_00245'),
 jobPath		    : i18n.__('w_00246'),
 status		    : i18n.__('w_00247'),
 actions		    : i18n.__('w_00248'),
-jobsTable	    : i18n.__('w_00249')
+jobsTable	    : i18n.__('w_00249'),
+caller	        : i18n.__('w_00257')
 };
 
 exports.jobsTableText = jobsTableText;

@@ -254,5 +254,6 @@
 	"w_00253": "Device URI is required",
 	"w_00254": "Device URI",
 	"w_00255": "Refresh",
-	"w_00256": "Jobs"
+	"w_00256": "Jobs",
+	"w_00257": "From"
 }

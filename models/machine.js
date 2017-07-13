@@ -11,7 +11,7 @@ var JobSchema = new mongoose.Schema({
         type: String},
     jobPath: {
         type: String},
-    status   : {    //queued, running, paused, cancelled
+    status   : {    //pending, queued, running, paused, cancelled
         type: String,
         required: true},
     createdOn: { //consider the idea to use Timestamp type

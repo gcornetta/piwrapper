@@ -737,9 +737,11 @@ test('GET /api/jobs/:jobid Fail', function (t) {
 });
 
 test('CLEAN jobFifo', function (t) {
-  while (libFifo.getNextJob()){
-  }
-  t.end();
+  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+    cleanJobsQueue(libFifo.getJobs(), "local", function(){
+        t.end();
+      })
+  })
 });
 
 test('PUT /api/jobs/:jobid', function (t) {
@@ -777,7 +779,6 @@ test('PUT /api/jobs/:jobid', function (t) {
       if (res.body.job){
         updatedJob = JSON.parse(res.body.job);
       }
-      console.log(res.body)
       t.equal(updatedJob.error, 1);
       t.equal(updatedJob.topZ, 1);
       t.equal(updatedJob.xz, 1);
@@ -852,9 +853,11 @@ function addJob(t, callback){
 }
 
 test('CLEAN jobFifo', function (t) {
-  while (libFifo.getNextJob()){
-  }
-  t.end();
+  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+    cleanJobsQueue(libFifo.getJobs(), "local", function(){
+        t.end();
+      })
+  })
 });
 
 test('FIFO Push and gets', function (t) {
@@ -866,10 +869,20 @@ test('FIFO Push and gets', function (t) {
     var retJob = libFifo.getJobById(job1.jobId);
     t.equal(retJob, job1);
 
-    var retJob = libFifo.getNextJob();
-    t.equal(retJob, job1);
-    t.end();
+    libFifo.acceptJob(job1.jobId, function(){
+        var retJob = libFifo.getNextJob();
+            t.equal(retJob, job1);
+            t.end();
+    });
   });
+});
+
+test('CLEAN jobFifo', function (t) {
+  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+    cleanJobsQueue(libFifo.getJobs(), "local", function(){
+        t.end();
+      })
+  })
 });
 
 test('FIFO Priority rotation test', function (t) {
@@ -896,27 +909,27 @@ test('FIFO Priority rotation test', function (t) {
                   testAddJob(t, job9, function(){
                     testAddJob(t, job10, function(){
                       testAddJob(t, job11, function(){
-                        var retJob = libFifo.getNextJob();
+                        var retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job1);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job5);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job9);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job2);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job6);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job10);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job3);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job7);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job11);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job4);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job8);
                         t.end();
                       })
@@ -934,32 +947,32 @@ test('FIFO Priority rotation test', function (t) {
 
 test('FIFO User push limit', function (t) {
   var job1 = {"jobId": "id1","userId": "user1","status": "queued", "form":{}}
-  libFifo.push(job1, "local", function(err, job) {
+  addJobAndAccept(job1, "local", function(err, job) {
     t.error(err, 'No error');
     t.equal(job, job1);
 
     job1 = {"jobId": "id2","userId": "user2","status": "queued", "form":{}}
-    libFifo.push(job1, "local", function(err, job) {
+    addJobAndAccept(job1, "local", function(err, job) {
       t.error(err, 'No error');
       t.equal(job, job1);
 
       job1 = {"jobId": "id3","userId": "user3","status": "queued", "form":{}}
-      libFifo.push(job1, "local", function(err, job) {
+      addJobAndAccept(job1, "local", function(err, job) {
         t.error(err, 'No error');
         t.equal(job, job1);
 
         job1 = {"jobId": "id4","userId": "user4","status": "queued", "form":{}}
-        libFifo.push(job1, "local", function(err, job) {
+        addJobAndAccept(job1, "local", function(err, job) {
           t.error(err, 'No error');
           t.equal(job, job1);
 
           job1 = {"jobId": "id5","userId": "user5","status": "queued", "form":{}}
-          libFifo.push(job1, "local", function(err, job) {
+          addJobAndAccept(job1, "local", function(err, job) {
             t.error(err, 'No error');
             t.equal(job, job1);
 
             job1 = {"jobId": "id6","userId": "user6","status": "queued", "form":{}}
-            libFifo.push(job1, "local", function(err, job) {
+            addJobAndAccept(job1, "local", function(err, job) {
               var error = "";
               if (err){
                 error = err.err;
@@ -977,32 +990,32 @@ test('FIFO User push limit', function (t) {
 
 test('FIFO Jobs per user push limit', function (t) {
   var job1 = {"jobId": "id6","userId": "user5","status": "queued", "form":{}}
-  libFifo.push(job1, "local", function(err, job) {
+  addJobAndAccept(job1, "local", function(err, job) {
     t.error(err, 'No error');
     t.equal(job, job1);
 
-    job1 = {"jobId": "id2","userId": "user1","status": "queued", "form":{}}
-    libFifo.push(job1, "local", function(err, job) {
+    job1 = {"jobId": "id7","userId": "user1","status": "queued", "form":{}}
+    addJobAndAccept(job1, "local", function(err, job) {
       t.error(err, 'No error');
       t.equal(job, job1);
 
-      job1 = {"jobId": "id3","userId": "user1","status": "queued", "form":{}}
-      libFifo.push(job1, "local", function(err, job) {
+      job1 = {"jobId": "id8","userId": "user1","status": "queued", "form":{}}
+      addJobAndAccept(job1, "local", function(err, job) {
         t.error(err, 'No error');
         t.equal(job, job1);
 
-        job1 = {"jobId": "id4","userId": "user1","status": "queued", "form":{}}
-        libFifo.push(job1, "local", function(err, job) {
+        job1 = {"jobId": "id9","userId": "user1","status": "queued", "form":{}}
+        addJobAndAccept(job1, "local", function(err, job) {
           t.error(err, 'No error');
           t.equal(job, job1);
 
-          job1 = {"jobId": "id5","userId": "user1","status": "queued", "form":{}}
-          libFifo.push(job1, "local", function(err, job) {
+          job1 = {"jobId": "id10","userId": "user1","status": "queued", "form":{}}
+          addJobAndAccept(job1, "local", function(err, job) {
             t.error(err, 'No error');
             t.equal(job, job1);
 
-            job1 = {"jobId": "id6","userId": "user1","status": "queued", "form":{}}
-            libFifo.push(job1, "local", function(err, job) {
+            job1 = {"jobId": "id11","userId": "user1","status": "queued", "form":{}}
+            addJobAndAccept(job1, "local", function(err, job) {
               var error = "";
               if (err){
                 error = err.err;
@@ -1035,9 +1048,11 @@ test('FIFO Job update', function (t) {
 });
 
 test('CLEAN jobFifo', function (t) {
-  while (libFifo.getNextJob()){
-  }
-  t.end();
+  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+    cleanJobsQueue(libFifo.getJobs(), "local", function(){
+        t.end();
+      })
+  })
 });
 
 
@@ -1054,38 +1069,61 @@ test('FIFO local and api change test', function (t) {
   var job10 = {"jobId": "id10","userId": "user3","status": "queued", "form":{}}
   var job11 = {"jobId": "id11","userId": "user3","status": "queued", "form":{}}
 
-  testAddJob(t, job1, function(){
-    testAddJob(t, job2, function(){
-      testAddJob(t, job3, function(){
-        testAddJobLocal(t, job4, function(){
-          testAddJobLocal(t, job5, function(){
-            testAddJobLocal(t, job6, function(){
-              testAddJobLocal(t, job7, function(){
-                testAddJob(t, job8, function(){
-                  testAddJob(t, job9, function(){
-                    testAddJob(t, job10, function(){
-                      testAddJob(t, job11, function(){
-                        var retJob = libFifo.getNextJob();
-                        t.equal(retJob, job1);
-                        retJob = libFifo.getNextJob();
+  addJobAndAccept(job1, "api", function(err, job) {
+    t.error(err, 'No error');
+    t.equal(job, job1);
+    addJobAndAccept(job2, "api", function(err, job) {
+      t.error(err, 'No error');
+      t.equal(job, job2);
+      addJobAndAccept(job3, "api", function(err, job) {
+        t.error(err, 'No error');
+        t.equal(job, job3);
+        addJobAndAccept(job4, "local", function(err, job) {
+          t.error(err, 'No error');
+          t.equal(job, job4);
+          addJobAndAccept(job5, "local", function(err, job) {
+            t.error(err, 'No error');
+            t.equal(job, job5);
+            addJobAndAccept(job6, "local", function(err, job) {
+              t.error(err, 'No error');
+              t.equal(job, job6);
+              addJobAndAccept(job7, "local", function(err, job) {
+                t.error(err, 'No error');
+                t.equal(job, job7);
+                addJobAndAccept(job8, "api", function(err, job) {
+                  t.error(err, 'No error');
+                  t.equal(job, job8);
+                  addJobAndAccept(job9, "api", function(err, job) {
+                    t.error(err, 'No error');
+                    t.equal(job, job9);
+                    addJobAndAccept(job10, "api", function(err, job) {
+                      t.error(err, 'No error');
+                      t.equal(job, job10);
+                      addJobAndAccept(job11, "api", function(err, job) {
+                        t.error(err, 'No error');
+                        t.equal(job, job11);
+
+                        var retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job4);
-                        retJob = libFifo.getNextJob();
-                        t.equal(retJob, job8);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
+                        t.equal(retJob, job1);
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job5);
-                        retJob = libFifo.getNextJob();
-                        t.equal(retJob, job9);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
+                        t.equal(retJob, job8);
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job6);
-                        retJob = libFifo.getNextJob();
-                        t.equal(retJob, job2);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
+                        t.equal(retJob, job9);
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job7);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
+                        t.equal(retJob, job2);
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job10);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job3);
-                        retJob = libFifo.getNextJob();
+                        retJob = libFifo.lastJobCompleted();
                         t.equal(retJob, job11);
                         t.end();
                       })
@@ -1101,18 +1139,30 @@ test('FIFO local and api change test', function (t) {
   })
 });
 
+function cleanJobsQueue (jobs, caller, callback){
+    if (jobs.length > 0){
+        libFifo.removeJob(jobs.pop().jobId, caller, function(){
+            cleanJobsQueue(jobs, caller, callback);
+        });
+    }else{
+        callback();
+    }
+}
+
+function addJobAndAccept(j, caller, callback){
+    libFifo.push(j, caller, function(err, job) {
+        if (err){
+            callback(err, job);
+        }else{
+            libFifo.acceptJob(j.jobId, callback);
+        }
+    });
+}
+
 function testAddJob(t, job, callback){
   libFifo.push(job, "api", function(err, retJob) {
     t.error(err, 'No error');
     t.equal(retJob, job);
-    callback();
-  });
-}
-
-function testAddJobLocal(t, job, callback){
-  libFifo.push(job, "local", function(err, retJob) {
-    t.error(err, 'No error');
-    t.equal(retJob, job);
-    callback();
+    libFifo.acceptJob(job.jobId, callback);
   });
 }
