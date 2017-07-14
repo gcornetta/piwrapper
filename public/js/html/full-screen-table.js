@@ -94,7 +94,7 @@ var $table = $('#fresh-table'),
 
                 showRefresh: false,
                 search: true,
-                showToggle: true,
+                showToggle: false,
                 showColumns: false,
                 pagination: true,
                 striped: true,
