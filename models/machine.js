@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+var printer = require('../lib/fablab/printerConfig');
+
 
 var JobSchema = new mongoose.Schema({
     jobId    : {
@@ -35,17 +37,17 @@ var MachineSchema = new mongoose.Schema({
     vendor: {
         type: String,
         required: true
-    },  
+    },
     type: {  //laser cutter, vynil cutter, 3D printer, milling machine
         type: String,
         required: true
-    },   
+    },
     name: { //logical name to assign to a machine
         type: String,
         required: true
-    }, 
+    },
     isConfigured : Boolean,
-    adcDevice : [AdcSchema],  
+    adcDevice : [AdcSchema],
     queuedJobs: [JobSchema],
     deviceUri: {
         type: String}
@@ -54,7 +56,13 @@ var MachineSchema = new mongoose.Schema({
 var Machine = module.exports = mongoose.model('Machine', MachineSchema);
 
 module.exports.createMachine = function(newMachine, callback){
-        newMachine.save(callback);
+        printer.addPrinter({Name: newMachine.name, DeviceURI: newMachine.deviceUri}, function(err, stdout){
+                if (!err){
+                    newMachine.save(callback);
+                }else{
+                    callback(err, null);
+                }
+            });
 }
 
 module.exports.checkIfMachineConfigured = function(callback){
@@ -63,8 +71,14 @@ module.exports.checkIfMachineConfigured = function(callback){
 }
 
 module.exports.updateMachine = function(newConfiguration, callback){
-	var query = {'isConfigured': true}; 
-	Machine.findOneAndUpdate(query, newConfiguration, {new : true}, callback);
+	var query = {'isConfigured': true};
+	printer.addPrinter({Name: newConfiguration.name, DeviceURI: newConfiguration.deviceUri}, function(err, stdout){
+        if (!err){
+            Machine.findOneAndUpdate(query, newConfiguration, {new : true}, callback);
+        }else{
+            callback(err, null);
+        }
+    });
 }  
 
 module.exports.addMachineJob = function(newJob, callback){
