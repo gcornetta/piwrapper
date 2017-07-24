@@ -19,6 +19,7 @@ dashboardPage.currentPanelRoute = '/dashboard/jobsTable';
 if (!dashboardPage.userName){
     res.redirect('/dashboard');
 }else{
+    dashboardPage.errors = null;
     res.render('dashboard', dashboardPage);
 }
 }

@@ -129,6 +129,7 @@ module.exports.dashboard = function(req, res){
         				dashboardPage.flashWelcome = flashWelcome;
         				req.session.flash = [];
 				}
+	            dashboardPage.errors = null;
 				dashboardPage.userName = req.user.firstname + ' ' + req.user.lastname;
 				if(req.user.pathtophoto) {
           				dashboardPage.pathToPhoto = req.user.pathtophoto;
@@ -165,6 +166,7 @@ module.exports.dashboard = function(req, res){
         			if (!dashboardPage.displayTerminal) {
 					dashboardPage.displayTerminal = true;
         			}
+	                dashboardPage.errors = null;
         			dashboardPage.userName = req.user.firstname + ' ' + req.user.lastname;
 				dashboardPage.machineConfigured = true;
                                 dashboardPage.displaySidebarMenu = true;
@@ -234,6 +236,7 @@ module.exports.profile = function(req, res){
 	if (!dashboardPage.userName){
 	    res.redirect('/dashboard');
 	}else{
+	    dashboardPage.errors = null;
         dashboardPage.profile = { firstname : req.user.firstname,
                                   lastname  : req.user.lastname,
                                   role      : req.user.issuperuser ? userRoles.superAdmin : userRoles.admin,
@@ -382,8 +385,13 @@ Machine.checkIfMachineConfigured(function(err, machine){
                           	  adcDevice : machine.adcDevice[0].device,
                               deviceUri : machine.deviceUri
         	        	} ;
-         res.render('dashboard', dashboardPage);
-         dashboardPage.flashSuccess = false;
+        if (!dashboardPage.userName){
+            res.redirect('/dashboard');
+         }else{
+	        dashboardPage.errors = null;
+            res.render('dashboard', dashboardPage);
+            dashboardPage.flashSuccess = false;
+         }
 	});               
 }
 

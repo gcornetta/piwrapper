@@ -53,6 +53,7 @@ Machine.checkIfMachineConfigured(function(err, machine){
 	if (!dashboardPage.userName){
 	    res.redirect('/dashboard');
 	}else{
+	    dashboardPage.errors = null;
 	    dashboardPage.machine = { name      : machine.name,
         	                  type      : machine.type,
                 	          vendor    : machine.vendor,
