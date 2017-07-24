@@ -231,6 +231,9 @@ module.exports.profile = function(req, res){
         dashboardPage.currentPanelName = panelNames.profile;
         dashboardPage.currentPanelRoute = '/dashboard/profile';
 
+	if (!dashboardPage.userName){
+	    res.redirect('/dashboard');
+	}else{
         dashboardPage.profile = { firstname : req.user.firstname,
                                   lastname  : req.user.lastname,
                                   role      : req.user.issuperuser ? userRoles.superAdmin : userRoles.admin,
@@ -239,6 +242,7 @@ module.exports.profile = function(req, res){
         			}
 	res.render('dashboard', dashboardPage);
         dashboardPage.flashSuccess = false;
+    }
 }
 
 module.exports.upload = function(req, res){
@@ -319,7 +323,12 @@ var deviceUri = req.body.deviceUri;
 
 if(errors){
            dashboardPage.errors = errors;
+
+	    if (!dashboardPage.userName){
+	        res.redirect('/dashboard');
+	    }else{
            res.render('dashboard', dashboardPage);
+        }
 	} else {
 		var newMachine = new Machine({vendor       : vendor,
                               		      type         : type,

@@ -51,14 +51,18 @@ dashboardPage.currentPanelRoute = '/dashboard/control/laser/epilog';
 
 Machine.checkIfMachineConfigured(function(err, machine){
 	if (err) throw (err);
-	dashboardPage.machine = { name      : machine.name,
+	if (!dashboardPage.userName){
+	    res.redirect('/dashboard');
+	}else{
+	    dashboardPage.machine = { name      : machine.name,
         	                  type      : machine.type,
                 	          vendor    : machine.vendor,
                         	  adcVendor : machine.adcDevice[0].vendor,
                           	  adcDevice : machine.adcDevice[0].device
         	        	} ;
          res.render('dashboard', dashboardPage);
-      	});               
+    }
+});
 }
 
 module.exports.upload = function (req, res) {
