@@ -145,7 +145,8 @@ module.exports.setMachine = function(req, res) {
     type: req.body.type,
     name: req.body.name,
     isConfigured: true,
-    adcDevice: req.body.adcDevice
+    adcDevice: req.body.adcDevice,
+    deviceUri: req.body.deviceUri
   };
   machine.updateMachine(newConfiguration, function(err, machine) {
     if (err) {

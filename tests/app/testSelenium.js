@@ -2,7 +2,8 @@ var webdriver = require('selenium-webdriver');
 var test = require('tape');
 var request = require('supertest');
 
-const imageAbsolutePath = "C:/Users/mejis/IdeaProjects/piwrapper/tests/app/test.png";
+//const imageAbsolutePath = "C:/Users/mejis/IdeaProjects/piwrapper/tests/app/test.png";
+const imageAbsolutePath = "/home/meji/Imágenes/isosceles.png";
 const url = 'http://192.168.0.100:8888';
 var token = "";
 
@@ -10,8 +11,8 @@ var driver = new webdriver
 .Builder()
 .usingServer()
 .withCapabilities({
-  'browserName': 'phantomjs'
-  //'browserName': 'chrome'
+  //'browserName': 'phantomjs'
+  'browserName': 'chrome'
 })
 .build();
 
@@ -103,7 +104,7 @@ test('Laser Epilog cut Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 101");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 1000.1");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 1000");
 
     driver.executeScript("document.getElementsByName('diameter')[0].value = \'aa\'");
     driver.executeScript("document.getElementsByName('offsets')[0].value = 1.2");
@@ -119,7 +120,7 @@ test('Laser Epilog cut Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 12);
+      t.equal(alertDanger.length, 14);
       t.end();
     });
   }, 10);
@@ -169,10 +170,10 @@ test('Laser Epilog halftone Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 500");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 0.8");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 1000");
 
-    driver.executeScript("document.getElementsByName('diameter')[0].value = \'w\'");
-    driver.executeScript("document.getElementsByName('spotSize')[0].value = \'w\'");
+    driver.executeScript("document.getElementsByName('diameter')[0].value = -1");
+    driver.executeScript("document.getElementsByName('spotSize')[0].value = -1");
     driver.executeScript("document.getElementsByName('minSpotsize')[0].value = -1");
     driver.executeScript("document.getElementsByName('horSpotspace')[0].value = 101");
     driver.executeScript("document.getElementsByName('verSpotspace')[0].value = 1000");
@@ -183,7 +184,7 @@ test('Laser Epilog halftone Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 10);
+      t.equal(alertDanger.length, 7);
       t.end();
     });
   }, 10);
@@ -240,14 +241,14 @@ test('Laser Trotec cut Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 101");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 1000.1");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 1000");
 
     driver.executeScript("document.getElementsByName('diameter')[0].value = \'aa\'");
     driver.executeScript("document.getElementsByName('offsets')[0].value = 1.2");
     driver.executeScript("document.getElementsByName('overlap')[0].value = -50");
-    driver.executeScript("document.getElementsByName('error')[0].value = \'aa\'");
+    //driver.executeScript("document.getElementsByName('error')[0].value = \'aa\'");
     driver.executeScript("document.getElementsByName('threshold')[0].value = 1.2");
-    driver.executeScript("document.getElementsByName('merge')[0].value = \'aa\'");
+    //driver.executeScript("document.getElementsByName('merge')[0].value = \'aa\'");
     driver.executeScript("document.getElementsByName('order')[0].value = 1.2");
     driver.executeScript("document.getElementsByName('sequence')[0].value = 1.3");
 
@@ -256,7 +257,7 @@ test('Laser Trotec cut Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 13);
+      t.equal(alertDanger.length, 11);
       t.end();
     });
   }, 10);
@@ -308,7 +309,7 @@ test('Laser Trotec halftone Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 500");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 0.8");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 0");
 
     driver.executeScript("document.getElementsByName('diameter')[0].value = \'w\'");
     driver.executeScript("document.getElementsByName('spotSize')[0].value = \'w\'");
@@ -322,7 +323,7 @@ test('Laser Trotec halftone Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 11);
+      t.equal(alertDanger.length, 12);
       t.end();
     });
   }, 10);
@@ -377,7 +378,7 @@ test('Laser GCC cut Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 101");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 1000.1");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 1000");
 
     driver.executeScript("document.getElementsByName('diameter')[0].value = \'aa\'");
     driver.executeScript("document.getElementsByName('offsets')[0].value = 1.2");
@@ -393,7 +394,7 @@ test('Laser GCC cut Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 12);
+      t.equal(alertDanger.length, 14);
       t.end();
     });
   }, 10);
@@ -445,7 +446,7 @@ test('Laser GCC halftone Error', function (t) {
 
     driver.executeScript("document.getElementsByName('power')[0].value = -100");
     driver.executeScript("document.getElementsByName('speed')[0].value = 500");
-    driver.executeScript("document.getElementsByName('rate')[0].value = 0.8");
+    driver.executeScript("document.getElementsByName('rate')[0].value = 1000");
 
     driver.executeScript("document.getElementsByName('diameter')[0].value = \'w\'");
     driver.executeScript("document.getElementsByName('spotSize')[0].value = \'w\'");
@@ -459,7 +460,7 @@ test('Laser GCC halftone Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 10);
+      t.equal(alertDanger.length, 11);
       t.end();
     });
   }, 10);
@@ -524,7 +525,7 @@ test('Vinyl Roland Error', function (t) {
     });
     driver.findElements(webdriver.By.className("alert-danger"))
     .then(function (alertDanger){
-      t.equal(alertDanger.length, 10);
+      t.equal(alertDanger.length, 13);
       t.end();
     });
   }, 10);
@@ -604,14 +605,14 @@ test('Milling Roland pcb Error', function (t) {
       driver.executeScript("document.getElementsByName('threshold')[1].value = 2");
       driver.executeScript("document.getElementsByName('merge')[1].value = -0.1");
       driver.executeScript("document.getElementsByName('order')[1].value = 1.1");
-      driver.executeScript("document.getElementsByName('sequence')[1].value = 1.0001");
+      driver.executeScript("document.getElementsByName('sequence')[1].value = 1");
 
       driver.findElements(webdriver.By.id('submitDesign')).then(function(submitBtn) {
         submitBtn[0].click();
       });
       driver.findElements(webdriver.By.className("alert-danger"))
       .then(function (alertDanger){
-        t.equal(alertDanger.length, 18);
+        t.equal(alertDanger.length, 22);
         t.end();
         driver.quit();
       });
@@ -651,7 +652,8 @@ function setMachine (type, vendor){
       "type" : type,
       "vendor" : vendor,
       "name": "testMachine",
-      "adcDevice": [{vendor : "Texas Instruments", device : "ADS 1115"}]
+      "adcDevice": [{vendor : "Texas Instruments", device : "ADS 1115"}],
+      "deviceUri": "serial:/dev/ttyS0?baud=115200"
     })
     .end(function (err, res) {
       t.error(err, 'No error');
