@@ -796,7 +796,8 @@ function setMachine (type, vendor){
       "type" : type,
       "vendor" : vendor,
       "name": "testMachine",
-      "adcDevice": [{vendor : "Texas Instruments", device : "ADS 1115"}]
+      "adcDevice": [{vendor : "Texas Instruments", device : "ADS 1115"}],
+      "deviceUri": "serial:/dev/ttyS0?baud=115200"
     })
     .end(function (err, res) {
       t.error(err, 'No error');
