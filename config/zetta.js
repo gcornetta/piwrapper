@@ -8,7 +8,7 @@ Machine.checkIfMachineConfigured( function (err, machine) {
   zetta()
     .name('machine-wrapper')
     .link ('http://pigateway.local:1337')
-    .use (device, machine.name, machine.type)
+    .use (device, machine.name, machine.type, machine.vendor)
     .listen(1337, function () {
        winston.info('@zetta: Server started on piwrapper');
     })
