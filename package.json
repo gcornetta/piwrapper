@@ -42,7 +42,6 @@
     "passport.socketio": "^3.7.0",
     "pngjs": "^3.0.0",
     "pty.js": "^0.3.1",
-    "regression": "^1.2.1",
     "request": "^2.74.0",
     "serialport": "^4.0.1",
     "serve-favicon": "~2.3.0",
