@@ -8,7 +8,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var mongoose = require('mongoose');
-var mongoose.Promise = require('bluebird');
+mongoose.Promise = require('bluebird');
 var expressWinston = require('express-winston');
 var winston = require('winston');
 var events = require('events');
@@ -28,6 +28,9 @@ var i18n = require('./i18n');
 
 //start mongoDB
 var db = require('./config/db');
+
+//start zetta server
+var zetta = require ('./config/zetta')
 
 //require Passport configuration
 require('./config/passport');
