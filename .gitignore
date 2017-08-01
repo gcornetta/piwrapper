@@ -13,3 +13,7 @@ chromedriver
 #    nodemon config   #
 #######################
 nodemon.json
+
+#  ignore  log files  #
+#######################
+/logs/*
