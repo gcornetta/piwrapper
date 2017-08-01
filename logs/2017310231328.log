@@ -1,4 +1,0 @@
-{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-10T23:13:31.529Z"}
-{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T23:13:31.699Z"}
-{"level":"info","message":"@websockets.ws.progress: Connection established with the client","timestamp":"2017-03-10T23:13:31.726Z"}
-{"level":"info","message":"Mongoose disconnected","timestamp":"2017-03-10T23:13:33.847Z"}

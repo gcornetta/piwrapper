@@ -1,5 +1,0 @@
-{"level":"info","message":"Mongoose connected to mongodb://localhost/usersDB","timestamp":"2017-03-10T06:18:49.328Z"}
-{"level":"info","message":"@websockets.ws.terminal: Connection established with the client","timestamp":"2017-03-10T06:18:53.467Z"}
-{"level":"info","message":"@websockets.ws.dashboard: Connection established with the client","timestamp":"2017-03-10T06:18:53.497Z"}
-{"level":"info","message":"@authorization.isLoggedIn: access attempt without authorization","timestamp":"2017-03-10T06:19:08.951Z"}
-{"level":"info","message":"@authorization.login: gcornetta successfully logged in","timestamp":"2017-03-10T06:19:16.998Z"}
