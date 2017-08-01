@@ -5,3 +5,11 @@
 #node_modules directory#
 ########################
 /node_modules
+
+#     chromedriver    #
+#######################  
+chromedriver
+
+#    nodemon config   #
+#######################
+nodemon.json
