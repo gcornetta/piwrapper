@@ -17,3 +17,4 @@ nodemon.json
 #  ignore  log files  #
 #######################
 /logs/*
+!/logs/.gitkeep
