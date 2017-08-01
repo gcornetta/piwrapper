@@ -1,6 +1,6 @@
 var machine = require('../../models/machine');
 var fifo = require('../../app').fifo;
-var formCheck = require('../../lib/formCheck/formCheck');
+var formCheck = require('../../common/formCheck');
 const uuid = require('uuid/v4');
 var multiparty = require('multiparty');
 var util = require('util');

@@ -1,4 +1,4 @@
-var validationMsg = require('../../controllers/lib/messages').validationMsg;
+var validationMsg = require('../controllers/lib/messages').validationMsg;
 
 module.exports.checkJSON = function (req, machine){
     var json = req.body;
