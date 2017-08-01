@@ -8,7 +8,7 @@ var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
 const uuid = require('uuid/v4');
-var formCheck = require('../lib/formCheck/formCheck');
+var formCheck = require('../common/formCheck');
 
 var dashboardPage = dashboard.dashboardPage;
 var panelNames    = dashboard.panelNames;
