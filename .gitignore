@@ -18,3 +18,11 @@ nodemon.json
 #######################
 /logs/*
 !/logs/.gitkeep
+
+
+# ignore zetta files  #
+#######################
+/.devices
+/.peers
+
+
