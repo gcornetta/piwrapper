@@ -255,5 +255,12 @@
 	"w_00254": "Device URI",
 	"w_00255": "Refresh",
 	"w_00256": "Jobs",
-	"w_00257": "From"
+	"w_00257": "From",
+	"w_00258": "Threshold current",
+	"w_00259": "Sample time",
+	"w_00260": "Duty cycle",
+	"w_00261": "xxxxx",
+	"w_00262": "xxxxx",
+	"w_00263": "xxxxx",
+	"w_00264": "xxxxx"
 }
