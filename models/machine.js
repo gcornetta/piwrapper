@@ -60,7 +60,7 @@ var MachineSchema = new mongoose.Schema({
         max: 99,
         required: true
     },
-    deviceUri: {
+    deviceUri: { //uri of the device
         type: String
     },
     isConfigured : Boolean,
