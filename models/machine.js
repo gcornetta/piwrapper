@@ -46,11 +46,26 @@ var MachineSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    threshCurr: { //threshold current in mA to switch from idle to busy
+    	type: Number,
+        required: true
+    },
+    sampleTime: { //driver current sample time
+        type: Number,
+        required: true
+    },
+    dutyCycle: { //sampling duty cycle
+    	type: Number,
+        min: 1,
+        max: 99,
+        required: true
+    },
+    deviceUri: {
+        type: String
+    },
     isConfigured : Boolean,
     adcDevice : [AdcSchema],
-    queuedJobs: [JobSchema],
-    deviceUri: {
-        type: String}
+    queuedJobs: [JobSchema]
 });
 
 var Machine = module.exports = mongoose.model('Machine', MachineSchema);
