@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var winston = require('winston');
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/usersDB';
+var dbURI = 'mongodb://piwrapper.local/usersDB';
 
 mongoose.connect(dbURI);
 
