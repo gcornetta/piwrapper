@@ -1,19 +1,26 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+
+-->
 <div class="user">
-   <div class="photo">
-      <img src="<%=pathToPhoto%>" />
-   </div>
-   <div class="info">
-      <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-         <%=userName%>
-         <b class="caret"></b>
-      </a>
-      <div class="collapse" id="collapseExample">
-         <ul class="nav">
-            <li><a href="/dashboard/profile"><%=sideBar.user.editProfile%></a></li>
-            <% if (machineConfigured) {%>
-               <li><a href="/dashboard/settings"><%=sideBar.user.settings%></a></li>
-            <%}%>
-	 </ul>
-      </div>
-   </div>
+  <div class="photo">
+    <img src="<%=pathToPhoto%>" />
+  </div>
+  <div class="info">
+    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+    <%=userName%>
+    <b class="caret"></b>
+    </a>
+    <div class="collapse" id="collapseExample">
+      <ul class="nav">
+        <li><a href="/dashboard/profile"><%=sideBar.user.editProfile%></a></li>
+        <% if (machineConfigured) {%>
+        <li><a href="/dashboard/settings"><%=sideBar.user.settings%></a></li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
 </div>

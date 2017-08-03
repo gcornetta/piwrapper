@@ -1,3 +1,14 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
 <div class="row">
   <div class="col-md-3">
     <legend><%= millingPanel.roland.switches.title %></legend>
@@ -53,13 +64,13 @@
           </div>
           <div class="col-sm-6">
             <label class="radio">
-              <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyz %>" checked> <%= millingPanel.roland.position.toxyz %>
+            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyz %>" checked> <%= millingPanel.roland.position.toxyz %>
             </label>
             <label class="radio">
-              <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzjog %>"> <%= millingPanel.roland.position.toxyzjog %>
+            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzjog %>"> <%= millingPanel.roland.position.toxyzjog %>
             </label>
             <label class="radio">
-              <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzhome %>"> <%= millingPanel.roland.position.toxyzhome %>
+            <input type="radio" data-toggle="radio" name="origin" value="<%= millingPanel.roland.position.toxyzhome %>"> <%= millingPanel.roland.position.toxyzhome %>
             </label>
           </div>
         </div>
@@ -108,12 +119,11 @@
     <br />
   </div>
 </div>
-
 <script type="text/javascript">
-function setZjog() {
-  var z    = document.getElementById("z");
-  var zjog = document.getElementById("zjog");
-
-  zjog.value = parseInt(z.value) + 2;
-}
+  function setZjog() {
+    var z    = document.getElementById("z");
+    var zjog = document.getElementById("zjog");
+  
+    zjog.value = parseInt(z.value) + 2;
+  }
 </script>

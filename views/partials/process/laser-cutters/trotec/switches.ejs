@@ -1,112 +1,120 @@
-               <div class="row">								
-		  <div class="col-md-3">
-	             <legend><%= laserPanel.trotec.switches.title %></legend>
-		     <div class="col-md-6">
-                        <div id="switch-div-halftone" style="display: none;">
-			<p class="category"><%= laserPanel.trotec.switches.fill %></p>
-	                <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
-			   <input type="checkbox" name="switchAutofocus" checked />
-			</div>
-			<p class="category"><%= laserPanel.trotec.switches.sort %></p>
-			<div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
-		           <input type="checkbox" name="switchSort"checked />
-			</div>
-                        </div>
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
 
-                        <div id="switch-div-cut" style="display: none;">
-			<p class="category"><%= laserPanel.trotec.switches.sort %></p>
-			<div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
-		           <input type="checkbox" name="switchSort"checked />
-			</div>
-                        </div>
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
 
-
-	             </div>
-		  </div>
-		  <div class="col-md-4">
-		     <legend><%= laserPanel.trotec.position.title %></legend>
-		     <div class="row">
-		        <fieldset>
-			   <div class="form-group">
-			      <div class="col-sm-6">
-			         <div class="row">
-			            <label class="col-sm-2 control-label">X:</label>
-				    <div class="col-sm-8">
-				       <input type="number" step=1 name="xCoord" placeholder="50" value="50" class="form-control">
-				    </div>
-				  </div>
-				  <br />
-				  <div class="row">
-				  <label class="col-sm-2 control-label">Y:</label>
-			          <div class="col-sm-8">
-			             <input type="number" step=1 name="yCoord" placeholder="50" value="50" class="form-control">
-				  </div>
-			       </div>
-			    </div>
-			    <div class="col-sm-6">
-			       <label class="radio">
-			          <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>" checked> <%= laserPanel.trotec.position.topleft %>
-			       </label>
-			       <label class="radio">
-			          <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.topright %>
-			       </label>
-			       <label class="radio">
-			          <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.bottomleft %>
-			       </label>
-			       <label class="radio">
-			          <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.bottomright %>
-			       </label>
-			    </div>
-			 </div>
-	              </fieldset>
-		   </div>
-		</div>
-		<div class="col-md-4 col-md-offset-1">
-		   <legend><%= laserPanel.trotec.select.process.title %></legend>
-	           <div class="row">
-	              <fieldset>
-		         <div class="form-group">
-			    <div class="col-sm-12">
-		               <select id="processes-trotec" name="process" class="selectpicker" data-title="Process" data-style="btn-danger btn-block" data-menu-style="dropdown-blue" onchange="showSwitchTrotec(this)">
-			          <option value="cut"><%= laserPanel.trotec.select.process.cut %></option>
-			          <option value="halftone"><%= laserPanel.trotec.select.process.halftone %></option>
-			       </select>
-			    </div>
-			 </div>
-	              </fieldset>			
-		   </div>
-                   <br />
-		   <h4 class="title"><%= laserPanel.trotec.select.material.title %></h4>	 
-                   <div class="row">
-	              <fieldset>
-		         <div class="form-group">
-			    <div class="col-sm-12">
-		               <select name="material" class="selectpicker" data-title="Material" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
-			          <option value="cardboard"><%= laserPanel.trotec.select.material.cardboard %></option>
-			          <option value="acrylic"><%= laserPanel.trotec.select.material.acrylic %></option>
-				  <option value="wood"><%= laserPanel.trotec.select.material.wood %></option>
-				  <option value="mylar"><%= laserPanel.trotec.select.material.mylar %></option>
-			       </select>
-			    </div>
-			 </div>
-		      </fieldset>			
-	           </div>
-                   <br />
-                   <h4 class="title"><%= laserPanel.trotec.select.machine.title %></h4>
-                   <div class="row">
-	              <fieldset>
-		         <div class="form-group">
-			    <div class="col-sm-12">
-		               <select name="machine" class="selectpicker" data-title="Machine" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
-			          <option value="speedy100"><%= laserPanel.trotec.select.machine.speedy100 %></option>
-			          <option value="speedy100FlexxCO2"><%= laserPanel.trotec.select.machine.speedy100FlexxCO2 %></option>
-				  <option value="speedy100FlexxFiber"><%= laserPanel.trotec.select.machine.speedy100FlexxFiber %></option>
-				  <option value="speedy400"><%= laserPanel.trotec.select.machine.speedy400 %></option>
-			       </select>
-			    </div>
-			 </div>
-		      </fieldset>			
-	           </div>
-                  <br />
-		</div>
-             </div>
+-->
+<div class="row">
+  <div class="col-md-3">
+    <legend><%= laserPanel.trotec.switches.title %></legend>
+    <div class="col-md-6">
+      <div id="switch-div-halftone" style="display: none;">
+        <p class="category"><%= laserPanel.trotec.switches.fill %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="switchAutofocus" checked />
+        </div>
+        <p class="category"><%= laserPanel.trotec.switches.sort %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="switchSort"checked />
+        </div>
+      </div>
+      <div id="switch-div-cut" style="display: none;">
+        <p class="category"><%= laserPanel.trotec.switches.sort %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="switchSort"checked />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <legend><%= laserPanel.trotec.position.title %></legend>
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-6">
+            <div class="row">
+              <label class="col-sm-2 control-label">X:</label>
+              <div class="col-sm-8">
+                <input type="number" step=1 name="xCoord" placeholder="50" value="50" class="form-control">
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <label class="col-sm-2 control-label">Y:</label>
+              <div class="col-sm-8">
+                <input type="number" step=1 name="yCoord" placeholder="50" value="50" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label class="radio">
+            <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>" checked> <%= laserPanel.trotec.position.topleft %>
+            </label>
+            <label class="radio">
+            <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.topright %>
+            </label>
+            <label class="radio">
+            <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.bottomleft %>
+            </label>
+            <label class="radio">
+            <input type="radio" data-toggle="radio" name="origin" value="<%= laserPanel.trotec.position.topleft %>"> <%= laserPanel.trotec.position.bottomright %>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="col-md-4 col-md-offset-1">
+    <legend><%= laserPanel.trotec.select.process.title %></legend>
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <select id="processes-trotec" name="process" class="selectpicker" data-title="Process" data-style="btn-danger btn-block" data-menu-style="dropdown-blue" onchange="showSwitchTrotec(this)">
+              <option value="cut"><%= laserPanel.trotec.select.process.cut %></option>
+              <option value="halftone"><%= laserPanel.trotec.select.process.halftone %></option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <br />
+    <h4 class="title"><%= laserPanel.trotec.select.material.title %></h4>
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <select name="material" class="selectpicker" data-title="Material" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
+              <option value="cardboard"><%= laserPanel.trotec.select.material.cardboard %></option>
+              <option value="acrylic"><%= laserPanel.trotec.select.material.acrylic %></option>
+              <option value="wood"><%= laserPanel.trotec.select.material.wood %></option>
+              <option value="mylar"><%= laserPanel.trotec.select.material.mylar %></option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <br />
+    <h4 class="title"><%= laserPanel.trotec.select.machine.title %></h4>
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <select name="machine" class="selectpicker" data-title="Machine" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
+              <option value="speedy100"><%= laserPanel.trotec.select.machine.speedy100 %></option>
+              <option value="speedy100FlexxCO2"><%= laserPanel.trotec.select.machine.speedy100FlexxCO2 %></option>
+              <option value="speedy100FlexxFiber"><%= laserPanel.trotec.select.machine.speedy100FlexxFiber %></option>
+              <option value="speedy400"><%= laserPanel.trotec.select.machine.speedy400 %></option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <br />
+  </div>
+</div>

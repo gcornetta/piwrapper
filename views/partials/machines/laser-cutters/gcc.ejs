@@ -1,17 +1,28 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
 <div class="content">
-   <div class="container-fluid">
-      <div class="card">
-         <form method="post" action="/dashboard/control/laser/gcc" enctype="multipart/form-data">
-	    <div class="content">
-               <% include ../../process/upload %>
-	       <% include ../../process/laser-cutters/gcc/switches %> 
-	       <% include ../../process/laser-cutters/gcc/engine %>
-               <div id="feedback"></div>
-                <br />
-	       <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= laserPanel.submitButtonText %></button>
-	    </div>
-	  </form>
-       </div>                         
-    <!-- end card -->
+  <div class="container-fluid">
+    <div class="card">
+      <form method="post" action="/dashboard/control/laser/gcc" enctype="multipart/form-data">
+        <div class="content">
+          <% include ../../process/upload %>
+          <% include ../../process/laser-cutters/gcc/switches %> 
+          <% include ../../process/laser-cutters/gcc/engine %>
+          <div id="feedback"></div>
+          <br />
+          <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= laserPanel.submitButtonText %></button>
+        </div>
+      </form>
     </div>
+    <!-- end card -->
+  </div>
 </div>

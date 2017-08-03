@@ -1,132 +1,141 @@
-<div class="content">
-	<div class="container-fluid">
-	    <div class="row">
-				<% if (flashSuccess) {%>
-				<div class="alert alert-success alert-with-icon fade in" data-notify="container">
-					<button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-					<span data-notify="icon" class="ti-bell"></span>
-                        		<span data-notify="message"><%=flashSuccess%></span>
-                		</div>
-            		<%}%>
-	        <div class="col-lg-8 col-md-6">
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
 
-	            <div class="card">
-	                <div class="header">
-	                    <h4 class="title"><%=userProfile.editProfile%></h4>
-	                </div>
-	                <div class="content">
-	                    <form method="post" action="/dashboard/profile/change/">
-	                        <div class="row">
-	                            <div class="col-md-3">
-	                                <div class="form-group">
-	                                    <label><%=userProfile.userName%></label>
-	                                    <input type="text" class="form-control border-input" disabled name="userName" value=<%=profile.username%>>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-3">
-	                            	<div class="form-group">
-	                            		<label><%=userProfile.role%></label>
-                                                <% if (profile.role == 'Superadministrator') {%>
-                                                     <select name="userType" class="form-control">
-							<option value="<%=profile.role%>" selected><%=profile.role%></option>
-							<option value="Administrator">Administrator</option>
-                                                     </select>
-                                                <%} else {%>
-                                                   <input type="text" class="form-control border-input" disabled placeholder="Role" value=<%=profile.role%>>
-                                                <%}%>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-6">
-	                                <div class="form-group">
-	                                    <label for="exampleInputEmail1"><%=userProfile.email%></label>
-	                                    <input type="email" class="form-control border-input" name="email" value=<%=profile.email%>>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="row">
-	                            <div class="col-md-6">
-	                                <div class="form-group">
-	                                    <label><%=userProfile.firstName%></label>
-	                                    <input type="text" class="form-control border-input" name="firstName" value=<%=profile.firstname%>>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-6">
-	                                <div class="form-group">
-	                                    <label><%=userProfile.lastName%></label>
-	                                    <input type="text" class="form-control border-input" name="lastName" value=<%=profile.lastname%>>
-	                                </div>
-	                            </div>
-	                        </div>
-					    	<div class="row">
- 								<div class="col-md-12">
-	                                <div class="form-group">
-	                                    <div class="text-center">
-	                                        <button type="submit" class="btn btn-info btn-fill btn-wd"><%=userProfile.updateProfile%></button>
-	                                    </div>
-									</div>
-	                            </div>
-	                        </div>
-	                        <div class="clearfix"></div>
-	                    </form>
-	                </div>
-	            </div>
-	        </div>
-	                
- 			<div class="col-lg-4 col-md-3">
-				<div class="card">
-	                <div class="header" style="padding-bottom : 60px">
-	                    <h4 class="title"><%=userProfile.uploadPhoto%></h4>
-	                </div>
-	               	<div class="content">
-                    <div class="icon icon-info" >
-			 			<i class="ti-cloud-up"></i>
-					</div>
-						<div class="progress">
-	                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-	                    </div>
-						<div class="text-center">
-	                        <button type="button" class="btn btn-info btn-fill btn-wd upload-btn"><%=userProfile.uploadPhoto%></button>
-                    	</div>
-						<input id="upload-input" type="file" name="/dashboard/upload">
-                	</div>
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <% if (flashSuccess) {%>
+      <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+        <span data-notify="icon" class="ti-bell"></span>
+        <span data-notify="message"><%=flashSuccess%></span>
+      </div>
+      <%}%>
+      <div class="col-lg-8 col-md-6">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"><%=userProfile.editProfile%></h4>
+          </div>
+          <div class="content">
+            <form method="post" action="/dashboard/profile/change/">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><%=userProfile.userName%></label>
+                    <input type="text" class="form-control border-input" disabled name="userName" value=<%=profile.username%>>
+                  </div>
                 </div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 col-md-10">
-				<div class="card">
-					<div class="header">
-	                    <h4 class="title">Change password</h4>
-	                </div>	                
-	                <div class="content">
-	                	<form method="post" action="/dashboard/password/change/">
-							<div class="row">
-								<div class="col-md-6">
-	    							<div class="form-group">
-	        							<label>New password</label>
-	        							<input type="password" class="form-control border-input" name="newPassword" placeholder="New password">
-	    							</div>
-								</div>
-								<div class="col-md-6">
-	    							<div class="form-group">
-	        							<label>Confirm password</label>
-	        							<input type="password" class="form-control border-input" name="confirmPassword" placeholder="Confirm password" >
-	    							</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-	    							<div class="form-group">
-	        							<div class="text-center">
-	            							<button type="submit" class="btn btn-info btn-fill btn-wd">Change password</button>
-	        							</div>
-	    							</div>
-								</div>
-							</div>
-	                	</form>
-	                </div>
-				</div>			
-			</div>	
-		</div>
-	</div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><%=userProfile.role%></label>
+                    <% if (profile.role == 'Superadministrator') {%>
+                    <select name="userType" class="form-control">
+                      <option value="<%=profile.role%>" selected><%=profile.role%></option>
+                      <option value="Administrator">Administrator</option>
+                    </select>
+                    <%} else {%>
+                    <input type="text" class="form-control border-input" disabled placeholder="Role" value=<%=profile.role%>>
+                    <%}%>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1"><%=userProfile.email%></label>
+                    <input type="email" class="form-control border-input" name="email" value=<%=profile.email%>>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label><%=userProfile.firstName%></label>
+                    <input type="text" class="form-control border-input" name="firstName" value=<%=profile.firstname%>>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label><%=userProfile.lastName%></label>
+                    <input type="text" class="form-control border-input" name="lastName" value=<%=profile.lastname%>>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-info btn-fill btn-wd"><%=userProfile.updateProfile%></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-3">
+        <div class="card">
+          <div class="header" style="padding-bottom : 60px">
+            <h4 class="title"><%=userProfile.uploadPhoto%></h4>
+          </div>
+          <div class="content">
+            <div class="icon icon-info" >
+              <i class="ti-cloud-up"></i>
+            </div>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-info btn-fill btn-wd upload-btn"><%=userProfile.uploadPhoto%></button>
+            </div>
+            <input id="upload-input" type="file" name="/dashboard/upload">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-10">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Change password</h4>
+          </div>
+          <div class="content">
+            <form method="post" action="/dashboard/password/change/">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>New password</label>
+                    <input type="password" class="form-control border-input" name="newPassword" placeholder="New password">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type="password" class="form-control border-input" name="confirmPassword" placeholder="Confirm password" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-info btn-fill btn-wd">Change password</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

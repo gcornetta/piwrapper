@@ -1,130 +1,141 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
 <!doctype html>
 <html lang="en">
-<head>
-  <% include ./partials/header %>
-</head>
-
-<body>
+  <head>
+    <% include ./partials/header %>
+  </head>
+  <body>
     <nav class="navbar navbar-transparent navbar-absolute">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                       <a href="/"><%=homePageLink%></a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
         </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/"><%=homePageLink%></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-
     <div class="wrapper wrapper-full-page">
-        <div class="full-page login-page" data-color="" data-image="/img/background/background-login.jpg">
+      <div class="full-page login-page" data-color="" data-image="/img/background/background-login.jpg">
         <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
-            <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                       <% if (errors) {%>
-                                    <%errors.forEach(function(error) {%>
-	                                <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-			                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-					    <span data-notify="icon" class="ti-bell"></span>
-                                            <span data-notify="message"><%=error.msg%></span>
-                                        </div>
-                                    <%});%>  
-                                <%}%>
-
-			<% if (flashSuccess) {%>
-                                <div class="alert alert-success alert-with-icon fade in" data-notify="container">
-			   	    <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-				    <span data-notify="icon" class="ti-bell"></span>
-                                    <span data-notify="message"><%=flashSuccess%></span>
-                                </div>  
-                        <%}%>
-                        <% if (flashError) {%>
-                                <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-			   	    <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-				    <span data-notify="icon" class="ti-bell"></span>
-                                    <span data-notify="message"><%=flashError%></span>
-                                </div>  
-                        <%}%>   
-                        <div class="card-container manual-flip">
-                            <div class="rc-card">
-                                <div class="front">
-                                    <div class="content">
-                                        <div class="main">
-                                            <form method="post" action="">
-                                            <!--data-background="color" data-color="blue"-->
-                                                <div class="rc-header">
-                                                    <h3 class="rc-title"><%=loginHeader%></h3>
-                                                </div>
-                                                <div class="content">
-                                                    <%for (var i=0; i<placeHolders.length; i++) {%>
-                                                        <div class="form-group">
-                                                            <label><%=placeHolders[i].label%></label>
-                                                            <input id="<%=placeHolders[i].name%>" type="<%=placeHolders[i].type%>" name="<%=placeHolders[i].name%>" placeholder="<%=placeHolders[i].text%>" class="form-control input-no-border">
-                                                        </div>
-                                                    <%}%>
-                                                </div>
-                                                <div class="footer text-center">
-                                                    <button type="submit" class="btn btn-fill btn-wd "><%=submitButtonText%></button>
-                                                </div>
-                                            </form>
-                                        </div>
-					<div class="space-20"></div>
-                                        <div class="rc-footer">
-                                            <button class="btn btn-simple" rel="tooltip" title="<%=forgotPasswordTooltip%>" onclick="rotateCard(this)">
-                                            <i class="fa fa-mail-forward"></i> <%=forgotPasswordLink%>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div> <!-- end front panel -->
-                                <div class="back">
-                                    <div class="header">
-                                        <h5 class="motto"><%=requestFormHeaderText%></h5>
-                                    </div>
-                                    <div class="content">
-                                        <div class="main">
-                                            <form method="post" action="/login/request">
-                                                <div class="content">
-                                                    <div class="form-group">
-                                                        <label><%=placeHolders[0].label%></label>
-                                                        <input type="<%=placeHolders[0].type%>" name="<%=placeHolders[0].name%>" placeholder="<%=placeHolders[0].text%>" class="form-control input-no-border">
-                                                    </div>
-                                                </div>
-						<div class="space-50"></div>
-						<div class="space-30"></div>
-                                                <div class="footer text-center">
-                                                    <button type="submit" class="btn btn-fill btn-wd "><%=passwordRequestButton%></button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="rc-footer">
-                                        <button class="btn btn-simple" rel="tooltip" title="<%=gobackTologinTooltip%>" onclick="rotateCard(this)">
-                                            <i class="fa fa-reply"></i> Back
-                                        </button>
-                                    </div>
-                                </div> <!-- end back panel -->
-                            </div> <!-- end card -->
-                        </div> <!-- end card-container -->
-                    </div> <!-- end col sm 3 -->
-                </div>      
+        <div class="content">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                <% if (errors) {%>
+                <%errors.forEach(function(error) {%>
+                <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                  <span data-notify="icon" class="ti-bell"></span>
+                  <span data-notify="message"><%=error.msg%></span>
+                </div>
+                <%});%>  
+                <%}%>
+                <% if (flashSuccess) {%>
+                <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                  <span data-notify="icon" class="ti-bell"></span>
+                  <span data-notify="message"><%=flashSuccess%></span>
+                </div>
+                <%}%>
+                <% if (flashError) {%>
+                <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                  <span data-notify="icon" class="ti-bell"></span>
+                  <span data-notify="message"><%=flashError%></span>
+                </div>
+                <%}%>   
+                <div class="card-container manual-flip">
+                  <div class="rc-card">
+                    <div class="front">
+                      <div class="content">
+                        <div class="main">
+                          <form method="post" action="">
+                            <!--data-background="color" data-color="blue"-->
+                            <div class="rc-header">
+                              <h3 class="rc-title"><%=loginHeader%></h3>
+                            </div>
+                            <div class="content">
+                              <%for (var i=0; i<placeHolders.length; i++) {%>
+                              <div class="form-group">
+                                <label><%=placeHolders[i].label%></label>
+                                <input id="<%=placeHolders[i].name%>" type="<%=placeHolders[i].type%>" name="<%=placeHolders[i].name%>" placeholder="<%=placeHolders[i].text%>" class="form-control input-no-border">
+                              </div>
+                              <%}%>
+                            </div>
+                            <div class="footer text-center">
+                              <button type="submit" class="btn btn-fill btn-wd "><%=submitButtonText%></button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="space-20"></div>
+                        <div class="rc-footer">
+                          <button class="btn btn-simple" rel="tooltip" title="<%=forgotPasswordTooltip%>" onclick="rotateCard(this)">
+                          <i class="fa fa-mail-forward"></i> <%=forgotPasswordLink%>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end front panel -->
+                    <div class="back">
+                      <div class="header">
+                        <h5 class="motto"><%=requestFormHeaderText%></h5>
+                      </div>
+                      <div class="content">
+                        <div class="main">
+                          <form method="post" action="/login/request">
+                            <div class="content">
+                              <div class="form-group">
+                                <label><%=placeHolders[0].label%></label>
+                                <input type="<%=placeHolders[0].type%>" name="<%=placeHolders[0].name%>" placeholder="<%=placeHolders[0].text%>" class="form-control input-no-border">
+                              </div>
+                            </div>
+                            <div class="space-50"></div>
+                            <div class="space-30"></div>
+                            <div class="footer text-center">
+                              <button type="submit" class="btn btn-fill btn-wd "><%=passwordRequestButton%></button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="rc-footer">
+                        <button class="btn btn-simple" rel="tooltip" title="<%=gobackTologinTooltip%>" onclick="rotateCard(this)">
+                        <i class="fa fa-reply"></i> Back
+                        </button>
+                      </div>
+                    </div>
+                    <!-- end back panel -->
+                  </div>
+                  <!-- end card -->
+                </div>
+                <!-- end card-container -->
+              </div>
+              <!-- end col sm 3 -->
             </div>
+          </div>
         </div>
-        	<% include ./partials/footer %>
-        </div>
+        <% include ./partials/footer %>
+      </div>
     </div>
-</body>
-
-	<% include ./partials/scripts %>
-    
+  </body>
+  <% include ./partials/scripts %>
 </html>

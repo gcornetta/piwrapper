@@ -1,40 +1,48 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
 <style>
-.fileUpload {
-	position: relative;
-	overflow: hidden;
-	margin: 10px;
-}
-.fileUpload input.upload {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
-}
+  .fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  }
+  .fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  }
 </style>
-
-
-
 <div class="row">
-   <div class="col-md-12">
-      <legend>Design Upload</legend>
-      <div class="row">
-         <div class="col-md-3">
-            <div class="fileUpload btn btn-info btn-fill btn-wd">
-               <span>Select Design File</span>
-               <input type="file" class="upload" name="designfile" />
-            </div>
-         </div>
-         <div class="col-md-9" style="padding-top: 21px">
-            <div class="progress">
-               <div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-            </div>
-         </div>
+  <div class="col-md-12">
+    <legend>Design Upload</legend>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="fileUpload btn btn-info btn-fill btn-wd">
+          <span>Select Design File</span>
+          <input type="file" class="upload" name="designfile" />
+        </div>
       </div>
-      <br /> <br /> 
-   </div>
+      <div class="col-md-9" style="padding-top: 21px">
+        <div class="progress">
+          <div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+        </div>
+      </div>
+    </div>
+    <br /> <br /> 
+  </div>
 </div>

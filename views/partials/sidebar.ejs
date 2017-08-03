@@ -1,23 +1,34 @@
-<div class="sidebar" data-background-color="brown" data-active-color="danger">
 <!--
-	Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
-	Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20160301 08:00 am
+  last modified:      20170803 09:00 am
+  modification type:  improvement
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
 -->
+<div class="sidebar" data-background-color="brown" data-active-color="danger">
+  <!--
+    Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+    Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    -->
   <div class="logo">
-     <a href="/dashboard" class="simple-text"> <%=fabLabName%> </a>
+    <a href="/dashboard" class="simple-text"> <%=fabLabName%> </a>
   </div>
   <div class="logo logo-mini">
-     <a href="/dashboard" class="simple-text"> <%=fabLabText%> </a>
+    <a href="/dashboard" class="simple-text"> <%=fabLabText%> </a>
   </div>
   <div class="sidebar-wrapper">
-     <% include ./sidebar/user %>
-     <ul class="nav">	
-        <% if(!displaySidebarMenu) {%>
-           <% include ./sidebar/wizard %>
-        <%}%>
-        <% if(displaySidebarMenu) {%>
-           <% include ./sidebar/normal %>
-        <%}%>
-     </ul>
-   </div>
+    <% include ./sidebar/user %>
+    <ul class="nav">  
+      <% if(!displaySidebarMenu) {%>
+      <% include ./sidebar/wizard %>
+      <%}%>
+      <% if(displaySidebarMenu) {%>
+      <% include ./sidebar/normal %>
+      <%}%>
+    </ul>
+  </div>
 </div>
