@@ -1,0 +1,14 @@
+code #		priority				type								Description																	Assigned to
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<num>		low | medium | high		bugfix | improvement | refactoring | test																		<name>
+0001		medium					improvement							launch zetta server as a child process										Gianluca Cornetta
+0002		medium					improvement							rewrite log system using zetta style										Gianluca Cornetta
+0003		high					improvement							rewrite the test system to match software changes 							Javier Mateos
+0004		high					test								check if the new configuration wizard works									Javier Mateos
+0004		high					test								lab test of the new software version										All
+0005		medium					improvement							write the interface for Othermill machines	(the app						Javier Mateos
+																		has only a mockup for those interfaces)
+0006		medium					improvement							finish the writing of the queue subsystem									Javier Mateos
+0007		medium					improvement							current sensor integration													Gianluca Cornetta
+0008		medium					improvement							graphical interface with usage statistics									Javier Mateos
+0009		medium					test								final lab test of the piwrapper
