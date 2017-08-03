@@ -11,7 +11,7 @@ var trotecCtrl = require('../controllers/trotec_laser');
 var rolandVinylCtrl = require('../controllers/roland_vinyl');
 var rolandMillingCtrl = require('../controllers/roland_milling');
 var apiCtrl = require('../controllers/api');
-var jobsTable = require('../controllers/jobsTable');
+var jobsCtrl = require('../controllers/jobs_table');
 
 
 var User = require('../models/user');
@@ -32,7 +32,7 @@ router.get('/dashboard/wizard', authCtrl.isLoggedIn, dashCtrl.wizard);
 router.get('/dashboard/settings', authCtrl.isLoggedIn, dashCtrl.settings);
 router.get('/dashboard/settings/discoveredPrinters', authCtrl.isLoggedIn, dashCtrl.discoveredPrinters);
 router.get('/dashboard/logs', authCtrl.isLoggedIn, dashCtrl.logs);
-router.get('/dashboard/jobsTable', authCtrl.isLoggedIn, jobsTable.controller);
+router.get('/dashboard/jobs', authCtrl.isLoggedIn, jobsCtrl.controller);
 
 router.get('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.controller);
 router.get('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.controller);
