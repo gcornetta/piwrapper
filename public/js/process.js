@@ -199,7 +199,7 @@ function loadMachines(){
     $('#deviceUri').empty();
     $('#deviceUri').html('<option value="null">Searching machines...</option>');
     $.ajax({
-      url: '/dashboard/settings/discoveredPrinters',
+      url: '/dashboard/settings/discovered-printers',
       type: 'GET',
       data: {},
       dataType: 'html',

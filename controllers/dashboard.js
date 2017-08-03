@@ -471,7 +471,7 @@ module.exports.discoveredPrinters = function (req, res) {
     if (err) throw err
     dashboardPage.printers = printers
     dashboardPage.currentPanelRoute = '/dashboard/control'
-    res.render('partials/printersSelect', dashboardPage)
+    res.render('partials/printer-select', dashboardPage)
   })
 }
 

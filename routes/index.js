@@ -30,7 +30,7 @@ router.get('/dashboard', authCtrl.isLoggedIn, dashCtrl.dashboard);
 router.get('/dashboard/profile', authCtrl.isLoggedIn, dashCtrl.profile);
 router.get('/dashboard/wizard', authCtrl.isLoggedIn, dashCtrl.wizard);
 router.get('/dashboard/settings', authCtrl.isLoggedIn, dashCtrl.settings);
-router.get('/dashboard/settings/discoveredPrinters', authCtrl.isLoggedIn, dashCtrl.discoveredPrinters);
+router.get('/dashboard/settings/discovered-printers', authCtrl.isLoggedIn, dashCtrl.discoveredPrinters);
 router.get('/dashboard/logs', authCtrl.isLoggedIn, dashCtrl.logs);
 router.get('/dashboard/jobs', authCtrl.isLoggedIn, jobsCtrl.controller);
 
