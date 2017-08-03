@@ -8,13 +8,43 @@ var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
 const uuid = require('uuid/v4');
-var formCheck = require('../common/formCheck');
+var formCheck = require('../common/form-check');
 
 var dashboardPage = dashboard.dashboardPage;
 var panelNames    = dashboard.panelNames;
 var validationMsg = dashboard.validationMsg;
 
 var jobCounter = [];
+
+module.exports.controller = function (req, res) {
+
+dashboardPage.displayProfile = false;
+dashboardPage.displayWizard = false;
+dashboardPage.displayTerminal = false;
+dashboardPage.displaySettings = false;
+dashboardPage.displayLogs = false;
+dashboardPage.uploadSuccess = false;
+dashboardPage.displayJobsTable = false;
+dashboardPage.displayControl = true;
+dashboardPage.currentPanelName = panelNames.control;
+dashboardPage.currentPanelRoute = '/dashboard/control/vinyl/roland';
+
+Machine.checkIfMachineConfigured(function(err, machine){
+	if (err) throw (err);
+	if (!dashboardPage.userName){
+	    res.redirect('/dashboard');
+	}else{
+	    dashboardPage.errors = null;
+	    dashboardPage.machine = { name      : machine.name,
+        	                  type      : machine.type,
+                	          vendor    : machine.vendor,
+                        	  adcVendor : machine.adcDevice[0].vendor,
+                          	  adcDevice : machine.adcDevice[0].device
+        	        	} ;
+         res.render('dashboard', dashboardPage);
+    }
+});
+}
 
 var _validate = function (req, res) {
         var path = req.body.path;
@@ -33,37 +63,6 @@ var _validate = function (req, res) {
            return [];
         else
            return errors;
-}
-
-
-module.exports.controller = function (req, res) {
-
-dashboardPage.displayProfile = false;
-dashboardPage.displayWizard = false;
-dashboardPage.displayTerminal = false;
-dashboardPage.displaySettings = false;
-dashboardPage.displayLogs = false;
-dashboardPage.uploadSuccess = false;
-dashboardPage.displayJobsTable = false;
-dashboardPage.displayControl = true;
-dashboardPage.currentPanelName = panelNames.control;
-dashboardPage.currentPanelRoute = '/dashboard/control/laser/epilog';
-
-Machine.checkIfMachineConfigured(function(err, machine){
-	if (err) throw (err);
-	if (!dashboardPage.userName){
-	    res.redirect('/dashboard');
-	}else{
-	    dashboardPage.errors = null;
-	    dashboardPage.machine = { name      : machine.name,
-        	                  type      : machine.type,
-                	          vendor    : machine.vendor,
-                        	  adcVendor : machine.adcDevice[0].vendor,
-                          	  adcDevice : machine.adcDevice[0].device
-        	        	} ;
-         res.render('dashboard', dashboardPage);
-    }
-});
 }
 
 module.exports.upload = function (req, res) {
@@ -119,35 +118,17 @@ module.exports.upload = function (req, res) {
                                     break;
            case 'sequence'        : req.body.sequence = value; 
                                     break;
-           case 'spotSize'	  : req.body.spotSize = value; 
-                                    break;	   
-           case 'minSpotsize'	  : req.body.minSpotsize = value; 
+           case 'power'           : req.body.power = value;
                                     break;
-           case 'horSpotspace'	  : req.body.horSpotspace = value; 
-                                    break; 
-           case 'verSpotspace'	  : req.body.verSpotspace = value; 
-                                    break;
-           case 'pointSpot'	  : req.body.pointSpot = value; 
-                                    break;
-           case 'power'           : req.body.power = value; 
-                                    break;
-           case 'speed'           : req.body.speed = value; 
-                                    break;
-           case 'rate'            : req.body.rate = value; 
-                                    break;
-           case 'switchAutofocus' : req.body.switchAutofocus = value; 
+           case 'speed'           : req.body.speed = value;
                                     break;
            case 'switchSort'      : req.body.switchSort = value; 
-                                    break;
-           case 'switchFill'      : req.body.switchFill = value; 
                                     break;
            case 'xCoord'          : req.body.xCoord = value; 
                                     break;
            case 'yCoord'          : req.body.yCoord = value; 
                                     break;
            case 'origin'          : req.body.origin = value; 
-                                    break;
-           case 'process'         : req.body.process = value; 
                                     break;
            case 'material'        : req.body.material = value; 
                                     break;
@@ -171,24 +152,24 @@ module.exports.upload = function (req, res) {
            dashboardPage.errors = errors;
            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
           } else {
-            dashboardPage.errors = null;
+            dashboardPage.errors = null; 
             fifoData.userId = req.user._id;
             fifoData.jobId = uuid();
             fifoData.status = 'pending'; //status: pending, approved, rejected
             fifo.push(fifoData, "local", function(err, job){
-                if (err){
-                    winston.error('@controllers.epilog_laser: '+err.err);
-                    dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
-                }else{
-                    dashboardPage.uploadSuccess = true;
-                    var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
-                    req.flash('success_msg', uploadMessage);
-                    var flashUpload = req.flash('success_msg')[0];
-                    dashboardPage.flashUpload = flashUpload;
-                    req.session.flash = [];
-                }
-                setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
-            });
+                            if (err){
+                                winston.error('@controllers.roland_vinyl: '+err.err);
+                                dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
+                            }else{
+                                dashboardPage.uploadSuccess = true;
+                                var uploadMessage = 'Design succsessfully uploaded to /public/uploads/designs/local. ' + 'User id: ' + req.user._id + ' File: ' +  req.body.filename;
+                                req.flash('success_msg', uploadMessage);
+                                var flashUpload = req.flash('success_msg')[0];
+                                dashboardPage.flashUpload = flashUpload;
+                                req.session.flash = [];
+                            }
+                            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
+                        });
          }
        });
      });
@@ -205,19 +186,20 @@ module.exports.upload = function (req, res) {
 }
 
 
-
-
 module.exports.process = function (req, res) {
 
    dashboardPage.currentPanelName = panelNames.control;
    dashboardPage.currentPanelRoute = '/dashboard/control';
    winston.info('@dashboard.process: the process selected is ' + req.query.process);
 
-   if (req.query.process == 'cut') {
-      res.render('partials/process/laser-cutters/epilog/cut', dashboardPage);
-   } else {
-      res.render('partials/process/laser-cutters/epilog/halftone', dashboardPage);
+   if (req.query.material == 'vinyl') {
+      res.render('partials/process/vinyl-cutters/roland/cut-vinyl', dashboardPage);
    }
+   if (req.query.material == 'epoxy') {
+      res.render('partials/process/vinyl-cutters/roland/cut-epoxy', dashboardPage);
+   }
+   if (req.query.material == 'copper') {
+      res.render('partials/process/vinyl-cutters/roland/cut-copper', dashboardPage);
+   }
+
 }
-
-

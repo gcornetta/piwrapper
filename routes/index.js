@@ -5,13 +5,13 @@ var router = express.Router();
 var authCtrl = require('../controllers/authorization');
 var usrCtrl = require('../controllers/user');
 var dashCtrl = require('../controllers/dashboard');
-var epilogCtrl = require('../controllers/epilog_laser');
-var gccCtrl = require('../controllers/gcc_laser');
-var trotecCtrl = require('../controllers/trotec_laser');
-var rolandVinylCtrl = require('../controllers/roland_vinyl');
-var rolandMillingCtrl = require('../controllers/roland_milling');
+var epilogCtrl = require('../controllers/epilog-laser');
+var gccCtrl = require('../controllers/gcc-laser');
+var trotecCtrl = require('../controllers/trotec-laser');
+var rolandVinylCtrl = require('../controllers/roland-vinyl');
+var rolandMillingCtrl = require('../controllers/roland-milling');
 var apiCtrl = require('../controllers/api');
-var jobsCtrl = require('../controllers/jobs_table');
+var jobsCtrl = require('../controllers/jobs-table');
 
 
 var User = require('../models/user');

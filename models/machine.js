@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-var printer = require('../lib/fablab/printerConfig');
+var printer = require('../lib/fablab/printer-config');
 
 
 var JobSchema = new mongoose.Schema({

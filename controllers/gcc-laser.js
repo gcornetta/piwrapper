@@ -8,7 +8,7 @@ var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
 const uuid = require('uuid/v4');
-var formCheck = require('../common/formCheck');
+var formCheck = require('../common/form-check');
 
 var dashboardPage = dashboard.dashboardPage;
 var panelNames    = dashboard.panelNames;
@@ -35,7 +35,6 @@ var _validate = function (req, res) {
            return errors;
 }
 
-
 module.exports.controller = function (req, res) {
 
 dashboardPage.displayProfile = false;
@@ -47,7 +46,7 @@ dashboardPage.uploadSuccess = false;
 dashboardPage.displayJobsTable = false;
 dashboardPage.displayControl = true;
 dashboardPage.currentPanelName = panelNames.control;
-dashboardPage.currentPanelRoute = '/dashboard/control/laser/trotec';
+dashboardPage.currentPanelRoute = '/dashboard/control/laser/gcc';
 
 Machine.checkIfMachineConfigured(function(err, machine){
 	if (err) throw (err);
@@ -65,6 +64,27 @@ Machine.checkIfMachineConfigured(function(err, machine){
     }
 });
 }
+
+
+var _validate = function (req, res) {
+        var path = req.body.path;
+        req.checkBody('path', validationMsg.path).notEmpty();
+	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
+
+        if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
+           if(!errors) {
+              errors = [{param : 'vendor', msg : 'Unsupported graphic format'}];
+           } else {  
+              errors.push({param : 'vendor', msg : 'Unsupported graphic format'});
+           } 
+        } 
+        
+        if (errors.length == undefined) 
+           return [];
+        else
+           return errors;
+}
+
 
 module.exports.upload = function (req, res) {
   // create an incoming form object
@@ -151,7 +171,6 @@ module.exports.upload = function (req, res) {
                                     break;
            case 'material'        : req.body.material = value; 
                                     break;
-           case 'machine'         : req.body.machine = value;
         }
         for (var f in fields){
             fifoData[f] = fields[f];
@@ -172,13 +191,13 @@ module.exports.upload = function (req, res) {
            dashboardPage.errors = errors;
            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
           } else {
-            dashboardPage.errors = null;
+            dashboardPage.errors = null; 
             fifoData.userId = req.user._id;
             fifoData.jobId = uuid();
             fifoData.status = 'pending'; //status: pending, approved, rejected
             fifo.push(fifoData, "local", function(err, job){
                             if (err){
-                                winston.error('@controllers.trotec_laser: '+err.err);
+                                winston.error('@controllers.gcc_laser: '+err.err);
                                 dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
                             }else{
                                 dashboardPage.uploadSuccess = true;
@@ -205,6 +224,7 @@ module.exports.upload = function (req, res) {
 
 }
 
+
 module.exports.process = function (req, res) {
 
    dashboardPage.currentPanelName = panelNames.control;
@@ -212,8 +232,8 @@ module.exports.process = function (req, res) {
    winston.info('@dashboard.process: the process selected is ' + req.query.process);
 
    if (req.query.process == 'cut') {
-      res.render('partials/process/laser-cutters/trotec/cut', dashboardPage);
+      res.render('partials/process/laser-cutters/gcc/cut', dashboardPage);
    } else {
-      res.render('partials/process/laser-cutters/trotec/halftone', dashboardPage);
+      res.render('partials/process/laser-cutters/gcc/halftone', dashboardPage);
    }
 }

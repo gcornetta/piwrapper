@@ -66,7 +66,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "testOriginal": "standard && node tests/app/test.js",
-    "test": "node tests/app/testSelenium.js"
+    "test": "standard && node tests/app/test.js",
+    "test-selenium": "node tests/app/test-selenium.js"
   }
 }

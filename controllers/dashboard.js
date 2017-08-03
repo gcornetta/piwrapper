@@ -11,7 +11,7 @@ var winston = require('winston')
 var eventEmitter = require('../app').eventEmitter
 var sync = require('synchronize')
 var dashboard = require('./lib/dashboard')
-var printerConfig = require('../lib/fablab/printerConfig')
+var printerConfig = require('../lib/fablab/printer-config')
 
 var dashboardPage = dashboard.dashboardPage
 var welcomeMsg = dashboard.welcomeMsg
