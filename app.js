@@ -13,7 +13,7 @@ var expressWinston = require('express-winston');
 var winston = require('winston');
 var events = require('events');
 var fifo = require('./lib/fifo/job-fifo');
-var passportSocketIo = require("passport.socketio");
+var passportSocketIo = require('passport.socketio');
 const MongoStore = require('connect-mongo')(session);
 var store = new MongoStore({mongooseConnection: mongoose.connection});
 
