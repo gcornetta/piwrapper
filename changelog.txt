@@ -41,4 +41,6 @@ change #	type		date		file(s)							Author				Notes
 
 0008		improvement	20170803	package.json					Gianluca Cornetta	Removed unused package (regression and webworker-threads)
 
-0009		improvement	20170803	.gitignore						Gianluca Cornetta	Modified .gitignore in order to avoid committing log files, nodemon config files and Selenium webdriver
+0009		improvement	20170803	.gitignore					Gianluca Cornetta	Modified .gitignore in order to avoid committing log files, nodemon config files and Selenium webdriver
+0010		improvement	20170805	package.json					Gianluca Cornetta	Created custom loggers with same look & feel
+						config/winston.js
