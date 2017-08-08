@@ -38,16 +38,6 @@ require('./config/passport');
 // Init App
 var app = express();
 
-// initialize logger
-/*app.use(expressWinston.logger({
-	transports : [
-		new winston.transports.Console({
-			json: true,
-                        colorize: true
-		})
-	]
-	})
-);*/
 var server = require('http').Server(app);
 
 
@@ -143,15 +133,6 @@ app.use(i18n);
 app.use('/', routes);
 app.use('/api', apiRoutes);
 
-// initialize  error logger after the routes
-/*app.use(expressWinston.errorLogger({
-	transports : [
-		new winston.transports.Console({
-			json: true,
-                        colorize: true
-		})
-	]
-}));*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
