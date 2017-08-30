@@ -2,7 +2,6 @@ code #		priority				type								Description																	Assigned to
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 <num>		low | medium | high		bugfix | improvement | refactoring | test																		<name>
 0001		medium					improvement							launch zetta server as a child process										Gianluca Cornetta
-0002		medium					improvement							rewrite log system using zetta style										Gianluca Cornetta
 0003		high					improvement							rewrite the test system to match software changes 							Javier Mateos
 0004		high					test								check if the new configuration wizard works									Javier Mateos
 0004		high					test								lab test of the new software version										All

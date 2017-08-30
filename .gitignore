@@ -25,4 +25,6 @@ nodemon.json
 /.devices
 /.peers
 
-
+# ignore uploaded files #
+#########################
+/public/uploads
