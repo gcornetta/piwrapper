@@ -1,0 +1,24 @@
+<!--
+  author:             Gianluca Cornetta
+  -------------------------------------
+
+  created:            20170918 09:30 am
+  modified by:        Gianluca Cornetta
+  changelog entry:    0001
+
+-->
+<div class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <form method="post" action="/dashboard/control/3dprint/prusa" enctype="multipart/form-data">
+        <div class="content">
+          <% include ../../process/upload %>
+          <% include ../../process/3d-printers/prusa/output %>
+          <br />
+          <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= print3dPanel.submitButtonText %></button>
+        </div>
+      </form>
+    </div>
+    <!-- end card -->
+  </div>
+</div>

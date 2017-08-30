@@ -203,12 +203,15 @@ module.exports.dashboard = function (req, res) {
         case 'Milling machine' : switch (machine.vendor) {
           case 'Roland' : dashboardPage.machinePanelRoute = '/dashboard/control/milling/roland'
             break
-          case 'Othermill' : dashboardPage.machinePanelRoute = '/dashboard/control/milling/othermill'
-            break
           default : break
         }
           break
-        case 'Laser micromachining' : break
+        case '3D printer' : switch (machine.vendor) {
+	  case 'Prusa' : dashboardPage.machinePanelRoute = '/dashboard/control/3dprint/prusa'
+	    break
+	  default : break
+	} 
+	  break
       }
 
       res.render('dashboard', dashboardPage)

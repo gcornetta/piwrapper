@@ -3,8 +3,8 @@
   -------------------------------------
 
   created:            20160301 08:00 am
-  last modified:      20170803 09:00 am
-  modification type:  improvement
+  last modified:      20170919 15:10 am
+  modification type:  improvement (added Prusa Support)
   modified by:        Gianluca Cornetta
   changelog entry:    0001
 
@@ -15,11 +15,11 @@
   <head>
     <% include ./partials/header %>
     <% if (displayTerminal) {%>
-    <% include ./partials/header-term %>
-    <%}%>
+      <% include ./partials/header-term %>
+    <% } %>  
     <% if (displayLogs) {%>
-    <% include ./partials/header-log %>
-    <%}%>
+      <% include ./partials/header-log %>
+    <% } %>
   </head>
   <body>
     <div class="wrapper">
@@ -27,99 +27,108 @@
       <div class="main-panel">
         <% include ./partials/navigation %> 
         <% if (displayWelcome) {%>
-        <div class="alert alert-success alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=flashWelcome%></span>
-        </div>
-        <%}%>
+          <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+            <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+            <span data-notify="icon" class="ti-bell"></span>
+            <span data-notify="message"><%=flashWelcome%></span>
+          </div>
+        <% } %>
+        
         <% if (displayWizard) {%>
-        <% include ./partials/wizard %>
-        <%}%>
+          <% include ./partials/wizard %>
+        <% } %>
+        
         <% if (displayTerminal) {%>
-        <% if (errors) {%>
-        <%errors.forEach(function(error) {%>
-        <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=error.msg%></span>
-        </div>
-        <%});%>  
-        <%}%>
-        <% include ./partials/nterm %>
+          <% if (errors) {%>
+            <%errors.forEach(function(error) {%>
+              <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                <span data-notify="icon" class="ti-bell"></span>
+                <span data-notify="message"><%=error.msg%></span>
+              </div>
+            <%});%>  
+          <%}%>
+          <% include ./partials/nterm %>
         <%}%> 
+        
         <% if (displayProfile){%>
-        <% if (errors) {%>
-        <%errors.forEach(function(error) {%>
-        <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=error.msg%></span>
-        </div>
-        <%});%>  
-        <%}%>   
-        <% include ./partials/profile %>
+          <% if (errors) {%>
+            <%errors.forEach(function(error) {%>
+              <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                <span data-notify="icon" class="ti-bell"></span>
+                <span data-notify="message"><%=error.msg%></span>
+              </div>
+            <%});%>  
+          <%}%>   
+          <% include ./partials/profile %>
         <%}%>
+        
         <% if (displaySettings){%> 
-        <% if (errors) {%>
-        <%errors.forEach(function(error) {%>
-        <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=error.msg%></span>
-        </div>
-        <%});%>  
-        <%}%> 
-        <% include ./partials/settings %>
+          <% if (errors) {%>
+            <%errors.forEach(function(error) {%>
+              <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                <span data-notify="icon" class="ti-bell"></span>
+                <span data-notify="message"><%=error.msg%></span>
+              </div>
+            <%});%>  
+          <%}%> 
+          <% include ./partials/settings %>
         <%}%>
+        
         <% if (displayLogs) {%>
-        <% include ./partials/logger %>
+          <% include ./partials/logger %>
         <%}%>
+        
         <% if (displayJobsTable) {%>
-        <% include ./partials/jobs-table %>
+          <% include ./partials/jobs-table %>
         <%}%>
+        
         <% if (displayControl) {%>
-        <% if (errors) {%>
-        <%errors.forEach(function(error) {%>
-        <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=error.msg%></span>
-        </div>
-        <%});%>  
-        <%}%>
-        <% if (uploadSuccess) {%>
-        <div class="alert alert-success alert-with-icon fade in" data-notify="container">
-          <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
-          <span data-notify="icon" class="ti-bell"></span>
-          <span data-notify="message"><%=flashUpload%></span>
-        </div>
-        <%}%>
-        <% if (machine.type == 'Laser cutter') {%>     
-        <% if (machine.vendor == 'Epilog') {%>    
-        <% include ./partials/machines/laser-cutters/epilog %>
+          <% if (errors) {%>
+            <%errors.forEach(function(error) {%>
+              <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+                <span data-notify="icon" class="ti-bell"></span>
+                <span data-notify="message"><%=error.msg%></span>
+              </div>
+            <%});%>  
+          <%}%>
+          <% if (uploadSuccess) {%>
+            <div class="alert alert-success alert-with-icon fade in" data-notify="container">
+              <button type="button" aria-hidden="true" class="close" data-dismiss="alert">&times;</button>
+              <span data-notify="icon" class="ti-bell"></span>
+              <span data-notify="message"><%=flashUpload%></span>
+            </div>
+          <%}%>
+          <% if (machine.type == 'Laser cutter') {%>     
+            <% if (machine.vendor == 'Epilog') {%>    
+              <% include ./partials/machines/laser-cutters/epilog %>
+            <% } %>
+            <% if (machine.vendor == 'Trotec') {%>    
+              <% include ./partials/machines/laser-cutters/trotec %>
+            <% } %>
+            <% if (machine.vendor == 'GCC') {%>    
+              <% include ./partials/machines/laser-cutters/gcc %>
+            <% } %>
+          <% } %>
+          <% if (machine.type == 'Vinyl cutter') {%>     
+            <% if (machine.vendor == 'Roland') {%>    
+              <% include ./partials/machines/vinyl-cutters/roland %>
+            <% } %>
+          <% } %>
+          <% if (machine.type == 'Milling machine') {%>     
+            <% if (machine.vendor == 'Roland') {%>    
+              <% include ./partials/machines/milling-machines/roland %>
+            <% } %>
+          <% } %>
+          <% if (machine.type == '3D printer') {%>
+	    <% if (machine.vendor == 'Prusa') { %>
+	      <% include ./partials/machines/3d-printers/prusa %>
+            <% } %>
+          <% } %>
         <% } %>
-        <% if (machine.vendor == 'Trotec') {%>    
-        <% include ./partials/machines/laser-cutters/trotec %>
-        <% } %>
-        <% if (machine.vendor == 'GCC') {%>    
-        <% include ./partials/machines/laser-cutters/gcc %>
-        <% } %>
-        <% } %>
-        <% if (machine.type == 'Vinyl cutter') {%>     
-        <% if (machine.vendor == 'Roland') {%>    
-        <% include ./partials/machines/vinyl-cutters/roland %>
-        <% } %>
-        <% } %>
-        <% if (machine.type == 'Milling machine') {%>     
-        <% if (machine.vendor == 'Roland') {%>    
-        <% include ./partials/machines/milling-machines/roland %>
-        <% } %>
-        <% if (machine.vendor == 'Othermill') {%>    
-        <% include ./partials/machines/milling-machines/othermill %>
-        <% } %>
-        <% } %>
-        <%}%>
         <% include ./partials/footer %>
       </div>
       <!-- end main panel-->

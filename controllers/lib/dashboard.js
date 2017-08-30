@@ -11,6 +11,7 @@ exports.infoText = infoText
 var laserPanelText = pageContent.laserPanelText
 var vinylPanelText = pageContent.vinylPanelText
 var millingPanelText = pageContent.millingPanelText
+var print3dPanelText = pageContent.print3dPanelText
 var jobsTableText = pageContent.jobsTableText
 
 var dashboardPage = {
@@ -97,14 +98,15 @@ var dashboardPage = {
     machines: [
         {label: 'Laser cutters', type: 'Laser cutter', vendors: ['Epilog', 'GCC', 'Trotec']},
         {label: 'Vinyl cutters', type: 'Vinyl cutter', vendors: ['Roland']},
-        {label: 'Milling machines', type: 'Milling machine', vendors: ['Roland', 'Othermachine']},
-        {label: 'Micromachining', type: 'Laser micromachining', vendors: ['Oxford']}
+        {label: 'Milling machines', type: 'Milling machine', vendors: ['Roland']},
+        {label: '3D printers', type: '3D printer', vendors: ['Prusa']}
     ],
-    vendors: ['Epilog', 'GCC', 'Trotec', 'Roland', 'Othermachine', 'Oxford']
+    vendors: ['Epilog', 'GCC', 'Trotec', 'Roland', 'Prusa']
   },
   laserPanel: laserPanelText,
   vinylPanel: vinylPanelText,
   millingPanel: millingPanelText,
+  print3dPanel: print3dPanelText,
   jobsTableText: jobsTableText,
   errors: null
 }
