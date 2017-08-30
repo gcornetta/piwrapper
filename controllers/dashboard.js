@@ -1,7 +1,6 @@
 var formidable = require('formidable')
 var fs = require('fs')
 var path = require('path')
-var lwip = require('lwip')
 var os = require('../lib/os/os')
 var mongoose = require('mongoose')
 var User = require('../models/user')
@@ -267,15 +266,6 @@ module.exports.upload = function (req, res) {
     newFileName = req.user._id + '.' + fileExt
     fs.rename(file.path, path.join(form.uploadDir, newFileName))
     var imgPath = form.uploadDir + '/' + newFileName
-    lwip.open(imgPath, function (err, image) {
-      if (err) throw (err)
-      image.resize(300, function (err, image) {
-        if (err) throw (err)
-        image.writeFile(imgPath, function (err) {
-          if (err) throw (err)
-        })
-      })
-    })
     User.updatePhotoPathByUsername(req.user.username, '/uploads/img/' + newFileName, function (err, result) {
       if (err) throw (err)
       if (result) {
