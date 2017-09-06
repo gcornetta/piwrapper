@@ -150,7 +150,7 @@ module.exports.upload = function (req, res) {
           errors = _validate(req, res);
           if(errors.length >0){
            dashboardPage.errors = errors;
-           setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
+           res.render('dashboard', dashboardPage);
           } else {
             dashboardPage.errors = null; 
             fifoData.userId = req.user._id;
@@ -168,7 +168,7 @@ module.exports.upload = function (req, res) {
                                 dashboardPage.flashUpload = flashUpload;
                                 req.session.flash = [];
                             }
-                            setTimeout(function(){res.render('dashboard', dashboardPage);}, 1000);
+                            res.render('dashboard', dashboardPage);
                         });
          }
        });
