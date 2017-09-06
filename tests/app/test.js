@@ -5,7 +5,8 @@ const fs = require('fs');
 var app = require('../../app.js').app;
 //var app = 'http://192.168.0.101:8888';
 var token = "";
-var libFifo = require('../../lib/fifo/jobFIFO.js');
+var libFifo = require('../../lib/fifo/job-fifo.js');
+
 
 test('GET /', function (t) {
   request(app)
