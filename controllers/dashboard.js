@@ -1,7 +1,7 @@
 var formidable = require('formidable')
 var fs = require('fs')
 var path = require('path')
-var lwip = require('lwip')
+//var lwip = require('lwip')
 var os = require('../lib/os/os')
 var mongoose = require('mongoose')
 var User = require('../models/user')
@@ -26,9 +26,9 @@ var _validateFields = function (req, res) {
   var vendor = req.body.machineVendor
   var type = req.body.machineType
   var name = req.body.machineName
-  var threshCurr = req.body.machineThreshCurr
-  var sampleTime = req.body.machineSampleTime
-  var dutyCycle = req.body.machineDutyCycle
+  var threshCurr = req.body.currentThreshold
+  var sampleTime = req.body.samplingTime
+  var dutyCycle = req.body.dutyCycle
   var adcVendor = req.body.adcVendor
   var adcDevice = req.body.adcDevice
   var deviceUri = req.body.deviceUri
@@ -37,9 +37,9 @@ var _validateFields = function (req, res) {
   req.checkBody('machineVendor', validationMsg.vendor).notEmpty()
   req.checkBody('machineType', validationMsg.type).notEmpty()
   req.checkBody('machineName', validationMsg.name).notEmpty()
-  req.checkBody('machineThreshCurr', validationMsg.threshCurr).notEmpty().isInt()
-  req.checkBody('machineSampleTime', validationMsg.sampleTime).notEmpty().isInt()
-  req.checkBody('machineDutyCycle', validationMsg.dutyCycle).notEmpty().isInt()
+  req.checkBody('currentThreshold', validationMsg.threshCurr).notEmpty().isInt()
+  req.checkBody('samplingTime', validationMsg.sampleTime).notEmpty().isInt()
+  req.checkBody('dutyCycle', validationMsg.dutyCycle).notEmpty().isInt({ min: 0, max: 100 })
   req.checkBody('adcVendor', validationMsg.adcVendor).notEmpty()
   req.checkBody('adcDevice', validationMsg.adcDevice).notEmpty()
   req.checkBody('deviceUri', validationMsg.deviceURI).notEmpty()
@@ -264,7 +264,7 @@ module.exports.upload = function (req, res) {
     newFileName = req.user._id + '.' + fileExt
     fs.rename(file.path, path.join(form.uploadDir, newFileName))
     var imgPath = form.uploadDir + '/' + newFileName
-    lwip.open(imgPath, function (err, image) {
+    //lwip.open(imgPath, function (err, image) {
       if (err) throw (err)
       image.resize(300, function (err, image) {
         if (err) throw (err)
@@ -272,7 +272,7 @@ module.exports.upload = function (req, res) {
           if (err) throw (err)
         })
       })
-    })
+    //})
     User.updatePhotoPathByUsername(req.user.username, '/uploads/img/' + newFileName, function (err, result) {
       if (err) throw (err)
       if (result) {
@@ -326,12 +326,7 @@ module.exports.configure = function (req, res) {
 
   if (errors) {
     dashboardPage.errors = errors
-
-    if (!dashboardPage.userName) {
-      res.redirect('/dashboard')
-    } else {
-      res.render('dashboard', dashboardPage)
-    }
+    res.render('dashboard', dashboardPage)
   } else {
     var newMachine = new Machine({vendor: vendor,
       type: type,
@@ -348,19 +343,18 @@ module.exports.configure = function (req, res) {
     Machine.createMachine(newMachine, function (err, machine) {
       if (err) throw err
       winston.info('@dashboard.cofigure: a new machine has been successfully configured') // machine also contains ._id
+      // add to the machine the information about the adc device
+      // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
+
+      // check if sensor connected
+      /*if (_checkCurrentSensor() === -1) {
+        dashboardPage.errors = [{param: 'adcVendor', msg: 'Cannot read the current sensor. Check if it is properly connected'}]
+      }*/
+
+      dashboardPage.displayWizard = false
+      dashboardPage.machineConfigured = true
+      res.redirect('/dashboard')
     })
-
-               // add to the machine the information about the adc device
-               // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
-
-               // check if sensor connected
-    if (_checkCurrentSensor() === -1) {
-      dashboardPage.errors = [{param: 'adcVendor', msg: 'Cannot read the current sensor. Check if it is properly connected'}]
-    }
-
-    dashboardPage.displayWizard = false
-    dashboardPage.machineConfigured = true
-    res.redirect('/dashboard')
   }
 }
 
@@ -455,18 +449,6 @@ module.exports.machineUpdate = function (req, res) {
 }
 
 module.exports.discoveredPrinters = function (req, res) {
-  dashboardPage.displayControl = false
-  dashboardPage.displayLogs = false
-  dashboardPage.displayProfile = false
-  dashboardPage.displayWizard = false
-  dashboardPage.displayTerminal = false
-  dashboardPage.displayProcessCut = false
-  dashboardPage.displayProcessHalftone = false
-  dashboardPage.displayJobsTable = false
-  dashboardPage.displaySettings = true
-  dashboardPage.currentPanelName = panelNames.settings
-  dashboardPage.currentPanelRoute = '/dashboard/settings'
-
   printerConfig.discoverPrinters(function (err, printers, unhandledPrinters) {
     if (err) throw err
     dashboardPage.printers = printers
