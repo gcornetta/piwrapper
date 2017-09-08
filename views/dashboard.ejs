@@ -16,7 +16,7 @@
     <% include ./partials/header %>
     <% if (displayTerminal) {%>
       <% include ./partials/header-term %>
-    <% } %>  
+    <% } %>
     <% if (displayLogs) {%>
       <% include ./partials/header-log %>
     <% } %>
@@ -33,11 +33,11 @@
             <span data-notify="message"><%=flashWelcome%></span>
           </div>
         <% } %>
-        
+
         <% if (displayWizard) {%>
           <% include ./partials/wizard %>
         <% } %>
-        
+
         <% if (displayTerminal) {%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
@@ -46,11 +46,11 @@
                 <span data-notify="icon" class="ti-bell"></span>
                 <span data-notify="message"><%=error.msg%></span>
               </div>
-            <%});%>  
+            <%});%>
           <%}%>
           <% include ./partials/nterm %>
         <%}%> 
-        
+
         <% if (displayProfile){%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
@@ -59,12 +59,12 @@
                 <span data-notify="icon" class="ti-bell"></span>
                 <span data-notify="message"><%=error.msg%></span>
               </div>
-            <%});%>  
-          <%}%>   
+            <%});%>
+          <%}%>
           <% include ./partials/profile %>
         <%}%>
-        
-        <% if (displaySettings){%> 
+
+        <% if (displaySettings){%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
               <div class="alert alert-danger alert-with-icon fade in" data-notify="container">
@@ -72,19 +72,21 @@
                 <span data-notify="icon" class="ti-bell"></span>
                 <span data-notify="message"><%=error.msg%></span>
               </div>
-            <%});%>  
-          <%}%> 
+            <%});%>
+          <%}%>
           <% include ./partials/settings %>
         <%}%>
-        
+
         <% if (displayLogs) {%>
           <% include ./partials/logger %>
         <%}%>
-        
+
         <% if (displayJobsTable) {%>
           <% include ./partials/jobs-table %>
         <%}%>
-        
+        <% if (displayGraphs) {%>
+        <% include ./partials/graphs %>
+        <%}%>
         <% if (displayControl) {%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
@@ -93,7 +95,7 @@
                 <span data-notify="icon" class="ti-bell"></span>
                 <span data-notify="message"><%=error.msg%></span>
               </div>
-            <%});%>  
+            <%});%>
           <%}%>
           <% if (uploadSuccess) {%>
             <div class="alert alert-success alert-with-icon fade in" data-notify="container">
@@ -102,24 +104,24 @@
               <span data-notify="message"><%=flashUpload%></span>
             </div>
           <%}%>
-          <% if (machine.type == 'Laser cutter') {%>     
-            <% if (machine.vendor == 'Epilog') {%>    
+          <% if (machine.type == 'Laser cutter') {%>
+            <% if (machine.vendor == 'Epilog') {%>
               <% include ./partials/machines/laser-cutters/epilog %>
             <% } %>
-            <% if (machine.vendor == 'Trotec') {%>    
+            <% if (machine.vendor == 'Trotec') {%>
               <% include ./partials/machines/laser-cutters/trotec %>
             <% } %>
-            <% if (machine.vendor == 'GCC') {%>    
+            <% if (machine.vendor == 'GCC') {%>
               <% include ./partials/machines/laser-cutters/gcc %>
             <% } %>
           <% } %>
-          <% if (machine.type == 'Vinyl cutter') {%>     
-            <% if (machine.vendor == 'Roland') {%>    
+          <% if (machine.type == 'Vinyl cutter') {%>
+            <% if (machine.vendor == 'Roland') {%>
               <% include ./partials/machines/vinyl-cutters/roland %>
             <% } %>
           <% } %>
-          <% if (machine.type == 'Milling machine') {%>     
-            <% if (machine.vendor == 'Roland') {%>    
+          <% if (machine.type == 'Milling machine') {%>
+            <% if (machine.vendor == 'Roland') {%>
               <% include ./partials/machines/milling-machines/roland %>
             <% } %>
           <% } %>

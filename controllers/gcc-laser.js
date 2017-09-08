@@ -44,6 +44,7 @@ dashboardPage.displaySettings = false;
 dashboardPage.displayLogs = false;
 dashboardPage.uploadSuccess = false;
 dashboardPage.displayJobsTable = false;
+dashboardPage.displayGraphs = false;
 dashboardPage.displayControl = true;
 dashboardPage.currentPanelName = panelNames.control;
 dashboardPage.currentPanelRoute = '/dashboard/control/laser/gcc';
