@@ -12,10 +12,10 @@ dashboardPage.displaySettings = false;
 dashboardPage.displayLogs = false;
 dashboardPage.uploadSuccess = false;
 dashboardPage.displayControl = false;
-dashboardPage.displayGraphs = false;
-dashboardPage.displayJobsTable = true;
-dashboardPage.currentPanelName = panelNames.jobs;
-dashboardPage.currentPanelRoute = '/dashboard/jobs';
+dashboardPage.displayJobsTable = false;
+dashboardPage.displayGraphs = true;
+dashboardPage.currentPanelName = panelNames.graphs;
+dashboardPage.currentPanelRoute = '/dashboard/graphs';
 
 if (!dashboardPage.userName){
     res.redirect('/dashboard');

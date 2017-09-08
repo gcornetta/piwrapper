@@ -99,7 +99,8 @@ var panelNames = {
   settings: i18n.__('w_00105'),
   logs: i18n.__('w_00115'),
   control: i18n.__('w_00145'),
-  jobs: i18n.__('w_00249')
+  jobs: i18n.__('w_00249'),
+  graphs: i18n.__('w_00041')
 }
 
 exports.panelNames = panelNames

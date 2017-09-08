@@ -61,6 +61,7 @@ var dashboardPage = {
   displayLogs: false,
   displayControl: false,
   displayJobsTable: false,
+  displayGraphs: false,
   machineConfigured: false,
   displaySidebarMenu: null,
   profile: {},
