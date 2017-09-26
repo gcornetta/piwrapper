@@ -33,7 +33,7 @@ const logFormatter = function(options) {
 
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
-            level: 'info',
+            level: 'debug',
             timestamp: timestamp,
             formatter: logFormatter,
             colorize: true
