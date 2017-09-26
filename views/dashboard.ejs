@@ -84,6 +84,9 @@
         <% if (displayJobsTable) {%>
           <% include ./partials/jobs-table %>
         <%}%>
+        <% if (displayGraphs) {%>
+        <% include ./partials/graphs %>
+        <%}%>
         <% if (displayControl) {%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
