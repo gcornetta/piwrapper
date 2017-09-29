@@ -45,6 +45,12 @@ socket.on('addJob', function(job) {
    $table.bootstrapTable('load', jobs);
 });
 
+socket.on('errorAlert', function(err) {
+    if (err.err){
+        alert(err.err)
+    }
+});
+
 socket.on('updateJob', function(job){
     for (var j in jobs){
         if (jobs[j].jobId == job.jobId){
@@ -122,9 +128,9 @@ var $table = $('#fresh-table'),
                 'click .accept': function (e, value, row, index) {
                     acceptJob(row, index);
                 },
-                'click .edit': function (e, value, row, index) {
+                /*'click .edit': function (e, value, row, index) {
                     editJob(row, index);
-                },
+                },*/
                 'click .remove': function (e, value, row, index) {
                     removeJob(row, index);
                 }
@@ -146,9 +152,9 @@ var $table = $('#fresh-table'),
                 '<a rel="tooltip" title="Accept" class="table-action accept" href="javascript:void(0)">',
                     '<i class="fa fa-rocket"></i>',
                 '</a>',
-                '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
+                /*'<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)">',
                     '<i class="fa fa-edit"></i>',
-                '</a>',
+                '</a>',*/
                 '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)">',
                     '<i class="fa fa-remove"></i>',
                 '</a>'

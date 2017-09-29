@@ -45,7 +45,8 @@ var dashboardPage = {
     adcDevice: settingsText.adcDevice,
     updateSettings: settingsText.updateSettings,
     deviceUri: settingsText.deviceUri,
-    refresh: settingsText.refresh
+    refresh: settingsText.refresh,
+    baudRate: settingsText.baudRate
   },
   currentPanelRoute: {},
   currentPanelName: {},

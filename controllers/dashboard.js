@@ -31,6 +31,7 @@ var _validateFields = function (req, res) {
   var adcVendor = req.body.adcVendor
   var adcDevice = req.body.adcDevice
   var deviceUri = req.body.deviceUri
+  var baudRate = req.body.baudRate
 
   // Validation
   req.checkBody('machineVendor', validationMsg.vendor).notEmpty()
@@ -38,10 +39,11 @@ var _validateFields = function (req, res) {
   req.checkBody('machineName', validationMsg.name).notEmpty()
   req.checkBody('currentThreshold', validationMsg.threshCurr).notEmpty().isInt()
   req.checkBody('samplingTime', validationMsg.sampleTime).notEmpty().isInt()
-  req.checkBody('dutyCycle', validationMsg.dutyCycle).notEmpty().isInt({ min: 0, max: 100 })
+  req.checkBody('dutyCycle', validationMsg.dutyCycle).notEmpty().isInt({ min: 0, max: 99 })
   req.checkBody('adcVendor', validationMsg.adcVendor).notEmpty()
   req.checkBody('adcDevice', validationMsg.adcDevice).notEmpty()
   req.checkBody('deviceUri', validationMsg.deviceURI).notEmpty()
+  req.checkBody('baudRate', validationMsg.baudRate).notEmpty()
 
   var errors = req.validationErrors()
 
@@ -71,7 +73,7 @@ var _validateFields = function (req, res) {
     }
   }
 
-  return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri}
+  return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri, baudRate: baudRate}
 }
 
 // ToDO: fix this routine we now perform single-end reading
@@ -320,6 +322,7 @@ module.exports.configure = function (req, res) {
   var adcVendor = validationResponse.adcVendor
   var adcDevice = validationResponse.adcDevice
   var deviceUri = req.body.deviceUri
+  var baudRate = req.body.baudRate
 
   if (errors) {
     dashboardPage.errors = errors
@@ -333,7 +336,8 @@ module.exports.configure = function (req, res) {
       dutyCycle: dutyCycle,
       isConfigured: true,
       adcDevice: [{vendor: adcVendor, device: adcDevice}],
-      deviceUri: deviceUri
+      deviceUri: deviceUri,
+      baudRate: baudRate
     })
 
     // create a new machine
@@ -372,18 +376,21 @@ module.exports.settings = function (req, res) {
 // load object from db
   Machine.checkIfMachineConfigured(function (err, machine) {
     if (err) throw (err)
-    dashboardPage.machine = {
-      name: machine.name,
-      type: machine.type,
-      vendor: machine.vendor,
-      threshCurr: machine.threshCurr,
-      sampleTime: machine.sampleTime,
-      dutyCycle: machine.dutyCycle,
-      adcVendor: machine.adcDevice[0].vendor,
-      adcDevice: machine.adcDevice[0].device,
-      deviceUri: machine.deviceUri
+    if (machine) {
+        dashboardPage.machine = {
+            name: machine.name,
+            type: machine.type,
+            vendor: machine.vendor,
+            threshCurr: machine.threshCurr,
+            sampleTime: machine.sampleTime,
+            dutyCycle: machine.dutyCycle,
+            adcVendor: machine.adcDevice[0].vendor,
+            adcDevice: machine.adcDevice[0].device,
+            deviceUri: machine.deviceUri,
+            baudRate: machine.baudRate
+        }
     }
-    if (!dashboardPage.userName) {
+    if ((!dashboardPage.userName)||(!machine)) {
       res.redirect('/dashboard')
     } else {
       dashboardPage.errors = null
@@ -406,6 +413,7 @@ module.exports.machineUpdate = function (req, res) {
   var adcVendor = validationResponse.adcVendor
   var adcDevice = validationResponse.adcDevice
   var deviceUri = validationResponse.deviceUri
+  var baudRate = validationResponse.baudRate
 
   if (errors) {
     dashboardPage.errors = errors
@@ -420,7 +428,8 @@ module.exports.machineUpdate = function (req, res) {
       dutyCycle: dutyCycle,
       isConfigured: true,
       adcDevice: [{vendor: adcVendor, device: adcDevice}],
-      deviceUri: deviceUri
+      deviceUri: deviceUri,
+      baudRate: baudRate
     }
     Machine.updateMachine(newConfiguration, function (err, machine) {
       if (err) throw err
@@ -433,7 +442,8 @@ module.exports.machineUpdate = function (req, res) {
         dutyCycle: machine.dutyCycle,
         adcVendor: machine.adcDevice[0].vendor,
         adcDevice: machine.adcDevice[0].device,
-        deviceUri: machine.deviceUri
+        deviceUri: machine.deviceUri,
+        baudRate: machine.baudRate
       }
     })
     var successDbUpdate = 'DB succsessfully updated'

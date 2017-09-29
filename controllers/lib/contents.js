@@ -124,7 +124,8 @@ var settingsText = {
   adcDevice: i18n.__('w_00111'),
   updateSettings: i18n.__('w_00112'),
   deviceUri: i18n.__('w_00254'),
-  refresh: i18n.__('w_00255')
+  refresh: i18n.__('w_00255'),
+  baudRate: i18n.__('w_00263')
 }
 
 exports.settingsText = settingsText

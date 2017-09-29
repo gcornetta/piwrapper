@@ -63,6 +63,9 @@ var MachineSchema = new mongoose.Schema({
     deviceUri: { //uri of the device
         type: String
     },
+    baudRate: { //baudRate of the device
+        type: Number
+    },
     isConfigured : Boolean,
     adcDevice : [AdcSchema],
     queuedJobs: [JobSchema]

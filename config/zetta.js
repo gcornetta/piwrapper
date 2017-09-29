@@ -5,6 +5,9 @@ var Machine = require('../models/machine')
 
 Machine.checkIfMachineConfigured( function (err, machine) {
   if (err) throw err
+  if (!machine){
+    machine = {};
+  }
   zetta()
     .name('machine-wrapper')
     .link ('http://pigateway.local:1337')
