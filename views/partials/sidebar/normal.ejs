@@ -13,42 +13,21 @@
 </li>
 <li>
   <a href="/dashboard/jobs">
-    <i class="ti-hummer"></i>
+    <i class="ti-view-list-alt"></i>
     <p><%=sideBar.jobs%></p>
   </a>
 </li>
 <li>
-  <a data-toggle="collapse" href="#dashboardOverview">
-    <i class="ti-panel"></i>
-    <p><%=sideBar.system.title%>
-      <b class="caret"></b>
-    </p>
-  </a>
-  <div class="collapse" id="dashboardOverview">
-    <ul class="nav">
-      <li><a href="#"><%=sideBar.system.overview%></a></li>
-      <li><a href=""><%=sideBar.system.stats%></a></li>
-    </ul>
-  </div>
-</li>
-<li>
   <a data-toggle="collapse" href="#tablesExamples">
-    <i class="ti-view-list-alt"></i>
+    <i class="ti-hummer"></i>
     <p><%=sideBar.tools.title%>
       <b class="caret"></b>
     </p>
   </a>
   <div class="collapse" id="tablesExamples">
     <ul class="nav">
-      <li><a href="#"><%=sideBar.tools.userManag%></a></li>
-      <li><a href="#"><%=sideBar.tools.sysManag%></a></li>
+      <li><a href="/dashboard/monitor"><%=sideBar.tools.sysMonit%></a></li>
       <li><a href="/dashboard/logs"><%=sideBar.tools.sysLog%></a></li>
     </ul>
   </div>
-</li>
-<li>
-  <a href="">
-    <i class="ti-bar-chart-alt"></i>
-    <p><%=sideBar.workload%></p>
-  </a>
 </li>

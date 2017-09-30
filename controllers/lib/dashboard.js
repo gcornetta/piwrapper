@@ -62,6 +62,7 @@ var dashboardPage = {
   displayLogs: false,
   displayControl: false,
   displayJobsTable: false,
+  displayMonitor: false,
   machineConfigured: false,
   displaySidebarMenu: null,
   profile: {},
@@ -108,6 +109,7 @@ var dashboardPage = {
   millingPanel: millingPanelText,
   print3dPanel: print3dPanelText,
   jobsTableText: jobsTableText,
+  siren: {},
   errors: null
 }
 

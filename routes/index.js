@@ -35,6 +35,7 @@ router.get('/dashboard/settings', authCtrl.isLoggedIn, dashCtrl.settings)
 router.get('/dashboard/settings/discovered-printers', authCtrl.isLoggedIn, dashCtrl.discoveredPrinters)
 router.get('/dashboard/logs', authCtrl.isLoggedIn, dashCtrl.logs)
 router.get('/dashboard/jobs', authCtrl.isLoggedIn, jobsCtrl.controller)
+router.get('/dashboard/monitor', authCtrl.isLoggedIn, dashCtrl.siren)
 
 router.get('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.controller)
 router.get('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.controller)
