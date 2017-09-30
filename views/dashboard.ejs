@@ -85,6 +85,10 @@
           <% include ./partials/jobs-table %>
         <%}%>
         
+        <% if (displayMonitor) { %>
+          <% include ./partials/monitor-panel %>
+        <% } %>
+ 
         <% if (displayControl) {%>
           <% if (errors) {%>
             <%errors.forEach(function(error) {%>
@@ -144,5 +148,8 @@
   <%}%>
   <% if (displayControl) {%>
   <% include ./partials/scripts-machines %>
+  <%}%>
+  <% if (displayMonitor) {%>
+  <% include ./partials/scripts-monitor %>
   <%}%>
 </html>

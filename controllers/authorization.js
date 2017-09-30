@@ -1,7 +1,7 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
 var infoMsg = require('./lib/messages');
-var winston = require('winston');
+var logger = require('../config/winston') 
 var User = require('../models/user');
 
 var authMsg = infoMsg.authorizationMsg;
@@ -21,7 +21,7 @@ module.exports.login = function(req, res, next){
    } else {
      req.login(user, function(err) {//you have to login manually otherwise authentication won't work
          if (err) return next(err);
-         winston.log('info', '@authorization.login: %s successfully logged in', user.username); 
+         logger.log('info', '@authorization.login: %s successfully logged in', user.username); 
          res.redirect('/dashboard');     
    }); 
   }                 
@@ -32,7 +32,7 @@ module.exports.isLoggedIn = function (req, res, next){
 	if(req.isAuthenticated()){
            return next();
 	} else {
-           winston.info('@authorization.isLoggedIn: access attempt without authorization'); 
+           logger.info('@authorization.isLoggedIn: access attempt without authorization'); 
 	   res.redirect('/login');
 	}
 }

@@ -3,6 +3,7 @@ var winston = require('winston');
 var strftime = require('strftime');
 var colors = require('colors');
 
+
 var _getTimestamp = function(){
 	var d = new Date();
 
@@ -30,30 +31,39 @@ const logFormatter = function(options) {
             `\n\t`+ JSON.stringify(options.meta) : `` ).blue;
 };
 
+var winston = require('winston');
+//winston.emitErrs = true;
 
-winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {
-            level: 'info',
-            timestamp: timestamp,
-            formatter: logFormatter,
-            colorize: true
-});
-winston.add(winston.transports.File, {
+var logger = new winston.Logger({
+    transports: [
+        new winston.transports.File({
             level: 'info',
             filename: logfile,
             timestamp: timestamp,
             formatter: logFormatter,
+           // handleExceptions: true,
+            json: false,
             maxsize: 5242880, //5MB
             maxFiles: 5,
-            colorize: true,
-	    json: false
-        });
+            colorize: true
+        }),
+        new winston.transports.Console({
+            level: 'info',
+            timestamp: timestamp,
+           // handleExceptions: true,
+            formatter: logFormatter,
+            json: false,
+            colorize: true
+        })
+    ],
+    exitOnError: false
+});
 
-//conflicts with File transport
-/*require('winston-redis').Redis;
-winston.add(winston.transports.Redis, {
-	    host: 'http://localhost',
-	    port:  6379,
-	    auth: 'none'
-});*/
+module.exports = logger;
+module.exports.stream = {
+    write: function(message, encoding){
+        logger.info(message);
+    }
+};
+
 

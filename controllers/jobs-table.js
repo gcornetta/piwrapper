@@ -12,6 +12,7 @@ dashboardPage.displaySettings = false;
 dashboardPage.displayLogs = false;
 dashboardPage.uploadSuccess = false;
 dashboardPage.displayControl = false;
+dashboardPage.displayMonitor = false
 dashboardPage.displayJobsTable = true;
 dashboardPage.currentPanelName = panelNames.jobs;
 dashboardPage.currentPanelRoute = '/dashboard/jobs';
