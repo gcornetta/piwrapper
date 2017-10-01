@@ -21,7 +21,7 @@ var _validate = function (req, res) {
         req.checkBody('path', validationMsg.path).notEmpty();
 	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
 
-        if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
+        if ( path != undefined && ! path.endsWith(".png")) {
            if(!errors) {
               errors = [{param : 'vendor', msg : 'Unsupported graphic format'}];
            } else {  
@@ -65,27 +65,6 @@ Machine.checkIfMachineConfigured(function(err, machine){
     }
 });
 }
-
-
-var _validate = function (req, res) {
-        var path = req.body.path;
-        req.checkBody('path', validationMsg.path).notEmpty();
-	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
-
-        if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
-           if(!errors) {
-              errors = [{param : 'vendor', msg : 'Unsupported graphic format'}];
-           } else {  
-              errors.push({param : 'vendor', msg : 'Unsupported graphic format'});
-           } 
-        } 
-        
-        if (errors.length == undefined) 
-           return [];
-        else
-           return errors;
-}
-
 
 module.exports.upload = function (req, res) {
   // create an incoming form object

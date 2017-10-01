@@ -21,7 +21,7 @@ var _validate = function (req, res) {
         req.checkBody('path', validationMsg.path).notEmpty();
 	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
 
-        if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
+        if ( path != undefined && !path.endsWith(".png")) {
            if(!errors) {
               errors = [{param : 'vendor', msg : 'Unsupported graphic format'}];
            } else {  
