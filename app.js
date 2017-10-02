@@ -16,6 +16,8 @@ var fifo = require('./lib/fifo/job-fifo');
 var passportSocketIo = require('passport.socketio');
 const MongoStore = require('connect-mongo')(session);
 var store = new MongoStore({mongooseConnection: mongoose.connection});
+var cp = require('child_process')
+var Machine = require('./models/machine')
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
@@ -26,8 +28,15 @@ var i18n = require('./i18n');
 //start mongoDB
 var db = require('./config/db');
 
-//start zetta server
-var zetta = require ('./config/zetta')
+Machine.checkIfMachineConfigured( function (err, machine) {                                                                                      
+  if (err) throw err                                                                                                                               
+  if (!machine){                                                                                                                                   
+    machine = {};                                                                                                                                  
+  }
+  //spawn zetta server
+  var child = cp.fork('./config/zetta.js')
+  child.send(machine)  
+})
 
 //require Passport configuration
 require('./config/passport');
