@@ -449,7 +449,6 @@ module.exports.machineUpdate = function (req, res) {
         deviceUri: machine.deviceUri,
         baudRate: machine.baudRate
       }
-    })
     var successDbUpdate = 'DB succsessfully updated'
     req.flash('success_msg', successDbUpdate)
     var flashSuccess = req.flash('success_msg')[0]
@@ -457,6 +456,7 @@ module.exports.machineUpdate = function (req, res) {
     req.session.flash = []
 
     res.redirect('/dashboard/settings')
+    })
   }
 }
 
