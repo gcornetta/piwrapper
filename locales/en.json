@@ -37,7 +37,7 @@
 	"w_00036": "Stats",
 	"w_00037": "Tools",
 	"w_00038": "User Management",
-	"w_00039": "System Management",
+	"w_00039": "System Monitor",
 	"w_00040": "System Logs",
 	"w_00041": "Workload",
 	"w_00042": "Terminal (VT 100)",
@@ -261,6 +261,7 @@
 	"w_00260": "Duty cycle (%)",
 	"w_00261": "Printer Model",
 	"w_00262": "i3 Berlin",
-	"w_00263": "Baud rate",
-	"w_00264": "xxxxx"
+	"w_00263": "Monitor",
+	"w_00264": "Baud rate",
+	"w_00265": "xxxxx"
 }

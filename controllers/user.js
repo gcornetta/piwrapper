@@ -2,7 +2,7 @@ var generator = require('generate-password');
 var mongoose = require('mongoose');
 var wsClient = require ('../lib/websockets/ws-client');
 var User = require('../models/user');
-var winston = require('winston');
+var logger = require('../config/winston') 
 
 var pageContent = require('./lib/contents');
 var systemMessages = require('./lib/messages');
@@ -135,7 +135,7 @@ module.exports.registrationForm = function(req, res){
                     } else {
 			User.createUser(newUser, password, function(err, user){
 			   if(err) throw err;
-			   winston.info('@user.registration: superadministrator successfully created');
+			   logger.info('@user.registration: superadministrator successfully created');
 		        });
 		        req.flash('success_msg', usrMsg.loginSuccess);
                         var flashSuccess = req.flash('success_msg')[0];
@@ -212,12 +212,12 @@ module.exports.logout = function(req, res){
 	User.updateLastLogByUsername(req.user.username, function(err, result){
             if(err) throw (err);
             if(result){
-             winston.info('@user.logout: DB successfully updated with log date');
+             logger.info('@user.logout: DB successfully updated with log date');
             }
         });
         var username = req.user.username;
         req.logout();
-        winston.log('info', '@user.logout: User %s logged out', username);
+        logger.log('info', '@user.logout: User %s logged out', username);
 	req.flash('success_msg', logMsg.logout);
         var flashSuccess = req.flash('success_msg')[0];                       
         loginPage.flashSuccess = flashSuccess;

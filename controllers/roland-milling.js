@@ -2,7 +2,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var path = require('path');
 var Machine = require('../models/machine');
-var winston = require('winston');
+var logger = require('../config/winston')
 var fifo = require('../app').fifo;
 var eventEmitter = require('../app').eventEmitter;
 var sync = require('synchronize');
@@ -25,7 +25,7 @@ dashboardPage.displaySettings = false;
 dashboardPage.displayLogs = false;
 dashboardPage.uploadSuccess = false;
 dashboardPage.displayJobsTable = false;
-dashboardPage.displayGraphs = false;
+dashboardPage.displayMonitor = false
 dashboardPage.displayControl = true;
 dashboardPage.currentPanelName = panelNames.control;
 dashboardPage.currentPanelRoute = '/dashboard/control/milling/roland';
@@ -52,7 +52,7 @@ var _validate = function (req, res) {
         req.checkBody('path', validationMsg.path).notEmpty();
 	    var errors = formCheck.checkJSON(req, dashboardPage.machine);
 
-        if ( path != undefined && !(path.endsWith(".png") || path.endsWith(".svg"))) {
+        if ( path != undefined && !path.endsWith(".png")) {
            if(!errors) {
               errors = [{param : 'vendor', msg : 'Unsupported graphic format'}];
            } else {  
@@ -196,7 +196,7 @@ module.exports.upload = function (req, res) {
             fifoData.status = 'pending'; //status: pending, approved, rejected
             fifo.push(fifoData, "local", function(err, job){
                             if (err){
-                                winston.error('@controllers.roland_milling: '+err.err);
+                                logger.error('@controllers.roland_milling: '+err.err);
                                 dashboardPage.errors = [{ param: 'jobs', msg: err.err, value: undefined }];
                             }else{
                                 dashboardPage.uploadSuccess = true;
@@ -215,7 +215,7 @@ module.exports.upload = function (req, res) {
 
   // log any errors that occur
   form.on('error', function(err) {
-    winston.log('error', '@dashboard.uploadJob: an error has occured: %s', err);
+    logger.log('error', '@dashboard.uploadJob: an error has occured: %s', err);
   });
 
   // parse the incoming request containing the form data
@@ -229,7 +229,7 @@ module.exports.process = function (req, res) {
 
    dashboardPage.currentPanelName = panelNames.control;
    dashboardPage.currentPanelRoute = '/dashboard/control';
-   winston.info('@dashboard.process: the process selected is ' + req.query.process);
+   logger.info('@dashboard.process: the process selected is ' + req.query.process);
 
    if (req.query.process == 'pcb') {
       res.render('partials/process/milling-machines/roland/cut', dashboardPage);

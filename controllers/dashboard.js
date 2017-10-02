@@ -6,11 +6,13 @@ var mongoose = require('mongoose')
 var User = require('../models/user')
 var Machine = require('../models/machine')
 var ADS1x15 = require('../lib/ads1x15/ADS1x15')
-var winston = require('winston')
-var eventEmitter = require('../app').eventEmitter
-var sync = require('synchronize')
 var dashboard = require('./lib/dashboard')
+var logger = require('../config/winston')
+var url = require('url');
+var sync = require('synchronize')
+var WebSocket = require('ws')
 var printerConfig = require('../lib/fablab/printer-config')
+var siren = require('../lib/siren/siren')
 
 var dashboardPage = dashboard.dashboardPage
 var welcomeMsg = dashboard.welcomeMsg
@@ -113,7 +115,7 @@ var _getSystemInfo = function () {
           (dashboardPage.sysInfoTable.rows[i].value)[j].value = ((info.loadavg)[j] * 100).toFixed(2)
         }
           break
-        default : winston.error('@dashboard._getSystemInfo: no match in processor system info.')
+        default : logger.error('@dashboard._getSystemInfo: no match in processor system info.')
       }
     }
   })
@@ -143,8 +145,8 @@ module.exports.dashboard = function (req, res) {
       dashboardPage.displaySidebarMenu = false
       dashboardPage.displayProcessCut = false
       dashboardPage.displayJobsTable = false
-      dashboardPage.displayGraphs = false
       dashboardPage.displayProcessHalftone = false
+      dashboardPage.displayMonitor = false
       dashboardPage.currentPanelName = panelNames.dashboard
       dashboardPage.currentPanelRoute = '/dashboard'
       res.render('dashboard', dashboardPage)
@@ -178,7 +180,7 @@ module.exports.dashboard = function (req, res) {
       dashboardPage.displayControl = false
       dashboardPage.displayProcessCut = false
       dashboardPage.displayJobsTable = false
-      dashboardPage.displayGraphs = false
+      dashboardPage.displayMonitor = false
       dashboardPage.displayProcessHalftone = false
       dashboardPage.currentPanelName = panelNames.dashboard
       dashboardPage.currentPanelRoute = '/dashboard'
@@ -213,7 +215,7 @@ module.exports.dashboard = function (req, res) {
 	  case 'Prusa' : dashboardPage.machinePanelRoute = '/dashboard/control/3dprint/prusa'
 	    break
 	  default : break
-	}
+	} 
 	  break
       }
 
@@ -234,7 +236,7 @@ module.exports.profile = function (req, res) {
   dashboardPage.displayProcessCut = false
   dashboardPage.displayProcessHalftone = false
   dashboardPage.displayJobsTable = false
-  dashboardPage.displayGraphs = false
+  dashboardPage.displayMonitor = false
   dashboardPage.displayProfile = true
   dashboardPage.currentPanelName = panelNames.profile
   dashboardPage.currentPanelRoute = '/dashboard/profile'
@@ -274,7 +276,7 @@ module.exports.upload = function (req, res) {
     User.updatePhotoPathByUsername(req.user.username, '/uploads/img/' + newFileName, function (err, result) {
       if (err) throw (err)
       if (result) {
-        winston.info('@dashboard.upload: path of user successfully saved in DB')
+        logger.info('@dashboard.upload: path of user successfully saved in DB')
       }
     })
     dashboardPage.pathToPhoto = '/uploads/img/' + newFileName
@@ -282,7 +284,8 @@ module.exports.upload = function (req, res) {
   })
   // log any errors that occur
   form.on('error', function (err) {
-    winston.log('error', '@dashboard.upload: an error has occured: %s', err)
+    logger.log('error', '@dashboard.upload: an error has occured: %s', err)
+
   })
 
   // once all the files have been uploaded, send a response to the client
@@ -301,7 +304,7 @@ module.exports.wizard = function (req, res) {
   dashboardPage.displayProcessCut = false
   dashboardPage.displayProcessHalftone = false
   dashboardPage.displayJobsTable = false
-  dashboardPage.displayGraphs = false
+  dashboardPage.displayMonitor = false
   dashboardPage.displayWizard = true
   dashboardPage.currentPanelName = panelNames.wizard
   dashboardPage.currentPanelRoute = '/dashboard/wizard'
@@ -343,14 +346,16 @@ module.exports.configure = function (req, res) {
     // create a new machine
     Machine.createMachine(newMachine, function (err, machine) {
       if (err) throw err
-      winston.info('@dashboard.cofigure: a new machine has been successfully configured') // machine also contains ._id
-      // add to the machine the information about the adc device
-      // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
+      logger.info('@dashboard.cofigure: a new machine has been successfully configured') // machine also contains ._id
+    })
 
-      // check if sensor connected
-      /*if (_checkCurrentSensor() === -1) {
-        dashboardPage.errors = [{param: 'adcVendor', msg: 'Cannot read the current sensor. Check if it is properly connected'}]
-      }*/
+               // add to the machine the information about the adc device
+               // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
+
+               // check if sensor connected
+    if (_checkCurrentSensor() === -1) {
+      dashboardPage.errors = [{param: 'adcVendor', msg: 'Cannot read the current sensor. Check if it is properly connected'}]
+    }
 
       dashboardPage.displayWizard = false
       dashboardPage.machineConfigured = true
@@ -368,7 +373,7 @@ module.exports.settings = function (req, res) {
   dashboardPage.displayProcessCut = false
   dashboardPage.displayProcessHalftone = false
   dashboardPage.displayJobsTable = false
-  dashboardPage.displayGraphs = false
+  dashboardPage.displayMonitor = false
   dashboardPage.displaySettings = true
   dashboardPage.currentPanelName = panelNames.settings
   dashboardPage.currentPanelRoute = '/dashboard/settings'
@@ -496,9 +501,9 @@ module.exports.profileUpdate = function (req, res) {
 
     User.updateUserById(id, newProfile, function (updateOK, user) {
       if (updateOK) {
-        winston.info('@dashboard.profileUpdate: user profile successfully updated')
+        logger.info('@dashboard.profileUpdate: user profile successfully updated')
       } else {
-        winston.error('@dashboard.profileUpdate: error updating user profile')
+        logger.error('@dashboard.profileUpdate: error updating user profile')
       }
     })
     var successDbUpdate = 'DB succsessfully updated'
@@ -531,9 +536,11 @@ module.exports.changePassword = function (req, res) {
     User.updatePassword(username, password, function (err, status) {
       if (err) throw err
       if (status) {
-        winston.info('@dashboard.changePassword: password update successful')
+        logger.info('@dashboard.changePassword: password update successful')
       } else {
-        winston.error('@dashboard.changePassword: error updating the user password')
+        logger.error('@dashboard.changePassword: error updating the user password')
+
+eventEmitter.emit('global-log', '@dashboard.changePassword: error updating the user password')
       }
     })
     var successDbUpdate = 'DB succsessfully updated'
@@ -555,10 +562,52 @@ module.exports.logs = function (req, res) {
   dashboardPage.displayProcessCut = false
   dashboardPage.displayProcessHalftone = false
   dashboardPage.displayJobsTable = false
-  dashboardPage.displayGraphs = false
   dashboardPage.displayLogs = true
+  dashboardPage.displayMonitor = false
   dashboardPage.currentPanelName = panelNames.logs
   dashboardPage.currentPanelRoute = '/dashboard/logs'
 
   res.render('dashboard', dashboardPage)
+}
+
+
+module.exports.siren = function (req, res) {
+
+ dashboardPage.displayProfile = false
+ dashboardPage.displayWizard = false
+ dashboardPage.displayTerminal = false
+ dashboardPage.displaySettings = false
+ dashboardPage.displayControl = false
+ dashboardPage.displayProcessCut = false
+ dashboardPage.displayProcessHalftone = false
+ dashboardPage.displayJobsTable = false
+ dashboardPage.displayLogs = false
+ dashboardPage.displayMonitor = true
+ dashboardPage.currentPanelName = panelNames.monitor
+ dashboardPage.currentPanelRoute = '/dashboard/monitor'
+
+ siren.connect('http://piwrapper.local:1337/', conn => {
+   if (conn.err == null) {
+
+     conn.entity.data.links
+       .filter(link => link.title !== undefined && link.title.includes('machine-wrapper'))
+       .map(link => link.href)
+       .forEach(href => siren.connect(href, conn => {
+          dashboardPage.siren.deviceHref = href
+          dashboardPage.siren.deviceProps = conn.entity.data.entities[0].properties
+          var apiURL  = conn.entity.data.entities[0].links[0].href
+          var path = url.parse(apiURL, true)
+          dashboardPage.siren.host = (path.host).split(':', 1)
+          dashboardPage.siren.query = {method: 'GET', url: path.pathname}
+          siren.connect(conn.entity.data.entities[0].links[0].href, conn => {
+              dashboardPage.siren.response = JSON.stringify(conn.entity.data, null, 4)
+              dashboardPage.siren.deviceActions = conn.entity.data.actions
+              dashboardPage.siren.deviceMonitor = {current: conn.entity.data.links[3].title,
+                                                     state: conn.entity.data.links[4].title }
+              res.render('dashboard', dashboardPage)
+          })
+         })
+       );
+   }
+ });
 }

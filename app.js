@@ -10,7 +10,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var expressWinston = require('express-winston');
-var winston = require('winston');
+var logger = require("./config/winston");
 var events = require('events');
 var fifo = require('./lib/fifo/job-fifo');
 var passportSocketIo = require('passport.socketio');
@@ -19,9 +19,6 @@ var store = new MongoStore({mongooseConnection: mongoose.connection});
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
-
-//configure winston logger
-var logger = require('./config/winston');
 
 //configure internationalization support
 var i18n = require('./i18n');
@@ -39,7 +36,6 @@ require('./config/passport');
 var app = express();
 
 var server = require('http').Server(app);
-
 
 module.exports = {};
 module.exports.fifo = fifo;
@@ -133,7 +129,6 @@ app.use(i18n);
 app.use('/', routes);
 app.use('/api', apiRoutes);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -169,3 +164,4 @@ app.use(function(err, req, res, next) {
 module.exports.app = app;
 module.exports.server = server;
 module.exports.eventEmitter = eventEmitter;
+module.exports.logger = logger

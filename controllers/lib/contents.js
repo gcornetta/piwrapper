@@ -48,7 +48,7 @@ var dashboardText = {
     wizard: i18n.__('w_00033'),
     machine: i18n.__('w_00104'),
     system: {title: i18n.__('w_00034'), overview: i18n.__('w_00035'), stats: i18n.__('w_00036')},
-    tools: {title: i18n.__('w_00037'), userManag: i18n.__('w_00038'), sysManag: i18n.__('w_00039'), sysLog: i18n.__('w_00040')},
+    tools: {title: i18n.__('w_00037'), userManag: i18n.__('w_00038'), sysMonit: i18n.__('w_00039'), sysLog: i18n.__('w_00040')},
     workload: i18n.__('w_00041'),
     jobs: i18n.__('w_00256')
   },
@@ -100,7 +100,7 @@ var panelNames = {
   logs: i18n.__('w_00115'),
   control: i18n.__('w_00145'),
   jobs: i18n.__('w_00249'),
-  graphs: i18n.__('w_00041')
+  monitor: i18n.__('w_00263')
 }
 
 exports.panelNames = panelNames
