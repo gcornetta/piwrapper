@@ -360,7 +360,6 @@ module.exports.configure = function (req, res) {
       dashboardPage.displayWizard = false
       dashboardPage.machineConfigured = true
       res.redirect('/dashboard')
-    })
   }
 }
 
