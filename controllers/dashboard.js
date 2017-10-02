@@ -566,7 +566,11 @@ module.exports.logs = function (req, res) {
   dashboardPage.currentPanelName = panelNames.logs
   dashboardPage.currentPanelRoute = '/dashboard/logs'
 
-  res.render('dashboard', dashboardPage)
+   if (!dashboardPage.userName) {
+       res.redirect('/dashboard')
+   } else {
+    res.render('dashboard', dashboardPage)
+  }
 }
 
 
@@ -585,28 +589,31 @@ module.exports.siren = function (req, res) {
  dashboardPage.currentPanelName = panelNames.monitor
  dashboardPage.currentPanelRoute = '/dashboard/monitor'
 
- siren.connect('http://piwrapper.local:1337/', conn => {
-   if (conn.err == null) {
+ if (!dashboardPage.userName) {
+     res.redirect('/dashboard')
+ } else {
+    siren.connect('http://piwrapper.local:1337/', conn => {
+        if (conn.err == null) {
 
-     conn.entity.data.links
-       .filter(link => link.title !== undefined && link.title.includes('machine-wrapper'))
-       .map(link => link.href)
-       .forEach(href => siren.connect(href, conn => {
-          dashboardPage.siren.deviceHref = href
-          dashboardPage.siren.deviceProps = conn.entity.data.entities[0].properties
-          var apiURL  = conn.entity.data.entities[0].links[0].href
-          var path = url.parse(apiURL, true)
-          dashboardPage.siren.host = (path.host).split(':', 1)
-          dashboardPage.siren.query = {method: 'GET', url: path.pathname}
-          siren.connect(conn.entity.data.entities[0].links[0].href, conn => {
-              dashboardPage.siren.response = JSON.stringify(conn.entity.data, null, 4)
-              dashboardPage.siren.deviceActions = conn.entity.data.actions
-              dashboardPage.siren.deviceMonitor = {current: conn.entity.data.links[3].title,
+        conn.entity.data.links
+            .filter(link => link.title !== undefined && link.title.includes('machine-wrapper'))
+            .map(link => link.href)
+            .forEach(href => siren.connect(href, conn => {
+                dashboardPage.siren.deviceHref = href
+                dashboardPage.siren.deviceProps = conn.entity.data.entities[0].properties
+                var apiURL  = conn.entity.data.entities[0].links[0].href
+                var path = url.parse(apiURL, true)
+                dashboardPage.siren.host = (path.host).split(':', 1)
+                dashboardPage.siren.query = {method: 'GET', url: path.pathname}
+                siren.connect(conn.entity.data.entities[0].links[0].href, conn => {
+                    dashboardPage.siren.response = JSON.stringify(conn.entity.data, null, 4)
+                    dashboardPage.siren.deviceActions = conn.entity.data.actions
+                    dashboardPage.siren.deviceMonitor = {current: conn.entity.data.links[3].title,
                                                      state: conn.entity.data.links[4].title }
-              res.render('dashboard', dashboardPage)
-          })
-         })
-       );
-   }
- });
+                    res.render('dashboard', dashboardPage)
+                })
+            }));
+        }
+    });
+ }
 }
