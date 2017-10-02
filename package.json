@@ -54,6 +54,7 @@
     "socket.io": "^1.4.8",
     "strftime": "^0.10.0",
     "synchronize": "^2.0.0",
+    "terminate": "^2.1.0",
     "typeahead.js": "^0.11.1",
     "ul": "^5.2.2",
     "uuid": "^3.1.0",

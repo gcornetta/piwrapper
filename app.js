@@ -16,6 +16,7 @@ var fifo = require('./lib/fifo/job-fifo');
 var passportSocketIo = require('passport.socketio');
 const MongoStore = require('connect-mongo')(session);
 var store = new MongoStore({mongooseConnection: mongoose.connection});
+var terminate = require('terminate')
 var cp = require('child_process')
 var Machine = require('./models/machine')
 
@@ -28,6 +29,7 @@ var i18n = require('./i18n');
 //start mongoDB
 var db = require('./config/db');
 
+var pid 
 Machine.checkIfMachineConfigured( function (err, machine) {                                                                                      
   if (err) throw err                                                                                                                               
   if (!machine){                                                                                                                                   
@@ -35,8 +37,33 @@ Machine.checkIfMachineConfigured( function (err, machine) {
   }
   //spawn zetta server
   var child = cp.fork('./config/zetta.js')
+  pid = child.pid
   child.send(machine)  
 })
+
+process.on ('machineUpdated', () => {
+    logger.info('@zetta: Updating machine configuration');  
+    terminate(pid, function(err, done){
+    if(err) {   
+       logger.error('@zetta: Unable to terminate zetta process');  
+    }
+    else {
+     logger.info('@zetta: Restarting zetta server with the new configuration');  
+     Machine.checkIfMachineConfigured( function (err, machine) {                                                                                        
+       if (err) throw err                                                                                                                               
+       if (!machine){                                                                                                                                   
+        machine = {};                                                                                                                                  
+       }                                                                                                                                                
+       //spawn zetta server                                                                                                                             
+       var child = cp.fork('./config/zetta.js')                                                                                                         
+       pid = child.pid
+       child.send(machine)
+     })
+      
+   }
+});
+})
+
 
 //require Passport configuration
 require('./config/passport');
