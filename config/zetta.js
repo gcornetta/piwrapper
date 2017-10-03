@@ -1,13 +1,8 @@
-var logger = require('./winston') 
-var zetta = require('zetta')
-var device  = require ('../lib/fablab/driver/scout')
-var Machine = require('../models/machine')
+const startZetta = (machine) => {
+  var logger = require('./winston') 
+  var zetta = require('zetta')
+  var device  = require ('../lib/fablab/driver/scout')
 
-Machine.checkIfMachineConfigured( function (err, machine) {
-  if (err) throw err
-  if (!machine){
-    machine = {};
-  }
   zetta()
     .name('machine-wrapper')
     .link ('http://pigateway.local:1337')
@@ -15,4 +10,8 @@ Machine.checkIfMachineConfigured( function (err, machine) {
     .listen(1337, function () {
        logger.info('@zetta: Server started on piwrapper');
     })
-  })
+}
+
+process.on('message', (machine) => {
+  startZetta(machine)
+})

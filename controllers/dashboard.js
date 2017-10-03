@@ -14,6 +14,7 @@ var WebSocket = require('ws')
 var printerConfig = require('../lib/fablab/printer-config')
 var siren = require('../lib/siren/siren')
 
+
 var dashboardPage = dashboard.dashboardPage
 var welcomeMsg = dashboard.welcomeMsg
 var validationMsg = dashboard.validationMsg
@@ -449,14 +450,15 @@ module.exports.machineUpdate = function (req, res) {
         deviceUri: machine.deviceUri,
         baudRate: machine.baudRate
       }
-    })
     var successDbUpdate = 'DB succsessfully updated'
     req.flash('success_msg', successDbUpdate)
     var flashSuccess = req.flash('success_msg')[0]
     dashboardPage.flashSuccess = flashSuccess
     req.session.flash = []
-
+    process.emit('machineUpdated')
+   
     res.redirect('/dashboard/settings')
+    })
   }
 }
 
@@ -538,8 +540,6 @@ module.exports.changePassword = function (req, res) {
         logger.info('@dashboard.changePassword: password update successful')
       } else {
         logger.error('@dashboard.changePassword: error updating the user password')
-
-eventEmitter.emit('global-log', '@dashboard.changePassword: error updating the user password')
       }
     })
     var successDbUpdate = 'DB succsessfully updated'
