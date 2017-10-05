@@ -147,10 +147,12 @@ module.exports.checkJSON = function (req, machine){
               req.checkBody('y', validationMsg.y).notEmpty().isFloat();
               req.checkBody('z', validationMsg.z).notEmpty().isFloat();
               req.checkBody('zjog', validationMsg.zjog).notEmpty().isFloat();
-              req.checkBody('origin', validationMsg.origin).notEmpty();
-              req.checkBody('power', validationMsg.power).notEmpty().isInt({ min: 1, max: 100 });
+              req.checkBody('xhome', validationMsg.x).notEmpty().isFloat();
+              req.checkBody('yhome', validationMsg.y).notEmpty().isFloat();
+              req.checkBody('zhome', validationMsg.z).notEmpty().isFloat();
+              //req.checkBody('power', validationMsg.power).notEmpty().isInt({ min: 1, max: 100 });
               req.checkBody('speed', validationMsg.speed).notEmpty().isInt({ min: 1, max: 100 });
-              req.checkBody('rate', validationMsg.rate).notEmpty().isFloat();
+              //req.checkBody('rate', validationMsg.rate).notEmpty().isFloat();
 
               req.checkBody('diameter', validationMsg.diameter).notEmpty().isFloat({ min: 0});
               req.checkBody('error', validationMsg.error).notEmpty().isFloat({ min: 0});

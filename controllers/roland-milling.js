@@ -118,8 +118,12 @@ module.exports.upload = function (req, res) {
            case 'z'               : req.body.z = value;
                                     break;
            case 'zjog'            : req.body.zjog = value;
+
+           case 'xhome'           : req.body.xhome = value;
                                     break;
-           case 'origin'          : req.body.origin = value;
+           case 'yhome'           : req.body.yhome = value;
+                                    break;
+           case 'zhome'           : req.body.zhome = value;
                                     break;
         //Process
            case 'process'         : req.body.process = value;
@@ -129,12 +133,12 @@ module.exports.upload = function (req, res) {
            case 'waxFinishing'   : req.body.waxFinishing = value;
                                     break;
         //Engine
-           case 'power'           : req.body.power = value;
-                                    break;
+           //case 'power'           : req.body.power = value;
+           //                         break;
            case 'speed'           : req.body.speed = value;
                                     break;
-           case 'rate'            : req.body.rate = value;
-                                    break;
+           //case 'rate'            : req.body.rate = value;
+           //                         break;
         //Machines
            case 'machines'        : req.body.machines = value;
                                     break;
