@@ -13,7 +13,8 @@ router.get('/jobs/:jobid', passport.authenticate('jwt', { session: false }), job
 router.put('/jobs/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.jobsUpdateOne);
 router.put('/jobs/file/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.addJobFile);
 router.delete('/jobs/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.jobsDeleteOne);
-router.post('/jobs/machine', passport.authenticate('jwt', { session: false }), jobsCtrl.setMachine);
+router.post('/machine', passport.authenticate('jwt', { session: false }), jobsCtrl.setMachine);
+router.get('/machine', passport.authenticate('jwt', { session: false }), jobsCtrl.getMachine);
 
 secretOrKey = process.env.TOKENKEY || "wololo";
 

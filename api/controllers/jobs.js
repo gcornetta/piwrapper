@@ -163,6 +163,23 @@ module.exports.setMachine = function(req, res) {
   });
 };
 
+/* GET /api/machine */
+module.exports.getMachine = function(req, res) {
+  machine.checkIfMachineConfigured(function(err, machine){
+    console.log(machine)
+  	if (err) {
+          throw err;
+          sendJSONresponse(res, 500, {
+            "error": err
+          });
+        } else {
+          sendJSONresponse(res, 200, {
+            "machine": JSON.stringify(machine)
+          });
+        }
+  });
+};
+
 function addToPendingJobs(job, id) {
   //job.userId = req.user._id;
   job.jobId = id || uuid();
