@@ -20,6 +20,11 @@ var terminate = require('terminate')
 var cp = require('child_process')
 var Machine = require('./models/machine')
 
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDoc = YAML.load('swagger.yaml')
+
+
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
 
@@ -70,6 +75,10 @@ require('./config/passport');
 
 // Init App
 var app = express();
+
+// Serve the Swagger documents and Swagger UI 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+
 
 var server = require('http').Server(app);
 

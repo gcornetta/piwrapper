@@ -54,6 +54,7 @@
     "sleep": "^3.0.1",
     "socket.io": "^1.4.8",
     "strftime": "^0.10.0",
+    "swagger-ui-express": "^2.0.10",
     "synchronize": "^2.0.0",
     "terminate": "^2.1.0",
     "typeahead.js": "^0.11.1",
@@ -62,6 +63,7 @@
     "websocket": "^1.0.23",
     "winston": "^2.2.0",
     "ws": "^3.2.0",
+    "yamljs": "^0.3.0",
     "zetta": "^1.5.0"
   },
   "devDependencies": {
