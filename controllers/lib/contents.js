@@ -125,7 +125,8 @@ var settingsText = {
   updateSettings: i18n.__('w_00112'),
   deviceUri: i18n.__('w_00254'),
   refresh: i18n.__('w_00255'),
-  baudRate: i18n.__('w_00264')
+  baudRate: i18n.__('w_00264'),
+  defaultApiParams: i18n.__('w_00265')
 }
 
 exports.settingsText = settingsText

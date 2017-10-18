@@ -118,10 +118,10 @@
 	"w_00117": "Autofocus",
 	"w_00118": "Sort path",
 	"w_00119": "Origin (mm)",
-	"w_00120": "Top left",
-	"w_00121": "Top right",
-	"w_00122": "Bottom left",
-	"w_00123": "Bottom right",
+	"w_00120": "top left",
+	"w_00121": "top right",
+	"w_00122": "bottom left",
+	"w_00123": "bottom right",
 	"w_00124": "Process",
 	"w_00125": "Cut",
 	"w_00126": "Halftone",
@@ -263,5 +263,12 @@
 	"w_00262": "i3 Berlin",
 	"w_00263": "Monitor",
 	"w_00264": "Baud rate",
-	"w_00265": "xxxxx"
+	"w_00265": "Default API parameters",
+	"w_00266": "Baud rate",
+	"w_00267": "Baud rate",
+	"w_00268": "Baud rate",
+	"w_00269": "Baud rate",
+	"w_00270": "Baud rate",
+	"w_00271": "Baud rate",
+	"w_00272": "xxxxx"
 }

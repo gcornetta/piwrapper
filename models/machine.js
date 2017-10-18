@@ -66,6 +66,7 @@ var MachineSchema = new mongoose.Schema({
     baudRate: { //baudRate of the device
         type: Number
     },
+    defaultValues: mongoose.Schema.Types.Mixed,
     isConfigured : Boolean,
     adcDevice : [AdcSchema],
     queuedJobs: [JobSchema]
@@ -76,6 +77,7 @@ var Machine = module.exports = mongoose.model('Machine', MachineSchema);
 module.exports.createMachine = function(newMachine, callback){
         printer.addPrinter({Name: newMachine.name, DeviceURI: newMachine.deviceUri}, function(err, stdout){
                 if (!err){
+                    newMachine.defaultValues = defaultValues[newMachine.type][newMachine.vendor];
                     newMachine.save(callback);
                 }else{
                     callback(err, null);
@@ -92,7 +94,15 @@ module.exports.updateMachine = function(newConfiguration, callback){
 	var query = {'isConfigured': true};
 	printer.addPrinter({Name: newConfiguration.name, DeviceURI: newConfiguration.deviceUri}, function(err, stdout){
         if (!err){
-            Machine.findOneAndUpdate(query, newConfiguration, {new : true}, callback);
+            Machine.findOne ({}, function(err, machine){
+                if (err) throw(err);
+                if ((machine.type != newConfiguration.type)||(machine.vendor != newConfiguration.vendor)){
+                    if (defaultValues[newConfiguration.type]){
+                        newConfiguration.defaultValues = defaultValues[newConfiguration.type][newConfiguration.vendor];
+                    }
+                }
+                Machine.findOneAndUpdate(query, newConfiguration, {new : true}, callback);
+            });
         }else{
             callback(err, null);
         }
@@ -176,3 +186,88 @@ module.exports.getJobStatusByOwner = function (owner, callback){
    var query = {owner : owner};
    Machine.queuedJobs.findOne(query, callback);
 }
+
+var defaultValues = {
+    'Laser cutter':{
+        'Epilog': {
+            switchAutofocus: 'on',
+            switchSort: 'on',
+            switchFill: 'on',
+            diameter : 0.25,
+            offsets : 1,
+            overlap : 50,
+            error : 1.5,
+            threshold : 0.5,
+            merge : 1.1,
+            order : -1,
+            sequence : -1,
+            spotSize : 2,
+            minSpotsize : 25,
+            horSpotspace : 25,
+            verSpotspace : 25,
+            pointSpot : 4,
+            power : 25,
+            speed : 75,
+            rate : 500,
+            xCoord : 50,
+            yCoord : 50,
+            origin : 'top left',
+        }
+    },
+    'Vinyl cutter':{
+        'Roland':{
+            switchSort : 'on',
+            origin : 'bottom left',
+            diameter : 0.25,
+            offsets : 1,
+            overlap : 50,
+            error : 1.5,
+            threshold : 0.5,
+            merge : 1.1,
+            order : -1,
+            sequence : -1,
+            power : 45,
+            speed : 2,
+            xCoord : 50,
+            yCoord : 50
+        }
+    },
+    'Milling machine':{
+        'Roland':{
+            machines : "srm_20",
+            x : 10,
+            y : 10,
+            z : 10,
+            zjog : 12,
+            xhome : 0,
+            yhome : 152.4,
+            zhome : 60.5,
+            speed : 4,
+            diameter : 0.4,
+            error : 1.1,
+            overlap : 50,
+            thickness : 1.7,
+            switchSort : 'on',
+            direction : 'climb',
+            cutDepth : 0.1,
+            offsets : 4,
+            threshold : 0.5,
+            merge : 1.5,
+            order : -1,
+            sequence : -1,
+            bottomZ : -10,
+            bottomIntensity : 0,
+            topZ : 0,
+            topIntensity : 1,
+            xz : 'on',
+            yz : 'on',
+            type : 'flat'
+        }
+    },
+    '3D printer':{
+        'Prusa':{
+        }
+    }
+}
+
+module.exports.defaultValues = defaultValues;

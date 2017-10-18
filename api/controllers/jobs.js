@@ -78,6 +78,7 @@ module.exports.addNewJob = function(req, res) {
         "message": "Machine isn't configured"
       });
     } else {
+      formCheck.setDefaultValuesIfNull(req, machine);
       var errors = formCheck.checkJSON(req, machine);
       if (errors) {
         sendJSONresponse(res, 200, {
@@ -200,7 +201,6 @@ function addFilePath(jobId, filePath) {
 }
 
 function move(oldPath, newPath, callback) {
-
     fs.rename(oldPath, newPath, function (err) {
         if (err) {
             if (err.code === 'EXDEV') {

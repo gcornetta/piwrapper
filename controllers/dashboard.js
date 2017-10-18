@@ -13,6 +13,7 @@ var sync = require('synchronize')
 var WebSocket = require('ws')
 var printerConfig = require('../lib/fablab/printer-config')
 var siren = require('../lib/siren/siren')
+var formCheck = require('../common/form-check')
 
 
 var dashboardPage = dashboard.dashboardPage
@@ -392,7 +393,8 @@ module.exports.settings = function (req, res) {
             adcVendor: machine.adcDevice[0].vendor,
             adcDevice: machine.adcDevice[0].device,
             deviceUri: machine.deviceUri,
-            baudRate: machine.baudRate
+            baudRate: machine.baudRate,
+            defaultValues: machine.defaultValues
         }
     }
     if ((!dashboardPage.userName)||(!machine)) {
@@ -425,7 +427,8 @@ module.exports.machineUpdate = function (req, res) {
     res.render('dashboard', dashboardPage)
     dashboardPage.errors = null
   } else {
-    var newConfiguration = {vendor: vendor,
+    var newConfiguration = {
+      vendor: vendor,
       type: type,
       name: name,
       threshCurr: threshCurr,
@@ -434,31 +437,90 @@ module.exports.machineUpdate = function (req, res) {
       isConfigured: true,
       adcDevice: [{vendor: adcVendor, device: adcDevice}],
       deviceUri: deviceUri,
-      baudRate: baudRate
+      baudRate: baudRate,
+      defaultValues: JSON.parse(JSON.stringify(Machine.defaultValues[type][vendor]))
     }
-    Machine.updateMachine(newConfiguration, function (err, machine) {
-      if (err) throw err
-      dashboardPage.machine = {
-        name: machine.name,
-        type: machine.type,
-        vendor: machine.vendor,
-        threshCurr: machine.threshCurr,
-        sampleTime: machine.sampleTime,
-        dutyCycle: machine.dutyCycle,
-        adcVendor: machine.adcDevice[0].vendor,
-        adcDevice: machine.adcDevice[0].device,
-        deviceUri: machine.deviceUri,
-        baudRate: machine.baudRate
-      }
-    var successDbUpdate = 'DB succsessfully updated'
-    req.flash('success_msg', successDbUpdate)
-    var flashSuccess = req.flash('success_msg')[0]
-    dashboardPage.flashSuccess = flashSuccess
-    req.session.flash = []
-    process.emit('machineUpdated')
+    for (var i in newConfiguration.defaultValues){
+        newConfiguration.defaultValues[i] = req.body[i] || newConfiguration.defaultValues[i];
+        req.body[i] = newConfiguration.defaultValues[i];
+    }
+    switch (type) {
+        case 'Laser cutter':
+            switch (vendor){
+                case 'Epilog':
+                req.body.process = "cut";
+                req.body.material = "cardboard";
+                errors = formCheck.checkJSON(req, newConfiguration);
+                if (!errors){
+                    req.body.process = "halftone";
+                    errors = formCheck.checkJSON(req, newConfiguration);
+                }
+                break;
+            }
+        break;
+        case 'Vinyl cutter':
+            switch (vendor){
+                case 'Roland':
+                    req.body.material = "vinyl";
+                    errors = formCheck.checkJSON(req, newConfiguration);
+                break;
+            }
+        break;
+        case 'Milling machine':
+            switch (vendor){
+                case 'Roland':
+                req.body.process = "pcb";
+                req.body.pcbFinishing = "outline_1_32";
+                errors = formCheck.checkJSON(req, newConfiguration);
+                if (!errors){
+                    req.body.process = "wax";
+                    req.body.waxFinishing = "rough_cut";
+                    errors = formCheck.checkJSON(req, newConfiguration);
+                    if (!errors){
+                        req.body.waxFinishing = "finish_cut";
+                        errors = formCheck.checkJSON(req, newConfiguration);
+                    }
+                }
+                break;
+            }
+        break;
+        case '3D printer':
+            switch (vendor){
+                case 'Prusa':
+                break;
+            }
+        break;
+    }
+    if (errors) {
+        dashboardPage.errors = errors
+        res.render('dashboard', dashboardPage)
+        dashboardPage.errors = null
+    } else {
+        Machine.updateMachine(newConfiguration, function (err, machine) {
+        if (err) throw err
+            dashboardPage.machine = {
+            name: machine.name,
+            type: machine.type,
+            vendor: machine.vendor,
+            threshCurr: machine.threshCurr,
+            sampleTime: machine.sampleTime,
+            dutyCycle: machine.dutyCycle,
+            adcVendor: machine.adcDevice[0].vendor,
+            adcDevice: machine.adcDevice[0].device,
+            deviceUri: machine.deviceUri,
+            baudRate: machine.baudRate,
+            defaultValues: machine.defaultValues
+        }
+        var successDbUpdate = 'DB succsessfully updated'
+        req.flash('success_msg', successDbUpdate)
+        var flashSuccess = req.flash('success_msg')[0]
+        dashboardPage.flashSuccess = flashSuccess
+        req.session.flash = []
+        process.emit('machineUpdated')
    
-    res.redirect('/dashboard/settings')
-    })
+        res.redirect('/dashboard/settings')
+        })
+    }
   }
 }
 

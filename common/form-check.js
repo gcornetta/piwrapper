@@ -223,3 +223,96 @@ module.exports.checkJSON = function (req, machine){
        }
           return req.validationErrors();
 }
+
+
+module.exports.setDefaultValuesIfNull = function (req, machine){
+    var json = req.body;
+        switch (machine.type) {
+          case 'Laser cutter':
+            switch (machine.vendor) {
+              case 'Epilog':
+                json.diameter = json.diameter || machine.defaultValues.diameter;
+                json.offsets = json.offsets || machine.defaultValues.offsets;
+                json.overlap = json.overlap || machine.defaultValues.overlap;
+                json.error = json.error || machine.defaultValues.error;
+                json.threshold = json.threshold || machine.defaultValues.threshold;
+                json.merge = json.merge || machine.defaultValues.merge;
+                json.order = json.order || machine.defaultValues.order;
+                json.sequence = json.sequence || machine.defaultValues.sequence;
+                json.spotSize = json.spotSize || machine.defaultValues.spotSize;
+                json.minSpotsize = json.minSpotsize || machine.defaultValues.minSpotsize;
+                json.horSpotspace = json.horSpotspace || machine.defaultValues.horSpotspace;
+                json.verSpotspace = json.verSpotspace || machine.defaultValues.verSpotspace;
+                json.pointSpot = json.pointSpot || machine.defaultValues.pointSpot;
+                json.power = json.power || machine.defaultValues.power;
+                json.speed = json.speed || machine.defaultValues.speed;
+                json.rate = json.rate || machine.defaultValues.rate;
+                json.xCoord = json.xCoord || machine.defaultValues.xCoord;
+                json.yCoord = json.yCoord || machine.defaultValues.yCoord;
+                break;
+              }
+              break;
+
+            case 'Vinyl cutter':
+              switch (machine.vendor) {
+                case 'Roland':
+                  json.switchSort = json.switchSort || machine.defaultValues.switchSort;
+                  json.origin = json.origin || machine.defaultValues.origin;
+                  json.diameter = json.diameter || machine.defaultValues.diameter;
+                  json.offsets = json.offsets || machine.defaultValues.offsets;
+                  json.overlap = json.overlap || machine.defaultValues.overlap;
+                  json.error = json.error || machine.defaultValues.error;
+                  json.threshold = json.threshold || machine.defaultValues.threshold;
+                  json.merge = json.merge || machine.defaultValues.merge;
+                  json.order = json.order || machine.defaultValues.order;
+                  json.sequence = json.sequence || machine.defaultValues.sequence;
+                  json.power = json.power || machine.defaultValues.power;
+                  json.speed = json.speed || machine.defaultValues.speed;
+                  json.xCoord = json.xCoord || machine.defaultValues.xCoord;
+                  json.yCoord = json.yCoord || machine.defaultValues.yCoord;
+                  break;
+                }
+                break;
+
+            case 'Milling machine':
+              switch (machine.vendor) {
+                case 'Roland':
+                  json.machines = json.machines || machine.defaultValues.machines;
+                  json.x = json.x || machine.defaultValues.x;
+                  json.y = json.y || machine.defaultValues.y;
+                  json.z = json.z || machine.defaultValues.z;
+                  json.zjog = json.zjog || machine.defaultValues.zjog;
+                  json.xhome = json.xhome || machine.defaultValues.xhome;
+                  json.yhome = json.yhome || machine.defaultValues.yhome;
+                  json.zhome = json.zhome || machine.defaultValues.zhome;
+                  json.speed = json.speed || machine.defaultValues.speed;
+                  json.diameter = json.diameter || machine.defaultValues.diameter;
+                  json.error = json.error || machine.defaultValues.error;
+                  json.overlap = json.overlap || machine.defaultValues.overlap;
+                  json.thickness = json.thickness || machine.defaultValues.thickness;
+                  json.switchSort = json.switchSort || machine.defaultValues.switchSort;
+                  json.direction = json.direction || machine.defaultValues.direction;
+                  json.cutDepth = json.cutDepth || machine.defaultValues.cutDepth;
+                  json.offsets = json.offsets || machine.defaultValues.offsets;
+                  json.threshold = json.threshold || machine.defaultValues.threshold;
+                  json.merge = json.merge || machine.defaultValues.merge;
+                  json.order = json.order || machine.defaultValues.order;
+                  json.sequence = json.sequence || machine.defaultValues.sequence;
+                  json.bottomZ = json.bottomZ || machine.defaultValues.bottomZ;
+                  json.bottomIntensity = json.bottomIntensity || machine.defaultValues.bottomIntensity;
+                  json.topZ = json.topZ || machine.defaultValues.topZ;
+                  json.topIntensity = json.topIntensity || machine.defaultValues.topIntensity;
+                  json.xz = json.xz || machine.defaultValues.xz;
+                  json.yz = json.yz || machine.defaultValues.yz;
+                  json.type = json.type || machine.defaultValues.type;
+                }
+                break;
+
+            case '3D printer':
+                switch (machine.vendor) {
+                  case 'Prusa':
+                    break;
+                }
+              break;
+           }
+}

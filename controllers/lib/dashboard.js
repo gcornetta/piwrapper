@@ -46,7 +46,8 @@ var dashboardPage = {
     updateSettings: settingsText.updateSettings,
     deviceUri: settingsText.deviceUri,
     refresh: settingsText.refresh,
-    baudRate: settingsText.baudRate
+    baudRate: settingsText.baudRate,
+    defaultApiParams: settingsText.defaultApiParams
   },
   currentPanelRoute: {},
   currentPanelName: {},
