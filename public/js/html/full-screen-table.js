@@ -41,7 +41,7 @@ function dataJob(job, index){
                         var dpi = getDPI(this.result)
                         var alertTxt = "Dpi: "+dpi+"\n";
                         alertTxt = alertTxt.concat("Size in pixels: "+img.width+" x "+img.height+"\n");
-                        alertTxt = alertTxt.concat("Size in cm: "+(25.4 * img.width / dpi).toFixed(3)+" x "+(25.4 * img.height / dpi).toFixed(3)+"\n");
+                        alertTxt = alertTxt.concat("Size in cm: "+(2.54 * img.width / dpi).toFixed(2)+" x "+(2.54 * img.height / dpi).toFixed(2)+"\n");
                         for (var i in job){
                             if (i !== 'jobPath'){
                                 alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");

@@ -127,15 +127,15 @@
     </div>
     <!-- end wrapper-->
   </body>
+  <% if (displayControl) {%>
+  <% include ./partials/scripts-machines %>
+  <%}%>
   <% include ./partials/scripts %>
   <% if (displayTerminal) {%>
   <% include ./partials/scripts-term %>
   <%}%>
   <% if (displayLogs) {%>
   <% include ./partials/scripts-log %>
-  <%}%>
-  <% if (displayControl) {%>
-  <% include ./partials/scripts-machines %>
   <%}%>
   <% if (displayMonitor) {%>
   <% include ./partials/scripts-monitor %>
