@@ -1649,3 +1649,20 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .fresh-table .fa {
   min-width: 18px;
 }
+
+.modal-backdrop.in {
+    z-index: 0;
+}
+
+.modal {
+    z-index: 5;
+    position: absolute;
+}
+
+.modal-body{
+white-space: pre;
+}
+
+.modal-footer{
+    background-color: #66615b;
+}
