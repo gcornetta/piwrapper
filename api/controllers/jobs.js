@@ -17,9 +17,22 @@ var sendJSONresponse = function(res, status, content) {
 /* GET list of queued jobs */
 module.exports.getQueuedJobs = function(req, res) {
   var jobs = fifo.getJobs();
-  sendJSONresponse(res, 200, {
+  /*sendJSONresponse(res, 200, {
     "jobs": JSON.stringify(jobs)
-  });
+  });*/
+  var lightJobs = [];
+  for (var i in jobs){
+    lightJobs.push({
+        'id': jobs[i].jobId,
+        'status': jobs[i].status,
+        'process': jobs[i].process,
+        'queue': jobs[i].caller,
+        'priority': jobs[i].priority
+    })
+  }
+  sendJSONresponse(res, 200, {
+      "jobs": JSON.stringify(lightJobs)
+    });
 };
 
 
@@ -37,28 +50,32 @@ module.exports.addJobFile = function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, fields, files) {
     if (files) {
-      var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + req.params.jobid ;
-      if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
-        fs.mkdirSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id);
-      }
-      move(files.file[0].path, newPath, function(){
-        if (addFilePath(req.params.jobid, newPath)) {
-            fifo.push(pendingJobs[req.params.jobid], "api", function(err, job) {
-                if (err) {
-                    sendJSONresponse(res, 200, err);
+      if (!files.file[0].path.endsWith(".png")) {
+        sendJSONresponse(res, 200, {"message": "Unsupported graphic format"});
+      } else {
+        var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + req.params.jobid ;
+        if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
+            fs.mkdirSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id);
+        }
+        move(files.file[0].path, newPath, function(){
+            if (addFilePath(req.params.jobid, newPath)) {
+                fifo.push(pendingJobs[req.params.jobid], "api", function(err, job) {
+                    if (err) {
+                        sendJSONresponse(res, 200, err);
+                    } else {
+                        delete pendingJobs[req.params.jobid];
+                        sendJSONresponse(res, 200, {
+                            "message": "File added"
+                        });
+                    }
+                });
                 } else {
-                    delete pendingJobs[req.params.jobid];
                     sendJSONresponse(res, 200, {
-                        "message": "File added"
+                        "message": "Job don't exist or isn't pending"
                     });
                 }
-            });
-            } else {
-                sendJSONresponse(res, 200, {
-                    "message": "Job don't exist or isn't pending"
-                });
-            }
-      });
+        });
+      }
     } else {
       sendJSONresponse(res, 200, {
         "message": "Missing attachment"
@@ -166,8 +183,12 @@ module.exports.setMachine = function(req, res) {
 
 /* GET /api/machine */
 module.exports.getMachine = function(req, res) {
-  machine.checkIfMachineConfigured(function(err, machine){
-    console.log(machine)
+  machine.checkIfMachineConfigured(function(err, machineObj){
+    var retMachine = {
+        'machineId': machineObj._id,
+        'type': machineObj.type,
+        'vendor': machineObj.vendor
+    }
   	if (err) {
           throw err;
           sendJSONresponse(res, 500, {
@@ -175,7 +196,7 @@ module.exports.getMachine = function(req, res) {
           });
         } else {
           sendJSONresponse(res, 200, {
-            "machine": JSON.stringify(machine)
+            "machine": JSON.stringify(retMachine)
           });
         }
   });
