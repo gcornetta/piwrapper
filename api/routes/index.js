@@ -11,7 +11,6 @@ router.get('/jobs', passport.authenticate('jwt', { session: false }), jobsCtrl.g
 router.post('/jobs', passport.authenticate('jwt', { session: false }), jobsCtrl.addNewJob);
 router.get('/jobs/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.jobsReadOne);
 router.put('/jobs/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.jobsUpdateOne);
-router.put('/jobs/file/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.addJobFile);
 router.delete('/jobs/:jobid', passport.authenticate('jwt', { session: false }), jobsCtrl.jobsDeleteOne);
 router.post('/machine', passport.authenticate('jwt', { session: false }), jobsCtrl.setMachine);
 router.get('/machine', passport.authenticate('jwt', { session: false }), jobsCtrl.getMachine);
