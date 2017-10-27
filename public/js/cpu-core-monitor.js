@@ -1,4 +1,4 @@
-var socket = io.connect( 'http://piwrapper.local:8888/dashboard' );
+var socket = io.connect( window.location.host + '/dashboard' );
 
  socket.on('uptime-updated', function(uptime){
       var upt = 'h: ' + uptime.hours + ' m: ' + uptime.minutes + ' s: ' + uptime.seconds; 

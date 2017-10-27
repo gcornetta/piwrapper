@@ -1,5 +1,5 @@
-var socket = io.connect( 'http://piwrapper.local:8888/devCurrent' );
-var socket2 = io.connect( 'http://piwrapper.local:8888/devStatus' ); 
+var socket = io.connect( window.location.host + '/devCurrent' );
+var socket2 = io.connect( window.location.host + '/devStatus' );
 
  socket.on('connect', function () {
   var lineChartData = [{      

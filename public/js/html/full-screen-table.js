@@ -71,7 +71,7 @@ var jobs = [
     }*/
 ];
 
-var socket = io.connect( 'http://localhost:8888' );
+var socket = io.connect( window.location.host);
 
 socket.on('connect', function(){
     socket.emit('subscribeJobUpdates');
