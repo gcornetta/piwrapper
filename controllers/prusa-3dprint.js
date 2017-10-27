@@ -9,6 +9,7 @@ var sync = require('synchronize');
 var dashboard = require('./lib/dashboard');
 const uuid = require('uuid/v4');
 var formCheck = require('../common/form-check');
+var mkdirp = require('mkdirp');
 
 var dashboardPage = dashboard.dashboardPage;
 var panelNames    = dashboard.panelNames;
@@ -85,7 +86,7 @@ module.exports.upload = function (req, res) {
     if (fileExt != "") {
       var jobPath = path.join(__dirname, '/../public/uploads/designs/local') + '/' + req.user._id;
       if (fs.existsSync(jobPath) == false) {
-         fs.mkdirSync(jobPath);
+        mkdirp.sync(jobPath);
       }
       fifoData.jobId = uuid();
       form.uploadDir = jobPath;

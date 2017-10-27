@@ -14,6 +14,7 @@ var WebSocket = require('ws')
 var printerConfig = require('../lib/fablab/printer-config')
 var siren = require('../lib/siren/siren')
 var formCheck = require('../common/form-check')
+var mkdirp = require('mkdirp');
 
 
 var dashboardPage = dashboard.dashboardPage
@@ -268,6 +269,9 @@ module.exports.upload = function (req, res) {
 
   // store all uploads in the upload directory
   form.uploadDir = path.join(__dirname, '/../public/uploads/img')
+  if (fs.existsSync(form.uploadDir) == false) {
+    mkdirp.sync(form.uploadDir);
+  }
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function (field, file) {
