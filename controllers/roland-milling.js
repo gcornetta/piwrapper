@@ -91,7 +91,17 @@ module.exports.upload = function (req, res) {
       fifoData.jobId = uuid();
       form.uploadDir = jobPath;
       newFileName = fifoData.jobId + '.' + fileExt;
-      fs.rename(file.path, path.join(jobPath, newFileName));
+
+      fs.readFile(file.path, function (err, data) {
+        if (err) throw err;
+        fs.writeFile(path.join(jobPath, newFileName), data, function (err) {
+            if (err) console.log(err);
+        });
+        fs.unlink(file.path, function (err) {
+            if (err) console.log(err);
+        });
+      });
+
       fifoData.jobPath = path.join(jobPath, newFileName);
       req.body.path = fifoData.jobPath;
       req.body.filename = newFileName;
