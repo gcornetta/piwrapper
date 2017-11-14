@@ -1,0 +1,4 @@
+printer
+    -  libcups2-dev
+    -  node-gyp
+    -  Reconfigure locales error: https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian
