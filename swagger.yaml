@@ -1,0 +1,308 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Piwrapper API
+  description: Piwrapper REST API
+
+schemes:
+  - http
+host: localhost:8888
+basePath: /api
+produces:
+  - application/json
+
+paths:
+  /login:
+    post:
+      summary: Login
+      description: |
+        Returns JWT needed for the rest of api calls.
+      parameters:
+       - name: user
+         in: body
+         required: true
+         description: Username and password
+         schema:
+            required:
+              - name
+              - password
+            properties:
+              name:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: A JSON object with the JWT.
+          schema:
+            $ref: '#/definitions/jwtObject'
+        401:
+          description: Unauthorized.
+  /jobs:
+    get:
+      summary: Returns piwrapper jobs
+      description: |
+        Returns an array with the jobs running and pending.
+      tags:
+        - job
+      security:
+        - tokenSecurity: []
+      responses:
+        200:
+          description: A JSON object with the jobs.
+          schema:
+            $ref: '#/definitions/jobsArray'
+        401:
+          description: Unauthorized.
+    post:
+      summary: Job upload
+      description: |
+        Adds jobs to API job queue
+      tags:
+        - job
+      security:
+        - tokenSecurity: []
+      consumes:
+        - multipart/form-data
+      parameters:
+        - $ref: '#/parameters/process'
+        - $ref: '#/parameters/material'
+        - $ref: '#/parameters/pcbFinishing'
+        - $ref: '#/parameters/waxFinishing'
+
+      responses:
+        200:
+          description: A JSON object with the jobId.
+          schema:
+            type: object
+            properties:
+              jobId:
+                type: string
+                format: uuid
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/errorMsg'
+  /jobs/{id}:
+    get:
+      summary: Returns job with the specified id
+      description: |
+        Returns job info.
+      tags:
+        - job
+      security:
+        - tokenSecurity: []
+      parameters:
+        - $ref: '#/parameters/id'
+      responses:
+        200:
+          description: Job object.
+          schema:
+            $ref: '#/definitions/job'
+        401:
+          description: Unauthorized.
+    put:
+      summary: Update job data
+      description: |
+        Update job.
+      tags:
+        - job
+      security:
+        - tokenSecurity: []
+      parameters:
+        - $ref: '#/parameters/id'
+        - $ref: '#/parameters/process'
+        - $ref: '#/parameters/material'
+        - $ref: '#/parameters/pcbFinishing'
+        - $ref: '#/parameters/waxFinishing'
+      responses:
+        200:
+          description: A JSON object with the updated job.
+          schema:
+            $ref: '#/definitions/job'
+        401:
+          description: Unauthorized.
+    delete:
+      summary: Delete pending or queued job
+      description: |
+        Delete job.
+      tags:
+        - job
+      security:
+        - tokenSecurity: []
+      parameters:
+        - $ref: '#/parameters/id'
+      responses:
+        200:
+          description: A JSON object with the deleted job.
+          schema:
+            $ref: '#/definitions/job'
+        401:
+          description: Unauthorized.
+
+
+securityDefinitions:
+  tokenSecurity:
+    type: apiKey
+    in: header
+    name: Authorization
+
+parameters:
+  id:
+      name: id
+      in: path
+      required: true
+      description: The job unique identifier
+      type: string
+      format: uuid
+  process:
+      name: process
+      in: query
+      type: string
+      enum:
+        - cut
+        - halftone
+        - pcb
+        - wax
+      description: |
+        Fabrication processes.
+        3DPrinter and vinyl cutter doesn't have any process.
+        Laser cutter processes are cut and halftone.
+        Milling machine processes are pcb and wax.
+  material:
+      name: material
+      in: query
+      type: string
+      enum:
+        - cardboard
+        - acrylic
+        - wood
+        - mylar
+        - vinyl
+        - epoxy
+        - copper
+      description: |
+        Fabrication materials.
+        3DPrinter and milling machine doesn't have any material to choose.
+        Laser cutter materials are cardboard, acrylic, wood and mylar.
+        Vinyl cutter materials are vinyl, epoxy and cooper.
+  pcbFinishing:
+      name: pcbFinishing
+      in: query
+      type: string
+      enum:
+        - outline_1_32
+        - traces_0_010
+        - traces_1_64
+      description: |
+        Milling machine finishing when process are pcb
+  waxFinishing:
+      name: waxFinishing
+      in: query
+      type: string
+      enum:
+        - rough_cut
+        - finish_cut
+      description: |
+        Milling machine finishing when process are wax
+
+definitions:
+  jwtObject:
+    type: object
+    description: JWT
+    properties:
+      message:
+        type: string
+        description: Response message.
+      token:
+        type: string
+        description: The JWT.
+  errorMsg:
+    type: object
+    description: Error message
+    properties:
+      message:
+        type: string
+        description: Response message.
+  jobsArray:
+    type: object
+    description: jobs array
+    properties:
+      jobs:
+        type: array
+        items:
+          $ref: '#/definitions/smallJob'
+  smallJob:
+    type: object
+    description: Small job with principal data
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: The job unique identifier
+      status:
+        type: string
+        enum:
+          - running
+          - completed
+          - pending
+          - approved
+          - cancelled
+          - error
+      queue:
+        type: string
+        enum:
+          - local
+          - api
+      process:
+        type: string
+        enum:
+          - cut
+          - halftone
+          - pcb
+          - wax
+      priority:
+        type: integer
+        format: int32
+        minimum: 1
+        description: User priority in job queue (-1 if an user job running)
+  job:
+    type: object
+    description: Job object
+    properties:
+      job:
+        type: object
+        description: Job object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: The job unique identifier
+          status:
+            type: string
+            enum:
+            - running
+            - completed
+            - pending
+            - approved
+            - cancelled
+            - error
+          caller:
+            type: string
+            enum:
+            - local
+            - api
+          process:
+            type: string
+            enum:
+              - cut
+              - halftone
+              - pcb
+              - wax
+          jobPath:
+            type: string
+          userId:
+            type: string
+            format: uuid
+            description: The user unique identifier

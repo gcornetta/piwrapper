@@ -55,9 +55,7 @@ module.exports.addNewJob = function(req, res) {
         "message": "Machine isn't configured"
       });
     } else {
-      if (Object.keys(req.body).length === 0){
-        req.body = req.query
-      }
+      req.body = req.query
       formCheck.setDefaultValuesIfNull(req, machine);
       var errors = formCheck.checkJSON(req, machine);
       if (errors) {
@@ -69,7 +67,7 @@ module.exports.addNewJob = function(req, res) {
         job.userId = req.user._id;
         job.jobId = uuid();
         job.status = 'pending'; //status: pending, approved, rejected
-        if (files) {
+        if (files && files.file && files.file[0]) {
             if (!files.file[0].path.endsWith(".png")) {
                 sendJSONresponse(res, 200, {"message": "Unsupported graphic format"});
             } else {
