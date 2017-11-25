@@ -40,10 +40,11 @@ Machine.checkIfMachineConfigured( function (err, machine) {
   if (!machine){                                                                                                                                   
     machine = {};                                                                                                                                  
   }
+  let url = 'http://' + require('os').hostname() + '.local:8888/'
   //spawn zetta server
   var child = cp.fork('./config/zetta.js')
   pid = child.pid
-  child.send(machine)  
+  child.send({m: machine, url: url})  
 })
 
 process.on ('machineUpdated', () => {
@@ -59,10 +60,11 @@ process.on ('machineUpdated', () => {
        if (!machine){                                                                                                                                   
         machine = {};                                                                                                                                  
        }                                                                                                                                                
-       //spawn zetta server                                                                                                                             
+       //spawn zetta server
+       let url = 'http://' + require('os').hostname() + '.local:8888/'                                                                                                                             
        var child = cp.fork('./config/zetta.js')                                                                                                         
        pid = child.pid
-       child.send(machine)
+       child.send({m: machine, url: url})
      })
       
    }

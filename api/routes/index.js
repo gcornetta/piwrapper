@@ -24,7 +24,7 @@ router.post("/login", function(req, res) {
   }
   User.getUserByUsername(name, function(err, user){
     if( ! user ){
-      res.status(401).json({message:"no such user found"});
+      res.status(401).json({message: 'no such user.'});
     }else{
         User.comparePassword(user, password, function(err, isMatch){
             if(err) throw err;
@@ -32,9 +32,9 @@ router.post("/login", function(req, res) {
             if(isMatch){
                 var payload = {id: user._id, expDate: Date.now()+86400000};  //ExpDate += 1Day
                 var token = jwt.sign(payload, secretOrKey);
-                res.json({message: "ok", token: "JWT "+token});
+                res.json({message: 'ok', token: token});
             } else {
-                res.status(401).json({message:"passwords did not match"});
+                res.status(401).json({message: 'passwords did not match'});
             }
         });
     }
