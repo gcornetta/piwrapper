@@ -47,6 +47,7 @@ module.exports.jobsReadOne = function(req, res) {
 /* POST a new job */
 /* /api/jobs */
 module.exports.addNewJob = function(req, res) {
+
   var form = new formidable.IncomingForm()                                                                                                   
   form.keepExtensions = true                                                                                                                 
 
