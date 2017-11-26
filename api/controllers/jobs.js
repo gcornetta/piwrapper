@@ -2,9 +2,10 @@ var machine = require('../../models/machine');
 var fifo = require('../../app').fifo;
 var formCheck = require('../../common/form-check');
 const uuid = require('uuid/v4');
-var multiparty = require('multiparty');
+var formidable = require('formidable')
 var util = require('util');
 var fs = require('fs');
+var mkdirp = require('mkdirp')
 var path = require('path');
 
 var sendJSONresponse = function(res, status, content) {
@@ -46,7 +47,9 @@ module.exports.jobsReadOne = function(req, res) {
 /* POST a new job */
 /* /api/jobs */
 module.exports.addNewJob = function(req, res) {
-  var form = new multiparty.Form();
+  var form = new formidable.IncomingForm()                                                                                                   
+  form.keepExtensions = true                                                                                                                 
+
   form.parse(req, function(err, fields, files) {
     machine.checkIfMachineConfigured(function(err, machine) {
     if (err) throw (err);
@@ -71,23 +74,23 @@ module.exports.addNewJob = function(req, res) {
         job.userId = req.user._id;
         job.jobId = uuid();
         job.status = 'pending'; //status: pending, approved, rejected
-        if (files && files.file && files.file[0]) {
+        if (files && files.file) {
             var format;
             if (machine.type = "3D printer"){
                 format = ".gcode";
             }else{
                 format = ".png";
             }
-            if (!files.file[0].path.endsWith(format)) {
+            if (!files.file.path.endsWith(format)) {
                 sendJSONresponse(res, 200, {
                   "code": 22,
                   "message": "Unsupported file format",
-                  "details": JSON.stringify(files.file[0])
+                  "details": JSON.stringify(files.file)
                 });
             } else {
                 var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + job.jobId ;
                 if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
-                    fs.mkdirParent(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id, null, function(err){
+                    mkdirp(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id, function(err){
                         if (err) {
                             sendJSONresponse(res, 200, {
                                 "code": 23,
@@ -95,7 +98,7 @@ module.exports.addNewJob = function(req, res) {
                                 "details": JSON.stringify(err)
                             });
                         }else{
-                            move(files.file[0].path, newPath, function(){
+                            move(files.file.path, newPath, function(){
                                 job.jobPath = newPath;
                                 fifo.push(job, "api", function(err, job) {
                                     if (err) {
@@ -112,7 +115,7 @@ module.exports.addNewJob = function(req, res) {
                         }
                     });
                 }else{
-                    move(files.file[0].path, newPath, function(){
+                    move(files.file.path, newPath, function(){
                         job.jobPath = newPath;
                         fifo.push(job, "api", function(err, job) {
                             if (err) {
@@ -139,6 +142,11 @@ module.exports.addNewJob = function(req, res) {
     }
     });
   });
+
+
+
+
+
 };
 
 /* PUT /api/jobs/:jobid */
@@ -281,17 +289,3 @@ function move(oldPath, newPath, callback) {
     }
 }
 
-fs.mkdirParent = function(dirPath, mode, callback) {
-  //Call the standard fs.mkdir
-  fs.mkdir(dirPath, mode, function(error) {
-    //When it fail in this way, do the custom steps
-    if (error && ((error.errno === 34)||(error.errno === -2))) {
-      //Create all the parents recursively
-      fs.mkdirParent(path.dirname(dirPath), mode, callback);
-      //And then the directory
-      fs.mkdirParent(dirPath, mode, callback);
-    }
-    //Manually run the callback since we used our own callback to do all these
-    callback && callback(error);
-  });
-};
