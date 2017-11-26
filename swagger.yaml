@@ -7,7 +7,7 @@ info:
 
 schemes:
   - http
-host: localhost:8888
+host: piwrapper.local:8888
 basePath: /api
 produces:
   - application/json
@@ -182,7 +182,7 @@ parameters:
         - vinyl
         - epoxy
         - copper
-      description: |
+      description: >
         Fabrication materials.
         3DPrinter and milling machine doesn't have any material to choose.
         Laser cutter materials are cardboard, acrylic, wood and mylar.
@@ -195,7 +195,7 @@ parameters:
         - outline_1_32
         - traces_0_010
         - traces_1_64
-      description: |
+      description: >
         Milling machine finishing when process are pcb
   waxFinishing:
       name: waxFinishing
@@ -204,9 +204,14 @@ parameters:
       enum:
         - rough_cut
         - finish_cut
-      description: |
+      description: >
         Milling machine finishing when process are wax
-
+  design:
+      in: formData
+      name: design
+      required: true
+      type: file
+      description: The file with the design submitted for fabrication.
 definitions:
   jwtObject:
     type: object

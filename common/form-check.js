@@ -311,6 +311,7 @@ module.exports.setDefaultValuesIfNull = function (req, machine){
             case '3D printer':
                 switch (machine.vendor) {
                   case 'Prusa':
+                    json.machine = 'i3 Berlin'
                     break;
                 }
               break;
