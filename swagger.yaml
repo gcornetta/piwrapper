@@ -16,7 +16,7 @@ paths:
   /login:
     post:
       summary: Login
-      description: |
+      description: >
         Returns JWT needed for the rest of api calls.
       parameters:
        - name: user
@@ -42,7 +42,7 @@ paths:
   /jobs:
     get:
       summary: Returns piwrapper jobs
-      description: |
+      description: >
         Returns an array with the jobs running and pending.
       tags:
         - job
@@ -57,7 +57,7 @@ paths:
           description: Unauthorized.
     post:
       summary: Job upload
-      description: |
+      description: >
         Adds jobs to API job queue
       tags:
         - job
@@ -70,7 +70,7 @@ paths:
         - $ref: '#/parameters/material'
         - $ref: '#/parameters/pcbFinishing'
         - $ref: '#/parameters/waxFinishing'
-
+        - $ref: '#/parameters/design'
       responses:
         200:
           description: A JSON object with the jobId.
@@ -104,7 +104,7 @@ paths:
           description: Unauthorized.
     put:
       summary: Update job data
-      description: |
+      description: >
         Update job.
       tags:
         - job
@@ -165,7 +165,7 @@ parameters:
         - halftone
         - pcb
         - wax
-      description: |
+      description: >
         Fabrication processes.
         3DPrinter and vinyl cutter doesn't have any process.
         Laser cutter processes are cut and halftone.
@@ -208,7 +208,7 @@ parameters:
         Milling machine finishing when process are wax
   design:
       in: formData
-      name: design
+      name: file
       required: true
       type: file
       description: The file with the design submitted for fabrication.
