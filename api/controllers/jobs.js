@@ -30,7 +30,7 @@ module.exports.getQueuedJobs = function(req, res) {
     })
   }
   sendJSONresponse(res, 200, {
-      "jobs": JSON.stringify(lightJobs)
+      jobs: lightJobs
     });
 };
 
@@ -56,9 +56,9 @@ module.exports.addNewJob = function(req, res) {
     if (err) throw (err);
     if (!machine) {
       sendJSONresponse(res, 200, {
-        "code": 20,
-        "message": "Machine not found",
-        "details": JSON.stringify(err)
+        code: 20,
+        message: 'Machine not found',
+        details: err
       });
     } else {
       req.body = req.query
@@ -66,9 +66,9 @@ module.exports.addNewJob = function(req, res) {
       var errors = formCheck.checkJSON(req, machine);
       if (errors) {
         sendJSONresponse(res, 200, {
-          "code": 21,
-          "message": "Bad request",
-          "details": JSON.stringify(errors)
+          code: 21,
+          message: 'Bad request',
+          details: errors
         });
       } else {
         var job = req.body;
@@ -84,9 +84,9 @@ module.exports.addNewJob = function(req, res) {
             }
             if (!files.file.path.endsWith(format)) {
                 sendJSONresponse(res, 200, {
-                  "code": 22,
-                  "message": "Unsupported file format",
-                  "details": JSON.stringify(files.file)
+                  code: 22,
+                  message: 'Unsupported file format',
+                  details: files.file
                 });
             } else {
                 var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + job.jobId ;
@@ -94,9 +94,9 @@ module.exports.addNewJob = function(req, res) {
                     mkdirp(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id, function(err){
                         if (err) {
                             sendJSONresponse(res, 200, {
-                                "code": 23,
-                                "message": "Mkdirp error",
-                                "details": JSON.stringify(err)
+                                code: 23,
+                                message: 'Mkdirp error',
+                                details: err
                             });
                         }else{
                             move(files.file.path, newPath, function(){
@@ -104,12 +104,12 @@ module.exports.addNewJob = function(req, res) {
                                 fifo.push(job, "api", function(err, job) {
                                     if (err) {
                                         sendJSONresponse(res, 200, {
-                                            "code": 24,
-                                            "message": "Fifo error",
-                                            "details": JSON.stringify(err)
+                                            code: 24,
+                                            message: 'Fifo error',
+                                            details: err
                                         });
                                     } else {
-                                        sendJSONresponse(res, 200, {"jobId": job.jobId});
+                                        sendJSONresponse(res, 200, {jobId: job.jobId});
                                     }
                                 });
                             });
@@ -118,15 +118,15 @@ module.exports.addNewJob = function(req, res) {
                 }else{
                     move(files.file.path, newPath, function(){
                         job.jobPath = newPath;
-                        fifo.push(job, "api", function(err, job) {
+                        fifo.push(job, 'api', function(err, job) {
                             if (err) {
                                 sendJSONresponse(res, 200, {
-                                            "code": 24,
-                                            "message": "Fifo error",
-                                            "details": JSON.stringify(err)
+                                            code: 24,
+                                            message: 'Fifo error',
+                                            details: err
                                         });
                             } else {
-                                sendJSONresponse(res, 200, {"jobId": job.jobId});
+                                sendJSONresponse(res, 200, {jobId: job.jobId});
                             }
                         });
                     });
@@ -134,9 +134,9 @@ module.exports.addNewJob = function(req, res) {
             }
         } else {
             sendJSONresponse(res, 200, {
-                "code": 25,
-                "message": "Missing attachment",
-                "details": JSON.stringify(files)
+                code: 25,
+                message: 'Missing attachment',
+                details: files
             });
         }
       }
@@ -153,12 +153,12 @@ module.exports.addNewJob = function(req, res) {
 /* PUT /api/jobs/:jobid */
 module.exports.jobsUpdateOne = function(req, res) {
   machine.checkIfMachineConfigured(function(err, machine) {
-    if (err) throw (err);
+    if (err) throw err;
     if (!machine) {
       sendJSONresponse(res, 200, {
-        "code": 20,
-        "message": "Machine not found",
-        "details": JSON.stringify(err)
+        code: 20,
+        message: 'Machine not found',
+        details: err
       });
     } else {
       if (Object.keys(req.body).length === 0){
@@ -168,22 +168,22 @@ module.exports.jobsUpdateOne = function(req, res) {
       var errors = formCheck.checkJSON(req, machine);
       if (errors) {
         sendJSONresponse(res, 200, {
-          "code": 21,
-          "message": "Bad request",
-          "details": JSON.stringify(errors)
+          code: 21,
+          message: 'Bad request',
+          details: errors
         });
       } else {
         req.body.jobId = req.params.jobid;
-        fifo.update(req.body, "api", function(err, jobUpdated) {
+        fifo.update(req.body, 'api', function(err, jobUpdated) {
           if (err) {
             sendJSONresponse(res, 200, {
-                "code": 24,
-                "message": "Fifo error",
-                "details": JSON.stringify(err)
+                code: 24,
+                message: 'Fifo error',
+                details: err
             });
           } else {
             sendJSONresponse(res, 200, {
-              "job": JSON.stringify(jobUpdated)
+              job: jobUpdated
             });
           }
         });
@@ -194,16 +194,16 @@ module.exports.jobsUpdateOne = function(req, res) {
 
 /* DELETE /api/jobs/:jobid */
 module.exports.jobsDeleteOne = function(req, res) {
-  fifo.removeJob(req.params.jobid, "api", function(err, deletedJob) {
+  fifo.removeJob(req.params.jobid, 'api', function(err, deletedJob) {
     if (err) {
         sendJSONresponse(res, 200, {
-            "code": 24,
-            "message": "Fifo error",
-            "details": JSON.stringify(err)
+            code: 24,
+            message: 'Fifo error',
+            details: err
         });
     }else{
         sendJSONresponse(res, 200, {
-          "job": JSON.stringify(deletedJob)
+          job: deletedJob
         });
     }
   });
@@ -224,15 +224,14 @@ module.exports.setMachine = function(req, res) {
   };
   machine.updateMachine(newConfiguration, function(err, machine) {
     if (err) {
-      throw err;
       sendJSONresponse(res, 500, {
-        "code": 26,
-        "message": "Machine update error",
-        "details": JSON.stringify(err)
+        code: 26,
+        message: 'Machine update error',
+        details: err
         });
     } else {
       sendJSONresponse(res, 200, {
-        "message": "Machine updated successfully"
+        message: 'Machine updated successfully'
       });
     }
 
@@ -243,20 +242,19 @@ module.exports.setMachine = function(req, res) {
 module.exports.getMachine = function(req, res) {
   machine.checkIfMachineConfigured(function(err, machineObj){
     var retMachine = {
-        'machineId': machineObj._id,
-        'type': machineObj.type,
-        'vendor': machineObj.vendor
+        machineId: machineObj._id,
+        type: machineObj.type,
+        vendor: machineObj.vendor
     }
   	if (err) {
-          throw err;
           sendJSONresponse(res, 500, {
-            "code": 20,
-            "message": "Machine not found",
-            "details": JSON.stringify(err)
+            code: 20,
+            message: 'Machine not found',
+            details: err
           });
         } else {
           sendJSONresponse(res, 200, {
-            "machine": JSON.stringify(retMachine)
+            machine: retMachine
           });
         }
   });
