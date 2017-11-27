@@ -71,7 +71,7 @@ module.exports.addNewJob = function(req, res) {
         });
       } else {
         var job = req.body;
-        job.userId = req.user._id;
+        job.userId = fields.user;
         job.jobId = uuid();
         job.status = 'pending'; //status: pending, approved, rejected
         if (files && files.file) {
@@ -142,11 +142,6 @@ module.exports.addNewJob = function(req, res) {
     }
     });
   });
-
-
-
-
-
 };
 
 /* PUT /api/jobs/:jobid */
@@ -201,7 +196,8 @@ module.exports.jobsDeleteOne = function(req, res) {
         });
     }else{
         sendJSONresponse(res, 200, {
-          job: deletedJob
+            message: 'OK',
+            details: "Job deleted successfully"
         });
     }
   });

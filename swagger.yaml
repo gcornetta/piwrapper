@@ -71,6 +71,7 @@ paths:
         - $ref: '#/parameters/pcbFinishing'
         - $ref: '#/parameters/waxFinishing'
         - $ref: '#/parameters/design'
+        - $ref: '#/parameters/user'
       responses:
         200:
           description: A JSON object with the jobId.
@@ -135,9 +136,9 @@ paths:
         - $ref: '#/parameters/id'
       responses:
         200:
-          description: A JSON object with the deleted job.
+          description: A JSON object with OK message
           schema:
-            $ref: '#/definitions/job'
+            $ref: '#/definitions/jobDeleted'
         401:
           description: Unauthorized.
 
@@ -212,6 +213,12 @@ parameters:
       required: true
       type: file
       description: The file with the design submitted for fabrication.
+  user:
+      in: formData
+      name: user
+      type: string
+      description: >
+        Id of the user who sends the job
 definitions:
   jwtObject:
     type: object
@@ -311,3 +318,13 @@ definitions:
             type: string
             format: uuid
             description: The user unique identifier
+  jobDeleted:
+    type: object
+    description: Job deleted response
+    properties:
+      message:
+        type: string
+        description: OK
+      details:
+        type: string
+        description: Job deleted successfully
