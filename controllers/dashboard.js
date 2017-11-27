@@ -81,12 +81,11 @@ var _validateFields = function (req, res) {
   return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri, baudRate: baudRate}
 }
 
-// ToDO: fix this routine we now perform single-end reading
 var _checkCurrentSensor = function () {
   var ADS1115 = 0x01 // 16-bit ADC
   var adc = new ADS1x15(address = 0x48, ic = ADS1115)
 
-  return adc.readADCDifferential23(2048, 250)
+  return adc.readADCSingleEnded(0,2048, 250)
 }
 
 var _getSystemInfo = function () {
