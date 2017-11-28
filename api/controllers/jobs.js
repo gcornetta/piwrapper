@@ -73,18 +73,34 @@ module.exports.addNewJob = function(req, res) {
             } else {
                 var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + job.jobId ;
                 if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
-                    fs.mkdirSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id);
-                }
-                move(files.file[0].path, newPath, function(){
-                    job.jobPath = newPath;
-                    fifo.push(job, "api", function(err, job) {
+                    fs.mkdirParent(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id, null, function(err){
                         if (err) {
                             sendJSONresponse(res, 200, err);
-                        } else {
-                            sendJSONresponse(res, 200, {"jobId": job.jobId});
+                        }else{
+                            move(files.file[0].path, newPath, function(){
+                                job.jobPath = newPath;
+                                fifo.push(job, "api", function(err, job) {
+                                    if (err) {
+                                        sendJSONresponse(res, 200, err);
+                                    } else {
+                                        sendJSONresponse(res, 200, {"jobId": job.jobId});
+                                    }
+                                });
+                            });
                         }
                     });
-                });
+                }else{
+                    move(files.file[0].path, newPath, function(){
+                        job.jobPath = newPath;
+                        fifo.push(job, "api", function(err, job) {
+                            if (err) {
+                                sendJSONresponse(res, 200, err);
+                            } else {
+                                sendJSONresponse(res, 200, {"jobId": job.jobId});
+                            }
+                        });
+                    });
+                }
             }
         } else {
             sendJSONresponse(res, 200, {"message": "Missing attachment"});
@@ -215,3 +231,18 @@ function move(oldPath, newPath, callback) {
         readStream.pipe(writeStream);
     }
 }
+
+fs.mkdirParent = function(dirPath, mode, callback) {
+  //Call the standard fs.mkdir
+  fs.mkdir(dirPath, mode, function(error) {
+    //When it fail in this way, do the custom steps
+    if (error && error.errno === 34) {
+      //Create all the parents recursively
+      fs.mkdirParent(path.dirname(dirPath), mode, callback);
+      //And then the directory
+      fs.mkdirParent(dirPath, mode, callback);
+    }
+    //Manually run the callback since we used our own callback to do all these
+    callback && callback(error);
+  });
+};
