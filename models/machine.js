@@ -266,6 +266,7 @@ var defaultValues = {
     },
     '3D printer':{
         'Prusa':{
+            machine: 'i3 Berlin'
         }
     }
 }
