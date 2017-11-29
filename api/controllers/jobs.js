@@ -196,7 +196,8 @@ module.exports.jobsDeleteOne = function(req, res) {
         });
     }else{
         sendJSONresponse(res, 200, {
-          job: deletedJob
+            message: 'OK',
+            details: "Job deleted successfully"
         });
     }
   });
