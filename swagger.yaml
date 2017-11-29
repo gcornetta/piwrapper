@@ -136,9 +136,9 @@ paths:
         - $ref: '#/parameters/id'
       responses:
         200:
-          description: A JSON object with the deleted job.
+          description: A JSON object with OK message
           schema:
-            $ref: '#/definitions/job'
+            $ref: '#/definitions/jobDeleted'
         401:
           description: Unauthorized.
 
@@ -318,3 +318,13 @@ definitions:
             type: string
             format: uuid
             description: The user unique identifier
+  jobDeleted:
+    type: object
+    description: Job deleted response
+    properties:
+      message:
+        type: string
+        description: OK
+      details:
+        type: string
+        description: Job deleted successfully
