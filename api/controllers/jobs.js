@@ -39,7 +39,7 @@ module.exports.getQueuedJobs = function(req, res) {
 module.exports.jobsReadOne = function(req, res) {
   var job = fifo.getJobById(req.params.jobid, "api");
   sendJSONresponse(res, 200, {
-    "job": JSON.stringify(job)
+    job: job
   });
 };
 
@@ -53,7 +53,6 @@ module.exports.addNewJob = function(req, res) {
 
   form.parse(req, function(err, fields, files) {
     machine.checkIfMachineConfigured(function(err, machine) {
-    if (err) throw (err);
     if (!machine) {
       sendJSONresponse(res, 200, {
         code: 20,
@@ -89,9 +88,9 @@ module.exports.addNewJob = function(req, res) {
                   details: files.file
                 });
             } else {
-                var newPath = path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id+ '/' + job.jobId ;
-                if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id) == false) {
-                    mkdirp(path.join(__dirname, '/../../public/uploads/designs/local') + '/' + req.user._id, function(err){
+                var newPath = path.join(__dirname, '/../../public/uploads/designs/global') + '/' + req.user._id+ '/' + job.jobId ;
+                if (fs.existsSync(path.join(__dirname, '/../../public/uploads/designs/global') + '/' + req.user._id) == false) {
+                    mkdirp(path.join(__dirname, '/../../public/uploads/designs/global') + '/' + req.user._id, function(err){
                         if (err) {
                             sendJSONresponse(res, 200, {
                                 code: 23,
@@ -153,7 +152,6 @@ module.exports.addNewJob = function(req, res) {
 /* PUT /api/jobs/:jobid */
 module.exports.jobsUpdateOne = function(req, res) {
   machine.checkIfMachineConfigured(function(err, machine) {
-    if (err) throw err;
     if (!machine) {
       sendJSONresponse(res, 200, {
         code: 20,
