@@ -71,6 +71,7 @@ paths:
         - $ref: '#/parameters/pcbFinishing'
         - $ref: '#/parameters/waxFinishing'
         - $ref: '#/parameters/design'
+        - $ref: '#/parameters/user'
       responses:
         200:
           description: A JSON object with the jobId.
@@ -212,6 +213,12 @@ parameters:
       required: true
       type: file
       description: The file with the design submitted for fabrication.
+  user:
+      in: formData
+      name: user
+      type: string
+      description: >
+        Id of the user who sends the job
 definitions:
   jwtObject:
     type: object
