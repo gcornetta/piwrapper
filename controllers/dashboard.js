@@ -5,7 +5,6 @@ var os = require('../lib/os/os')
 var mongoose = require('mongoose')
 var User = require('../models/user')
 var Machine = require('../models/machine')
-var ADS1x15 = require('../lib/ads1x15/ADS1x15')
 var dashboard = require('./lib/dashboard')
 var logger = require('../config/winston')
 var url = require('url');
@@ -79,13 +78,6 @@ var _validateFields = function (req, res) {
   }
 
   return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri, baudRate: baudRate}
-}
-
-var _checkCurrentSensor = function () {
-  var ADS1115 = 0x01 // 16-bit ADC
-  var adc = new ADS1x15(address = 0x48, ic = ADS1115)
-
-  return adc.readADCSingleEnded(0,2048, 250)
 }
 
 var _getSystemInfo = function () {
@@ -358,9 +350,6 @@ module.exports.configure = function (req, res) {
                // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
 
                // check if sensor connected
-    if (_checkCurrentSensor() === -1) {
-      dashboardPage.errors = [{param: 'adcVendor', msg: 'Cannot read the current sensor. Check if it is properly connected'}]
-    }
 
       dashboardPage.displayWizard = false
       dashboardPage.machineConfigured = true
