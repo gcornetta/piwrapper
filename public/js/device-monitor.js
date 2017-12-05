@@ -50,7 +50,7 @@ var socket2 = io.connect( window.location.host + '/devStatus' );
        }, 200)
      }
    } else {
-     for (var p = 100; p === 0; p-=10) {                                                                                                        
+     for (var p = 100; p > 0; p-=10) {
        setTimeout(function () {                                                                                                                      
          $(".progress-bar").css('width', p.toString() + '%');                                                                                        
        }, 300)                                                                                                                                       
