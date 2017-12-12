@@ -18,8 +18,9 @@ var JobSchema = new mongoose.Schema({
         required: true},
     createdOn: { //consider the idea to use Timestamp type
         type: Date,
-        "default": Date.now
-    }
+        "default": Date.now },
+    caller: { //api, local
+        type: String }
 });
 
 var AdcSchema = new mongoose.Schema({
@@ -112,7 +113,17 @@ module.exports.updateMachine = function(newConfiguration, callback){
 module.exports.addMachineJob = function(newJob, callback){
         Machine.findOne ({}, function(err, machine){
           if (err) throw(err);
-          machine.queuedJobs.push(newJob);
+          var insert = true;
+          for (var i in machine.queuedJobs){
+            if (machine.queuedJobs[i].jobId === newJob.jobId){
+              insert = false;
+              machine.queuedJobs[i] = newJob;
+              break;
+            }
+          }
+          if (insert){
+            machine.queuedJobs.push(newJob);
+          }
           machine.save(callback);
         });
 }
@@ -126,17 +137,14 @@ module.exports.getMachineById = function(id, callback){
     Machine.findById(id, callback);
 }
 
-module.exports.getJobById = function(id, callback){
-    Machine.queuedJobs.find({jobId : id}, callback);
+module.exports.getJobs = function(callback){
+    Machine.findOne({}, function(err, machine){
+        callback(err, machine.queuedJobs);
+    });
 }
 
 module.exports.removeJobById = function(id, callback){
     Machine.update({}, { $pull: { queuedJobs : { jobId : id } } }, callback);
-}
-
-module.exports.removeJobByOwner = function(owner, callback){
-    var query = {owner : owner};
-    Machine.queuedJobs.findByOneAndRemove(query, callback);
 }
 
 module.exports.updateJob = function(job, callback){
