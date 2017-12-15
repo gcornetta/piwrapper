@@ -140,7 +140,8 @@ var jobsTableText = {
   status: i18n.__('w_00247'),
   actions: i18n.__('w_00248'),
   jobsTable: i18n.__('w_00249'),
-  caller: i18n.__('w_00257')
+  caller: i18n.__('w_00257'),
+  material: i18n.__('w_00266')
 }
 
 exports.jobsTableText = jobsTableText
