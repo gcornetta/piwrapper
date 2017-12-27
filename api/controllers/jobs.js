@@ -71,12 +71,13 @@ module.exports.addNewJob = function(req, res) {
         });
       } else {
         var job = req.body;
-        job.userId = fields.user;
+        job.userId = job.user;
+        delete job.user;
         job.jobId = uuid();
         job.status = 'pending'; //status: pending, approved, rejected
         if (files && files.file) {
             var format;
-            if (machine.type = "3D printer"){
+            if (machine.type === "3D printer"){
                 format = ".gcode";
             }else{
                 format = ".png";
