@@ -214,7 +214,7 @@ parameters:
       type: file
       description: The file with the design submitted for fabrication.
   user:
-      in: formData
+      in: query
       name: user
       type: string
       description: >
