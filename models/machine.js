@@ -2,27 +2,6 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var printer = require('../lib/fablab/printer-config');
 
-
-var JobSchema = new mongoose.Schema({
-    jobId    : {
-        type: String,
-        required: true},
-    userId    : {
-        type: String},
-    ownerIP  : {
-        type: String},
-    jobPath: {
-        type: String},
-    status   : {    //pending, queued, running, paused, cancelled
-        type: String,
-        required: true},
-    createdOn: { //consider the idea to use Timestamp type
-        type: Date,
-        "default": Date.now },
-    caller: { //api, local
-        type: String }
-});
-
 var AdcSchema = new mongoose.Schema({
     vendor: {
          type: String,
@@ -70,7 +49,7 @@ var MachineSchema = new mongoose.Schema({
     defaultValues: mongoose.Schema.Types.Mixed,
     isConfigured : Boolean,
     adcDevice : [AdcSchema],
-    queuedJobs: [JobSchema]
+    queuedJobs: []
 });
 
 var Machine = module.exports = mongoose.model('Machine', MachineSchema);
