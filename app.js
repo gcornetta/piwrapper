@@ -44,7 +44,7 @@ Machine.checkIfMachineConfigured( function (err, machine) {
   //spawn zetta server
   var child = cp.fork('./config/zetta.js')
   pid = child.pid
-  child.send({m: machine, url: url})  
+  child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
 })
 
 process.on ('machineUpdated', () => {
@@ -64,7 +64,7 @@ process.on ('machineUpdated', () => {
        let url = 'http://' + require('os').hostname() + '.local:8888/'                                                                                                                             
        var child = cp.fork('./config/zetta.js')                                                                                                         
        pid = child.pid
-       child.send({m: machine, url: url})
+       child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
      })
       
    }
