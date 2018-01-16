@@ -4,7 +4,7 @@ function acceptJob(job, index){
     if ((job.status === "pending")||(job.status === "error")){
         socket.emit('acceptJob', job.jobId);
     }else{
-        alert("Job already accepted");
+        alert("Job can't be accepted");
     }
 }
 
