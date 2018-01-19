@@ -72,6 +72,7 @@ paths:
         - $ref: '#/parameters/waxFinishing'
         - $ref: '#/parameters/design'
         - $ref: '#/parameters/user'
+        - $ref: '#/parameters/username'
       responses:
         200:
           description: A JSON object with the jobId.
@@ -219,6 +220,12 @@ parameters:
       type: string
       description: >
         Id of the user who sends the job
+  username:
+      in: query
+      name: username
+      type: string
+      description: >
+        Name of the user who sends the job
 definitions:
   jwtObject:
     type: object

@@ -164,7 +164,8 @@ module.exports.upload = function (req, res) {
            dashboardPage.errors = errors;
            res.render('dashboard', dashboardPage);
           } else {
-            dashboardPage.errors = null; 
+            dashboardPage.errors = null;
+            fifoData.username = req.user.username;
             fifoData.userId = req.user._id;
             fifoData.jobId = uuid();
             fifoData.status = 'pending'; //status: pending, approved, rejected

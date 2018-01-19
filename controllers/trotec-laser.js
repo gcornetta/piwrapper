@@ -187,6 +187,7 @@ module.exports.upload = function (req, res) {
             dashboardPage.errors = null;
             fifoData.userId = req.user._id;
             fifoData.jobId = uuid();
+            fifoData.username = req.user.username;
             fifoData.status = 'pending'; //status: pending, approved, rejected
             fifo.push(fifoData, "local", function(err, job){
                             if (err){

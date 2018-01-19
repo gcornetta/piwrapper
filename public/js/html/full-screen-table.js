@@ -83,6 +83,7 @@ socket.on('clearTable', function() {
 });
 
 socket.on('addJob', function(job) {
+    job.username = job.username || job.userId;
    jobs.push(job);
    $table.bootstrapTable('load', jobs);
 });
