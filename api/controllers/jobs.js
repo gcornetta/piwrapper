@@ -71,7 +71,7 @@ module.exports.addNewJob = function(req, res) {
         });
       } else {
         var job = req.body;
-        job.userId = job.user;
+        job.userId = job.user || req.user._id;
         delete job.user;
         job.jobId = uuid();
         job.status = 'pending'; //status: pending, approved, rejected
