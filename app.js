@@ -24,7 +24,6 @@ const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
 const swaggerDoc = YAML.load('swagger.yaml')
 
-
 var asyncOnExit = require('async-on-exit')
 
 asyncOnExit(function () {

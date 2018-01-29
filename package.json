@@ -68,7 +68,7 @@
     "selenium-webdriver": "*"
   },
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node --no-warnings ./bin/www",
     "test": "standard && node tests/app/test.js",
     "test-selenium": "node tests/app/test-selenium.js"
   }
