@@ -40,8 +40,13 @@ process.once('SIGUSR2', function(){
 //Listen to SIGINT emitted on application termination
 process.on('SIGINT', function(){
   gracefulShutdown('app termination', function(){
-    process.exit(0);
   });
+});
+
+process.on('SIGTERM', function() {
+  gracefulShutdown('nodemon restart', function(){
+    process.kill(process.pid, 'SIGUSR2');
+  });  
 });
 
 //Bring in your schemas and models

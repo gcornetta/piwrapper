@@ -19,6 +19,7 @@
     "cpu-stat": "^2.0.1",
     "crypto": "0.0.3",
     "debug": "~2.2.0",
+    "dotenv": "^5.0.0",
     "ejs": "~2.4.1",
     "epoch-charting": "^0.8.4",
     "express": "~4.13.4",

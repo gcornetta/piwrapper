@@ -654,7 +654,7 @@ module.exports.siren = function (req, res) {
  if (!dashboardPage.userName) {
      res.redirect('/dashboard')
  } else {
-    siren.connect('http://piwrapper.local:1337/', conn => {
+    siren.connect('http://'+ process.env.HOSTNAME + ':1337/', conn => {
         if (conn.err == null) {
 
         conn.entity.data.links

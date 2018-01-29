@@ -1,4 +1,5 @@
 var express = require('express');
+require ('dotenv').config()
 var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
@@ -32,18 +33,20 @@ asyncOnExit(function () {
         if (err) {
           self.log(`${err.toString().toLowerCase()}.`)
         } else {
-          pm2.sendSignalToProcessName('SIGTERM', 'zetta', (err, result) =>{
+          pm2.stop('zetta', (err, result) =>{
             if (err) {
               logger.error(`${err.toString().toLowerCase()}.`)
             } else {
               logger.info ('@piwrapper: Gracefully terminating child processes')
             }
             pm2.disconnect()
+            resolve()
           })
         }
     })
   });
 }, true);
+
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
