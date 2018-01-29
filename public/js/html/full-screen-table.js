@@ -22,6 +22,10 @@ function imageJob(job, index){
     window.location.replace(job.jobPath.slice(job.jobPath.indexOf('/public')+7, job.jobPath.length));
 }
 
+function auxFileJob(job, index){
+    window.location.replace(job.jobPath.slice(job.jobPath.indexOf('/public')+7, job.jobPath.length)+"_aux");
+}
+
 function dataJob(job, index){
     $('#modalBody').empty();
     try {
@@ -176,6 +180,9 @@ var $table = $('#fresh-table'),
                 'click .image': function (e, value, row, index) {
                     imageJob(row, index);
                 },
+                'click .file': function (e, value, row, index) {
+                    auxFileJob(row, index);
+                },
                 'click .data': function (e, value, row, index) {
                     dataJob(row, index);
                 }
@@ -202,6 +209,9 @@ var $table = $('#fresh-table'),
                 '</a>',
                 '<a rel="tooltip" title="Image" class="table-action image" href="javascript:void(0)">',
                     '<i class="fa fa-image"></i>',
+                '</a>',
+                '<a rel="tooltip" title="File" class="table-action file" href="javascript:void(0)">',
+                    '<i class="fa fa-folder-open-o"></i>',
                 '</a>',
                 '<a rel="tooltip" title="Data" class="table-action data" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">',
                     '<i class="fa fa-file-code-o"></i>',

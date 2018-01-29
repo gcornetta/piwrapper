@@ -100,35 +100,71 @@ module.exports.addNewJob = function(req, res) {
                             });
                         }else{
                             move(files.file.path, newPath, function(){
-                                job.jobPath = newPath;
-                                fifo.push(job, "api", function(err, job) {
-                                    if (err) {
-                                        sendJSONresponse(res, 200, {
-                                            code: 24,
-                                            message: 'Fifo error',
-                                            details: err
+                                if (files.auxFile){
+                                    move(files.auxFile.path, newPath+"_aux", function(){
+                                        job.auxFile = newPath+"_aux";
+                                        job.jobPath = newPath;
+                                        fifo.push(job, "api", function(err, job) {
+                                            if (err) {
+                                                sendJSONresponse(res, 200, {
+                                                    code: 24,
+                                                    message: 'Fifo error',
+                                                    details: err
+                                                });
+                                            } else {
+                                                sendJSONresponse(res, 200, {jobId: job.jobId});
+                                            }
                                         });
-                                    } else {
-                                        sendJSONresponse(res, 200, {jobId: job.jobId});
-                                    }
-                                });
+                                    })
+                                }else{
+                                    job.jobPath = newPath;
+                                    fifo.push(job, "api", function(err, job) {
+                                        if (err) {
+                                            sendJSONresponse(res, 200, {
+                                                code: 24,
+                                                message: 'Fifo error',
+                                                details: err
+                                            });
+                                        } else {
+                                            sendJSONresponse(res, 200, {jobId: job.jobId});
+                                        }
+                                    });
+                                }
                             });
                         }
                     });
                 }else{
                     move(files.file.path, newPath, function(){
-                        job.jobPath = newPath;
-                        fifo.push(job, 'api', function(err, job) {
-                            if (err) {
-                                sendJSONresponse(res, 200, {
-                                            code: 24,
-                                            message: 'Fifo error',
-                                            details: err
+                                if (files.auxFile){
+                                    move(files.auxFile.path, newPath+"_aux", function(){
+                                        job.auxFile = newPath+"_aux";
+                                        job.jobPath = newPath;
+                                        fifo.push(job, "api", function(err, job) {
+                                            if (err) {
+                                                sendJSONresponse(res, 200, {
+                                                    code: 24,
+                                                    message: 'Fifo error',
+                                                    details: err
+                                                });
+                                            } else {
+                                                sendJSONresponse(res, 200, {jobId: job.jobId});
+                                            }
                                         });
-                            } else {
-                                sendJSONresponse(res, 200, {jobId: job.jobId});
-                            }
-                        });
+                                    })
+                                }else{
+                                    job.jobPath = newPath;
+                                    fifo.push(job, "api", function(err, job) {
+                                        if (err) {
+                                            sendJSONresponse(res, 200, {
+                                                code: 24,
+                                                message: 'Fifo error',
+                                                details: err
+                                            });
+                                        } else {
+                                            sendJSONresponse(res, 200, {jobId: job.jobId});
+                                        }
+                                    });
+                                }
                     });
                 }
             }
