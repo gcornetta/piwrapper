@@ -73,18 +73,28 @@ pm2.connect(err => {
                machine = {};
               }
               let url = 'http://' + require('os').hostname() + '.local:8888/'
-              pm2.sendDataToProcessId(0, {
-                type: 'process:msg',
-                data: {m: machine, url: url, jobs: fifo.getJobStatusObject()},
-                topic: 'my topic'
-                }, (err, result) =>{
-                    if (err) {
-                        logger.error(`${err.toString().toLowerCase()}.`)
-                    } else {
-                        logger.info ('@wrapper: Machine send to zetta server')
-                    }
-                    pm2.disconnect()
-              })
+              let processId = -1
+              for (var pid in app) {
+                 if (app[pid].name === 'zetta') {
+                   processId = app[pid].pm_id
+                 }
+              }
+              if (processId !== -1) {
+                pm2.sendDataToProcessId(processId, {
+                  type: 'process:msg',
+                  data: {m: machine, url: url, jobs: fifo.getJobStatusObject()},
+                  topic: 'my topic'
+                  }, (err, result) =>{
+                      if (err) {
+                          logger.error(`${err.toString().toLowerCase()}.`)
+                      } else {
+                          logger.info ('@wrapper: Machine send to zetta server')
+                      }
+                      pm2.disconnect()
+                })
+             } else {
+               logger.error(`@main app: zetta pm2_id not found.`)
+             }   
        })
 
   })
