@@ -310,8 +310,9 @@ module.exports.setDefaultValuesIfNull = function (req, machine){
 
             case '3D printer':
                 switch (machine.vendor) {
+                  //TODO: Change parameter name
                   case 'Prusa':
-                    json.machine = json.machine || machine.defaultValues.machine
+                    json.machine = machine.defaultValues.machine
                     break;
                 }
               break;
