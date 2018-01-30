@@ -19,11 +19,34 @@ var store = new MongoStore({mongooseConnection: mongoose.connection});
 var terminate = require('terminate')
 var cp = require('child_process')
 var Machine = require('./models/machine')
+var child;
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
 const swaggerDoc = YAML.load('swagger.yaml')
 
+let exitHandler = function () {
+  if (child) {
+    logger.info('@piwrapper: Terminating zetta server...');
+    child.kill();
+  }
+  process.exit (0);
+}
+
+process.on ('SIGINT', () => {
+  logger.info ('@piwrapper: Detected CTRL+C...');
+  exitHandler()
+})
+
+process.on('SIGUSR1', () => {
+  console.log ('\nDetected SIGUSR1...');
+  exitHandler()
+})
+
+process.on('SIGUSR2', () => {
+  console.log ('\nDetected SIGUSR2...');
+  exitHandler()
+})
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
@@ -42,7 +65,7 @@ Machine.checkIfMachineConfigured( function (err, machine) {
   }
   let url = 'http://' + require('os').hostname() + '.local:8888/'
   //spawn zetta server
-  var child = cp.fork('./config/zetta.js')
+  child = cp.fork('./config/zetta.js')
   pid = child.pid
   child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
 })
@@ -62,7 +85,7 @@ process.on ('machineUpdated', () => {
        }                                                                                                                                                
        //spawn zetta server
        let url = 'http://' + require('os').hostname() + '.local:8888/'                                                                                                                             
-       var child = cp.fork('./config/zetta.js')                                                                                                         
+       child = cp.fork('./config/zetta.js')
        pid = child.pid
        child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
      })
