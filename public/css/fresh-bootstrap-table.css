@@ -1544,6 +1544,12 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .fresh-table[class*="full-color-white"] .table td a {
   color: #666666;
 }
+.fresh-table[class*="full-color-white"] .table td a:hover {
+  color: #2ca8fe;
+}
+.fresh-table[class*="full-color-white"] .table td a:focus {
+  color: #666666;
+}
 .fresh-table[class*="full-color-white"] table {
   color: #666666;
 }
