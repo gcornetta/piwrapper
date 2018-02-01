@@ -29,37 +29,47 @@ function auxFileJob(job, index){
 function dataJob(job, index){
     $('#modalBody').empty();
     try {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", job.jobPath.slice(job.jobPath.indexOf('/public')+7, job.jobPath.length));
-        xhr.responseType = "blob";
-        xhr.onerror = function() {reject("Network error.")};
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var blob = xhr.response;
-                var urlCreator = window.URL || window.webkitURL;
-                var imageUrl = urlCreator.createObjectURL( blob );
-                var img = new Image();
-                img.onload= function(){
-                    var fileReader = new FileReader();
-                    fileReader.onload = function() {
-                        var dpi = getDPI(this.result)
-                        var alertTxt = "Dpi: "+dpi+"\n";
-                        alertTxt = alertTxt.concat("Size in pixels: "+img.width+" x "+img.height+"\n");
-                        alertTxt = alertTxt.concat("Size in cm: "+(2.54 * img.width / dpi).toFixed(2)+" x "+(2.54 * img.height / dpi).toFixed(2)+"\n");
-                        for (var i in job){
-                            if (i !== 'jobPath'){
-                                alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");
+        if (job.machine !== "i3 Berlin"){
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", job.jobPath.slice(job.jobPath.indexOf('/public')+7, job.jobPath.length));
+            xhr.responseType = "blob";
+            xhr.onerror = function() {reject("Network error.")};
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var blob = xhr.response;
+                    var urlCreator = window.URL || window.webkitURL;
+                    var imageUrl = urlCreator.createObjectURL( blob );
+                    var img = new Image();
+                    img.onload= function(){
+                        var fileReader = new FileReader();
+                        fileReader.onload = function() {
+                            var dpi = getDPI(this.result)
+                            var alertTxt = "Dpi: "+dpi+"\n";
+                            alertTxt = alertTxt.concat("Size in pixels: "+img.width+" x "+img.height+"\n");
+                            alertTxt = alertTxt.concat("Size in cm: "+(2.54 * img.width / dpi).toFixed(2)+" x "+(2.54 * img.height / dpi).toFixed(2)+"\n");
+                            for (var i in job){
+                                if (i !== 'jobPath'){
+                                    alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");
+                                }
                             }
-                        }
-                        $('#modalBody').append(alertTxt);
-                    };
-                    fileReader.readAsArrayBuffer(xhr.response);
+                            $('#modalBody').append(alertTxt);
+                        };
+                        fileReader.readAsArrayBuffer(xhr.response);
+                    }
+                    img.src = imageUrl;
                 }
-                img.src = imageUrl;
+                else {console.log("Loading error:" + xhr.statusText)}
+            };
+            xhr.send();
+        }else{
+            var alertTxt = "";
+            for (var i in job){
+                if (i !== 'jobPath'){
+                    alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");
+                }
             }
-            else {console.log("Loading error:" + xhr.statusText)}
-        };
-        xhr.send();
+            $('#modalBody').append(alertTxt);
+        }
     }
     catch(err) {console.log(err.message)}
 }
