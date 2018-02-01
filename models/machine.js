@@ -118,7 +118,12 @@ module.exports.getMachineById = function(id, callback){
 
 module.exports.getJobs = function(callback){
     Machine.findOne({}, function(err, machine){
-        callback(err, machine.queuedJobs);
+        if ((machine)&&(machine.queuedJobs)){
+            callback(err, machine.queuedJobs);
+        }else{
+            callback(err,[]);
+        }
+
     });
 }
 
