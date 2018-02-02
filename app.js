@@ -17,36 +17,34 @@ var passportSocketIo = require('passport.socketio');
 const MongoStore = require('connect-mongo')(session);
 var store = new MongoStore({mongooseConnection: mongoose.connection});
 var terminate = require('terminate')
-var cp = require('child_process')
+var pm2 = require('pm2')
 var Machine = require('./models/machine')
-var child;
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
 const swaggerDoc = YAML.load('swagger.yaml')
 
-let exitHandler = function () {
-  if (child) {
-    logger.info('@piwrapper: Terminating zetta server...');
-    child.kill();
-  }
-  process.exit (0);
-}
 
-process.on ('SIGINT', () => {
-  logger.info ('@piwrapper: Detected CTRL+C...');
-  exitHandler()
-})
+var asyncOnExit = require('async-on-exit')
 
-process.on('SIGUSR1', () => {
-  console.log ('\nDetected SIGUSR1...');
-  exitHandler()
-})
-
-process.on('SIGUSR2', () => {
-  console.log ('\nDetected SIGUSR2...');
-  exitHandler()
-})
+asyncOnExit(function () {
+  return new Promise(function (resolve, reject) {
+    pm2.connect ( function(err) {
+        if (err) {
+          self.log(`${err.toString().toLowerCase()}.`)
+        } else {
+          pm2.sendSignalToProcessName('SIGTERM', 'zetta', (err, result) =>{
+            if (err) {
+              logger.error(`${err.toString().toLowerCase()}.`)
+            } else {
+              logger.info ('@piwrapper: Gracefully terminating child processes')
+            }
+            pm2.disconnect()
+          })
+        }
+    })
+  });
+}, true);
 
 //create a global event emitter
 var eventEmitter = new events.EventEmitter();
@@ -57,41 +55,37 @@ var i18n = require('./i18n');
 //start mongoDB
 var db = require('./config/db');
 
-var pid 
-Machine.checkIfMachineConfigured( function (err, machine) {                                                                                      
-  if (err) throw err                                                                                                                               
-  if (!machine){                                                                                                                                   
-    machine = {};                                                                                                                                  
+pm2.connect(err => {
+  if (err) {
+    logger.error(`${err.toString().toLowerCase()}.`)
+    process.exit(2);
   }
-  let url = 'http://' + require('os').hostname() + '.local:8888/'
-  //spawn zetta server
-  child = cp.fork('./config/zetta.js')
-  pid = child.pid
-  child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
-})
 
-process.on ('machineUpdated', () => {
-    logger.info('@zetta: Updating machine configuration');  
-    terminate(pid, function(err, done){
-    if(err) {   
-       logger.error('@zetta: Unable to terminate zetta process');  
-    }
-    else {
-     logger.info('@zetta: Restarting zetta server with the new configuration');  
-     Machine.checkIfMachineConfigured( function (err, machine) {                                                                                        
-       if (err) throw err                                                                                                                               
-       if (!machine){                                                                                                                                   
-        machine = {};                                                                                                                                  
-       }                                                                                                                                                
-       //spawn zetta server
-       let url = 'http://' + require('os').hostname() + '.local:8888/'                                                                                                                             
-       child = cp.fork('./config/zetta.js')
-       pid = child.pid
-       child.send({m: machine, url: url, jobs: fifo.getJobStatusObject()})
-     })
-      
-   }
-});
+  pm2.start({
+    script    : './config/zetta.js',
+    max_memory_restart : '100M'
+  }, (err, app) => {
+       Machine.checkIfMachineConfigured( function (err, machine) {
+              if (err) throw err
+              if (!machine){
+               machine = {};
+              }
+              let url = 'http://' + require('os').hostname() + '.local:8888/'
+              pm2.sendDataToProcessId(0, {
+                type: 'process:msg',
+                data: {m: machine, url: url, jobs: fifo.getJobStatusObject()},
+                topic: 'my topic'
+                }, (err, result) =>{
+                    if (err) {
+                        logger.error(`${err.toString().toLowerCase()}.`)
+                    } else {
+                        logger.info ('@wrapper: Machine send to zetta server')
+                    }
+                    pm2.disconnect()
+              })
+       })
+
+  })
 })
 
 

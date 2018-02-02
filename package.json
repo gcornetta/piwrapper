@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@raymond-lam/priority-queue": "^2.0.0",
+    "async-on-exit": "^0.1.0",
     "bluebird": "^3.5.0",
     "body-parser": "~1.15.1",
     "colors": "^1.1.2",
@@ -39,6 +40,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "passport.socketio": "^3.7.0",
+    "pm2": "^2.9.3",
     "pngjs": "^3.0.0",
     "pty.js": "^0.3.1",
     "request": "^2.82.0",
