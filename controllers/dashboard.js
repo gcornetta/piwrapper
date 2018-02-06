@@ -30,6 +30,7 @@ var _validateFields = function (req, res) {
   var type = req.body.machineType
   var name = req.body.machineName
   var threshCurr = req.body.currentThreshold
+  var hysteresis = req.body.hysteresis
   var sampleTime = req.body.samplingTime
   var dutyCycle = req.body.dutyCycle
   var adcVendor = req.body.adcVendor
@@ -42,6 +43,7 @@ var _validateFields = function (req, res) {
   req.checkBody('machineType', validationMsg.type).notEmpty()
   req.checkBody('machineName', validationMsg.name).notEmpty()
   req.checkBody('currentThreshold', validationMsg.threshCurr).notEmpty().isInt()
+  req.checkBody('hysteresis', validationMsg.hysteresis).notEmpty().isInt()
   req.checkBody('samplingTime', validationMsg.sampleTime).notEmpty().isInt()
   req.checkBody('dutyCycle', validationMsg.dutyCycle).notEmpty().isInt({ min: 0, max: 99 })
   req.checkBody('adcVendor', validationMsg.adcVendor).notEmpty()
@@ -77,7 +79,7 @@ var _validateFields = function (req, res) {
     }
   }
 
-  return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri, baudRate: baudRate}
+  return {errors: errors, vendor: vendor, type: type, name: name, threshCurr: threshCurr, hysteresis: hysteresis, sampleTime: sampleTime, dutyCycle: dutyCycle, adcVendor: adcVendor, adcDevice: adcDevice, deviceUri: deviceUri, baudRate: baudRate}
 }
 
 var _getSystemInfo = function () {
@@ -317,6 +319,7 @@ module.exports.configure = function (req, res) {
   var type = validationResponse.type
   var name = validationResponse.name
   var threshCurr = validationResponse.threshCurr
+  var hysteresis = validationResponse.hysteresis
   var sampleTime = validationResponse.sampleTime
   var dutyCycle = validationResponse.dutyCycle
   var adcVendor = validationResponse.adcVendor
@@ -332,6 +335,7 @@ module.exports.configure = function (req, res) {
       type: type,
       name: name,
       threshCurr: threshCurr,
+      hysteresis: hysteresis,
       sampleTime: sampleTime,
       dutyCycle: dutyCycle,
       isConfigured: true,
@@ -380,6 +384,7 @@ module.exports.settings = function (req, res) {
             type: machine.type,
             vendor: machine.vendor,
             threshCurr: machine.threshCurr,
+            hysteresis: machine.hysteresis,
             sampleTime: machine.sampleTime,
             dutyCycle: machine.dutyCycle,
             adcVendor: machine.adcDevice[0].vendor,
@@ -407,6 +412,7 @@ module.exports.machineUpdate = function (req, res) {
   var type = validationResponse.type
   var name = validationResponse.name
   var threshCurr = validationResponse.threshCurr
+  var hysteresis = validationResponse.hysteresis
   var sampleTime = validationResponse.sampleTime
   var dutyCycle = validationResponse.dutyCycle
   var adcVendor = validationResponse.adcVendor
@@ -424,6 +430,7 @@ module.exports.machineUpdate = function (req, res) {
       type: type,
       name: name,
       threshCurr: threshCurr,
+      hysteresis: hysteresis,
       sampleTime: sampleTime,
       dutyCycle: dutyCycle,
       isConfigured: true,
@@ -495,6 +502,7 @@ module.exports.machineUpdate = function (req, res) {
             type: machine.type,
             vendor: machine.vendor,
             threshCurr: machine.threshCurr,
+            hysteresis: machine.hysteresis,
             sampleTime: machine.sampleTime,
             dutyCycle: machine.dutyCycle,
             adcVendor: machine.adcDevice[0].vendor,

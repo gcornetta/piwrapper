@@ -120,6 +120,7 @@ var settingsText = {
   machineThreshCurr: i18n.__('w_00258'),
   machineSampleTime: i18n.__('w_00259'),
   machineDutyCycle: i18n.__('w_00260'),
+  machineHysteresis: i18n.__('w_00267'),
   adcVendor: i18n.__('w_00110'),
   adcDevice: i18n.__('w_00111'),
   updateSettings: i18n.__('w_00112'),

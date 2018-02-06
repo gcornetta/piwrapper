@@ -52,28 +52,28 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label><%=machineSettings.machineThreshCurr%></label>
-                    <div class="input-group">
                       <input type="number" name="currentThreshold" value="<%=machine.threshCurr%>" class="form-control">
-                    </div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><%=machineSettings.machineHysteresis%></label>
+                      <input type="number" name="hysteresis" value="<%=machine.hysteresis%>" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3">
                   <div class="form-group">
                     <label><%=machineSettings.machineSampleTime%></label>
-                    <div class="input-group">
                       <input type="number" name="samplingTime" value="<%=machine.sampleTime%>" class="form-control">
-                    </div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label><%=machineSettings.machineDutyCycle%></label>
-                    <div class="input-group">
                       <input type="number" name="dutyCycle" value="<%=machine.dutyCycle%>" class="form-control">
-                    </div>
                   </div>
                 </div>
               </div>

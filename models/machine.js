@@ -30,6 +30,10 @@ var MachineSchema = new mongoose.Schema({
     	type: Number,
         required: true
     },
+    hysteresis: { //hysteresis in mA to switch from idle to busy
+    	type: Number,
+        required: true
+    },
     sampleTime: { //driver current sample time
         type: Number,
         required: true

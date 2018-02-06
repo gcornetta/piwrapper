@@ -123,7 +123,7 @@
                   <h2 class="text-center text-space">Just the last inputs, then <br><small>Click on "<b>Finish</b>" to submit configuration</small></h2>
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label> <%=machine.currentThreshold%> (mA) </label>
                           <div class="input-group">
@@ -131,7 +131,15 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label> <%=machineSettings.machineHysteresis%> (mA) </label>
+                          <div class="input-group">
+                            <input type="number" name="hysteresis" placeholder="10" value="10" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label><%=machine.samplingTime%> (ms) </label>
                           <div class="input-group">
@@ -139,7 +147,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div class="form-group">
                           <label> <%=machine.dutyCycle%> (%) </label>
                           <div class="input-group">

@@ -41,6 +41,7 @@ var dashboardPage = {
     machineThreshCurr: settingsText.machineThreshCurr,
     machineSampleTime: settingsText.machineSampleTime,
     machineDutyCycle: settingsText.machineDutyCycle,
+    machineHysteresis: settingsText.machineHysteresis,
     adcVendor: settingsText.adcVendor,
     adcDevice: settingsText.adcDevice,
     updateSettings: settingsText.updateSettings,
