@@ -6,7 +6,7 @@ const startZetta = (machine) => {
   zetta()
     .name('machine-wrapper2')
     .link ('http://pigateway.local:1337')
-    .use (device, machine.m.name, machine.url, machine.m.type, machine.m.vendor, machine.m.threshCurr, machine.m.sampleTime, machine.m.dutyCycle, machine.jobs)
+    .use (device, machine.m.name, machine.url, machine.m.type, machine.m.vendor, machine.m.threshCurr, machine.m.sampleTime, machine.m.hysteresis, machine.m.dutyCycle, machine.jobs)
     .listen(1337, function () {
        logger.info('@zetta: Server started on piwrapper');
     })
