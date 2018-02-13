@@ -37,7 +37,7 @@ module.exports.getQueuedJobs = function(req, res) {
 
 /* GET a job by the id */
 module.exports.jobsReadOne = function(req, res) {
-  var job = fifo.getJobById(req.params.jobid, "api");
+  var job = fifo.getJobById(req.params.jobid, "global");
   sendJSONresponse(res, 200, {
     job: job
   });
@@ -104,7 +104,7 @@ module.exports.addNewJob = function(req, res) {
                                     move(files.auxFile.path, newPath+"_aux", function(){
                                         job.auxFile = newPath+"_aux";
                                         job.jobPath = newPath;
-                                        fifo.push(job, "api", function(err, job) {
+                                        fifo.push(job, "global", function(err, job) {
                                             if (err) {
                                                 sendJSONresponse(res, 200, {
                                                     code: 24,
@@ -118,7 +118,7 @@ module.exports.addNewJob = function(req, res) {
                                     })
                                 }else{
                                     job.jobPath = newPath;
-                                    fifo.push(job, "api", function(err, job) {
+                                    fifo.push(job, "global", function(err, job) {
                                         if (err) {
                                             sendJSONresponse(res, 200, {
                                                 code: 24,
@@ -139,7 +139,7 @@ module.exports.addNewJob = function(req, res) {
                                     move(files.auxFile.path, newPath+"_aux", function(){
                                         job.auxFile = newPath+"_aux";
                                         job.jobPath = newPath;
-                                        fifo.push(job, "api", function(err, job) {
+                                        fifo.push(job, "global", function(err, job) {
                                             if (err) {
                                                 sendJSONresponse(res, 200, {
                                                     code: 24,
@@ -153,7 +153,7 @@ module.exports.addNewJob = function(req, res) {
                                     })
                                 }else{
                                     job.jobPath = newPath;
-                                    fifo.push(job, "api", function(err, job) {
+                                    fifo.push(job, "global", function(err, job) {
                                         if (err) {
                                             sendJSONresponse(res, 200, {
                                                 code: 24,

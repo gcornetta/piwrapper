@@ -738,7 +738,7 @@ test('GET /api/jobs/:jobid Fail', function (t) {
 });
 
 test('CLEAN jobFifo', function (t) {
-  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+  cleanJobsQueue(libFifo.getJobs(), "global", function(){
     cleanJobsQueue(libFifo.getJobs(), "local", function(){
         t.end();
       })
@@ -855,7 +855,7 @@ function addJob(t, callback){
 }
 
 test('CLEAN jobFifo', function (t) {
-  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+  cleanJobsQueue(libFifo.getJobs(), "global", function(){
     cleanJobsQueue(libFifo.getJobs(), "local", function(){
         t.end();
       })
@@ -880,7 +880,7 @@ test('FIFO Push and gets', function (t) {
 });
 
 test('CLEAN jobFifo', function (t) {
-  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+  cleanJobsQueue(libFifo.getJobs(), "global", function(){
     cleanJobsQueue(libFifo.getJobs(), "local", function(){
         t.end();
       })
@@ -1050,7 +1050,7 @@ test('FIFO Job update', function (t) {
 });
 
 test('CLEAN jobFifo', function (t) {
-  cleanJobsQueue(libFifo.getJobs(), "api", function(){
+  cleanJobsQueue(libFifo.getJobs(), "global", function(){
     cleanJobsQueue(libFifo.getJobs(), "local", function(){
         t.end();
       })
@@ -1071,13 +1071,13 @@ test('FIFO local and api change test', function (t) {
   var job10 = {"jobId": "id10","userId": "user3","status": "queued", "form":{}}
   var job11 = {"jobId": "id11","userId": "user3","status": "queued", "form":{}}
 
-  addJobAndAccept(job1, "api", function(err, job) {
+  addJobAndAccept(job1, "global", function(err, job) {
     t.error(err, 'No error');
     t.equal(job, job1);
-    addJobAndAccept(job2, "api", function(err, job) {
+    addJobAndAccept(job2, "global", function(err, job) {
       t.error(err, 'No error');
       t.equal(job, job2);
-      addJobAndAccept(job3, "api", function(err, job) {
+      addJobAndAccept(job3, "global", function(err, job) {
         t.error(err, 'No error');
         t.equal(job, job3);
         addJobAndAccept(job4, "local", function(err, job) {
@@ -1092,16 +1092,16 @@ test('FIFO local and api change test', function (t) {
               addJobAndAccept(job7, "local", function(err, job) {
                 t.error(err, 'No error');
                 t.equal(job, job7);
-                addJobAndAccept(job8, "api", function(err, job) {
+                addJobAndAccept(job8, "global", function(err, job) {
                   t.error(err, 'No error');
                   t.equal(job, job8);
-                  addJobAndAccept(job9, "api", function(err, job) {
+                  addJobAndAccept(job9, "global", function(err, job) {
                     t.error(err, 'No error');
                     t.equal(job, job9);
-                    addJobAndAccept(job10, "api", function(err, job) {
+                    addJobAndAccept(job10, "global", function(err, job) {
                       t.error(err, 'No error');
                       t.equal(job, job10);
-                      addJobAndAccept(job11, "api", function(err, job) {
+                      addJobAndAccept(job11, "global", function(err, job) {
                         t.error(err, 'No error');
                         t.equal(job, job11);
 
@@ -1162,7 +1162,7 @@ function addJobAndAccept(j, caller, callback){
 }
 
 function testAddJob(t, job, callback){
-  libFifo.push(job, "api", function(err, retJob) {
+  libFifo.push(job, "global", function(err, retJob) {
     t.error(err, 'No error');
     t.equal(retJob, job);
     libFifo.acceptJob(job.jobId, callback);
