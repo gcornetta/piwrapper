@@ -333,7 +333,7 @@ module.exports.configure = function (req, res) {
   } else {
     var newMachine = new Machine({vendor: vendor,
       type: type,
-      name: name,
+      name: name.replace(" ", "_"),
       threshCurr: threshCurr,
       hysteresis: hysteresis,
       sampleTime: sampleTime,
@@ -428,7 +428,7 @@ module.exports.machineUpdate = function (req, res) {
     var newConfiguration = {
       vendor: vendor,
       type: type,
-      name: name,
+      name: name.replace(" ", "_"),
       threshCurr: threshCurr,
       hysteresis: hysteresis,
       sampleTime: sampleTime,
