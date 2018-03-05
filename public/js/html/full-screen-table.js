@@ -49,7 +49,13 @@ function dataJob(job, index){
                             alertTxt = alertTxt.concat("Size in cm: "+(2.54 * img.width / dpi).toFixed(2)+" x "+(2.54 * img.height / dpi).toFixed(2)+"\n");
                             for (var i in job){
                                 if (i !== 'jobPath'){
-                                    alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");
+                                    if (i === "createdOn" ){
+                                        var d = new Date(0);
+                                        d.setUTCSeconds(job[i]);
+                                        alertTxt = alertTxt.concat(i + " : " + d + "\n");
+                                    }else {
+                                        alertTxt = alertTxt.concat(i + " : " + job[i] + "\n");
+                                    }
                                 }
                             }
                             $('#modalBody').append(alertTxt);
@@ -65,7 +71,13 @@ function dataJob(job, index){
             var alertTxt = "";
             for (var i in job){
                 if (i !== 'jobPath'){
-                    alertTxt = alertTxt.concat(i+" : "+job[i]+"\n");
+                    if (i === "createdOn" ){
+                        var d = new Date(0);
+                        d.setUTCSeconds(job[i]);
+                        alertTxt = alertTxt.concat(i + " : " + d + "\n");
+                    }else {
+                        alertTxt = alertTxt.concat(i + " : " + job[i] + "\n");
+                    }
                 }
             }
             $('#modalBody').append(alertTxt);
