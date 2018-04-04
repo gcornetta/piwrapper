@@ -4,7 +4,7 @@ var request = require('supertest');
 
 //const imageAbsolutePath = "C:/Users/mejis/IdeaProjects/piwrapper/tests/app/test.png";
 const imageAbsolutePath = "/home/meji/Imágenes/isosceles.png";
-const url = 'http://192.168.0.100:8888';
+const url = 'http://192.168.0.103:8888';
 var token = "";
 
 var driver = new webdriver
@@ -51,7 +51,7 @@ test('API /login', function (t) {
   .end(function (err, res) {
     t.error(err, 'No error');
     t.notEqual(res.body.token, undefined);
-    token = res.body.token;
+    token = 'JWT ' + res.body.token;
     t.end();
   });
 });
@@ -550,9 +550,7 @@ test('Milling Roland pcb', function (t) {
       driver.executeScript("document.getElementsByName('zjog')[0].value = 1");
       driver.executeScript("document.getElementsByName('machines')[0].value = 'mdx_15'");
 
-      driver.executeScript("document.getElementsByName('power')[0].value = 1");
       driver.executeScript("document.getElementsByName('speed')[0].value = 1");
-      driver.executeScript("document.getElementsByName('rate')[0].value = 1");
 
       driver.executeScript("document.getElementsByName('cutDepth')[1].value = 1");
       driver.executeScript("document.getElementsByName('thickness')[0].value = 1");
@@ -592,9 +590,7 @@ test('Milling Roland pcb Error', function (t) {
       driver.executeScript("document.getElementsByName('zjog')[0].value = \'aa\'");
       driver.executeScript("document.getElementsByName('machines')[0].value = 'lklñpou'");
 
-      driver.executeScript("document.getElementsByName('power')[0].value = 101");
       driver.executeScript("document.getElementsByName('speed')[0].value = -1");
-      driver.executeScript("document.getElementsByName('rate')[0].value = \'aa\'");
 
       driver.executeScript("document.getElementsByName('cutDepth')[1].value = -1");
       driver.executeScript("document.getElementsByName('thickness')[0].value = -1");
@@ -612,9 +608,9 @@ test('Milling Roland pcb Error', function (t) {
       });
       driver.findElements(webdriver.By.className("alert-danger"))
       .then(function (alertDanger){
-        t.equal(alertDanger.length, 22);
-        t.end();
+        t.equal(alertDanger.length, 14);
         driver.quit();
+        t.end();
       });
     }, 10);
   }, 10);
@@ -646,14 +642,19 @@ function login(callback){
 function setMachine (type, vendor){
   test('Set machine to '+type+" "+vendor, function (t) {
     request(url + '')
-    .post('/api/jobs/machine')
+    .post('/api/machine')
     .set('Authorization', token)
     .send({
       "type" : type,
       "vendor" : vendor,
       "name": "testMachine",
       "adcDevice": [{vendor : "Texas Instruments", device : "ADS 1115"}],
-      "deviceUri": "serial:/dev/ttyS0?baud=115200"
+      "deviceUri": "serial:/dev/ttyS0?baud=115200",
+      "hysteresis": 100,
+      "dutyCycle": 10,
+      "baudRate": 115200,
+      "sampleTime": 100,
+      "threshCurr": 1000
     })
     .end(function (err, res) {
       t.error(err, 'No error');

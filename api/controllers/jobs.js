@@ -246,12 +246,17 @@ module.exports.setMachine = function(req, res) {
     req.body = req.query
   }
   var newConfiguration = {
-    vendor: req.body.vendor,
-    type: req.body.type,
-    name: req.body.name,
-    isConfigured: true,
-    adcDevice: req.body.adcDevice,
-    deviceUri: req.body.deviceUri
+      vendor: req.body.vendor,
+      type: req.body.type,
+      name: req.body.name,
+      isConfigured: true,
+      adcDevice: req.body.adcDevice,
+      deviceUri: req.body.deviceUri,
+      hysteresis: req.body.hysteresis,
+      dutyCycle: req.body.dutyCycle,
+      baudRate: req.body.baudRate,
+      sampleTime: req.body.sampleTime,
+      threshCurr: req.body.threshCurr
   };
   machine.updateMachine(newConfiguration, function(err, machine) {
     if (err) {
