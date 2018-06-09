@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meta on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/categories/meta/</link>
+    <description>Recent content in Meta on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Aug 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/categories/meta/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me and Newton</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/about/</link>
+      <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/about/</guid>
+      <description>I am an associate professor at San Pablo-CEU University (Madrid, Spain) where I teach several subjects in the area of electronics and computer architecture. I am one of the coordinators of NEWTON a EU founded project with grant n. 688503 within the HORIZON 2020 programme. The project started in March 2016 and is scheduled to end in February 2019. NEWTON is an integrated action involving 14 academic and industrial partners of 7 European countries.</description>
+    </item>
+    
+  </channel>
+</rss>

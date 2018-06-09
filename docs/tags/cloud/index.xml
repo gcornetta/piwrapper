@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloud on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/tags/cloud/</link>
+    <description>Recent content in Cloud on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/tags/cloud/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NEWTON Fab Lab Architecture</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201115/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201115/</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+&lt;strong&gt;NEWTON&lt;/strong&gt; fab lab architecture is a distributed and loosely coupled hardware/software infrastructure that allows remote access to digital fabrication resources as well as fab lab networking and communication.</description>
+    </item>
+    
+  </channel>
+</rss>

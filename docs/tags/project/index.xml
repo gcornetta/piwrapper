@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/tags/project/</link>
+    <description>Recent content in Project on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Apr 2018 06:27:08 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fab Lab Gateway</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/fablabgateway/</link>
+      <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/fablabgateway/</guid>
+      <description>The fab lab gateway is the entry point of a NEWTON fab lab. It implements the access and security policies and exposes a set of APIs that exposes the fab lab over the internet as a web service. The APIs allow an external authorized user or application to perform several operations on the machines of a fab lab, such as: sending a fabrication request, check a machine status, check the fabrication progress, and cancel a fabrication request.</description>
+    </item>
+    
+    <item>
+      <title>Fab Lab Cloud APIs</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</link>
+      <pubDate>Wed, 25 Apr 2018 02:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</guid>
+      <description>Fab lab cloud APIs implement a centralized cloud-hosted hub to interconnect several networked fab labs and expose their infrastructure as REST services that can be accessed through a client application. The APIs endpoints are protected by Oauth. We use Auth0, an authentication as a service provider to secure our APIs. Auth0 provides a free tier that allows up to 7.000 users and unlimited logins. Fig. 1 depicts the architecture of the software infrastructure that implements the cloud hub.</description>
+    </item>
+    
+    <item>
+      <title>Machine Wrapper</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/machinewrapper/</link>
+      <pubDate>Sun, 27 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/machinewrapper/</guid>
+      <description>Mustache keytar disrupt ugh PBR. Before they sold out Brooklyn pickled, lumbersexual lo-fi mustache hoodie Tumblr Banksy semiotics salvia seitan 8-bit four loko PBR. Readymade mumblecore selfies, forage Schlitz Truffaut Portland PBR&amp;amp;B brunch sustainable chia retro 90&amp;rsquo;s tofu actually. Cold-pressed synth pickled Blue Bottle, chambray photo booth Schlitz Austin leggings distillery. Whatever kogi gastropub hashtag, 90&amp;rsquo;s wayfarers church-key ennui chia actually. Disrupt Bushwick trust fund, bicycle rights umami pork belly sartorial lumbersexual scenester asymmetrical Schlitz.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/</link>
+    <description>Recent content on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Apr 2018 06:27:08 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fab Lab Gateway</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/fablabgateway/</link>
+      <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/fablabgateway/</guid>
+      <description>The fab lab gateway is the entry point of a NEWTON fab lab. It implements the access and security policies and exposes a set of APIs that exposes the fab lab over the internet as a web service. The APIs allow an external authorized user or application to perform several operations on the machines of a fab lab, such as: sending a fabrication request, check a machine status, check the fabrication progress, and cancel a fabrication request.</description>
+    </item>
+    
+    <item>
+      <title>Fab Lab Cloud APIs</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</link>
+      <pubDate>Wed, 25 Apr 2018 02:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</guid>
+      <description>Fab lab cloud APIs implement a centralized cloud-hosted hub to interconnect several networked fab labs and expose their infrastructure as REST services that can be accessed through a client application. The APIs endpoints are protected by Oauth. We use Auth0, an authentication as a service provider to secure our APIs. Auth0 provides a free tier that allows up to 7.000 users and unlimited logins. Fig. 1 depicts the architecture of the software infrastructure that implements the cloud hub.</description>
+    </item>
+    
+    <item>
+      <title>NEWTON Fab Lab Architecture</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201115/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201115/</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+&lt;strong&gt;NEWTON&lt;/strong&gt; fab lab architecture is a distributed and loosely coupled hardware/software infrastructure that allows remote access to digital fabrication resources as well as fab lab networking and communication.</description>
+    </item>
+    
+    <item>
+      <title>Newton Gateway APIs</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Set up the Gateway for Production</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Wrapper</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/project/machinewrapper/</link>
+      <pubDate>Sun, 27 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/project/machinewrapper/</guid>
+      <description>Mustache keytar disrupt ugh PBR. Before they sold out Brooklyn pickled, lumbersexual lo-fi mustache hoodie Tumblr Banksy semiotics salvia seitan 8-bit four loko PBR. Readymade mumblecore selfies, forage Schlitz Truffaut Portland PBR&amp;amp;B brunch sustainable chia retro 90&amp;rsquo;s tofu actually. Cold-pressed synth pickled Blue Bottle, chambray photo booth Schlitz Austin leggings distillery. Whatever kogi gastropub hashtag, 90&amp;rsquo;s wayfarers church-key ennui chia actually. Disrupt Bushwick trust fund, bicycle rights umami pork belly sartorial lumbersexual scenester asymmetrical Schlitz.</description>
+    </item>
+    
+    <item>
+      <title>About Me and Newton</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/about/</link>
+      <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/about/</guid>
+      <description>I am an associate professor at San Pablo-CEU University (Madrid, Spain) where I teach several subjects in the area of electronics and computer architecture. I am one of the coordinators of NEWTON a EU founded project with grant n. 688503 within the HORIZON 2020 programme. The project started in March 2016 and is scheduled to end in February 2019. NEWTON is an integrated action involving 14 academic and industrial partners of 7 European countries.</description>
+    </item>
+    
+  </channel>
+</rss>

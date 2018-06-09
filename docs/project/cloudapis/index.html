@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="generator" content="Hugo 0.36.1" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My thoughts and rambles">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.3/material.grey-orange.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/hmdl-style.css"/>
+
+
+
+    <title>Fab Lab Cloud APIs</title>
+</head>
+
+<body style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/background.jpg');">
+    <div class="hmdl-body mdl-layout mdl-js-layout has-drawer is-upgraded">        
+        <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+
+            <div class="hmdl-page mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+                    <div class="hmdl-page-banner mdl-card__media mdl-color-text--grey-50" style="background-image: url('images/default.jpg'); background-color:#222444;">
+                        <h3 >Fab Lab Cloud APIs</h3>
+                    </div>
+                    <div class="hmdl-page-meta mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <div class="minilogo" style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/avatar-64x64.png');"></div>
+                        <div>
+                            <strong>Gianluca Cornetta</strong>
+                            <span>Apr 25, 2018</span>
+                        </div>
+                        <div class="section-spacer"></div>
+                        <div><span>
+                            <a id="repolink" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://github.com/"><i class="material-icons icon ion-social-github"></i><span class="visuallyhidden">Github</span></a>
+                            <span for="repolink" class="mdl-tooltip">Code Repository</span>
+                            <a id="sitelink" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://github.com/"><i class="material-icons icon ion-link"></i><span class="visuallyhidden">Website</span></a>
+                            <span for="sitelink" class="mdl-tooltip">Website Link</span>
+                        </span></div>
+                    </div>
+                        
+                    <div class="hmdl-page-content mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <p align="justify">
+Fab lab cloud APIs implement a centralized cloud-hosted hub to interconnect several networked fab labs and expose their infrastructure as REST services that can be accessed through a client application. The APIs endpoints are protected by Oauth. We use <a href="https://auth0.com/pricing">Auth0</a>, an authentication as a service provider to secure our APIs. Auth0 provides a free tier that allows up to 7.000 users and unlimited logins.   
+</p>
+
+<p align="justify">
+Fig. 1 depicts the architecture of the software infrastructure that implements the cloud hub. The APIs provide endpoints to submit and monitor distributed fabrication batches to the networked fab labs. Fabrication requests are automatically routed by the business logic to the fab lab that is geographically closer to the requester.
+</p>
+
+<p><img src="https://gcornetta.github.io/cloudhubAPI/images/cloudAPIs.png" alt="Cloud APIs Architecture" />
+<em>Fig. 1: Cloud APIs Architecture</em></p>
+
+<p align="justify">
+The APIs run on an <strong>Express.js</strong> server that also implements the business logic to connect to the service registry and to the service monitor. The registry keeps a record of all the on-line fab labs (machines, running and pending jobs, materials, etc.), whereas the service monitor implements a websocket connection with the networked fab labs. Every connected fab lab issues an event every time a change of state of a networked fabrication machine is detected (e.g. new service up or down) and the service monitor updates the service registry accordingly.
+</p>
+
+                    </div>
+                    
+                    <div class="hmdl-page-comments mdl-color-text--primary-contrast mdl-card__supporting-text comments"> 
+                        <a href="http://example.com/">Gianluca Cornetta</a>
+                        <p>Node.js and JavaScript enthusiast.</p>
+                    </div>  
+                </div>                
+                <nav class="mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+                    <a href="/cloudhubAPI/project/machinewrapper/">
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                        <i class="icon ion-android-arrow-back"></i>
+                        </button>
+                        Older
+                    </a>
+                    <div class="section-spacer"></div>
+                    <a href="/cloudhubAPI/project/fablabgateway/">
+                        Newer
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                            <i class="icon ion-android-arrow-forward"></i>
+                        </button>
+                    </a>
+                </nav>
+ 
+            </div>        
+        </main>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer--left-section">                
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="mailto:Firstname@example.com?subject=Hi">
+                    <i class="material-icons_lg icon ion-email"></i>
+                    <span class="visuallyhidden">Email</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://github.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-github"></i>
+                    <span class="visuallyhidden">Github</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://twitter.com/firstname_lastname">
+                    <i class="material-icons_lg icon ion-social-twitter "></i>
+                    <span class="visuallyhidden">Twitter</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://facebook.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-facebook "></i>                        
+                    <span class="visuallyhidden">Facebook</span>
+                </a>
+
+            </div>
+            <div class="mdl-mini-footer--right-section">
+                <span>© 2018 Gianluca Cornetta</span>
+            </div>
+        </footer>
+        <div class="mdl-layout__obfuscator"></div>
+    </div>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+
+</body>
+</html>
+

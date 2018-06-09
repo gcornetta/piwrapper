@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/categories/</link>
+    <description>Recent content in Categories on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Aug 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/categories/about/</link>
+      <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/categories/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bio</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/categories/bio/</link>
+      <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/categories/bio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/categories/meta/</link>
+      <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/categories/meta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Post</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/categories/post/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/categories/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/categories/project/</link>
+      <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/categories/project/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

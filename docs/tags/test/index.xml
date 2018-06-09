@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/cloudhubAPI/tags/test/</link>
+    <description>Recent content in Test on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/cloudhubAPI/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Newton Gateway APIs</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Set up the Gateway for Production</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

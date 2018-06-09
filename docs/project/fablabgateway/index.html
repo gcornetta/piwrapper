@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="generator" content="Hugo 0.36.1" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My thoughts and rambles">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.3/material.grey-orange.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/hmdl-style.css"/>
+
+
+
+    <title>Fab Lab Gateway</title>
+</head>
+
+<body style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/background.jpg');">
+    <div class="hmdl-body mdl-layout mdl-js-layout has-drawer is-upgraded">        
+        <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+
+            <div class="hmdl-page mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+                    <div class="hmdl-page-banner mdl-card__media mdl-color-text--grey-50" style=" background-color:#663667;">
+                        <h3 >Fab Lab Gateway</h3>
+                    </div>
+                    <div class="hmdl-page-meta mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <div class="minilogo" style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/avatar-64x64.png');"></div>
+                        <div>
+                            <strong>Gianluca Cornetta</strong>
+                            <span>Apr 25, 2018</span>
+                        </div>
+                        <div class="section-spacer"></div>
+                        <div><span>
+                            <a id="repolink" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://github.com/sampleproject"><i class="material-icons icon ion-social-github"></i><span class="visuallyhidden">Github</span></a>
+                            <span for="repolink" class="mdl-tooltip">Code Repository</span>
+                            <a id="sitelink" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="http://github.com/sampleproject"><i class="material-icons icon ion-link"></i><span class="visuallyhidden">Website</span></a>
+                            <span for="sitelink" class="mdl-tooltip">Website Link</span>
+                        </span></div>
+                    </div>
+                        
+                    <div class="hmdl-page-content mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <p align="justify">
+The fab lab gateway is the entry point of a NEWTON fab lab. It implements the access and security policies and exposes a set of APIs that exposes the fab lab over the internet as a web service. The APIs allow an external authorized user or application to perform several operations on the machines of a fab lab, such as: sending a fabrication request, check a machine status, check the fabrication progress, and cancel a fabrication request.
+</p>
+
+<p align="justify">
+The fab lab gateway runs on a <strong>Raspberry Pi III model B embedded computer</strong>. Raspberry Pi III model B has ARM Cortex-A53 quad-core processor implementing the ARMv7 32-bit microarchitecture. Recently, Raspberry Pi foundation has launched to the market the <strong>Raspberry Pi III model B+</strong> that implements the 64-bit ARMv8 microarchitecture. <strong>We have not yet tested our software with this new model, so we cannot guarantee a correct operation with the new B+ model</strong>.   
+</p>
+
+<p align="justify">
+The fab lab gateway, that we also call <strong>Pi Gateway</strong> is formed by three components:
+</p>
+
+<ol>
+<li><p align="justify"><strong>The API Gateway</strong> (i.e. and instance of <a href="https://www.express-gateway.io">Express Gateway</a>), that acts like a proxy that manages the incoming requests from the cloud hub, implements security and access policies and forward the requests to the API Wrapper Microservice.
+</p></li>
+
+<li><p align="justify"><strong>The API Wrapper Microservice</strong>, that implements the gateway business logic, manages the API quota and implements the communication protocols with the digital fabrication machines.
+</p></li>
+
+<li><p align="justify"><strong>The Command Line Interface</strong> (CLI), that implements a set of methods to download, install, deploy, monitor and manage the fab lab gateway.
+</p></li>
+</ol>
+
+<p>Please observe that the CLI software has not been open-sourced.</p>
+
+                    </div>
+                    
+                    <div class="hmdl-page-comments mdl-color-text--primary-contrast mdl-card__supporting-text comments"> 
+                        <a href="http://example.com/bio/">Gianluca Cornetta</a>
+                        <p>Writer of stuff</p>
+                    </div>  
+                </div>                
+                <nav class="mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+                    <a href="/cloudhubAPI/project/cloudapis/">
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                        <i class="icon ion-android-arrow-back"></i>
+                        </button>
+                        Older
+                    </a>
+                    <div class="section-spacer"></div>
+                </nav>
+ 
+            </div>        
+        </main>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer--left-section">                
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="mailto:Firstname@example.com?subject=Hi">
+                    <i class="material-icons_lg icon ion-email"></i>
+                    <span class="visuallyhidden">Email</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://github.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-github"></i>
+                    <span class="visuallyhidden">Github</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://twitter.com/firstname_lastname">
+                    <i class="material-icons_lg icon ion-social-twitter "></i>
+                    <span class="visuallyhidden">Twitter</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://facebook.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-facebook "></i>                        
+                    <span class="visuallyhidden">Facebook</span>
+                </a>
+
+            </div>
+            <div class="mdl-mini-footer--right-section">
+                <span>© 2018 Gianluca Cornetta</span>
+            </div>
+        </footer>
+        <div class="mdl-layout__obfuscator"></div>
+    </div>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+
+</body>
+</html>
+

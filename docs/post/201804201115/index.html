@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="generator" content="Hugo 0.36.1" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My thoughts and rambles">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.3/material.grey-orange.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://gcornetta.github.io/cloudhubAPI/css/hmdl-style.css"/>
+
+
+
+    <title>NEWTON Fab Lab Architecture</title>
+</head>
+
+<body style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/background.jpg');">
+    <div class="hmdl-body mdl-layout mdl-js-layout has-drawer is-upgraded">        
+        <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+                <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/cloudhubAPI/">Home</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/about/">About</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/project/">Projects</a>
+            <a class="mdl-navigation__link" href="/cloudhubAPI/post/">Articles</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+
+            <div class="hmdl-page mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+                    <div class="hmdl-page-banner mdl-card__media mdl-color-text--grey-50" style=" background-color:#789456;">
+                        <h3 >NEWTON Fab Lab Architecture</h3>
+                    </div>
+                    <div class="hmdl-page-meta mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <div class="minilogo" style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/avatar-64x64.png');"></div>
+                        <div>
+                            <strong>Gianluca Cornetta</strong>
+                            <span>Apr 20, 2018</span>
+                        </div>
+                        <div class="section-spacer"></div>
+                    </div>
+                    <div class="hmdl-page-content mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <p align="justify">
+<strong>NEWTON</strong> fab lab architecture is a distributed and loosely coupled hardware/software infrastructure that allows remote access to digital fabrication resources as well as fab lab networking and communication.
+</p>
+
+<p>The hardware infrastructure has the following characteristics:</p>
+
+<ol>
+<li><p>cheap;</p></li>
+
+<li><p>easily deployable maintainable and scalable;</p></li>
+
+<li><p>vendor agnostic.</p></li>
+</ol>
+
+<p>The software infrastructure has the following characteristics:</p>
+
+<ol>
+<li><p>modular and hardware-agnostic;</p></li>
+
+<li><p>easily integrable with third-party services and applications through REST APIs;</p></li>
+
+<li><p>easily deployable in both private and public clouds;</p></li>
+
+<li><p>robust and secure;</p></li>
+
+<li><p>developer-friendly.</p></li>
+</ol>
+
+<p><img src="https://gcornetta.github.io/cloudhubAPI/images/fablabArch.png" alt="NEWTON Fab Lab Architecture" />
+<em>Fig. 1: NEWTON Fab Lab Architecture</em></p>
+
+<p align="justify">
+Fig. 1 depicts the overall system architecture. It is a distributed three-tier architecture in which we can clearly identify three layers:
+</p>
+
+<ol>
+<li><p align="justify"><strong>The service layer</strong>; namely, the software abstraction layer that wraps the fab lab infrastructure and exposes it a service to the internet through a set of APIs.</p></li>
+
+<li><p align="justify"><strong>The middleware layer</strong>; namely, the cloud hub infrastructure that manages intra-fab lab communications and provides the software interfaces to connect to third-party services and applications.</p></li>
+
+<li><p align="justify"><strong>The application layer</strong>; namely, a third-party application that connects to the cloud infrastructure using a REST client.</p></li>
+</ol>
+
+<p align="justify">
+The interfacing between layers is implemented through REST (Representational State Transfer) Application Programming Interfaces (APIs) that guarantee seamless interoperation between different technologies and provide programmers with a framework to expand NEWTON platform by developing new applications on top of the API layer or adding new layers to the protocol stack.
+</p>
+
+<p align="justify">
+In NEWTON fab lab production environment, the fab lab gateways are connected to the cloud infrastructure through a IPSec tunnel; however, if you don't want to set up a complex cloud infrastructure you can leverage the gateway infrastructure to create a secure TLS connection with the cloud hub.
+<p>
+
+<p align="justify">
+The fab lab gateway is simply a set of microservices whose API endpoints are protected using an API gateway. We use <a href="https://www.express-gateway.io">Express Gateway</a> as the API gateway. <strong>Express Gateway</strong> is a lightweight, flexible and easy-to-configure gateway based on <strong>Express.js</strong> framework. With Express Gateway, setting up a TLS socket is as simple as editing a YAML configuration file.
+</p>
+                    </div>
+                    <div class="hmdl-page-comments mdl-color-text--primary-contrast mdl-card__supporting-text comments"> 
+                        <a href=http://example.com/>Gianluca Cornetta</a>
+                        <p>Node.js and JavaScript enthusiast.</p>
+                    </div>  
+                </div>                
+                <nav class="mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+                    <a href="/cloudhubAPI/post/201804201120/">
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                        <i class="icon ion-android-arrow-back"></i>
+                        </button>
+                        Older
+                    </a>
+                    <div class="section-spacer"></div>
+                </nav>
+ 
+            </div>        
+        </main>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer--left-section">                
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="mailto:Firstname@example.com?subject=Hi">
+                    <i class="material-icons_lg icon ion-email"></i>
+                    <span class="visuallyhidden">Email</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://github.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-github"></i>
+                    <span class="visuallyhidden">Github</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://twitter.com/firstname_lastname">
+                    <i class="material-icons_lg icon ion-social-twitter "></i>
+                    <span class="visuallyhidden">Twitter</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://facebook.com/firstname_lastname/">
+                    <i class="material-icons_lg icon ion-social-facebook "></i>                        
+                    <span class="visuallyhidden">Facebook</span>
+                </a>
+
+            </div>
+            <div class="mdl-mini-footer--right-section">
+                <span>© 2018 Gianluca Cornetta</span>
+            </div>
+        </footer>
+        <div class="mdl-layout__obfuscator"></div>
+    </div>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+
+</body>
+</html>
+
