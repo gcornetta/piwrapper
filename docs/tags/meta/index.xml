@@ -21,21 +21,23 @@
     </item>
     
     <item>
-      <title>Newton Gateway APIs</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</link>
-      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Set up the Gateway for Production</title>
+      <title>NEWTON Cloud Hub Software Architecture</title>
       <link>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</guid>
-      <description></description>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+The cloud hub runs a connector software that wraps all the available services and exposes them to the internet through a set of APIs. In our original design, the API endpoints were protected using &lt;strong&gt;Auth0&lt;/strong&gt; as the authentication server and &lt;strong&gt;AWS API Gateway&lt;/strong&gt; to proxy the incoming requests to the backend APIs.</description>
+    </item>
+    
+    <item>
+      <title>Newton Cloud Hub APIs</title>
+      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</guid>
+      <description>&lt;p align=&#34;justify&#34;&gt;
+&lt;strong&gt;NEWTON&lt;/strong&gt; fab labs are a complex distributed system. The networked fab labs need to be integrated and seamlessly managed with a unique and flexible interface that must expose all the underlying infrastructure as a web service and provide the developers with tools to expand and enhance the software infrastructure.</description>
     </item>
     
   </channel>
