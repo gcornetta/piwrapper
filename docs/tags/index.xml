@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on NEWTON Fab Labs</title>
-    <link>https://gcornetta.github.io/cloudhubAPI/tags/</link>
+    <link>https://gcornetta.github.io/piwrapper/tags/</link>
     <description>Recent content in Tags on NEWTON Fab Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 18 Aug 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gcornetta.github.io/cloudhubAPI/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gcornetta.github.io/piwrapper/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bio</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/bio/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/bio/</link>
       <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/bio/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/bio/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cloud</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/cloud/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/cloud/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/cloud/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/cloud/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/meta/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/meta/</link>
       <pubDate>Wed, 25 Apr 2018 02:27:08 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/meta/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/meta/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Newton</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/newton/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/newton/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/newton/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/newton/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/project/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/project/</link>
       <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/project/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/project/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Test</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/tags/test/</link>
+      <link>https://gcornetta.github.io/piwrapper/tags/test/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/tags/test/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/tags/test/</guid>
       <description></description>
     </item>
     

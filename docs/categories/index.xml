@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on NEWTON Fab Labs</title>
-    <link>https://gcornetta.github.io/cloudhubAPI/categories/</link>
+    <link>https://gcornetta.github.io/piwrapper/categories/</link>
     <description>Recent content in Categories on NEWTON Fab Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 18 Aug 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://gcornetta.github.io/cloudhubAPI/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gcornetta.github.io/piwrapper/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/categories/about/</link>
+      <link>https://gcornetta.github.io/piwrapper/categories/about/</link>
       <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/categories/about/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/categories/about/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bio</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/categories/bio/</link>
+      <link>https://gcornetta.github.io/piwrapper/categories/bio/</link>
       <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/categories/bio/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/categories/bio/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/categories/meta/</link>
+      <link>https://gcornetta.github.io/piwrapper/categories/meta/</link>
       <pubDate>Tue, 18 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/categories/meta/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/categories/meta/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Post</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/categories/post/</link>
+      <link>https://gcornetta.github.io/piwrapper/categories/post/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/categories/post/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/categories/post/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/categories/project/</link>
+      <link>https://gcornetta.github.io/piwrapper/categories/project/</link>
       <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/categories/project/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/categories/project/</guid>
       <description></description>
     </item>
     

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Meta on NEWTON Fab Labs</title>
-    <link>https://gcornetta.github.io/cloudhubAPI/tags/meta/</link>
+    <link>https://gcornetta.github.io/piwrapper/tags/meta/</link>
     <description>Recent content in Meta on NEWTON Fab Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Apr 2018 02:27:08 +0000</lastBuildDate>
     
-	<atom:link href="https://gcornetta.github.io/cloudhubAPI/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gcornetta.github.io/piwrapper/tags/meta/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Fab Lab Cloud APIs</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</link>
+      <link>https://gcornetta.github.io/piwrapper/project/cloudapis/</link>
       <pubDate>Wed, 25 Apr 2018 02:27:08 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/project/cloudapis/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/project/cloudapis/</guid>
       <description>Fab lab cloud APIs implement a centralized cloud-hosted hub to interconnect several networked fab labs and expose their infrastructure as REST services that can be accessed through a client application. The APIs endpoints are protected by Oauth. We use Auth0, an authentication as a service provider to secure our APIs. Auth0 provides a free tier that allows up to 7.000 users and unlimited logins. Fig. 1 depicts the architecture of the software infrastructure that implements the cloud hub.</description>
     </item>
     
     <item>
       <title>NEWTON Cloud Hub Software Architecture</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</link>
+      <link>https://gcornetta.github.io/piwrapper/post/201804201130/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201130/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/post/201804201130/</guid>
       <description>&lt;p align=&#34;justify&#34;&gt;
 The cloud hub runs a connector software that wraps all the available services and exposes them to the internet through a set of APIs. In our original design, the API endpoints were protected using &lt;strong&gt;Auth0&lt;/strong&gt; as the authentication server and &lt;strong&gt;AWS API Gateway&lt;/strong&gt; to proxy the incoming requests to the backend APIs.</description>
     </item>
     
     <item>
       <title>Newton Cloud Hub APIs</title>
-      <link>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</link>
+      <link>https://gcornetta.github.io/piwrapper/post/201804201120/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://gcornetta.github.io/cloudhubAPI/post/201804201120/</guid>
+      <guid>https://gcornetta.github.io/piwrapper/post/201804201120/</guid>
       <description>&lt;p align=&#34;justify&#34;&gt;
 &lt;strong&gt;NEWTON&lt;/strong&gt; fab labs are a complex distributed system. The networked fab labs need to be integrated and seamlessly managed with a unique and flexible interface that must expose all the underlying infrastructure as a web service and provide the developers with tools to expand and enhance the software infrastructure.</description>
     </item>
