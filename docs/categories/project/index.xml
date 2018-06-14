@@ -35,7 +35,7 @@
       <pubDate>Sun, 27 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>https://gcornetta.github.io/piwrapper/project/machinewrapper/</guid>
-      <description>Mustache keytar disrupt ugh PBR. Before they sold out Brooklyn pickled, lumbersexual lo-fi mustache hoodie Tumblr Banksy semiotics salvia seitan 8-bit four loko PBR. Readymade mumblecore selfies, forage Schlitz Truffaut Portland PBR&amp;amp;B brunch sustainable chia retro 90&amp;rsquo;s tofu actually. Cold-pressed synth pickled Blue Bottle, chambray photo booth Schlitz Austin leggings distillery. Whatever kogi gastropub hashtag, 90&amp;rsquo;s wayfarers church-key ennui chia actually. Disrupt Bushwick trust fund, bicycle rights umami pork belly sartorial lumbersexual scenester asymmetrical Schlitz.</description>
+      <description>The machine wrapper is a software abstraction layer built on top of a digital fabrication machine (3D printers, laser cutters, milling machines, etc.). It provides simple administration interfaces as well as the possibility to expose a machine over the internet as a web service through a set of RESY APIs. The software runs on a Raspberry Pi connected to the machine through an USB port. The machine status (busy, idle, off-line) is monitored through a current sensor that measures the the current drawn by the machine from the power supply.</description>
     </item>
     
   </channel>
