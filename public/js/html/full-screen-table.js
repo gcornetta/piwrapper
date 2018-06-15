@@ -100,7 +100,11 @@ var jobs = [
 var socket = io.connect( window.location.host);
 
 socket.on('connect', function(){
-    socket.emit('subscribeJobUpdates');
+    setTimeout(function(){
+        jobs = [];
+        $table.bootstrapTable('load', jobs);
+        socket.emit('subscribeJobUpdates');
+    }, 1000);
 });
 
 socket.on('clearTable', function() {
