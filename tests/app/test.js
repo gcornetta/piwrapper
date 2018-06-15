@@ -54,7 +54,7 @@ test('API /login', function (t) {
 
 setMachine('Laser cutter', 'Epilog');
 
-test('POST /api/jobs Epilog cut God', function (t) {
+test('POST /api/jobs Epilog cut Good', function (t) {
   request(app)
   .post('/api/jobs')
   .set('Authorization', token)

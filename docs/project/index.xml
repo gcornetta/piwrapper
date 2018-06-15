@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on NEWTON Fab Labs</title>
+    <link>https://gcornetta.github.io/piwrapper/project/</link>
+    <description>Recent content in Projects on NEWTON Fab Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Apr 2018 06:27:08 +0000</lastBuildDate>
+    
+	<atom:link href="https://gcornetta.github.io/piwrapper/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fab Lab Gateway</title>
+      <link>https://gcornetta.github.io/piwrapper/project/fablabgateway/</link>
+      <pubDate>Wed, 25 Apr 2018 06:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/piwrapper/project/fablabgateway/</guid>
+      <description>The fab lab gateway is the entry point of a NEWTON fab lab. It implements the access and security policies and exposes a set of APIs that exposes the fab lab over the internet as a web service. The APIs allow an external authorized user or application to perform several operations on the machines of a fab lab, such as: sending a fabrication request, check a machine status, check the fabrication progress, and cancel a fabrication request.</description>
+    </item>
+    
+    <item>
+      <title>Fab Lab Cloud APIs</title>
+      <link>https://gcornetta.github.io/piwrapper/project/cloudapis/</link>
+      <pubDate>Wed, 25 Apr 2018 02:27:08 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/piwrapper/project/cloudapis/</guid>
+      <description>Fab lab cloud APIs implement a centralized cloud-hosted hub to interconnect several networked fab labs and expose their infrastructure as REST services that can be accessed through a client application. The APIs endpoints are protected by Oauth. We use Auth0, an authentication as a service provider to secure our APIs. Auth0 provides a free tier that allows up to 7.000 users and unlimited logins. Fig. 1 depicts the architecture of the software infrastructure that implements the cloud hub.</description>
+    </item>
+    
+    <item>
+      <title>Machine Wrapper</title>
+      <link>https://gcornetta.github.io/piwrapper/project/machinewrapper/</link>
+      <pubDate>Sun, 27 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://gcornetta.github.io/piwrapper/project/machinewrapper/</guid>
+      <description>The machine wrapper is a software abstraction layer built on top of a digital fabrication machine (3D printers, laser cutters, milling machines, etc.). It provides simple administration interfaces as well as the possibility to expose a machine over the internet as a web service through a set of RESY APIs. The software runs on a Raspberry Pi connected to the machine through an USB port. The machine status (busy, idle, off-line) is monitored through a current sensor that measures the the current drawn by the machine from the power supply.</description>
+    </item>
+    
+  </channel>
+</rss>

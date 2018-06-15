@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="generator" content="Hugo 0.36.1" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My thoughts and rambles">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+    <link rel="stylesheet" href="https://gcornetta.github.io/piwrapper/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.1.3/material.grey-orange.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://gcornetta.github.io/piwrapper/css/hmdl-style.css"/>
+
+
+
+    <title>NEWTON Cloud Hub Software Architecture</title>
+</head>
+
+<body style="background-image: url('https://gcornetta.github.io/piwrapper/images/background.jpg');">
+    <div class="hmdl-body mdl-layout mdl-js-layout has-drawer is-upgraded">        
+        <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/piwrapper/">Home</a>
+                <a class="mdl-navigation__link" href="/piwrapper/about/">About</a>
+                <a class="mdl-navigation__link" href="/piwrapper/project/">Projects</a>
+                <a class="mdl-navigation__link" href="/piwrapper/post/">Articles</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/piwrapper/">Home</a>
+            <a class="mdl-navigation__link" href="/piwrapper/about/">About</a>
+            <a class="mdl-navigation__link" href="/piwrapper/project/">Projects</a>
+            <a class="mdl-navigation__link" href="/piwrapper/post/">Articles</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+
+            <div class="hmdl-page mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+                    <div class="hmdl-page-banner mdl-card__media mdl-color-text--grey-50" style=" background-color:#268368;">
+                        <h3 >NEWTON Cloud Hub Software Architecture</h3>
+                    </div>
+                    <div class="hmdl-page-meta mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <div class="minilogo" style="background-image: url('https://gcornetta.github.io/cloudhubAPI/images/avatar-64x64.png');"></div>
+                        <div>
+                            <strong>Gianluca Cornetta</strong>
+                            <span>Apr 20, 2018</span>
+                        </div>
+                        <div class="section-spacer"></div>
+                    </div>
+                    <div class="hmdl-page-content mdl-color-text--grey-700 mdl-card__supporting-text">
+                        <p align="justify">
+The cloud hub runs a connector software that wraps all the available services and exposes them to the internet through a set of APIs. In our original design, the API endpoints were protected using <strong>Auth0</strong> as the authentication server and <strong>AWS API Gateway</strong> to proxy the incoming requests to the backend APIs.  However, when we decided to open source the fab lab connector we chose to detach it from AWS managed services in order to give the users the possibility to deploy the fab lab hub on their favourite private or public cloud without any limitation imposed by third-party external services.
+</p>
+
+<p align="justify">
+Thus in the final implementation the <strong>Express.js</strong> middleware that manages the API endpoints is protected by <strong>Auth0</strong>. This does not substantially change our architecture; the only difference is that we moved the authentication and authorisation process from <strong>AWS API Gateway</strong> to
+our middleware, which makes API Gateway unnecessary.
+</p>
+
+<p><img src="https://gcornetta.github.io/cloudhubAPI/images/fablabConn.png" alt="NEWTON Fab Lab Connector" /></p>
+
+<p><em>Fig. 1: Detailed Architecture of the Fab Lab Connector Module</em></p>
+
+<h3 id="fab-lab-connector">Fab Lab Connector</h3>
+
+<p align="justify">
+Fig.1 depicts the fab lab connector architecture. The application business logic is implemented on top of middleware functions that implement the API endpoints, the persistence layer wrapping logic and the service registry interface.
+</p>
+
+<p align="justify">
+Another change with respect the original implementation is the service registry interface. Originally, the service registry interface was a REST client that connected to a <a href="https://www.consul.io">Consul</a> high-availability cluster.
+<strong>Consul</strong> is a tool for discovering and configuring distributed services. It implements service discovery, health checks and has an embedded key-value store to store the configuration as well as service status and information.
+</p>
+
+<p align="justify">
+Despite its amazing features, a Consul cluster is not easy to configure, deploy and maintain, for this reason we have built on top the connector persistence layer a lightweight registry server that replaces the Consul client. The server has a <strong>fab lab monitoring module</strong> that opens a real-time websocket connection with all the networked fab labs and registers a new service as soon as it is deployed or a new service state (i.e. on-line, off-line, busy) as soon as it is detected.
+</p>
+                    </div>
+                    <div class="hmdl-page-comments mdl-color-text--primary-contrast mdl-card__supporting-text comments"> 
+                        <a href=https://gcornetta.github.io/cloudhubAPI/>Gianluca Cornetta</a>
+                        <p>Node.js and JavaScript enthusiast.</p>
+                    </div>  
+                </div>                
+                <nav class="mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+                    <a href="/piwrapper/post/201804201115/">
+                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                        <i class="icon ion-android-arrow-back"></i>
+                        </button>
+                        Older
+                    </a>
+                    <div class="section-spacer"></div>
+                </nav>
+ 
+            </div>        
+        </main>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer--left-section">                
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="mailto:gcornetta.eps@ceu.es?subject=Hi">
+                    <i class="material-icons_lg icon ion-email"></i>
+                    <span class="visuallyhidden">Email</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://github.com/gcornetta">
+                    <i class="material-icons_lg icon ion-social-github"></i>
+                    <span class="visuallyhidden">Github</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://twitter.com/fablabmadridceu">
+                    <i class="material-icons_lg icon ion-social-twitter "></i>
+                    <span class="visuallyhidden">Twitter</span>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-mini-footer--social-btn social-btn" href="https://www.facebook.com/pg/Fab-Lab-Madrid-Ceu-273797622957130/about/">
+                    <i class="material-icons_lg icon ion-social-facebook "></i>                        
+                    <span class="visuallyhidden">Facebook</span>
+                </a>
+
+            </div>
+            <div class="mdl-mini-footer--right-section">
+                <span>© 2018 Gianluca Cornetta</span>
+            </div>
+        </footer>
+        <div class="mdl-layout__obfuscator"></div>
+    </div>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+
+</body>
+</html>
+
