@@ -14,13 +14,9 @@ var prusaCtrl = require('../controllers/prusa-3dprint')
 var apiCtrl = require('../controllers/api')
 var jobsCtrl = require('../controllers/jobs-table')
 
-
-var User = require('../models/user')
-
-
 // Get Registration Page
 router.get('/', usrCtrl.registration)
-router.get('/terminal', function(req, res){
+router.get('/terminal', function (req, res) {
   res.render('terminal')
 })
 
@@ -50,47 +46,45 @@ router.get('/dashboard/control/laser/gcc/process', authCtrl.isLoggedIn, gccCtrl.
 router.get('/dashboard/control/vinyl/roland/material', authCtrl.isLoggedIn, rolandVinylCtrl.process)
 router.get('/dashboard/control/milling/roland/process', authCtrl.isLoggedIn, rolandMillingCtrl.process)
 
-
 // Post User Registation Form
-router.post('/', usrCtrl.registrationForm);
+router.post('/', usrCtrl.registrationForm)
 
 // Post User Login Form for Authentication
-router.post('/login', authCtrl.login);
+router.post('/login', authCtrl.login)
 
 // Post User Password Request Form
-router.post('/login/request/', usrCtrl.passwordRequest);
+router.post('/login/request/', usrCtrl.passwordRequest)
 
 // Post File to upload
-router.post('/dashboard/upload/', authCtrl.isLoggedIn, dashCtrl.upload);
+router.post('/dashboard/upload/', authCtrl.isLoggedIn, dashCtrl.upload)
 
 // Post Machine configuration
-router.post('/dashboard/configure/', authCtrl.isLoggedIn, dashCtrl.configure);
- 
+router.post('/dashboard/configure/', authCtrl.isLoggedIn, dashCtrl.configure)
+
 // Post Machine update
-router.post('/dashboard/machine/update/', authCtrl.isLoggedIn, dashCtrl.machineUpdate);
+router.post('/dashboard/machine/update/', authCtrl.isLoggedIn, dashCtrl.machineUpdate)
 
 // Post User update
-//router.post('/dashboard/user/update', authCtrl.isLoggedIn, dashCtrl.userUpdate);
+// router.post('/dashboard/user/update', authCtrl.isLoggedIn, dashCtrl.userUpdate);
 
 // Post Profile update
-router.post('/dashboard/profile/change', authCtrl.isLoggedIn, dashCtrl.profileUpdate);
+router.post('/dashboard/profile/change', authCtrl.isLoggedIn, dashCtrl.profileUpdate)
 
 // Post fabrication job settings
-router.post('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.upload);
-router.post('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.upload);
-router.post('/dashboard/control/laser/gcc', authCtrl.isLoggedIn, gccCtrl.upload);
-router.post('/dashboard/control/vinyl/roland', authCtrl.isLoggedIn, rolandVinylCtrl.upload);
-router.post('/dashboard/control/milling/roland', authCtrl.isLoggedIn, rolandMillingCtrl.upload);
-router.post('/dashboard/control/3dprint/prusa', authCtrl.isLoggedIn, prusaCtrl.upload);
+router.post('/dashboard/control/laser/epilog', authCtrl.isLoggedIn, epilogCtrl.upload)
+router.post('/dashboard/control/laser/trotec', authCtrl.isLoggedIn, trotecCtrl.upload)
+router.post('/dashboard/control/laser/gcc', authCtrl.isLoggedIn, gccCtrl.upload)
+router.post('/dashboard/control/vinyl/roland', authCtrl.isLoggedIn, rolandVinylCtrl.upload)
+router.post('/dashboard/control/milling/roland', authCtrl.isLoggedIn, rolandMillingCtrl.upload)
+router.post('/dashboard/control/3dprint/prusa', authCtrl.isLoggedIn, prusaCtrl.upload)
 
 // Post Password change
-router.post('/dashboard/password/change', authCtrl.isLoggedIn, dashCtrl.changePassword);
+router.post('/dashboard/password/change', authCtrl.isLoggedIn, dashCtrl.changePassword)
 
 // Get User Logout
-router.get('/logout', usrCtrl.logout);
+router.get('/logout', usrCtrl.logout)
 
-//Test api function 
-router.get('/jobs/:jobid', apiCtrl.queuedJobs);
+// Test api function
+router.get('/jobs/:jobid', apiCtrl.queuedJobs)
 
-
-module.exports = router;
+module.exports = router

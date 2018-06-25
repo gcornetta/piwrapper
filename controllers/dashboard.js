@@ -2,19 +2,15 @@ var formidable = require('formidable')
 var fs = require('fs')
 var path = require('path')
 var os = require('../lib/os/os')
-var mongoose = require('mongoose')
 var User = require('../models/user')
 var Machine = require('../models/machine')
 var dashboard = require('./lib/dashboard')
 var logger = require('../config/winston')
-var url = require('url');
-var sync = require('synchronize')
-var WebSocket = require('ws')
+var url = require('url')
 var printerConfig = require('../lib/fablab/printer-config')
 var siren = require('../lib/siren/siren')
 var formCheck = require('../common/form-check')
-var mkdirp = require('mkdirp');
-
+var mkdirp = require('mkdirp')
 
 var dashboardPage = dashboard.dashboardPage
 var welcomeMsg = dashboard.welcomeMsg
@@ -22,8 +18,6 @@ var validationMsg = dashboard.validationMsg
 var panelNames = dashboard.panelNames
 var userRoles = dashboard.userRoles
 var infoText = dashboard.infoText
-
-var jobCounter = []
 
 var _validateFields = function (req, res) {
   var vendor = req.body.machineVendor
@@ -66,9 +60,9 @@ var _validateFields = function (req, res) {
     }
   }
 
-  for (var i = 0; i < dashboardPage.wizardPage.samplingDevices.length; i++) {
-    if (dashboardPage.wizardPage.samplingDevices[i].vendor === adcVendor) {
-      if (dashboardPage.wizardPage.samplingDevices[i].deviceList.indexOf(adcDevice) === -1) {
+  for (var j = 0; j < dashboardPage.wizardPage.samplingDevices.length; j++) {
+    if (dashboardPage.wizardPage.samplingDevices[j].vendor === adcVendor) {
+      if (dashboardPage.wizardPage.samplingDevices[j].deviceList.indexOf(adcDevice) === -1) {
         if (!errors) {
           errors = [{param: 'adcVendor', msg: 'No available sampling device for that vendor'}]
         } else {
@@ -107,8 +101,8 @@ var _getSystemInfo = function () {
           break
         case 'Free memory': dashboardPage.sysInfoTable.rows[i].value = (info.freemem / Math.pow(10, 6)).toFixed(2)
           break
-        case 'Average load': for (var j = 0; j < info.loadavg.length; j++) {
-          (dashboardPage.sysInfoTable.rows[i].value)[j].value = ((info.loadavg)[j] * 100).toFixed(2)
+        case 'Average load': for (var k = 0; k < info.loadavg.length; k++) {
+          (dashboardPage.sysInfoTable.rows[i].value)[k].value = ((info.loadavg)[k] * 100).toFixed(2)
         }
           break
         default : logger.error('@dashboard._getSystemInfo: no match in processor system info.')
@@ -146,17 +140,17 @@ module.exports.dashboard = function (req, res) {
       dashboardPage.currentPanelName = panelNames.dashboard
       dashboardPage.currentPanelRoute = '/dashboard'
       res.render('dashboard', dashboardPage)
-        // dashboardPage.displayWelcome = false;
+      // dashboardPage.displayWelcome = false;
     } else {
       _getSystemInfo()
-      var welcomeMessage = welcomeMsg.welcome + req.user.firstname + '!'
+      welcomeMessage = welcomeMsg.welcome + req.user.firstname + '!'
       if (req.user.lastlogged) {
         welcomeMessage += welcomeMsg.lastLog + req.user.lastlogged + '.'
         dashboardPage.lastLoggedOn = req.user.lastlogged.getDate()
       }
       if (dashboardPage.displayWelcome) {
         req.flash('success_msg', welcomeMessage)
-        var flashWelcome = req.flash('success_msg')[0]
+        flashWelcome = req.flash('success_msg')[0]
         dashboardPage.flashWelcome = flashWelcome
         req.session.flash = []
       }
@@ -208,17 +202,17 @@ module.exports.dashboard = function (req, res) {
         }
           break
         case '3D printer' : switch (machine.vendor) {
-	  case 'Prusa' : dashboardPage.machinePanelRoute = '/dashboard/control/3dprint/prusa'
-	    break
-	  default : break
-	} 
-	  break
+          case 'Prusa' : dashboardPage.machinePanelRoute = '/dashboard/control/3dprint/prusa'
+            break
+          default : break
+        }
+          break
       }
 
       res.render('dashboard', dashboardPage)
       dashboardPage.displayWelcome = false
       dashboardPage.errors = null // used to clear the current sensor error
-                                                             // may be in the future the check can be periodic
+      // may be in the future the check can be periodic
     }
   })
 }
@@ -253,7 +247,7 @@ module.exports.profile = function (req, res) {
 }
 
 module.exports.upload = function (req, res) {
- // create an incoming form object
+  // create an incoming form object
   var form = new formidable.IncomingForm()
   var newFileName
 
@@ -262,8 +256,8 @@ module.exports.upload = function (req, res) {
 
   // store all uploads in the upload directory
   form.uploadDir = path.join(__dirname, '/../public/uploads/img')
-  if (fs.existsSync(form.uploadDir) == false) {
-    mkdirp.sync(form.uploadDir);
+  if (fs.existsSync(form.uploadDir) === false) {
+    mkdirp.sync(form.uploadDir)
   }
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
@@ -271,7 +265,6 @@ module.exports.upload = function (req, res) {
     var fileExt = (file.name).split('.').pop()
     newFileName = req.user._id + '.' + fileExt
     fs.rename(file.path, path.join(form.uploadDir, newFileName))
-    var imgPath = form.uploadDir + '/' + newFileName
     User.updatePhotoPathByUsername(req.user.username, '/uploads/img/' + newFileName, function (err, result) {
       if (err) throw (err)
       if (result) {
@@ -284,7 +277,6 @@ module.exports.upload = function (req, res) {
   // log any errors that occur
   form.on('error', function (err) {
     logger.log('error', '@dashboard.upload: an error has occured: %s', err)
-
   })
 
   // once all the files have been uploaded, send a response to the client
@@ -308,7 +300,7 @@ module.exports.wizard = function (req, res) {
   dashboardPage.currentPanelName = panelNames.wizard
   dashboardPage.currentPanelRoute = '/dashboard/wizard'
   res.render('dashboard', dashboardPage)
- // dashboardPage.displayWelcome = false;
+  // dashboardPage.displayWelcome = false;
 }
 
 module.exports.configure = function (req, res) {
@@ -333,7 +325,7 @@ module.exports.configure = function (req, res) {
   } else {
     var newMachine = new Machine({vendor: vendor,
       type: type,
-      name: name.replace(" ", "_"),
+      name: name.replace(' ', '_'),
       threshCurr: threshCurr,
       hysteresis: hysteresis,
       sampleTime: sampleTime,
@@ -350,14 +342,14 @@ module.exports.configure = function (req, res) {
       logger.info('@dashboard.cofigure: a new machine has been successfully configured') // machine also contains ._id
     })
 
-               // add to the machine the information about the adc device
-               // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
+    // add to the machine the information about the adc device
+    // newMachine.adcDevice.push({vendor : adcVendor, device : adcDevice});
 
-               // check if sensor connected
+    // check if sensor connected
 
-      dashboardPage.displayWizard = false
-      dashboardPage.machineConfigured = true
-      res.redirect('/dashboard')
+    dashboardPage.displayWizard = false
+    dashboardPage.machineConfigured = true
+    res.redirect('/dashboard')
   }
 }
 
@@ -379,22 +371,22 @@ module.exports.settings = function (req, res) {
   Machine.checkIfMachineConfigured(function (err, machine) {
     if (err) throw (err)
     if (machine) {
-        dashboardPage.machine = {
-            name: machine.name,
-            type: machine.type,
-            vendor: machine.vendor,
-            threshCurr: machine.threshCurr,
-            hysteresis: machine.hysteresis,
-            sampleTime: machine.sampleTime,
-            dutyCycle: machine.dutyCycle,
-            adcVendor: machine.adcDevice[0].vendor,
-            adcDevice: machine.adcDevice[0].device,
-            deviceUri: machine.deviceUri,
-            baudRate: machine.baudRate,
-            defaultValues: machine.defaultValues
-        }
+      dashboardPage.machine = {
+        name: machine.name,
+        type: machine.type,
+        vendor: machine.vendor,
+        threshCurr: machine.threshCurr,
+        hysteresis: machine.hysteresis,
+        sampleTime: machine.sampleTime,
+        dutyCycle: machine.dutyCycle,
+        adcVendor: machine.adcDevice[0].vendor,
+        adcDevice: machine.adcDevice[0].device,
+        deviceUri: machine.deviceUri,
+        baudRate: machine.baudRate,
+        defaultValues: machine.defaultValues
+      }
     }
-    if ((!dashboardPage.userName)||(!machine)) {
+    if ((!dashboardPage.userName) || (!machine)) {
       res.redirect('/dashboard')
     } else {
       dashboardPage.errors = null
@@ -428,7 +420,7 @@ module.exports.machineUpdate = function (req, res) {
     var newConfiguration = {
       vendor: vendor,
       type: type,
-      name: name.replace(" ", "_"),
+      name: name.replace(' ', '_'),
       threshCurr: threshCurr,
       hysteresis: hysteresis,
       sampleTime: sampleTime,
@@ -439,77 +431,77 @@ module.exports.machineUpdate = function (req, res) {
       baudRate: baudRate,
       defaultValues: JSON.parse(JSON.stringify(Machine.defaultValues[type][vendor]))
     }
-    for (var i in newConfiguration.defaultValues){
-        newConfiguration.defaultValues[i] = req.body[i] || newConfiguration.defaultValues[i];
-        req.body[i] = newConfiguration.defaultValues[i];
+    for (var i in newConfiguration.defaultValues) {
+      newConfiguration.defaultValues[i] = req.body[i] || newConfiguration.defaultValues[i]
+      req.body[i] = newConfiguration.defaultValues[i]
     }
     switch (type) {
-        case 'Laser cutter':
-            switch (vendor){
-                case 'Epilog':
-                req.body.process = "cut";
-                req.body.material = "cardboard";
-                errors = formCheck.checkJSON(req, newConfiguration);
-                if (!errors){
-                    req.body.process = "halftone";
-                    errors = formCheck.checkJSON(req, newConfiguration);
-                }
-                break;
+      case 'Laser cutter':
+        switch (vendor) {
+          case 'Epilog':
+            req.body.process = 'cut'
+            req.body.material = 'cardboard'
+            errors = formCheck.checkJSON(req, newConfiguration)
+            if (!errors) {
+              req.body.process = 'halftone'
+              errors = formCheck.checkJSON(req, newConfiguration)
             }
-        break;
-        case 'Vinyl cutter':
-            switch (vendor){
-                case 'Roland':
-                    req.body.material = "vinyl";
-                    errors = formCheck.checkJSON(req, newConfiguration);
-                break;
+            break
+        }
+        break
+      case 'Vinyl cutter':
+        switch (vendor) {
+          case 'Roland':
+            req.body.material = 'vinyl'
+            errors = formCheck.checkJSON(req, newConfiguration)
+            break
+        }
+        break
+      case 'Milling machine':
+        switch (vendor) {
+          case 'Roland':
+            req.body.process = 'pcb'
+            req.body.pcbFinishing = 'outline_1_32'
+            errors = formCheck.checkJSON(req, newConfiguration)
+            if (!errors) {
+              req.body.process = 'wax'
+              req.body.waxFinishing = 'rough_cut'
+              errors = formCheck.checkJSON(req, newConfiguration)
+              if (!errors) {
+                req.body.waxFinishing = 'finish_cut'
+                errors = formCheck.checkJSON(req, newConfiguration)
+              }
             }
-        break;
-        case 'Milling machine':
-            switch (vendor){
-                case 'Roland':
-                req.body.process = "pcb";
-                req.body.pcbFinishing = "outline_1_32";
-                errors = formCheck.checkJSON(req, newConfiguration);
-                if (!errors){
-                    req.body.process = "wax";
-                    req.body.waxFinishing = "rough_cut";
-                    errors = formCheck.checkJSON(req, newConfiguration);
-                    if (!errors){
-                        req.body.waxFinishing = "finish_cut";
-                        errors = formCheck.checkJSON(req, newConfiguration);
-                    }
-                }
-                break;
-            }
-        break;
-        case '3D printer':
-            switch (vendor){
-                case 'Prusa':
-                break;
-            }
-        break;
+            break
+        }
+        break
+      case '3D printer':
+        switch (vendor) {
+          case 'Prusa':
+            break
+        }
+        break
     }
     if (errors) {
-        dashboardPage.errors = errors
-        res.render('dashboard', dashboardPage)
-        dashboardPage.errors = null
+      dashboardPage.errors = errors
+      res.render('dashboard', dashboardPage)
+      dashboardPage.errors = null
     } else {
-        Machine.updateMachine(newConfiguration, function (err, machine) {
+      Machine.updateMachine(newConfiguration, function (err, machine) {
         if (err) throw err
-            dashboardPage.machine = {
-            name: machine.name,
-            type: machine.type,
-            vendor: machine.vendor,
-            threshCurr: machine.threshCurr,
-            hysteresis: machine.hysteresis,
-            sampleTime: machine.sampleTime,
-            dutyCycle: machine.dutyCycle,
-            adcVendor: machine.adcDevice[0].vendor,
-            adcDevice: machine.adcDevice[0].device,
-            deviceUri: machine.deviceUri,
-            baudRate: machine.baudRate,
-            defaultValues: machine.defaultValues
+        dashboardPage.machine = {
+          name: machine.name,
+          type: machine.type,
+          vendor: machine.vendor,
+          threshCurr: machine.threshCurr,
+          hysteresis: machine.hysteresis,
+          sampleTime: machine.sampleTime,
+          dutyCycle: machine.dutyCycle,
+          adcVendor: machine.adcDevice[0].vendor,
+          adcDevice: machine.adcDevice[0].device,
+          deviceUri: machine.deviceUri,
+          baudRate: machine.baudRate,
+          defaultValues: machine.defaultValues
         }
         var successDbUpdate = 'DB succsessfully updated'
         req.flash('success_msg', successDbUpdate)
@@ -517,9 +509,9 @@ module.exports.machineUpdate = function (req, res) {
         dashboardPage.flashSuccess = flashSuccess
         req.session.flash = []
         process.emit('machineUpdated')
-   
+
         res.redirect('/dashboard/settings')
-        })
+      })
     }
   }
 }
@@ -559,7 +551,7 @@ module.exports.profileUpdate = function (req, res) {
       email: email,
       issuperuser: (userrole === 'Superadministrator')
     }
-          // read user id from session
+    // read user id from session
     var id = req.user._id
 
     User.updateUserById(id, newProfile, function (updateOK, user) {
@@ -581,7 +573,6 @@ module.exports.profileUpdate = function (req, res) {
 
 module.exports.changePassword = function (req, res) {
   var password = req.body.newPassword
-  var confirmPassword = req.body.confirmPassword
 
   req.checkBody('newPassword', validationMsg.password).notEmpty()
   req.checkBody('confirmPassword', validationMsg.passwordConfirm).notEmpty()
@@ -628,54 +619,51 @@ module.exports.logs = function (req, res) {
   dashboardPage.currentPanelName = panelNames.logs
   dashboardPage.currentPanelRoute = '/dashboard/logs'
 
-   if (!dashboardPage.userName) {
-       res.redirect('/dashboard')
-   } else {
+  if (!dashboardPage.userName) {
+    res.redirect('/dashboard')
+  } else {
     res.render('dashboard', dashboardPage)
   }
 }
 
-
 module.exports.siren = function (req, res) {
+  dashboardPage.displayProfile = false
+  dashboardPage.displayWizard = false
+  dashboardPage.displayTerminal = false
+  dashboardPage.displaySettings = false
+  dashboardPage.displayControl = false
+  dashboardPage.displayProcessCut = false
+  dashboardPage.displayProcessHalftone = false
+  dashboardPage.displayJobsTable = false
+  dashboardPage.displayLogs = false
+  dashboardPage.displayMonitor = true
+  dashboardPage.currentPanelName = panelNames.monitor
+  dashboardPage.currentPanelRoute = '/dashboard/monitor'
 
- dashboardPage.displayProfile = false
- dashboardPage.displayWizard = false
- dashboardPage.displayTerminal = false
- dashboardPage.displaySettings = false
- dashboardPage.displayControl = false
- dashboardPage.displayProcessCut = false
- dashboardPage.displayProcessHalftone = false
- dashboardPage.displayJobsTable = false
- dashboardPage.displayLogs = false
- dashboardPage.displayMonitor = true
- dashboardPage.currentPanelName = panelNames.monitor
- dashboardPage.currentPanelRoute = '/dashboard/monitor'
-
- if (!dashboardPage.userName) {
-     res.redirect('/dashboard')
- } else {
-    siren.connect('http://'+ process.env.HOSTNAME + ':1337/', conn => {
-        if (conn.err == null) {
-
+  if (!dashboardPage.userName) {
+    res.redirect('/dashboard')
+  } else {
+    siren.connect('http://' + process.env.HOSTNAME + ':1337/', conn => {
+      if (conn.err == null) {
         conn.entity.data.links
             .filter(link => link.title !== undefined && link.title.includes('machine-wrapper'))
             .map(link => link.href)
             .forEach(href => siren.connect(href, conn => {
-                dashboardPage.siren.deviceHref = href
-                dashboardPage.siren.deviceProps = conn.entity.data.entities[0].properties
-                var apiURL  = conn.entity.data.entities[0].links[0].href
-                var path = url.parse(apiURL, true)
-                dashboardPage.siren.host = (path.host).split(':', 1)
-                dashboardPage.siren.query = {method: 'GET', url: path.pathname}
-                siren.connect(conn.entity.data.entities[0].links[0].href, conn => {
-                    dashboardPage.siren.response = JSON.stringify(conn.entity.data, null, 4)
-                    dashboardPage.siren.deviceActions = conn.entity.data.actions
-                    dashboardPage.siren.deviceMonitor = {current: conn.entity.data.links[3].title,
-                                                     state: conn.entity.data.links[4].title }
-                    res.render('dashboard', dashboardPage)
-                })
-            }));
-        }
-    });
- }
+              dashboardPage.siren.deviceHref = href
+              dashboardPage.siren.deviceProps = conn.entity.data.entities[0].properties
+              var apiURL = conn.entity.data.entities[0].links[0].href
+              var path = url.parse(apiURL, true)
+              dashboardPage.siren.host = (path.host).split(':', 1)
+              dashboardPage.siren.query = {method: 'GET', url: path.pathname}
+              siren.connect(conn.entity.data.entities[0].links[0].href, conn => {
+                dashboardPage.siren.response = JSON.stringify(conn.entity.data, null, 4)
+                dashboardPage.siren.deviceActions = conn.entity.data.actions
+                dashboardPage.siren.deviceMonitor = {current: conn.entity.data.links[3].title,
+                  state: conn.entity.data.links[4].title }
+                res.render('dashboard', dashboardPage)
+              })
+            }))
+      }
+    })
+  }
 }
