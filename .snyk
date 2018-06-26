@@ -1,0 +1,27 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2018-06-26T10:49:57.418Z'
+  'npm:hoek:20180212':
+    - passport-jwt > jsonwebtoken > joi > hoek:
+        patched: '2018-06-26T10:49:57.418Z'
+    - passport-jwt > jsonwebtoken > joi > topo > hoek:
+        patched: '2018-06-26T10:49:57.418Z'
+  'npm:moment:20160126':
+    - zetta > titan > argo-clf > moment:
+        patched: '2018-06-26T10:49:57.418Z'
+  'npm:ms:20170412':
+    - socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2018-06-26T10:49:57.418Z'
+  'npm:negotiator:20160616':
+    - zetta > titan > argo-resource > negotiator:
+        patched: '2018-06-26T10:49:57.418Z'
+  'npm:ws:20160920':
+    - zetta > ws:
+        patched: '2018-06-26T10:49:57.418Z'
+    - zetta > revolt > ws:
+        patched: '2018-06-26T10:49:57.418Z'
