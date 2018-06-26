@@ -80,7 +80,7 @@ module.exports.updateMachine = function (newConfiguration, callback) {
     if (!err) {
       Machine.findOne({}, function (err, machine) {
         if (err) throw (err)
-        if ((machine.type !== newConfiguration.type) || (machine.vendor !== newConfiguration.vendor)) {
+        if ((!machine) || (machine.type !== newConfiguration.type) || (machine.vendor !== newConfiguration.vendor)) {
           if (defaultValues[newConfiguration.type]) {
             newConfiguration.defaultValues = defaultValues[newConfiguration.type][newConfiguration.vendor]
           }
