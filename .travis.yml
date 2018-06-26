@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "6"
+dist: trusty
+sudo: required
 services: mongodb
 before_script:
   - mongo usersDB --eval 'db.users.insert({"email":"gianluca.cornetta@gmail.com","firstname":"Gianluca","hash":"9b8e750b79b628ad5a1a1393d48cf70eb21f9250005c72db6a29f8ca60df818b819fff45e909e3e175264a88f60d8f7d9b12348bd312e6222225e9dce11c259f","issuperuser":true,"lastlogged":ISODate("2018-04-11T03:10:39.150Z"),"lastname":"Cornetta","pathtophoto":"/uploads/img/57a491c2c46763f60bf25acd.png","salt":"f6c7b8dda883b7781503c6cfe733ba4b","username":"gcornetta" });'
