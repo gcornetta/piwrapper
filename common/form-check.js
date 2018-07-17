@@ -229,24 +229,26 @@ module.exports.setDefaultValuesIfNull = function (req, machine) {
     case 'Laser cutter':
       switch (machine.vendor) {
         case 'Epilog':
-          json.diameter = json.diameter || machine.defaultValues.diameter
-          json.offsets = json.offsets || machine.defaultValues.offsets
-          json.overlap = json.overlap || machine.defaultValues.overlap
-          json.error = json.error || machine.defaultValues.error
-          json.threshold = json.threshold || machine.defaultValues.threshold
-          json.merge = json.merge || machine.defaultValues.merge
-          json.order = json.order || machine.defaultValues.order
-          json.sequence = json.sequence || machine.defaultValues.sequence
-          json.spotSize = json.spotSize || machine.defaultValues.spotSize
-          json.minSpotsize = json.minSpotsize || machine.defaultValues.minSpotsize
-          json.horSpotspace = json.horSpotspace || machine.defaultValues.horSpotspace
-          json.verSpotspace = json.verSpotspace || machine.defaultValues.verSpotspace
-          json.pointSpot = json.pointSpot || machine.defaultValues.pointSpot
-          json.power = json.power || machine.defaultValues.power
-          json.speed = json.speed || machine.defaultValues.speed
-          json.rate = json.rate || machine.defaultValues.rate
-          json.xCoord = json.xCoord || machine.defaultValues.xCoord
-          json.yCoord = json.yCoord || machine.defaultValues.yCoord
+          if (machine.defaultValues[json.material]) {
+            json.diameter = json.diameter || machine.defaultValues[json.material].diameter
+            json.offsets = json.offsets || machine.defaultValues[json.material].offsets
+            json.overlap = json.overlap || machine.defaultValues[json.material].overlap
+            json.error = json.error || machine.defaultValues[json.material].error
+            json.threshold = json.threshold || machine.defaultValues[json.material].threshold
+            json.merge = json.merge || machine.defaultValues[json.material].merge
+            json.order = json.order || machine.defaultValues[json.material].order
+            json.sequence = json.sequence || machine.defaultValues[json.material].sequence
+            json.spotSize = json.spotSize || machine.defaultValues[json.material].spotSize
+            json.minSpotsize = json.minSpotsize || machine.defaultValues[json.material].minSpotsize
+            json.horSpotspace = json.horSpotspace || machine.defaultValues[json.material].horSpotspace
+            json.verSpotspace = json.verSpotspace || machine.defaultValues[json.material].verSpotspace
+            json.pointSpot = json.pointSpot || machine.defaultValues[json.material].pointSpot
+            json.power = json.power || machine.defaultValues[json.material].power
+            json.speed = json.speed || machine.defaultValues[json.material].speed
+            json.rate = json.rate || machine.defaultValues[json.material].rate
+            json.xCoord = json.xCoord || machine.defaultValues[json.material].xCoord
+            json.yCoord = json.yCoord || machine.defaultValues[json.material].yCoord
+          }
           break
       }
       break
@@ -254,20 +256,22 @@ module.exports.setDefaultValuesIfNull = function (req, machine) {
     case 'Vinyl cutter':
       switch (machine.vendor) {
         case 'Roland':
-          json.switchSort = json.switchSort || machine.defaultValues.switchSort
-          json.origin = json.origin || machine.defaultValues.origin
-          json.diameter = json.diameter || machine.defaultValues.diameter
-          json.offsets = json.offsets || machine.defaultValues.offsets
-          json.overlap = json.overlap || machine.defaultValues.overlap
-          json.error = json.error || machine.defaultValues.error
-          json.threshold = json.threshold || machine.defaultValues.threshold
-          json.merge = json.merge || machine.defaultValues.merge
-          json.order = json.order || machine.defaultValues.order
-          json.sequence = json.sequence || machine.defaultValues.sequence
-          json.power = json.power || machine.defaultValues.power
-          json.speed = json.speed || machine.defaultValues.speed
-          json.xCoord = json.xCoord || machine.defaultValues.xCoord
-          json.yCoord = json.yCoord || machine.defaultValues.yCoord
+          if (machine.defaultValues[json.material]) {
+            json.switchSort = json.switchSort || machine.defaultValues[json.material].switchSort
+            json.origin = json.origin || machine.defaultValues[json.material].origin
+            json.diameter = json.diameter || machine.defaultValues[json.material].diameter
+            json.offsets = json.offsets || machine.defaultValues[json.material].offsets
+            json.overlap = json.overlap || machine.defaultValues[json.material].overlap
+            json.error = json.error || machine.defaultValues[json.material].error
+            json.threshold = json.threshold || machine.defaultValues[json.material].threshold
+            json.merge = json.merge || machine.defaultValues[json.material].merge
+            json.order = json.order || machine.defaultValues[json.material].order
+            json.sequence = json.sequence || machine.defaultValues[json.material].sequence
+            json.power = json.power || machine.defaultValues[json.material].power
+            json.speed = json.speed || machine.defaultValues[json.material].speed
+            json.xCoord = json.xCoord || machine.defaultValues[json.material].xCoord
+            json.yCoord = json.yCoord || machine.defaultValues[json.material].yCoord
+          }
           break
       }
       break
@@ -275,34 +279,37 @@ module.exports.setDefaultValuesIfNull = function (req, machine) {
     case 'Milling machine':
       switch (machine.vendor) {
         case 'Roland':
-          json.machines = json.machines || machine.defaultValues.machines
-          json.x = json.x || machine.defaultValues.x
-          json.y = json.y || machine.defaultValues.y
-          json.z = json.z || machine.defaultValues.z
-          json.zjog = json.zjog || machine.defaultValues.zjog
-          json.xhome = json.xhome || machine.defaultValues.xhome
-          json.yhome = json.yhome || machine.defaultValues.yhome
-          json.zhome = json.zhome || machine.defaultValues.zhome
-          json.speed = json.speed || machine.defaultValues.speed
-          json.diameter = json.diameter || machine.defaultValues.diameter
-          json.error = json.error || machine.defaultValues.error
-          json.overlap = json.overlap || machine.defaultValues.overlap
-          json.thickness = json.thickness || machine.defaultValues.thickness
-          json.switchSort = json.switchSort || machine.defaultValues.switchSort
-          json.direction = json.direction || machine.defaultValues.direction
-          json.cutDepth = json.cutDepth || machine.defaultValues.cutDepth
-          json.offsets = json.offsets || machine.defaultValues.offsets
-          json.threshold = json.threshold || machine.defaultValues.threshold
-          json.merge = json.merge || machine.defaultValues.merge
-          json.order = json.order || machine.defaultValues.order
-          json.sequence = json.sequence || machine.defaultValues.sequence
-          json.bottomZ = json.bottomZ || machine.defaultValues.bottomZ
-          json.bottomIntensity = json.bottomIntensity || machine.defaultValues.bottomIntensity
-          json.topZ = json.topZ || machine.defaultValues.topZ
-          json.topIntensity = json.topIntensity || machine.defaultValues.topIntensity
-          json.xz = json.xz || machine.defaultValues.xz
-          json.yz = json.yz || machine.defaultValues.yz
-          json.type = json.type || machine.defaultValues.type
+          var finishing = json.pcbFinishing || json.waxFinishing
+          if (machine.defaultValues[finishing]) {
+            json.machines = json.machines || machine.defaultValues[finishing].machines
+            json.x = json.x || machine.defaultValues[finishing].x
+            json.y = json.y || machine.defaultValues[finishing].y
+            json.z = json.z || machine.defaultValues[finishing].z
+            json.zjog = json.zjog || machine.defaultValues[finishing].zjog
+            json.xhome = json.xhome || machine.defaultValues[finishing].xhome
+            json.yhome = json.yhome || machine.defaultValues[finishing].yhome
+            json.zhome = json.zhome || machine.defaultValues[finishing].zhome
+            json.speed = json.speed || machine.defaultValues[finishing].speed
+            json.diameter = json.diameter || machine.defaultValues[finishing].diameter
+            json.error = json.error || machine.defaultValues[finishing].error
+            json.overlap = json.overlap || machine.defaultValues[finishing].overlap
+            json.thickness = json.thickness || machine.defaultValues[finishing].thickness
+            json.switchSort = json.switchSort || machine.defaultValues[finishing].switchSort
+            json.direction = json.direction || machine.defaultValues[finishing].direction
+            json.cutDepth = json.cutDepth || machine.defaultValues[finishing].cutDepth
+            json.offsets = json.offsets || machine.defaultValues[finishing].offsets
+            json.threshold = json.threshold || machine.defaultValues[finishing].threshold
+            json.merge = json.merge || machine.defaultValues[finishing].merge
+            json.order = json.order || machine.defaultValues[finishing].order
+            json.sequence = json.sequence || machine.defaultValues[finishing].sequence
+            json.bottomZ = json.bottomZ || machine.defaultValues[finishing].bottomZ
+            json.bottomIntensity = json.bottomIntensity || machine.defaultValues[finishing].bottomIntensity
+            json.topZ = json.topZ || machine.defaultValues[finishing].topZ
+            json.topIntensity = json.topIntensity || machine.defaultValues[finishing].topIntensity
+            json.xz = json.xz || machine.defaultValues[finishing].xz
+            json.yz = json.yz || machine.defaultValues[finishing].yz
+            json.type = json.type || machine.defaultValues[finishing].type
+          }
       }
       break
 

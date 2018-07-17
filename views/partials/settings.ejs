@@ -145,18 +145,23 @@
                     </h4>
                   </div>
                   <div id="collapse1" class="panel-collapse collapse">
-                    <div class="row">
                       <% for (var i in machine.defaultValues) {%>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label><%=i%></label>
+                      <div class="row">
+                      <br>
+                      <h4><%=i%></h4>
+                      <hr>
+                        <% for (var j in machine.defaultValues[i]) {%>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label><%=j%></label>
                               <div class="input-group">
-                                <input type="text" name="<%=i%>" value="<%=machine.defaultValues[i]%>" class="form-control">
+                                <input type="text" name="<%=j%>" value="<%=machine.defaultValues[i][j]%>" class="form-control">
                               </div>
                             </div>
                           </div>
                         <%}%>
-                    </div>
+                      </div>
+                      <%}%>
                   </div>
                 </div>
               </div>

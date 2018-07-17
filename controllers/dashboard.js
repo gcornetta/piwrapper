@@ -431,20 +431,33 @@ module.exports.machineUpdate = function (req, res) {
       baudRate: baudRate,
       defaultValues: JSON.parse(JSON.stringify(Machine.defaultValues[type][vendor]))
     }
-    for (var i in newConfiguration.defaultValues) {
-      newConfiguration.defaultValues[i] = req.body[i] || newConfiguration.defaultValues[i]
-      req.body[i] = newConfiguration.defaultValues[i]
+    var index = 1;
+    for (var i in newConfiguration.defaultValues){
+      for (var j in newConfiguration.defaultValues[i]){
+        if (req.body[j]) {
+          newConfiguration.defaultValues[i][j] = req.body[j][req.body[j].length - index] || newConfiguration.defaultValues[i][j]
+        }
+      }
+      index++
     }
     switch (type) {
       case 'Laser cutter':
         switch (vendor) {
           case 'Epilog':
-            req.body.process = 'cut'
-            req.body.material = 'cardboard'
-            errors = formCheck.checkJSON(req, newConfiguration)
-            if (!errors) {
-              req.body.process = 'halftone'
+            for (var i in newConfiguration.defaultValues){
+              req.body = newConfiguration.defaultValues[i]
+              req.body.process = 'cut'
+              req.body.material = 'cardboard'
               errors = formCheck.checkJSON(req, newConfiguration)
+              if (!errors) {
+                req.body.process = 'halftone'
+                errors = formCheck.checkJSON(req, newConfiguration)
+              }
+              delete req.body.process
+              delete req.body.material
+              if (errors){
+                break;
+              }
             }
             break
         }
@@ -452,24 +465,40 @@ module.exports.machineUpdate = function (req, res) {
       case 'Vinyl cutter':
         switch (vendor) {
           case 'Roland':
-            req.body.material = 'vinyl'
-            errors = formCheck.checkJSON(req, newConfiguration)
+            for (var i in newConfiguration.defaultValues){
+              req.body = newConfiguration.defaultValues[i]
+              req.body.material = 'vinyl'
+              errors = formCheck.checkJSON(req, newConfiguration)
+              delete req.body.material
+              if (errors){
+                break;
+              }
+            }
             break
         }
         break
       case 'Milling machine':
         switch (vendor) {
           case 'Roland':
-            req.body.process = 'pcb'
-            req.body.pcbFinishing = 'outline_1_32'
-            errors = formCheck.checkJSON(req, newConfiguration)
-            if (!errors) {
-              req.body.process = 'wax'
-              req.body.waxFinishing = 'rough_cut'
+            for (var i in newConfiguration.defaultValues){
+              req.body = newConfiguration.defaultValues[i]
+              req.body.process = 'pcb'
+              req.body.pcbFinishing = 'outline_1_32'
               errors = formCheck.checkJSON(req, newConfiguration)
               if (!errors) {
-                req.body.waxFinishing = 'finish_cut'
+                req.body.process = 'wax'
+                req.body.waxFinishing = 'rough_cut'
                 errors = formCheck.checkJSON(req, newConfiguration)
+                if (!errors) {
+                  req.body.waxFinishing = 'finish_cut'
+                  errors = formCheck.checkJSON(req, newConfiguration)
+                }
+              }
+              delete req.body.process
+              delete req.body.pcbFinishing
+              delete req.body.waxFinishing
+              if (errors){
+                break;
               }
             }
             break
