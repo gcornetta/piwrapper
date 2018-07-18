@@ -1,4 +1,4 @@
-var socket = io.connect( 'http://localhost:8888/');
+var socket = io.connect(window.location.host);
 
 socket.on('directCommandResult', function(msg) {
     alert(msg);
