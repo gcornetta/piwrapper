@@ -16,7 +16,6 @@
 # imports
 #
 import sys,string,threading,time,os
-from Tkinter import *
 #
 # globals
 #
@@ -28,7 +27,7 @@ state = RUN
 #
 # send routine
 #
-def send(canvas,data,device,separator):
+def send(data,device,separator):
    global state,tstart
    n = 0
    N = string.count(data,separator)
@@ -70,8 +69,6 @@ def send(canvas,data,device,separator):
       percent = (100.0*n)/N
       dt = (time.time()-tstart)/60.0
       totalt = (dt/n)*N
-      canvas.itemconfigure("text",text="sending %.1f%% (%.0f/%.0f min)"%(percent,dt,totalt))
-      canvas.update()
    device.close()
    os._exit(0)
 #
@@ -136,28 +133,12 @@ if (separator == ''):
    device.close()
    sys.exit(0)
 #
-# if command separator, set up GUI
-#
-#
-# set up GUI
-#
-root = Tk()
-root.title('mod_print.py')
-canvas = Canvas(root, width=WINDOW, height=.25*WINDOW, background='white')
-canvas.create_text(.5*WINDOW,.1*WINDOW,text="",font=("Helvetica",24),tags="text",fill="#0000b0")
-canvas.pack()
-pause_button = Button(root,text="pause",command=pause)
-pause_button.pack()
-cancel_button = Button(root,text="cancel",command=cancel)
-cancel_button.pack()
-#
 # start sending thread
 #
 tstart = time.time()
-t = threading.Thread(target=send,args=(canvas,data,device,separator))
+t = threading.Thread(target=send,args=(data,device,separator))
 t.start()
 #
 # start UI loop
 #
-root.mainloop()
 
