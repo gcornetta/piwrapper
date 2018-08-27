@@ -9,8 +9,20 @@
 This software is part of a larger suite of microservices designed to remotely manage digital fabrication equipment in a loosely coupled and distributed environment. More specifically, the software in this repo provides a software abstraction layer for 3D printers, laser cutters, vinyl cutters and desktop milling machines and exposes them over the internet as web services that can be consumed through REST APIs.
 
 # About
-This software has been developed by Gianluca Cornetta and Javier Mateos within the Horizon 2020 **NEWTON** project
+This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ within **NEWTON** project. **NEWTON** is a large scale Integrated Action started in March 2016 and funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
+
+# Hardware Prerequisites
+This software has been tested on a Raspberry Pi III Model B (amrv7 32-bit architecture) with a 8-GByte SD card. We strongly recommend using this Raspberry Pi model to avoid possible compilation errors of the GPIO module. You need at least 150 MBytes of free disk space to install the software.
+
+# Software prerequisites
+The Machine wrapper software requires that you previously install on your system the following software packages:
+
+1. Mongo DB
+2. Cups
+
 # Installation
+To install the Machine Wrapper module go through the following steps:
+
 
 # Index
 
