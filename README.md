@@ -7,7 +7,7 @@
 This software is part of a larger suite of microservices designed to remotely manage digital fabrication equipment in a loosely coupled and distributed environment. More specifically, the software in this repo provides a software abstraction layer for 3D printers, laser cutters, vinyl cutters and desktop milling machines and exposes them over the internet as web services that can be consumed through REST APIs.
 
 # About
-
+This software has been developed by Gianluca Cornetta and Javier Mateos within the Horizon 2020 **NEWTON** project
 # Installation
 
 # Index
