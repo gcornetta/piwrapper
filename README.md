@@ -112,7 +112,32 @@ The <b>Communication Layer</b> implements the HTTP server and the APIs interface
 
 <a name="hardware-architecture"></a>
 ## Harware architecture
+<p align="justify">
+The lack of network connectivity of a digital fabrication machine requires a hardware/software wrapper to overcome this limitation. The wrapper can be implemented using an inexpensive Raspberry Pi embedded computer connected to a machine through its USB port. Digital fabrication machines must operate in a networked real-time environment that must promptly react to any change of machine status. This, in turn, implies that we need somehow to retrieve status information from the machine (i.e., off, busy, idle). Unfortunately, most of the available fabrication machines have proprietary hardware specifications which impede the development of this functionality. However, it is possible to infer the machine status using a very simple workaround that requires the use of a CT (continuous Transformer) sensor and an ADC connected to the Raspberry Pi GPIO that samples the CT sensor at regular time intervals in order to infer the machine status from current drawn by the power supply. 
+</p>
 
+<p align="justify">
+Fig. 3 depicts the fabrication machine set-up and interfacing with both Pi-Wrapper and sensing and signal-conditioning circuits.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/machine-machine-interfacing.png" alt="MACHINE INTERFACING"/>
+    <figcaption>Fig. 3 - Fabrication Machine Interfacing.</figcaption>
+  </p>
+</figure>
+
+
+The proposed configuration is formed by the following components:
+
+1.	A Raspberry Pi III embedded computer (i.e., the Pi-Wrapper);
+2.	A split core current transformer sensor (ECS 1030-L72);
+3.	A conditioning circuit to convert the measured current into an input voltage for the Analog to Digital Converter (ADC);
+4.	A Ti ADS 1x15 Analog to Digital Converter.
+
+<p align="justify">
+  The ADS 1x15 has an embedded Programmable Gain Amplifier (PGA) and an I<sup>2</sup>C (Inter Integrated Circuit) bus that can be connected to the GPIO (General Purpose Input/Output) port of the Raspberry Pi. Software support is provided by the Pi-Wrapper middleware layer in which software drivers for the Raspberry Pi I2C pins and the Ti ADS 1x15 are implemented. Supported devices are ADS 1015 and ADS 1115 that are respectively a 12-bit and a 16-bit analog to digital converters; however, the I<sup>2</sup>C compliance allow seamless operation with converters from other vendors provided a new device driver is added to the Pi-Wrapper drivers’ library. 
+</p>
 <a name="machine-administration"></a>
 # Machine administration
 
