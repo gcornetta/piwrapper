@@ -13,7 +13,7 @@ This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ with
 
 # Table of contents
 
-1. [Preliminary steps](#Preliminary)
+1. [Preliminary steps](#preliminary-steps)
    * [Hardware prerequisites](#Hardware-prerequisites)
    * [Software prerequisites](#Software-prerequisites)
    * [Installation](#Installation)
@@ -29,7 +29,8 @@ This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ with
    * [Software architecture](#sub-heading-2)
    * [Hardware architecture](#sub-heading-2)
 
-# Preliminary
+<a name="preliminary-steps"></a>
+# Preliminary steps
 
 ## Hardware prerequisites
 This software has been tested on a Raspberry Pi III Model B (amrv7 32-bit architecture) with a 8-GByte SD card. We strongly recommend using this Raspberry Pi model to avoid possible compilation errors of the GPIO module. You need at least 150 MBytes of free disk space to install the software.
