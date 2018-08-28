@@ -34,15 +34,15 @@ The server listen to **port 8888** of your Raspberry Pi. You have first to creat
 
 # Index
 
-- [Machine administration](#heading)
+1. [Machine administration](#heading)
   * [The configuration menu](#sub-heading)
   * [The control panel menu](#sub-heading)
   * [The jobs menu](#sub-heading)
   * [The tools menu](#sub-heading)
-- [Documentation and developer support](#heading-1)
+2. [Documentation and developer support](#heading-1)
   * [Machine APIs](#sub-heading-1)
     + [On-line documentation](#sub-sub-heading-1)
-- [System architecture](#heading-2)
+3. [System architecture](#heading-2)
   * [Software architecture](#sub-heading-2)
   * [Hardware architecture](#sub-heading-2)
     
