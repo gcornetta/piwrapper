@@ -307,12 +307,70 @@ First, the MongoDB database instance is deployed, and the connection is carried 
 
 <a name="the-control-panel-menu"></a>
 ## The control panel menu
+<p align="justify">
+The Control panel allows configuring a machine and dispatching a fabrication job to it. Fig. 12 depicts a possible configuration of the machine control panel.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/machine-control-panel.png" alt="MACHINE CONTROL PANEL"/>
+    <figcaption>Fig. 12 - The Machine Control Panel.</figcaption>
+  </p>
+</figure>
+
+<p align="justify">
+The control panel allows configuring the basic machine parameters, set up the head position, selecting the material for fabrication, the machine model type etc. The structure of the control panel depends on the machine type and the interface is dynamically built after the software has been configured to work with a given machine.
+</p>
 
 <a name="the-jobs-menu"></a>
 ## The jobs menu
 
+<p align="justify">
+Once a fabrication batch has been submitted to a Fab Lab and routed by the Fab Lab Gateway to an available machine, the job is stored in the Pi-Wrapper queue system described. This design choice is fundamentally motivated by two reasons:
+</p>
+
+<p align="justify">
+1.	Implement a job scheduling system that allows a fair sharing of the underlying fabrication resources.
+2.	Implement a basic security policy to protect the machine from potentially harmful designs that could damage it.
+</p>
+
+<p align="justify">
+Once a fabrication batch has been queued, it must be verified and approved by the Fab Lab administrator before being sent to the machine for fabrication. The queued job can be monitored and controlled using the <b>Jobs Menu</b> depicted in Fig. 13.
+
+When a job is submitted, it is assigned a <em>pending</em> status and no priority until it is approved by the Fab Lab administrator.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/jobs-control-panel.png" alt="JOBS CONTROL PANEL"/>
+    <figcaption>Fig. 13 - The Jobs Control Panel.</figcaption>
+  </p>
+</figure>
+
 <a name="the-tools-menu"></a>
 ## The tools menu
+
+<p align="justify">
+The Pi-Wrapper user interface also allows the possibility to monitor in real time the machine status as well as system operation. These options are available in the <b>Tools Menu</b>. In this menu, one can select to display on the web interface the system logs (provided the system logger has been configured in debug mode) or to monitor the current drawn by the machine and the device status.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/machine-status-panel.png" alt="MACHINE STATUS PANEL"/>
+    <figcaption>Fig. 14 - The Machine Status Panel.</figcaption>
+  </p>
+</figure>
+
+<p align="justify">
+  As mentioned before, the status (either <em>off</em>, <em>idle</em>, or <em>busy</em>) is inferred by the current drawn by the machine. Fig. 14 shows the Machine Status Panel. In the panel, a real-time plot of the measured current as well as the machine status are displayed. The machine APIs are also checked performing a GET request at the URL reserved to the device connected to the Pi-Wrapper as shown in Fig. 15.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/apis-monitoring.png" alt="APIS MONITORING"/>
+    <figcaption>Fig. 15 - The API Monitoring Panel.</figcaption>
+  </p>
+</figure>
 
 <a name="documentation-and-developer-support"></a>
 # Documentation and developer support
