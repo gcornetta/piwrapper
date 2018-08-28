@@ -156,19 +156,19 @@ Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal con
   </tr>
   <tr>
     <td>R_BURDEN</td>
-    <td>120</td>
+    <td>120&Omega;</td>
   </tr>
   <tr>
-    <td>R1</td>
-    <td>10</td>
+    <td>R<sub>1</sub></td>
+    <td>10K&Omega;</td>
   </tr>
   <tr>
-    <td>R2</td>
-    <td>10</td>
+    <td>R<sub>2</sub></td>
+    <td>10K&Omega;</td>
   </tr>
   <tr>
-    <td>C1</td>
-    <td>47</td>
+    <td>C<sub>1</sub></td>
+    <td>47&mu;F</td>
   </tr>
 </table>
 
