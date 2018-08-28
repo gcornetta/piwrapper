@@ -106,6 +106,10 @@ The software architecture is modular and distributed over five layers as depicte
   </p>
 </figure>
 
+<p align="justify">
+The <b>Communication Layer</b> implements the HTTP server and the APIs interface to manage and schedule fabrication batches. The <b>Presentation Layer</b> implements the user interfaces to set up and manage a connected fabrication machine. An MVC (Model View Controller) programming paradigm is used at this stage; namely, a route in the browser triggers a controller function that dynamically generates and renders an HTML view using the data stored in the persistence layer (i.e. data base). The <p>Application Layer</p> implements the business logic. The business logic and the user interface rely on the middleware functions implemented in the <p>Middleware Layer</p>. More specifically, the middleware includes custom and third-party methods to manage security and authentication, machine to machine communications and interfacing, HTML views rendering, system logging, data base connection and access and ADC (Analog to Digital Converter) drivers. Open API 2.0 (formerly known as Swagger) support is integrated in the application middleware, this makes the Machine Wrapper a very developer-friendly software since APIs and data models documentation is embedded into the application, in addition a developer can test the API using the Swagger User Interface that is also embedded in the Machine Wrapper.  Swagger Machine Wrapper API specifications (written in YAML) are available in the software.
+</p>
+
 <a name="hardware-architecture"></a>
 ## Harware architecture
 
