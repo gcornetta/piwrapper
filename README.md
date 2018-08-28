@@ -127,7 +127,6 @@ Fig. 3 depicts the fabrication machine set-up and interfacing with both Pi-Wrapp
   </p>
 </figure>
 
-
 The proposed configuration is formed by the following components:
 
 1.	A Raspberry Pi III embedded computer (i.e., the Pi-Wrapper);
@@ -138,6 +137,18 @@ The proposed configuration is formed by the following components:
 <p align="justify">
   The ADS 1x15 has an embedded Programmable Gain Amplifier (PGA) and an I<sup>2</sup>C (Inter Integrated Circuit) bus that can be connected to the GPIO (General Purpose Input/Output) port of the Raspberry Pi. Software support is provided by the Pi-Wrapper middleware layer in which software drivers for the Raspberry Pi I2C pins and the Ti ADS 1x15 are implemented. Supported devices are ADS 1015 and ADS 1115 that are respectively a 12-bit and a 16-bit analog to digital converters; however, the I<sup>2</sup>C compliance allow seamless operation with converters from other vendors provided a new device driver is added to the Pi-Wrapper drivers’ library. 
 </p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/sensor-interfacing.png" alt="SENSOR INTERFACING"/>
+    <figcaption>Fig. 4 - Machine Wrapper-Sensor Interfacing.</figcaption>
+  </p>
+</figure>
+
+<p align="justify">
+Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal conditioning circuit. The resistance and capacity values are reported in Table 1. Resistance R_BURDEN converts the sensor output current into a voltage, whereas resistors R<sub>1</sub> and R<sub>2</sub> add a DC offset to the output signal. Finally, capacitor C<sub>1</sub> is used to stabilize the DC offset added to the signal. 
+</p>
+
 <a name="machine-administration"></a>
 # Machine administration
 
