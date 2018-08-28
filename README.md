@@ -42,7 +42,7 @@ Before installing the software you have to make sure that you comply with the ha
 ## Hardware prerequisites
 <p align="justify">
 This software has been tested on a Raspberry Pi III Model B (amrv7 32-bit architecture) with a 8-GByte SD card. We strongly recommend using this Raspberry Pi model to avoid possible compilation errors of the GPIO module. You need at least 150 MBytes of free disk space to install the software.
-You also need to connect to your Raspberry Pi a current sensor to monitor the connected machine. You can find sensor specifications <a href="#specs">here</a>.
+You also need to connect to your Raspberry Pi a current sensor to monitor the connected machine. You can find sensor specifications <a href="#hardware-architecture">here</a>.
 </p>
 
 <a name="software-prerequisites"></a>
@@ -122,7 +122,7 @@ Fig. 3 depicts the fabrication machine set-up and interfacing with both Pi-Wrapp
 
 <figure>
   <p align="center">
-    <img src="/docs/images/machine-machine-interfacing.png" alt="MACHINE INTERFACING"/>
+    <img src="/docs/images/machine-interfacing.png" alt="MACHINE INTERFACING"/>
     <figcaption>Fig. 3 - Fabrication Machine Interfacing.</figcaption>
   </p>
 </figure>
@@ -162,7 +162,6 @@ The proposed configuration is formed by the following components:
 <a name="on-line-documentation"></a>
 ### On-line documentation
 
-# specs
 # Websites
 
 # Contribution guidelines
