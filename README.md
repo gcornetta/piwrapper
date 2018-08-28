@@ -11,7 +11,7 @@ This software is part of a larger suite of microservices designed to remotely ma
 
 # About
 <p align="justify">
-This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ within **NEWTON** project. **NEWTON** is a large scale Integrated Action started in March 2016 and funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
+  This software has been developed by <em>Gianluca Cornetta</em> and <em>Javier Mateos</em> within <b>NEWTON</b> project. <b>NEWTON</b> is a large scale Integrated Action started in March 2016 and funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
 </p>
 
 # Table of contents
@@ -42,7 +42,7 @@ Before installing the software you have to make sure that you comply with the ha
 ## Hardware prerequisites
 <p align="justify">
 This software has been tested on a Raspberry Pi III Model B (amrv7 32-bit architecture) with a 8-GByte SD card. We strongly recommend using this Raspberry Pi model to avoid possible compilation errors of the GPIO module. You need at least 150 MBytes of free disk space to install the software.
-You also need to connect to your Raspberry Pi a current sensor to monitor the connected machine. You can find sensor specifications [here](#specs).
+You also need to connect to your Raspberry Pi a current sensor to monitor the connected machine. You can find sensor specifications <a href="#specs">here</a>.
 </p>
 
 <a name="software-prerequisites"></a>
@@ -55,7 +55,7 @@ The Machine wrapper software requires that you previously install on your system
 2. Cups
 
 <p align="justify">
-We have not tested the software with Mongo DB latest version; however it should work without any problem if you update **mongoose** to the last version in the `package.json` file with the project dependencies.
+We have not tested the software with Mongo DB latest version; however it should work without any problem if you update <b>mongoose</b> to the last version in the `package.json` file with the project dependencies.
 </p>
 
 <a name="installation"></a>
@@ -67,13 +67,13 @@ To install the Machine Wrapper module go through the following steps:
 3. run `npm run start` to start the server.
 
 <p align="justify">
-The server listen to **port 8888** of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
+  The server listen to <b>port 8888</b> of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
 </p>
 
 <a name="system-architecture"></a>
 # System architecture
 <p align="justify">
-The **NEWTON** Fab Lab software aims at empowering the traditional Fab Lab infrastructure by providing a software abstraction layer that enables inter- and intra-Fab Lab communication and state synchronization through a centralized cloud hub. This, in turn allows:
+The <b>NEWTON</b> Fab Lab software aims at empowering the traditional Fab Lab infrastructure by providing a software abstraction layer that enables inter- and intra-Fab Lab communication and state synchronization through a centralized cloud hub. This, in turn allows:
 </p>
 
 1. exposing remote digital fabrication machines (3D printers, laser cutters,...) as REST web services
@@ -81,7 +81,7 @@ The **NEWTON** Fab Lab software aims at empowering the traditional Fab Lab infra
 3. automatic service discovery and fabrication batch routing based on geographic proximity 
 
 <p align="justify">
-A **NEWTON** Fab Lab (see Fig. 1) is implemented as a two-level architecture that can be accessed through a Fab Lab Gateway (that we also call the Pi-Gateway). The Gateway task is forwarding the incoming fabrication requests to one the networked digital fabrication machines. Each networked machine can be accessed through a hardware/software **machine wrapper** (that we also call the Pi-Wrapper).
+A <b>NEWTON</b> Fab Lab (see Fig. 1) is implemented as a two-level architecture that can be accessed through a Fab Lab Gateway (that we also call the Pi-Gateway). The Gateway task is forwarding the incoming fabrication requests to one the networked digital fabrication machines. Each networked machine can be accessed through a hardware/software <b>machine wrapper</b> (that we also call the Pi-Wrapper).
 </p>
 
 <figure>
@@ -92,7 +92,7 @@ A **NEWTON** Fab Lab (see Fig. 1) is implemented as a two-level architecture tha
 </figure>
 
 <p align="justify">
-The following subsections are dedicated to describe in detail the hardware and software architecture of a **NEWTON** Fab Lab that has been developed during the development, staging and production phases of the project.
+The following subsections are dedicated to describe in detail the hardware and software architecture of a <b>NEWTON</b> Fab Lab that has been developed during the development, staging and production phases of the project.
 </p>
 
 <a name="software-architecture"></a>
