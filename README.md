@@ -33,6 +33,19 @@ To install the Machine Wrapper module go through the following steps:
 The server listen to **port 8888** of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
 
 # Index
+
+- [Machine administration](#heading)
+  * [The configuration menu](#sub-heading)
+  * [The control panel menu](#sub-heading)
+  * [The jobs menu](#sub-heading)
+  * [The tools menu](#sub-heading)
+- [Documentation and developer support](#heading-1)
+  * [Machine APIs](#sub-heading-1)
+    + [On-line documentation](#sub-sub-heading-1)
+- [System architecture](#heading-2)
+  * [Software architecture](#sub-heading-2)
+  * [Hardware architecture](#sub-heading-2)
+    
 # specs
 # Websites
 
