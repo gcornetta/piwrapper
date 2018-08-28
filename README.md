@@ -150,6 +150,15 @@ Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal con
 </p>
 
 <center>
+| Component | Value |
+|-----------|-------|
+| R_BURDEN  |  120  |
+| R1        |   10  |
+| R2        |   10  |
+| C1        |   47  |
+</center>
+
+<center>
 <table align="center">
   <caption>Table 1: Component Values</caption>
   <tr>
