@@ -149,17 +149,7 @@ The proposed configuration is formed by the following components:
 Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal conditioning circuit. The resistance and capacity values are reported in Table 1. Resistance R_BURDEN converts the sensor output current into a voltage, whereas resistors R<sub>1</sub> and R<sub>2</sub> add a DC offset to the output signal. Finally, capacitor C<sub>1</sub> is used to stabilize the DC offset added to the signal. 
 </p>
 
-
-| Component | Value |
-|-----------|-------|
-| R_BURDEN  |  120  |
-| R1        |   10  |
-| R2        |   10  |
-| C1        |   47  |
-
-
-<center>
-<table align="center">
+<table align="center" style="margin: 0px auto;">
   <caption>Table 1: Component Values</caption>
   <tr>
     <th>Component</th>
@@ -182,7 +172,6 @@ Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal con
     <td>47&mu;F</td>
   </tr>
 </table>
-</center>
 
 <a name="machine-administration"></a>
 # Machine administration
