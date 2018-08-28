@@ -329,10 +329,8 @@ The control panel allows configuring the basic machine parameters, set up the he
 Once a fabrication batch has been submitted to a Fab Lab and routed by the Fab Lab Gateway to an available machine, the job is stored in the Pi-Wrapper queue system described. This design choice is fundamentally motivated by two reasons:
 </p>
 
-<p align="justify">
 1.	Implement a job scheduling system that allows a fair sharing of the underlying fabrication resources.
 2.	Implement a basic security policy to protect the machine from potentially harmful designs that could damage it.
-</p>
 
 <p align="justify">
 Once a fabrication batch has been queued, it must be verified and approved by the Fab Lab administrator before being sent to the machine for fabrication. The queued job can be monitored and controlled using the <b>Jobs Menu</b> depicted in Fig. 13.
