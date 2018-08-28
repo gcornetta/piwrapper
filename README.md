@@ -59,6 +59,15 @@ The server listen to **port 8888** of your Raspberry Pi. You have first to creat
 
 <a name="system-architecture"></a>
 # System architecture
+The **NEWTON** Fab Lab software aims at empowering the traditional Fab Lab infrastructure by providing a software abstraction layer that enables inter- and intra-Fab Lab communication and state synchronization through a centralized cloud hub. This, in turn allows:
+
+1. exposing remote digital fabrication machines (3D printers, laser cutters,...) as REST web services
+2. controlling and monitoring remote machine trough web interfaces or programmatically through APIs
+3. automatic service discovery and fabrication batch routing based on geographic proximity 
+
+A **NEWTON** Fab Lab is implemented as a two-level architecture that can be accessed through a Fab Lab Gateway (that we also call the Pi-Gateway). The Gateway task is forwarding the incoming fabrication requests to one the networked digital fabrication machines. Each networked machine can be accessed through a hardware/software **machine wrapper** (that we also call the Pi-Wrapper).
+
+The following subsections are dedicated to describe in detail the hardware and software architecture of a **NEWTON** Fab Lab that has been developed during the development, staging and production phases of the project.
 
 <a name="software-architecture"></a>
 ## Software architecture
