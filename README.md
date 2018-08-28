@@ -236,22 +236,19 @@ Once the user has been logged in he/she is redirected to the dashboard panel (se
 
 The dashboard is formed by:
 
-<p align="justify">
 - A fully featured VT100 terminal that supports all the BASH commands. The VT100 terminal allows full control of the underlying hardware and the possibility to interact with the machine and the operating system from the web interface.
 - A graphic CPU monitor that reports in real-time the load of all the cores of the CPU.
 - A panel with system information.
-</p>
 
 <p align="justify">
 The user can use the sidebar menu on the left side of the dashboard to navigate among the different features of the user interface. The interface allows the user to:
 </p>
 
-<p align="justify">
 - Configure the machine and the user profile using the Configuration Menu located just below the Fab Lab administrator profile photo.
 - Control a machine and submit a fabrication batch using the Control Panel Menu.
 -	Control the jobs queued in the machine using the Jobs Menu.
 -	Monitor machine using the Tools Menu.
-</p>
+
 
 <a name="the-configuration-menu"></a>
 ## The configuration menu
