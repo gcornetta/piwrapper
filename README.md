@@ -11,7 +11,7 @@ This software is part of a larger suite of microservices designed to remotely ma
 
 # About
 <p align="justify">
-  This software has been developed by <em>Gianluca Cornetta</em> and <em>Javier Mateos</em> within <b>NEWTON</b> project. <b>NEWTON</b> is a large scale Integrated Action started in March 2016 and scheduled to end in summer 2019, funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
+  This software has been developed by <em>Gianluca Cornetta</em> and <em>Javier Mateos</em> within <b>NEWTON</b> project. <b>NEWTON</b> is a large scale Integrated Action, started in March 2016 and scheduled to end in summer 2019, funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
 </p>
 
 # Table of contents
@@ -181,7 +181,7 @@ Each machine in a Fab Lab is wrapped by hardware/software interface that we have
 1.	A specialized machine-to-machine (M2M) communication middleware that allows seamless interaction with the Fab Lab gateway.
 2.	An administration interface that allows setting up and configuring a machine as well as monitoring its status.
 
-This interface runs as a service on the port <b>8888</b> of each Raspberry Pi connected to a digital fabrication machine of the Fab Lab. For security reasons the user interface can be accessed only from inside the Fab Lab or the other sites where the Fab Lab network is propagated. By default each Raspberry Pi runs a simple DNS service (<em>Bonjour</em>) configured to resolve the <b>.local</b> domain; thus, each interface can be accessed through a URL like:
+This interface runs as a service on the <b>port 8888</b> of each Raspberry Pi connected to a digital fabrication machine of the Fab Lab. For security reasons the user interface can be accessed only from inside the Fab Lab or the other sites where the Fab Lab network is propagated. By default each Raspberry Pi runs a simple DNS service (<em>Bonjour</em>) configured to resolve the <b>.local</b> domain; thus, each interface can be accessed through a URL like:
 </p>
 
 <p align="center">
