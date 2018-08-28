@@ -17,17 +17,17 @@ This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ with
    * [Hardware prerequisites](#hardware-prerequisites)
    * [Software prerequisites](#software-prerequisites)
    * [Installation](#installation)
-2. [Machine administration](#heading)
-   * [The configuration menu](#sub-heading)
-   * [The control panel menu](#sub-heading)
-   * [The jobs menu](#sub-heading)
-   * [The tools menu](#sub-heading)
-3. [Documentation and developer support](#heading-1)
-   * [Machine APIs](#sub-heading-1)
-     + [On-line documentation](#sub-sub-heading-1)
-4. [System architecture](#heading-2)
-   * [Software architecture](#sub-heading-2)
-   * [Hardware architecture](#sub-heading-2)
+2. [System architecture](#system-architecture)
+   * [Software architecture](#software-architecture)
+   * [Hardware architecture](#hardware-architecture)
+3. [Machine administration](#machine-administration)
+   * [The configuration menu](#the-configuration-menu)
+   * [The control panel menu](#the-control-panel)
+   * [The jobs menu](#the-jobs-menu)
+   * [The tools menu](#the-tools-menu)
+4. [Documentation and developer support](#documentation-and-developer-support)
+   * [Machine APIs](#machine-apis)
+     + [On-line documentation](#on-line-documentation)
 
 <a name="preliminary-steps"></a>
 # Preliminary steps
@@ -56,7 +56,40 @@ To install the Machine Wrapper module go through the following steps:
 3. run `npm run start` to start the server.
 
 The server listen to **port 8888** of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
-    
+
+<a name="system-architecture"></a>
+# System architecture
+
+<a name="software-architecture"></a>
+## Software architecture
+
+<a name="hardware-architecture"></a>
+## Harware architecture
+
+<a name="machine-administration"></a>
+# Machine administration
+
+<a name="the-configuration-menu"></a>
+## The configuration menu
+
+<a name="the-control-panel-menu"></a>
+## The control panel menu
+
+<a name="the-jobs-menu"></a>
+## The jobs menu
+
+<a name="the-tools-menu"></a>
+## The tools menu
+
+<a name="documentation-and-developer-support"></a>
+# Documentation and developer support
+
+<a name="machine-apis"></a>
+## Machine APIs
+
+<a name="on-line-documentation"></a>
+### On-line documentation
+
 # specs
 # Websites
 
