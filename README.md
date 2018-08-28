@@ -14,9 +14,9 @@ This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ with
 # Table of contents
 
 1. [Preliminary steps](#preliminary-steps)
-   * [Hardware prerequisites](#Hardware-prerequisites)
-   * [Software prerequisites](#Software-prerequisites)
-   * [Installation](#Installation)
+   * [Hardware prerequisites](#hardware-prerequisites)
+   * [Software prerequisites](#software-prerequisites)
+   * [Installation](#installation)
 2. [Machine administration](#heading)
    * [The configuration menu](#sub-heading)
    * [The control panel menu](#sub-heading)
@@ -31,11 +31,14 @@ This software has been developed by _Gianluca Cornetta_ and _Javier Mateos_ with
 
 <a name="preliminary-steps"></a>
 # Preliminary steps
+Before installing the software you have to make sure that you comply with the hardware and software requirements specified in the next two sections.
 
+<a name="hardware-prerequisites"></a>
 ## Hardware prerequisites
 This software has been tested on a Raspberry Pi III Model B (amrv7 32-bit architecture) with a 8-GByte SD card. We strongly recommend using this Raspberry Pi model to avoid possible compilation errors of the GPIO module. You need at least 150 MBytes of free disk space to install the software.
 You also need to connect to your Raspberry Pi a current sensor to monitor the connected machine. You can find sensor specifications [here](#specs).
 
+<a name="software-prerequisites"></a>
 ## Software prerequisites
 The Machine wrapper software requires that you previously install on your system the following software packages:
 
@@ -44,6 +47,7 @@ The Machine wrapper software requires that you previously install on your system
 
 We have not tested the software with Mongo DB latest version; however it should work without any problem if you update **mongoose** to the last version in the `package.json` file with the project dependencies.
 
+<a name="installation"></a>
 ## Installation
 To install the Machine Wrapper module go through the following steps:
 
