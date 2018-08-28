@@ -186,7 +186,7 @@ This interface runs as a service on the port <b>8888</b> of each Raspberry Pi co
 
 <p align="center">
   <code>
-    http://<wrapper name>.local:8888
+    http://wrapper_name.local:8888
   </code>
 </p>
 
@@ -200,6 +200,10 @@ ff02::2         ip6-allrouters
 
 127.0.1.1       piwrapper
 ```
+
+<p align="justify">
+In the configuration above, we have called the wrapper machine <em>piwrapper</em>. Once the Fab Lab network has been configured, the machine web interface can be accessed through the URL assigned to the Pi-Wrapper.
+</p>
 
 <a name="the-configuration-menu"></a>
 ## The configuration menu
