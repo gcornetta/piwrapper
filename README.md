@@ -149,7 +149,7 @@ The proposed configuration is formed by the following components:
 Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal conditioning circuit. The resistance and capacity values are reported in Table 1. Resistance R_BURDEN converts the sensor output current into a voltage, whereas resistors R<sub>1</sub> and R<sub>2</sub> add a DC offset to the output signal. Finally, capacitor C<sub>1</sub> is used to stabilize the DC offset added to the signal. 
 </p>
 
-<table style="margin-left:auto; margin-right:auto;">
+<table>
   <caption>Table 1: Component Values</caption>
   <tr>
     <th>Component</th>
@@ -175,6 +175,23 @@ Fig. 4 depicts ADC interfacing with Raspberry Pi GPIO and sensor with signal con
 
 <a name="machine-administration"></a>
 # Machine administration
+<p align="justify">
+Each machine in a Fab Lab is wrapped by hardware/software interface that we have called Pi-Wrapper. The Pi-Wrapper is formed by two major software components:
+
+1.	A specialized machine-to-machine (M2M) communication middleware that allows seamless interaction with the Fab Lab gateway.
+2.	An administration interface that allows setting up and configuring a machine as well as monitoring its status.
+
+This interface runs as a service on the port <b>8888</b> of each Raspberry Pi connected to a digital fabrication machine of the Fab Lab. For security reasons the user interface can be accessed only from inside the Fab Lab or the other sites where the Fab Lab network is propagated. By default each Raspberry Pi runs a simple DNS service (Bonjour) configured to resolve the <b>.local</b> domain; thus, each interface can be accessed through a URL like:
+</p>
+
+<p align="center">
+  <code>
+    http://<wrapper name>.local:8888
+    </code>
+ </p>
+
+The wrapper name must be configured in the `/etc/hosts` file as follows:
+
 
 <a name="the-configuration-menu"></a>
 ## The configuration menu
