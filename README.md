@@ -11,7 +11,7 @@ This software is part of a larger suite of microservices designed to remotely ma
 
 # About
 <p align="justify">
-  This software has been developed by <em>Gianluca Cornetta</em> and <em>Javier Mateos</em> within <b>NEWTON</b> project. <b>NEWTON</b> is a large scale Integrated Action started in March 2016 and funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
+  This software has been developed by <em>Gianluca Cornetta</em> and <em>Javier Mateos</em> within <b>NEWTON</b> project. <b>NEWTON</b> is a large scale Integrated Action started in March 2016 and scheduled to end in summer 2019, funded by the European Commission under the Horizon 2020 Researh and Innovation Programme with grant agreement n. 688503.
 </p>
 
 # Table of contents
@@ -97,6 +97,14 @@ The following subsections are dedicated to describe in detail the hardware and s
 
 <a name="software-architecture"></a>
 ## Software architecture
+The software architecture is modular and distributed over five layers as depicted in Fig. 2.
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/machine-wrapper.png" alt="MACHINE WRAPPER SOFTWARE ARCHITECTURE"/>
+    <figcaption>Fig. 2 - Machine Wrapper Software Architecture.</figcaption>
+  </p>
+</figure>
 
 <a name="hardware-architecture"></a>
 ## Harware architecture
