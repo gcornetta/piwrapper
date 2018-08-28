@@ -181,17 +181,25 @@ Each machine in a Fab Lab is wrapped by hardware/software interface that we have
 1.	A specialized machine-to-machine (M2M) communication middleware that allows seamless interaction with the Fab Lab gateway.
 2.	An administration interface that allows setting up and configuring a machine as well as monitoring its status.
 
-This interface runs as a service on the port <b>8888</b> of each Raspberry Pi connected to a digital fabrication machine of the Fab Lab. For security reasons the user interface can be accessed only from inside the Fab Lab or the other sites where the Fab Lab network is propagated. By default each Raspberry Pi runs a simple DNS service (Bonjour) configured to resolve the <b>.local</b> domain; thus, each interface can be accessed through a URL like:
+This interface runs as a service on the port <b>8888</b> of each Raspberry Pi connected to a digital fabrication machine of the Fab Lab. For security reasons the user interface can be accessed only from inside the Fab Lab or the other sites where the Fab Lab network is propagated. By default each Raspberry Pi runs a simple DNS service (<em>Bonjour</em>) configured to resolve the <b>.local</b> domain; thus, each interface can be accessed through a URL like:
 </p>
 
 <p align="center">
   <code>
     http://<wrapper name>.local:8888
-    </code>
- </p>
+  </code>
+</p>
 
 The wrapper name must be configured in the `/etc/hosts` file as follows:
 
+```
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+
+127.0.1.1       piwrapper
+```
 
 <a name="the-configuration-menu"></a>
 ## The configuration menu
