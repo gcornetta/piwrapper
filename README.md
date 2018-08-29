@@ -502,7 +502,7 @@ The Machine Wrapper API documentation can be accessed from the Fab Lab network a
 
 <p align="center">
   <code>
-    http://<piwrapper name>.local:8888/docs
+    http://piwrapper_name.local:8888/docs
     </code>
     </p>
 
