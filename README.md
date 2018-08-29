@@ -35,6 +35,10 @@ This software is part of a larger suite of microservices designed to remotely ma
      + [Supported formats](#supported-formats)
      + [Error management](#error-management)
      + [On-line documentation](#on-line-documentation)
+     + [APIs responses](#api-responses)
+5. [Websites](#websites)
+6. [Contribution guidelines](#contribution-guidelines)
+7. [License](#license)
 
 <a name="preliminary-steps"></a>
 # Preliminary steps
@@ -387,8 +391,6 @@ The Pi-Wrapper user interface also allows the possibility to monitor in real tim
 The Fab Lab software infrastructure has been designed with the developer in mind. For this reason, Swagger has been integrated into the Pi-Gateway and the Pi-Wrapper middleware. This allow the developer to have on-line access to the API documentation and to test the native APIs through the Swagger User interface (Swagger UI).  In addition, the API-first approach used to the develop the Fab Lab software allows to easily expand the software, the protocol stack and add new features adding new layers on top of the native APIs without the need of modifying the core software architecture.
 </p>
 
-
-
 <a name="machine-apis"></a>
 ## Machine APIs
 <p align="justify">
@@ -509,7 +511,7 @@ The Machine Wrapper API documentation can be accessed from the Fab Lab network a
 
 <p align="center">
   <code>
-    http://piwrapper_name.local:8888/docs
+    http://wrapper_name.local:8888/docs
     </code>
     </p>
 
@@ -546,15 +548,77 @@ If the authentication is successful, the API returns a response with a 200 statu
   </p>
 </figure>
 
+<a name="api-responses"></a>
+### APIs responses
+
+#### Login
+
+```
+POST /api/login
+
+Body:
+{
+   "name": "the user password",
+   "password": "the user password"
+
+}
+```
+
+**Response**:
+
+```
+200 OK
+
+{
+   "message": "ok",
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5ZDIxYzUzODk5NTYxMzBlM2JmZjhkYyIsImV4cERhdGUiOjE1MTY3MDI2NjEyNjgsImlhdCI6MTUxNjYxNjI2MX0.b1QKle3wh2LZsbdb8CsMJQLR0a5sopBBUDzlvX0hfVw"
+}
+```
+#### Submit a job
+
+```
+POST
+/api/jobs?user=1234&machine=laser%20cutter&process=cut&material =wood
+```
+
+**Response**:
+
+```
+200 OK
+
+{
+   "jobId": "3a88b824-7268-4468-947a-054f39c86169"
+}
+```
+
+<p align="justify">
+Recall, that with this method a design file in PNG format is uploaded on the server. Our API specifications correspond to the HTTP request depicted below.
+</p>
+
+```
+POST /api/jobs
+Host: piwrapper.local/public/uploads
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryqzByvokjOTfF9UwD
+Content-Length: 204
+------WebKitFormBoundaryqzByvokjOTfF9UwD
+Content-Disposition: form-data; name="design"; filename="design.png"
+Content-Type: image/png
+File contents go here.
+------WebKitFormBoundaryqzByvokjOTfF9UwD—
+```
+
+<a name="websites"></a>
 # Websites
 
 1. [Newton Fab Labs on Github](https://gcornetta.github.io/piwrapper/)
 2. [Newton Project Page](http://www.newtonproject.eu) 
 
+<a name="contribution-guidelines"></a>
 # Contribution guidelines
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
+<a name="license"></a>
 # License
 
 This software is licensed under MIT license unless otherwise specified in the third-party modules included in this package.   
