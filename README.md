@@ -421,7 +421,7 @@ Table 2 displays the resource URI and the implemented HTTP verbs for the Machine
     <td>Deletes a job if it exists; <br>otherwise displays <br>an error <br>(<span style="font-weight:bold">404 Not found</span>)</td>
   </tr>
   <tr>
-    <td>/api/jobs?user=123&amp;machine=laser%20cutter&amp;process=cut&amp;material=wood</td>
+    <td>/api/jobs?user=123&amp;machine=laser%20cutter<br>&amp;process=cut&amp;material=wood</td>
     <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
     <td>Submit a job <br>to the Machine</td>
     <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
