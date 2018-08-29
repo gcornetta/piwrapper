@@ -498,6 +498,25 @@ Table 3 reports error codes and details.
 <a name="on-line-documentation"></a>
 ### On-line documentation
 
+The Machine Wrapper API documentation can be accessed from the Fab Lab network at the following URL:
+
+<p align="center">
+  <code>
+    http://<piwrapper name>.local:8888/docs
+    </code>
+    </p>
+
+<p align="justify">
+This URL leads to the Pi-Wrapper API documentation landing page depicted in Fig. 16. The lock indicates that these API are secured. API access is guaranteed with a JWT token that is issued by the system to Fab Lab authorized users. **Please note that Swagger UI HTML code is linked to external stylesheets and javascript code; thus you must ensure your network has external connectivity in order to use this feature.**
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/api-landing.png" alt="API DOCUMENTATION LANDING PAGE"/>
+    <figcaption>Fig. 16 - The API Documentation Landing Page.</figcaption>
+  </p>
+</figure>
+
 # Websites
 
 # Contribution guidelines
