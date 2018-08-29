@@ -544,3 +544,5 @@ If the authentication is successful, the API returns a response with a 200 statu
 # Contribution guidelines
 
 # License
+
+This software is licensed under MIT license unless otherwise specified in the third-party software included in this package.   
