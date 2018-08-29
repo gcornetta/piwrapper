@@ -20,6 +20,7 @@ This software is part of a larger suite of microservices designed to remotely ma
    * [Hardware prerequisites](#hardware-prerequisites)
    * [Software prerequisites](#software-prerequisites)
    * [Installation](#installation)
+   * [Testing](#testing)
 2. [System architecture](#system-architecture)
    * [Software architecture](#software-architecture)
    * [Hardware architecture](#hardware-architecture)
