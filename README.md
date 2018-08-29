@@ -507,13 +507,35 @@ The Machine Wrapper API documentation can be accessed from the Fab Lab network a
     </p>
 
 <p align="justify">
-This URL leads to the Pi-Wrapper API documentation landing page depicted in Fig. 16. The lock indicates that these API are secured. API access is guaranteed with a JWT token that is issued by the system to Fab Lab authorized users. **Please note that Swagger UI HTML code is linked to external stylesheets and javascript code; thus you must ensure your network has external connectivity in order to use this feature.**
+This URL leads to the Pi-Wrapper API documentation landing page depicted in Fig. 16. The lock indicates that these API are secured. API access is guaranteed with a JWT token that is issued by the system to Fab Lab authorized users. <b>Please note that Swagger UI HTML code is linked to external stylesheets and javascript code; thus you must ensure your network has external connectivity in order to use this feature</b>.
 </p>
 
 <figure>
   <p align="center">
     <img src="/docs/images/api-landing.png" alt="API DOCUMENTATION LANDING PAGE"/>
     <figcaption>Fig. 16 - The API Documentation Landing Page.</figcaption>
+  </p>
+</figure>
+
+<p align="justify">
+In order to use the Swagger User Interface and test the API, a user must get an authorization token first. This can be accomplished with the <code>/login</code> API that accepts a form with username and password (see Fig. 17).
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/api-authentication.png" alt="API AUTHENTICATION"/>
+    <figcaption>Fig. 17 - API Authentication.</figcaption>
+  </p>
+</figure>
+
+<p align="justify">
+If the authentication is successful, the API returns a response with a 200 status code and the JWT authorization token as depicted in Fig.18.
+</p>
+
+<figure>
+  <p align="center">
+    <img src="/docs/images/api-jwt-response.png" alt="API JWT AUTHORIZATION TOKEN"/>
+    <figcaption>Fig. 18 - API Response with the JWT Authentication Token.</figcaption>
   </p>
 </figure>
 
