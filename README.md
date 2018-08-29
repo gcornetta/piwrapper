@@ -373,8 +373,51 @@ The Pi-Wrapper user interface also allows the possibility to monitor in real tim
 <a name="documentation-and-developer-support"></a>
 # Documentation and developer support
 
+<p align="justify">
+The Fab Lab software infrastructure has been designed with the developer in mind. For this reason, Swagger has been integrated into the Pi-Gateway and the Pi-Wrapper middleware. This allow the developer to have on-line access to the API documentation and to test the native APIs through the Swagger User interface (Swagger UI).  In addition, the API-first approach used to the develop the Fab Lab software allows to easily expand the software, the protocol stack and add new features adding new layers on top of the native APIs without the need of modifying the core software architecture.
+</p>
+
+<table>
+  <caption>Table 2: MAchine Wrapper APIs</caption>
+  <tr>
+    <th>Resource</th>
+    <th>GET</th>
+    <th>POST</th>
+    <th>DELETE</th>
+  </tr>
+  <tr>
+    <td>/api/login</td>
+    <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
+    <td>Returns a JWT <br>if login is correct; <br>otherwise displays<br>an error<br>(<span style="font-weight:bold">401 Unauthorized</span>)</td>
+    <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
+  </tr>
+  <tr>
+    <td>/api/jobs</td>
+    <td>Returns an array <br>with all the jobs</td>
+    <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
+    <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
+  </tr>
+  <tr>
+    <td>/api/jobs/1234</td>
+    <td>Show the status <br>of the job with <br>id=1234</td>
+    <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
+    <td>Deletes a job if it exists; <br>otherwise displays <br>an error <br>(<span style="font-weight:bold">404 Not found</span>)</td>
+  </tr>
+  <tr>
+    <td>/api/jobs?user=123&amp;machine=laser%20cutter&amp;process=cut&amp;material=wood</td>
+    <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
+    <td>Submit a job <br>to the Machine</td>
+    <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
+  </tr>
+</table>
+
 <a name="machine-apis"></a>
 ## Machine APIs
+<p align="justify">
+Machine wrapper APIs expose methods to add, remove and modify jobs in a machine. These methods can be only accessed from the Fab Lab Gateway (i.e. the Pi-Gateway).
+
+Table 2 displays the resource URI and the implemented HTTP verbs for the Machine Wrapper (i.e. the Pi-Wrapper) APIs. 
+</p>
 
 <a name="on-line-documentation"></a>
 ### On-line documentation
