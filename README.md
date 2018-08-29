@@ -402,8 +402,8 @@ Table 2 displays the resource URI and the implemented HTTP verbs for the Machine
   <tr>
     <td>/api/login</td>
     <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
-    <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
     <td>Returns a JWT <br>if login is correct; <br>otherwise displays<br>an error<br>(<span style="font-weight:bold">401 Unauthorized</span>)</td>
+    <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
     <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
   </tr>
   <tr>
