@@ -73,6 +73,12 @@ To install the Machine Wrapper module go through the following steps:
   The server listen to <b>port 8888</b> of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
 </p>
 
+<a name="testing"></a>
+## Testing
+<p align="justify">
+To run the unit test type <code>npm run test</code> in the project root folder. To run end-to-end tests (with selenium) type <code>npm run test-selenium</code>. Please, recall that in order to run tests with selenium you need to install on your test server a browser driver. We recommend using Google Chrome with <a href="https://sites.google.com/a/chromium.org/chromedriver/">Chromedriver</a>
+</p>
+
 <a name="system-architecture"></a>
 # System architecture
 <p align="justify">
@@ -114,7 +120,7 @@ The <b>Communication Layer</b> implements the HTTP server and the APIs interface
 </p>
 
 <a name="hardware-architecture"></a>
-## Harware architecture
+## Hardware architecture
 <p align="justify">
 The lack of network connectivity of a digital fabrication machine requires a hardware/software wrapper to overcome this limitation. The wrapper can be implemented using an inexpensive Raspberry Pi embedded computer connected to a machine through its USB port. Digital fabrication machines must operate in a networked real-time environment that must promptly react to any change of machine status. This, in turn, implies that we need somehow to retrieve status information from the machine (i.e., off, busy, idle). Unfortunately, most of the available fabrication machines have proprietary hardware specifications which impede the development of this functionality. However, it is possible to infer the machine status using a very simple workaround that requires the use of a CT (continuous Transformer) sensor and an ADC connected to the Raspberry Pi GPIO that samples the CT sensor at regular time intervals in order to infer the machine status from current drawn by the power supply. 
 </p>
@@ -540,6 +546,9 @@ If the authentication is successful, the API returns a response with a 200 statu
 </figure>
 
 # Websites
+
+1. [Newton Fab Labs on Github](https://gcornetta.github.io/piwrapper/)
+2. [Newton Project Page](http://www.newtonproject.eu) 
 
 # Contribution guidelines
 
