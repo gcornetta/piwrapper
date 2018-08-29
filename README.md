@@ -547,4 +547,4 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details
 
 # License
 
-This software is licensed under MIT license unless otherwise specified in the third-party software included in this package.   
+This software is licensed under MIT license unless otherwise specified in the third-party modules included in this package.   
