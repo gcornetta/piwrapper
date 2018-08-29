@@ -410,7 +410,7 @@ Table 2 displays the resource URI and the implemented HTTP verbs for the Machine
     <td>/api/jobs</td>
     <td>Returns an array <br>with all the jobs</td>
     <td>Submit a job <br>for fabrication</td>
-    <td><td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td></td>
+    <td>Error 400 <br>(<span style="font-weight:bold">Bad Request</span>)</td>
     <td>Error 400<br>(<span style="font-weight:bold">Bad Request</span>)</td>
   </tr>
   <tr>
