@@ -43,7 +43,11 @@ function dataJob(job, index){
                     img.onload= function(){
                         var fileReader = new FileReader();
                         fileReader.onload = function() {
+                            try {
                             var dpi = getDPI(this.result)
+                            } catch (err){
+                                console.log(err)
+                            }
                             var alertTxt = "Dpi: "+dpi+"\n";
                             alertTxt = alertTxt.concat("Size in pixels: "+img.width+" x "+img.height+"\n");
                             alertTxt = alertTxt.concat("Size in cm: "+(2.54 * img.width / dpi).toFixed(2)+" x "+(2.54 * img.height / dpi).toFixed(2)+"\n");
