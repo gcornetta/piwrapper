@@ -208,7 +208,7 @@ module.exports.jobsUpdateOne = function (req, res) {
         })
       } else {
         req.body.jobId = req.params.jobid
-        fifo.update(req.body, 'api', function (err, jobUpdated) {
+        fifo.update(req.body, 'global', function (err, jobUpdated) {
           if (err) {
             sendJSONresponse(res, 200, {
               code: 24,
@@ -228,7 +228,7 @@ module.exports.jobsUpdateOne = function (req, res) {
 
 /* DELETE /api/jobs/:jobid */
 module.exports.jobsDeleteOne = function (req, res) {
-  fifo.removeJob(req.params.jobid, 'api', function (err, deletedJob) {
+  fifo.removeJob(req.params.jobid, 'global', function (err, deletedJob) {
     if (err) {
       sendJSONresponse(res, 200, {
         code: 24,
