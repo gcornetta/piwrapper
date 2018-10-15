@@ -198,6 +198,8 @@ module.exports.dashboard = function (req, res) {
         case 'Milling machine' : switch (machine.vendor) {
           case 'Roland' : dashboardPage.machinePanelRoute = '/dashboard/control/milling/roland'
             break
+          case 'Shopbot' : dashboardPage.machinePanelRoute = '/dashboard/control/milling/shopbot'
+            break
           default : break
         }
           break
@@ -496,6 +498,25 @@ module.exports.machineUpdate = function (req, res) {
               }
               delete req.body.process
               delete req.body.pcbFinishing
+              delete req.body.waxFinishing
+              if (errors){
+                break;
+              }
+            }
+            break
+            case 'Shopbot':
+            for (var i in newConfiguration.defaultValues){
+              req.body = newConfiguration.defaultValues[i]
+              req.body.waxFinishing = '7_16_plywood'
+              errors = formCheck.checkJSON(req, newConfiguration)
+              if (!errors) {
+                req.body.waxFinishing = 'rough_cut'
+                errors = formCheck.checkJSON(req, newConfiguration)
+                if (!errors) {
+                  req.body.waxFinishing = 'finish_cut'
+                  errors = formCheck.checkJSON(req, newConfiguration)
+                }
+              }
               delete req.body.waxFinishing
               if (errors){
                 break;

@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-3">
+    <legend><%= millingPanel.roland.switches.title %></legend>
+    <div class="col-md-6">
+      <div id="sortSwitch">
+        <p class="category">File units in inches</p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="isInches" checked />
+        </div>
+      </div>
+      <div id="sortSwitch">
+        <p class="category"><%= millingPanel.roland.switches.sort %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="switchSort" checked />
+        </div>
+      </div>
+      <div id="finishingsSwitch">
+        <p class="category"><%= millingPanel.roland.switches.xz %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="xz" checked />
+        </div>
+        <p class="category"><%= millingPanel.roland.switches.yz %></p>
+        <div class="switch" data-on-label="<i class='fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+          <input type="checkbox" name="yz" checked />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-md-offset-1">
+    <div id="finishings-title">
+      <legend><%= millingPanel.roland.select.finishing.title %></legend>
+    </div>
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <div id="wax">
+              <select id="waxFinishings" name="waxFinishing" class="selectpicker" data-title="Finishing" data-style="btn-danger btn-block" data-menu-style="dropdown-blue">
+                <option value="7_16_plywood">7/16 plywood</option>
+                <option value="1_2_HDPE">1/2 HDPE</option>
+                <option value="rough_cut">foam rough cut</option>
+                <option value="finish_cut">foam finish cut</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <br />
+  </div>
+</div>
+
+<script type="text/javascript">
+  function setZjog() {
+    var z    = document.getElementById("z");
+    var zjog = document.getElementById("zjog");
+  
+    zjog.value = parseInt(z.value) + 2;
+  }
+</script>

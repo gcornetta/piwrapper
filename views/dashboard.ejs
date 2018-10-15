@@ -113,6 +113,8 @@
           <% if (machine.type == 'Milling machine') {%>     
             <% if (machine.vendor == 'Roland') {%>    
               <% include ./partials/machines/milling-machines/roland %>
+            <% } else if (machine.vendor == 'Shopbot'){ %>
+              <% include ./partials/machines/milling-machines/shopbot %>
             <% } %>
           <% } %>
           <% if (machine.type == '3D printer') {%>

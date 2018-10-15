@@ -32,7 +32,7 @@ var User = module.exports = mongoose.model('User', UserSchema)
 
 module.exports.createUser = function (newUser, password, callback) {
   newUser.salt = crypto.randomBytes(16).toString('hex')
-  newUser.hash = crypto.pbkdf2Sync(password, newUser.salt, 1000, 64).toString('hex')
+  newUser.hash = crypto.pbkdf2Sync(password, newUser.salt, 1000, 64, 'sha512').toString('hex')
   newUser.save(callback)
 }
 
@@ -114,6 +114,6 @@ module.exports.checkIfSuperuserExists = function (callback) {
 }
 
 module.exports.comparePassword = function (newUser, password, callback) {
-  var hash = crypto.pbkdf2Sync(password, newUser.salt, 1000, 64).toString('hex')
+  var hash = crypto.pbkdf2Sync(password, newUser.salt, 1000, 64, 'sha512').toString('hex')
   if (newUser.hash === hash) { callback(null, true) } else { callback(null, false) }
 }

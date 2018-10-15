@@ -102,10 +102,10 @@ var dashboardPage = {
     machines: [
         {label: 'Laser cutters', type: 'Laser cutter', vendors: ['Epilog', 'GCC', 'Trotec']},
         {label: 'Vinyl cutters', type: 'Vinyl cutter', vendors: ['Roland']},
-        {label: 'Milling machines', type: 'Milling machine', vendors: ['Roland']},
+        {label: 'Milling machines', type: 'Milling machine', vendors: ['Roland', 'Shopbot']},
         {label: '3D printers', type: '3D printer', vendors: ['Prusa']}
     ],
-    vendors: ['Epilog', 'GCC', 'Trotec', 'Roland', 'Prusa']
+    vendors: ['Epilog', 'GCC', 'Trotec', 'Roland', 'Prusa', 'Shopbot']
   },
   laserPanel: laserPanelText,
   vinylPanel: vinylPanelText,

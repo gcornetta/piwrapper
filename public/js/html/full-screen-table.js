@@ -26,6 +26,10 @@ function auxFileJob(job, index){
     window.location.replace(job.jobPath.slice(job.jobPath.indexOf('/public')+7, job.jobPath.length)+"_aux");
 }
 
+function downloadPrintFile(job, index){
+    window.location.replace('/printFiles/'+job.userId+'/'+job.jobId);
+}
+
 function dataJob(job, index){
     $('#modalBody').empty();
     try {
@@ -215,6 +219,9 @@ var $table = $('#fresh-table'),
                 },
                 'click .data': function (e, value, row, index) {
                     dataJob(row, index);
+                },
+                'click .download': function (e, value, row, index) {
+                    downloadPrintFile(row, index);
                 }
             };
 
@@ -245,6 +252,9 @@ var $table = $('#fresh-table'),
                 '</a>',
                 '<a rel="tooltip" title="Data" class="table-action data" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">',
                     '<i class="fa fa-file-code-o"></i>',
+                '</a>',
+                '<a rel="tooltip" title="Download" class="table-action download" href="javascript:void(0)">',
+                    '<i class="fa fa-download"></i>',
                 '</a>'
             ].join('');
         }

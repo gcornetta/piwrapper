@@ -208,6 +208,44 @@ module.exports.checkJSON = function (req, machine) {
               }
               break
           }
+        break
+        case 'Shopbot':
+          console.log(req.body)
+          req.checkBody('cut_speed', validationMsg.speed).notEmpty().isInt({ min: 1})
+          req.checkBody('plunge_speed', validationMsg.speed).notEmpty().isInt({ min: 1})
+          req.checkBody('jog_speed', validationMsg.speed).notEmpty().isInt({ min: 1})
+          req.checkBody('jog_height', validationMsg.speed).notEmpty().isInt({ min: 0})
+          req.checkBody('spindle_speed', validationMsg.speed).notEmpty().isInt({ min: 1 })
+          req.checkBody('diameter', validationMsg.diameter).notEmpty().isFloat({min: 0})
+          req.checkBody('error', validationMsg.error).notEmpty().isFloat({min: 0})
+          req.checkBody('overlap', validationMsg.overlap).notEmpty().isInt({min: 1, max: 100})
+          var waxFinishing = ['7_16_plywood', '1_2_HDPE','rough_cut', 'finish_cut']
+          req.checkBody('waxFinishing', validationMsg.waxFinishing).isInArray(waxFinishing)
+          req.checkBody('bottomZ', validationMsg.bottomZ).notEmpty().isFloat()
+          req.checkBody('bottomIntensity', validationMsg.bottomIntensity).notEmpty().isFloat({min: 0, max: 1})
+          req.checkBody('topZ', validationMsg.topZ).notEmpty().isFloat()
+          req.checkBody('topIntensity', validationMsg.topIntensity).notEmpty().isFloat({min: 0, max: 1})
+          switch (json.waxFinishing) {
+            case '7_16_plywood':
+            case '1_2_HDPE':
+              req.checkBody('thickness', validationMsg.thickness).notEmpty().isFloat({min: 0})
+            case 'rough_cut':
+              //req.checkBody('switchSort', validationMsg.switchSort).notEmpty()
+              req.checkBody('direction', validationMsg.direction).notEmpty()
+              req.checkBody('cutDepth', validationMsg.cutDepth).notEmpty().isFloat()
+              req.checkBody('offsets', validationMsg.offsets).notEmpty().isFloat({min: -1})
+              req.checkBody('merge', validationMsg.merge).notEmpty().isFloat({min: 0})
+              req.checkBody('order', validationMsg.order).notEmpty().isInt()
+              req.checkBody('sequence', validationMsg.sequence).notEmpty().isInt()
+              break
+            case 'finish_cut':
+              var types = ['flat', 'ball']
+              req.checkBody('type', validationMsg.type).isInArray(types)
+              //req.checkBody('xz', validationMsg.xz).notEmpty()
+              //req.checkBody('yz', validationMsg.yz).notEmpty()
+              break
+          }
+        break
       }
       break
 

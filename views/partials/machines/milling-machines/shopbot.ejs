@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <form id="target" method="post" action="/dashboard/control/milling/shopbot" enctype="multipart/form-data">
+        <div class="content">
+          <% include ../../process/upload %>
+          <% include ../../process/milling-machines/shopbot/switches %>
+          <% include ../../process/milling-machines/shopbot/output %>
+          <% include ../../process/milling-machines/shopbot/wax %>
+          <div id="feedback"></div>
+          <br />
+          <button type="submit" id="submitDesign" class="btn btn-fill btn-info"><%= millingPanel.submitButtonText %></button>
+        </div>
+      </form>
+    </div>
+    <!-- end card -->
+  </div>
+</div>
+

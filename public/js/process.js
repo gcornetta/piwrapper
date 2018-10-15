@@ -135,6 +135,10 @@ var selected = $("#waxFinishings").children(":selected").val();
     if (selected === "finish_cut"){
         $('#finishingsSwitch').show();
         $('#sortSwitch').hide();
+    }else if((selected === "7_16_plywood")||(selected === "1_2_HDPE")){
+        $('#directionRadios').show();
+        $('#finishingsSwitch').hide();
+        $('#sortSwitch').show();
     }else{
         $('#finishingsSwitch').hide();
         $('#sortSwitch').show();
