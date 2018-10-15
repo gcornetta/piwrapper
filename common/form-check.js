@@ -210,7 +210,6 @@ module.exports.checkJSON = function (req, machine) {
           }
         break
         case 'Shopbot':
-          console.log(req.body)
           req.checkBody('cut_speed', validationMsg.speed).notEmpty().isInt({ min: 1})
           req.checkBody('plunge_speed', validationMsg.speed).notEmpty().isInt({ min: 1})
           req.checkBody('jog_speed', validationMsg.speed).notEmpty().isInt({ min: 1})

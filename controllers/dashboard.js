@@ -507,16 +507,8 @@ module.exports.machineUpdate = function (req, res) {
             case 'Shopbot':
             for (var i in newConfiguration.defaultValues){
               req.body = newConfiguration.defaultValues[i]
-              req.body.waxFinishing = '7_16_plywood'
+              req.body.waxFinishing = i
               errors = formCheck.checkJSON(req, newConfiguration)
-              if (!errors) {
-                req.body.waxFinishing = 'rough_cut'
-                errors = formCheck.checkJSON(req, newConfiguration)
-                if (!errors) {
-                  req.body.waxFinishing = 'finish_cut'
-                  errors = formCheck.checkJSON(req, newConfiguration)
-                }
-              }
               delete req.body.waxFinishing
               if (errors){
                 break;
