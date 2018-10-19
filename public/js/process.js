@@ -136,7 +136,6 @@ var selected = $("#waxFinishings").children(":selected").val();
         $('#finishingsSwitch').show();
         $('#sortSwitch').hide();
     }else if((selected === "7_16_plywood")||(selected === "1_2_HDPE")){
-        $('#directionRadios').show();
         $('#finishingsSwitch').hide();
         $('#sortSwitch').show();
     }else{
@@ -171,9 +170,23 @@ $( "#target" ).submit(function( event ) {
   switch ($('#waxFinishings').val()){
     case 'rough_cut':
         $('#finish_cut').empty();
+        $('#7_16_plywood').empty();
+        $('#1_2_HDPE').empty();
         break;
     case 'finish_cut':
         $('#rough_cut').empty();
+        $('#7_16_plywood').empty();
+        $('#1_2_HDPE').empty();
+        break;
+    case '7_16_plywood':
+        $('#rough_cut').empty();
+        $('#finish_cut').empty();
+        $('#1_2_HDPE').empty();
+        break;
+    case '1_2_HDPE':
+        $('#rough_cut').empty();
+        $('#finish_cut').empty();
+        $('#7_16_plywood').empty();
         break;
   }
 });

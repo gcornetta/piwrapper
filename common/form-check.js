@@ -217,17 +217,20 @@ module.exports.checkJSON = function (req, machine) {
           req.checkBody('spindle_speed', validationMsg.speed).notEmpty().isInt({ min: 1 })
           req.checkBody('diameter', validationMsg.diameter).notEmpty().isFloat({min: 0})
           req.checkBody('error', validationMsg.error).notEmpty().isFloat({min: 0})
-          req.checkBody('overlap', validationMsg.overlap).notEmpty().isInt({min: 1, max: 100})
+          req.checkBody('overlap', validationMsg.overlap).notEmpty().isInt({min: 0, max: 100})
           var waxFinishing = ['7_16_plywood', '1_2_HDPE','rough_cut', 'finish_cut']
           req.checkBody('waxFinishing', validationMsg.waxFinishing).isInArray(waxFinishing)
-          req.checkBody('bottomZ', validationMsg.bottomZ).notEmpty().isFloat()
-          req.checkBody('bottomIntensity', validationMsg.bottomIntensity).notEmpty().isFloat({min: 0, max: 1})
-          req.checkBody('topZ', validationMsg.topZ).notEmpty().isFloat()
-          req.checkBody('topIntensity', validationMsg.topIntensity).notEmpty().isFloat({min: 0, max: 1})
           switch (json.waxFinishing) {
             case '7_16_plywood':
             case '1_2_HDPE':
               req.checkBody('thickness', validationMsg.thickness).notEmpty().isFloat({min: 0})
+              req.checkBody('direction', validationMsg.direction).notEmpty()
+              req.checkBody('cutDepth', validationMsg.cutDepth).notEmpty().isFloat()
+              req.checkBody('offsets', validationMsg.offsets).notEmpty().isFloat({min: -1})
+              req.checkBody('merge', validationMsg.merge).notEmpty().isFloat({min: 0})
+              req.checkBody('order', validationMsg.order).notEmpty().isInt()
+              req.checkBody('sequence', validationMsg.sequence).notEmpty().isInt()
+              break
             case 'rough_cut':
               //req.checkBody('switchSort', validationMsg.switchSort).notEmpty()
               req.checkBody('direction', validationMsg.direction).notEmpty()
@@ -236,10 +239,18 @@ module.exports.checkJSON = function (req, machine) {
               req.checkBody('merge', validationMsg.merge).notEmpty().isFloat({min: 0})
               req.checkBody('order', validationMsg.order).notEmpty().isInt()
               req.checkBody('sequence', validationMsg.sequence).notEmpty().isInt()
+              req.checkBody('bottomZ', validationMsg.bottomZ).notEmpty().isFloat()
+              req.checkBody('bottomIntensity', validationMsg.bottomIntensity).notEmpty().isFloat({min: 0, max: 1})
+              req.checkBody('topZ', validationMsg.topZ).notEmpty().isFloat()
+              req.checkBody('topIntensity', validationMsg.topIntensity).notEmpty().isFloat({min: 0, max: 1})
               break
             case 'finish_cut':
               var types = ['flat', 'ball']
               req.checkBody('type', validationMsg.type).isInArray(types)
+              req.checkBody('bottomZ', validationMsg.bottomZ).notEmpty().isFloat()
+              req.checkBody('bottomIntensity', validationMsg.bottomIntensity).notEmpty().isFloat({min: 0, max: 1})
+              req.checkBody('topZ', validationMsg.topZ).notEmpty().isFloat()
+              req.checkBody('topIntensity', validationMsg.topIntensity).notEmpty().isFloat({min: 0, max: 1})
               //req.checkBody('xz', validationMsg.xz).notEmpty()
               //req.checkBody('yz', validationMsg.yz).notEmpty()
               break
@@ -347,6 +358,37 @@ module.exports.setDefaultValuesIfNull = function (req, machine) {
             json.yz = json.yz || machine.defaultValues[finishing].yz
             json.type = json.type || machine.defaultValues[finishing].type
           }
+          break
+        case 'Shopbot':
+          var finishing = json.pcbFinishing || json.waxFinishing
+          if (machine.defaultValues[finishing]) {
+            json.machines = json.machines || machine.defaultValues[finishing].machines
+            json.cut_speed = json.cut_speed || machine.defaultValues[finishing].cut_speed
+            json.plunge_speed = json.plunge_speed || machine.defaultValues[finishing].plunge_speed
+            json.jog_speed = json.jog_speed || machine.defaultValues[finishing].jog_speed
+            json.jog_height = json.jog_height || machine.defaultValues[finishing].jog_height
+            json.spindle_speed = json.spindle_speed || machine.defaultValues[finishing].spindle_speed
+            json.diameter = json.diameter || machine.defaultValues[finishing].diameter
+            json.error = json.error || machine.defaultValues[finishing].error
+            json.overlap = json.overlap || machine.defaultValues[finishing].overlap
+            json.thickness = json.thickness || machine.defaultValues[finishing].thickness
+            json.switchSort = json.switchSort || machine.defaultValues[finishing].switchSort
+            json.direction = json.direction || machine.defaultValues[finishing].direction
+            json.cutDepth = json.cutDepth || machine.defaultValues[finishing].cutDepth
+            json.offsets = json.offsets || machine.defaultValues[finishing].offsets
+            json.threshold = json.threshold || machine.defaultValues[finishing].threshold
+            json.merge = json.merge || machine.defaultValues[finishing].merge
+            json.order = json.order || machine.defaultValues[finishing].order
+            json.sequence = json.sequence || machine.defaultValues[finishing].sequence
+            json.bottomZ = json.bottomZ || machine.defaultValues[finishing].bottomZ
+            json.bottomIntensity = json.bottomIntensity || machine.defaultValues[finishing].bottomIntensity
+            json.topZ = json.topZ || machine.defaultValues[finishing].topZ
+            json.topIntensity = json.topIntensity || machine.defaultValues[finishing].topIntensity
+            json.xz = json.xz || machine.defaultValues[finishing].xz
+            json.yz = json.yz || machine.defaultValues[finishing].yz
+            json.type = json.type || machine.defaultValues[finishing].type
+          }
+          break
       }
       break
 

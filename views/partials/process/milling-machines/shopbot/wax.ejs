@@ -2,19 +2,19 @@
   <div class="col-md-12">
     <legend><%= millingPanel.roland.wax.title %></legend>
     <fieldset id="fieldset">
-      <div id="directionRadios" class="col-sm-5" style="display: none;">
-        <label class="control-label"><%= millingPanel.roland.cut.direction %></label>
-        <label class="radio">
-        <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
-        <input type="radio" data-toggle="radio" name="direction" value="conventional"><%= millingPanel.roland.cut.conventional %>
-        </label>
-        <label class="radio checked">
-        <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
-        <input type="radio" data-toggle="radio" name="direction" value="climb" checked><%= millingPanel.roland.cut.climb %>
-        </label>
-      </div>
 
 <div id="7_16_plywood" class="form-group" style="display: none;">
+        <div class="col-sm-5">
+          <label class="control-label"><%= millingPanel.roland.wax.direction %></label>
+          <label class="radio">
+          <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+          <input type="radio" data-toggle="radio" name="direction" value="conventional"><%= millingPanel.roland.wax.conventional %>
+          </label>
+          <label class="radio">
+          <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+          <input type="radio" data-toggle="radio" name="direction" value="climb"><%= millingPanel.roland.wax.climb %>
+          </label>
+        </div>
         <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.cut.cutDepth %></label>
         <div class="col-sm-2">
           <div class="input-group">
@@ -78,6 +78,17 @@
       </div>
 
 <div id="1_2_HDPE" class="form-group" style="display: none;">
+        <div class="col-sm-5">
+          <label class="control-label"><%= millingPanel.roland.wax.direction %></label>
+          <label class="radio">
+          <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+          <input type="radio" data-toggle="radio" name="direction" value="conventional"><%= millingPanel.roland.wax.conventional %>
+          </label>
+          <label class="radio">
+          <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
+          <input type="radio" data-toggle="radio" name="direction" value="climb"><%= millingPanel.roland.wax.climb %>
+          </label>
+        </div>
         <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.cut.cutDepth %></label>
         <div class="col-sm-2">
           <div class="input-group">
@@ -147,9 +158,9 @@
           <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
           <input type="radio" data-toggle="radio" name="direction" value="conventional"><%= millingPanel.roland.wax.conventional %>
           </label>
-          <label class="radio checked">
+          <label class="radio">
           <span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span>
-          <input type="radio" data-toggle="radio" name="direction" value="climb" checked><%= millingPanel.roland.wax.climb %>
+          <input type="radio" data-toggle="radio" name="direction" value="climb"><%= millingPanel.roland.wax.climb %>
           </label>
         </div>
         <label class="col-sm-3 col-sm-offset-1 control-label"><%= millingPanel.roland.wax.bottomZ %></label>
