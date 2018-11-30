@@ -437,7 +437,11 @@ module.exports.machineUpdate = function (req, res) {
     for (var i in newConfiguration.defaultValues){
       for (var j in newConfiguration.defaultValues[i]){
         if (req.body[j]) {
-          newConfiguration.defaultValues[i][j] = req.body[j][req.body[j].length - index] || newConfiguration.defaultValues[i][j]
+          if (Array.isArray(req.body[j])){
+            newConfiguration.defaultValues[i][j] = req.body[j][req.body[j].length - index] || newConfiguration.defaultValues[i][j]
+          }else{
+            newConfiguration.defaultValues[i][j] = req.body[j] || newConfiguration.defaultValues[i][j]
+          }
         }
       }
       index++
