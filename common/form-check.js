@@ -11,6 +11,8 @@ module.exports.checkJSON = function (req, machine) {
           materials = ['cardboard', 'acrylic', 'wood', 'mylar']
           req.checkBody('process', validationMsg.process).isInArray(processes)
           req.checkBody('material', validationMsg.material).isInArray(materials)
+          req.checkBody('switchSort', validationMsg.switchSort).notEmpty()
+          req.checkBody('switchAutofocus', validationMsg.switchSort).notEmpty()
 
           if (json.process === 'cut') {
             req.checkBody('diameter', validationMsg.diameter).notEmpty().isFloat()
@@ -35,8 +37,8 @@ module.exports.checkJSON = function (req, machine) {
           req.checkBody('power', validationMsg.power).notEmpty().isInt({ min: 1, max: 100 })
           req.checkBody('speed', validationMsg.speed).notEmpty().isInt({ min: 1, max: 100 })
           req.checkBody('rate', validationMsg.rate).notEmpty().isInt()
-          req.checkBody('xCoord', validationMsg.xCoord).notEmpty().isInt({ min: 0, max: 50 })
-          req.checkBody('yCoord', validationMsg.yCoord).notEmpty().isInt({ min: 0, max: 50 })
+          req.checkBody('xCoord', validationMsg.xCoord).notEmpty().isInt({ min: 0, max: 610 })
+          req.checkBody('yCoord', validationMsg.yCoord).notEmpty().isInt({ min: 0, max: 305 })
           break
 
         case 'GCC':

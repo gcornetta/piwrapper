@@ -65,7 +65,15 @@ module.exports.upload = function (req, res) {
   var form = new formidable.IncomingForm()
   var newFileName
   var fifoData = {}
-  var fields = []
+  //TODO: Why false switches doesn't appear in form.on('field')?
+  var fields = {
+    'switchAutofocus': 'off',
+    'switchSort': 'off',
+    'switchFill': 'off'
+  }
+  req.body.switchAutofocus = 'off'
+  req.body.switchSort = 'off'
+  req.body.switchFill = 'off'
 
   dashboardPage.uploadSuccess = false
 
