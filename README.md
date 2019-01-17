@@ -77,7 +77,7 @@ To install the Machine Wrapper module go through the following steps:
 3. run `npm run start` to start the server.
 
 <p align="justify">
-  The server will listen to <b>port 8888</b> of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
+  The server will listen to <b>port 8888</b> of your Raspberry Pi.
 </p>
 
 <a name="testing"></a>
