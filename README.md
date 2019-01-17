@@ -59,8 +59,9 @@ You also need to connect to your Raspberry Pi a current sensor to monitor the co
 The Machine wrapper software requires that you previously install on your system the following software packages:
 </p>
 
-1. Mongo DB v3.x
-2. Cups
+1. Node.js v6.x
+2. Mongo DB v3.x
+3. Cups
 
 <p align="justify">
 We have not tested the software with Mongo DB latest version; however it should work without any problem if you update <b>mongoose</b> to the last version in the `package.json` file with the project dependencies.
