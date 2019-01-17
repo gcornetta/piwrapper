@@ -60,8 +60,9 @@ The Machine wrapper software requires that you previously install on your system
 </p>
 
 1. Node.js v6.x
-2. Mongo DB v3.x
-3. Cups
+2. npm v3.10.x
+3. Mongo DB v3.x
+4. Cups
 
 <p align="justify">
 We have not tested the software with Mongo DB latest version; however it should work without any problem if you update <b>mongoose</b> to the last version in the `package.json` file with the project dependencies.
