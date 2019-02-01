@@ -59,8 +59,10 @@ You also need to connect to your Raspberry Pi a current sensor to monitor the co
 The Machine wrapper software requires that you previously install on your system the following software packages:
 </p>
 
-1. Mongo DB v3.x
-2. Cups
+1. Node.js v6.x
+2. npm v3.10.x
+3. Mongo DB v3.x
+4. Cups
 
 <p align="justify">
 We have not tested the software with Mongo DB latest version; however it should work without any problem if you update <b>mongoose</b> to the last version in the `package.json` file with the project dependencies.
@@ -75,7 +77,7 @@ To install the Machine Wrapper module go through the following steps:
 3. run `npm run start` to start the server.
 
 <p align="justify">
-  The server listen to <b>port 8888</b> of your Raspberry Pi. You have first to create the superuser for that machine and then log in to your system. At the first login a Wizard will guide you through the configuration process following three easy steps.
+  The server will listen to <b>port 8888</b> of your Raspberry Pi.
 </p>
 
 <a name="testing"></a>
