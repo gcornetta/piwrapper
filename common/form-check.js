@@ -298,6 +298,10 @@ module.exports.setDefaultValuesIfNull = function (req, machine) {
             json.rate = json.rate || machine.defaultValues[json.material].rate
             json.xCoord = json.xCoord || machine.defaultValues[json.material].xCoord
             json.yCoord = json.yCoord || machine.defaultValues[json.material].yCoord
+            json.origin = json.origin || machine.defaultValues[json.material].origin
+            json.switchAutofocus = json.switchAutofocus || machine.defaultValues[json.material].switchAutofocus
+            json.switchSort = json.switchSort || machine.defaultValues[json.material].switchSort
+            json.switchFill = json.switchFill || machine.defaultValues[json.material].switchFill
           }
           break
       }
