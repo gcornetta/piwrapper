@@ -8,7 +8,7 @@ module.exports.checkJSON = function (req, machine) {
       switch (machine.vendor) {
         case 'Epilog':
           processes = ['cut', 'halftone']
-          materials = ['cardboard', 'acrylic', 'wood', 'mylar']
+          materials = ['cardboard', '5mm_cardboard', 'acrylic',  '5mm_acrylic', 'wood',  '5mm_wood', 'mylar']
           req.checkBody('process', validationMsg.process).isInArray(processes)
           req.checkBody('material', validationMsg.material).isInArray(materials)
           req.checkBody('switchSort', validationMsg.switchSort).notEmpty()
@@ -118,7 +118,7 @@ module.exports.checkJSON = function (req, machine) {
           break
 
         case 'Roland':
-          materials = ['vinyl', 'epoxy', 'copper']
+          materials = ['vinyl', 'epoxy', 'copper', 'paper']
           req.checkBody('switchSort', validationMsg.switchSort).notEmpty()
           req.checkBody('origin', validationMsg.origin).notEmpty()
           req.checkBody('material', validationMsg.material).isInArray(materials)
@@ -220,7 +220,7 @@ module.exports.checkJSON = function (req, machine) {
           req.checkBody('diameter', validationMsg.diameter).notEmpty().isFloat({min: 0})
           req.checkBody('error', validationMsg.error).notEmpty().isFloat({min: 0})
           req.checkBody('overlap', validationMsg.overlap).notEmpty().isInt({min: 0, max: 100})
-          var waxFinishing = ['7_16_plywood', '1_2_HDPE','rough_cut', 'finish_cut']
+          var waxFinishing = ['7_16_plywood', '15mm_plywood', '1_2_HDPE','rough_cut', 'finish_cut']
           req.checkBody('waxFinishing', validationMsg.waxFinishing).isInArray(waxFinishing)
           switch (json.waxFinishing) {
             case '7_16_plywood':
