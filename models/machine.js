@@ -207,7 +207,7 @@ var defaultValues = {
         xCoord: 50,
         yCoord: 50,
         origin: 'top left'
-      }
+      },
       '5mm_cardboard': {
         switchAutofocus: 'on',
         switchSort: 'on',
