@@ -32,7 +32,7 @@
 		"i18n": "^0.8.3",
 		"i2c": "^0.2.3",
 		"jsonwebtoken": "^8.0.0",
-		"jwt-simple": "^0.3.1",
+		"jwt-simple": "^0.5.3",
 		"mkdirp": "^0.5.1",
 		"mongoose": "^4.5.7",
 		"node-printer": "^1.0.2",
