@@ -24,7 +24,7 @@
 		"epoch-charting": "^0.8.4",
 		"express": "~4.16.0",
 		"express-session": "^1.14.0",
-		"express-validator": "^5.0.0",
+		"express-validator": "^6.0.0",
 		"express-winston": "^2.0.0",
 		"fifo": "^2.3.0",
 		"formidable": "^1.1.1",
