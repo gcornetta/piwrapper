@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -25,3 +25,14 @@ patch:
         patched: '2018-06-26T10:49:57.418Z'
     - zetta > revolt > ws:
         patched: '2018-06-26T10:49:57.418Z'
+  SNYK-JS-LODASH-567746:
+    - express-validator > lodash:
+        patched: '2020-05-01T08:56:44.664Z'
+    - express-winston > lodash:
+        patched: '2020-05-01T08:56:44.664Z'
+    - mongoose > async > lodash:
+        patched: '2020-05-01T08:56:44.664Z'
+    - pm2 > async > lodash:
+        patched: '2020-05-01T08:56:44.664Z'
+    - pm2 > pm2-deploy > async > lodash:
+        patched: '2020-05-01T08:56:44.664Z'
