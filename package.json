@@ -27,7 +27,7 @@
 		"express-validator": "^5.0.0",
 		"express-winston": "^2.0.0",
 		"fifo": "^2.3.0",
-		"formidable": "^1.1.1",
+		"formidable": "^3.2.4",
 		"generate-password": "^1.1.1",
 		"i18n": "^0.8.3",
 		"i2c": "^0.2.3",
