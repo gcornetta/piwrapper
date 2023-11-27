@@ -41,11 +41,11 @@
 		"passport-local": "^1.0.0",
 		"passport-local-mongoose": "^4.0.0",
 		"passport.socketio": "^3.7.0",
-		"pm2": "^2.9.3",
+		"pm2": "^4.4.0",
 		"pngjs": "^3.0.0",
 		"pty.js": "^0.3.1",
 		"request": "^2.82.0",
-		"serialport": "^6.0.0",
+		"serialport": "^7.1.0",
 		"serve-favicon": "~2.4.5",
 		"siren-client": "^1.4.0",
 		"socket.io": "^2.0.2",
@@ -62,7 +62,7 @@
 		"yamljs": "^0.3.0",
 		"zetta": "^1.5.0",
 		"snyk": "^1.85.0",
-		"node-gyp": "3.8.0",
+		"node-gyp": "8.0.0",
 		"printer": "0.2.2"
 	},
 	"devDependencies": {
