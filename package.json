@@ -51,7 +51,7 @@
 		"socket.io": "^2.0.2",
 		"socket.io-client": "^2.0.4",
 		"strftime": "^0.10.0",
-		"swagger-ui-express": "^2.0.10",
+		"swagger-ui-express": "^4.3.0",
 		"synchronize": "^2.0.0",
 		"terminate": "^2.1.0",
 		"ul": "^5.2.2",
